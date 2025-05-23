@@ -1,0 +1,115 @@
+version: '3'
+
+env:
+ GIHUB_PAGES_URL: toshy.github.io/bunnynet-openapi-specification
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  # OpenAPI specs
+  openapi:specs:
+    desc: Download open api specs
+    summary: |
+      Requires JQ 1.7.1+
+    silent: true
+    shell: bash
+    cmds:
+      - |
+        out_dir="./data"
+        mkdir -p "$out_dir"
+        
+        manifest_path="$out_dir/manifest.json"
+        declare -A existing_hashes
+        if [ -f "$manifest_path" ]; then
+          manifest_json=$(cat "$manifest_path")
+          while IFS= read -r file; do
+            hash=$(echo "$manifest_json" | jq -r --arg file "$file" '.[] | select(.fileName == $file) | .fileSha256')            
+            existing_hashes["$file"]="$hash"
+          done < <(echo "$manifest_json" | jq -r '.[].fileName')
+        fi
+        
+        manifest_entries="[]"
+        temp_html="$(mktemp)"
+        if ! wget --quiet --retry-connrefused --waitretry=3 --read-timeout=20 --timeout=15 --tries=5 --retry-on-http-error=429,500,502,503,504 -O "$temp_html" "https://docs.bunny.net/openapi"; then
+          echo "Failed to fetch OpenAPI index from bunny.net"
+          exit 1
+        fi
+        
+        grep -oP '<div class="item"><a href="\K([^"]+)".*?>([^<]+)' "$temp_html" | \
+        while IFS=$'\n' read -r line; do
+          href=$(echo "$line" | cut -d'"' -f1)
+          text=$(echo "$line" | cut -d'>' -f2)
+          lower_text=$(echo "$text" | tr '[:upper:]' '[:lower:]')
+        
+          # Extract version (e.g., v1.0)
+          version=$(echo "$text" | grep -oE 'v[0-9]+\.[0-9]+')
+
+          # Normalize filename based on link text
+          filename=""
+          case "$lower_text" in
+            *"edge scripting api"*) filename="edge-scripting-api" ;;
+            *"edge storage api"*) filename="edge-storage-api" ;;
+            *"stream api"*) filename="stream-api" ;;
+            *"shield api"*) filename="shield-api" ;;
+            *"bunny.net api"*) filename="base-api" ;;
+            *)
+              filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//').json"
+              ;;
+          esac
+        
+          # Append version to filename with hyphen if found
+          if [ -n "$version" ]; then
+            filename="${filename}-${version}"
+          fi
+        
+          filename="${filename}.json"
+          full_url="https://docs.bunny.net$href"
+          filepath="$out_dir/$filename"
+          tempfile="$(mktemp)"
+        
+          echo "Downloading '$text' → '$filepath'"
+          if ! wget --quiet --retry-connrefused --waitretry=3 --read-timeout=20 --timeout=15 --tries=5 --retry-on-http-error=429,500,502,503,504 -O "$tempfile" "$full_url"; then
+            echo "Failed to download $text from $full_url after retries"
+            continue
+          fi
+        
+          if ! jq --indent 2 . "$tempfile" > "$tempfile.json" 2>/dev/null; then
+            echo "Invalid JSON from $full_url"
+            rm -f "$tempfile" "$tempfile.json"
+            continue
+          fi
+        
+          mv "$tempfile.json" "$tempfile"
+        
+          new_hash=$(sha256sum "$tempfile" | awk '{print $1}')
+          old_hash="${existing_hashes[$filename]}"
+
+          if [ "$new_hash" = "$old_hash" ]; then
+            echo "File '$filename' unchanged (checksum match); skipping overwrite."
+            rm "$tempfile"
+          else
+            echo "File '$filename' changed or new (old: $old_hash; new: $new_hash); writing."
+            mv "$tempfile" "$filepath"
+          fi
+
+          # Append entry using jq
+          manifest_entries=$(echo "$manifest_entries" | jq \
+            --arg source "$full_url" \
+            --arg sourceDescription "$text" \
+            --arg fileName "$filename" \
+            --arg fileUrl "https://${GIHUB_PAGES_URL}/$filename" \
+            --arg fileSha256 "$new_hash" \
+            '. + [{
+              source: $source,
+              sourceDescription: $sourceDescription,
+              fileName: $fileName,
+              fileUrl: $fileUrl,
+              fileSha256: $fileSha256
+            }]'
+          )
+        done
+        
+        # Save manifest to file
+        echo "$manifest_entries" > "$out_dir/manifest.json"
