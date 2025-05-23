@@ -4,7 +4,7 @@ Repository to keep track of changes in the [OpenAPI specifications](https://docs
 
 ## 🗂️ Data
 
-Data is available at [toshy.github.io/bunnynet-openapi-specification](https://toshy.github.io/bunnynet-openapi-specification).
+Data is available at [toshy.github.io/bunnynet-openapi-specification](https://toshy.github.io/bunnynet-openapi-specification/manifest.json).
 
 ```text
 https://toshy.github.io/bunnynet-openapi-specification/
