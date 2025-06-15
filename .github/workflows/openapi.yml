@@ -38,7 +38,7 @@ jobs:
 
       - name: Commit changes
         id: auto-commit-action
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           file_pattern: 'data/*.json'
           commit_message: Update OpenAPI reference
