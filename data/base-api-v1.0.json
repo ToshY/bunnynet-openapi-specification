@@ -6558,6 +6558,76 @@
               "type": "boolean",
               "default": false
             }
+          },
+          {
+            "name": "loadOriginResponseTimes",
+            "in": "query",
+            "x-nullable": false,
+            "description": "(Optional) If true, loads Origin Response Times data",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadOriginTraffic",
+            "in": "query",
+            "description": "(Optional) If true, loads Origin Traffic data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadRequestsServed",
+            "in": "query",
+            "description": "(Optional) If true, loads Requests Served data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadBandwidthUsed",
+            "in": "query",
+            "description": "(Optional) If true, loads Bandwidth Used data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadOriginShieldBandwidth",
+            "in": "query",
+            "description": "(Optional) If true, loads Origin Shield Bandwidth data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadGeographicTrafficDistribution",
+            "in": "query",
+            "description": "(Optional) If true, loads Geographic Traffic Distribution data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "loadUserBalanceHistory",
+            "in": "query",
+            "description": "(Optional) If true, loads User Balance History data",
+            "x-nullable": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
