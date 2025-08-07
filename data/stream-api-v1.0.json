@@ -785,6 +785,77 @@
         }
       }
     },
+    "/library/{libraryId}/videos/{videoId}/play/heatmap": {
+      "get": {
+        "tags": [
+          "Manage Videos"
+        ],
+        "summary": "Get Video heatmap data",
+        "operationId": "Video_GetVideoHeatmapData",
+        "parameters": [
+          {
+            "name": "libraryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "videoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "expires",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The heatmap data of the requested video",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoPlayDataModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "404": {
+            "description": "The requested video was not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/library/{libraryId}/statistics": {
       "get": {
         "tags": [
@@ -1217,6 +1288,16 @@
               }
             }
           },
+          "400": {
+            "description": "Request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
           "401": {
             "description": "The request authorization failed"
           },
@@ -1567,16 +1648,6 @@
               "type": "string"
             },
             "x-position": 2
-          },
-          {
-            "name": "language",
-            "in": "query",
-            "description": "Video source language, use ISO 639-1 language code",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 3
           },
           {
             "name": "force",
@@ -2467,6 +2538,14 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "zoneTier": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rememberPlayerPosition": {
+            "type": "boolean"
           }
         }
       },
@@ -2706,7 +2785,7 @@
         "properties": {
           "targetLanguages": {
             "type": "array",
-            "description": "List of languages that will be used as target languages, use ISO 639-1 language codes",
+            "description": "List of languages that will be used as target languages, use ISO 639-1 language codes.",
             "nullable": true,
             "items": {
               "type": "string"
@@ -2714,15 +2793,15 @@
           },
           "generateTitle": {
             "type": "boolean",
-            "description": "Whether video title should be automatically generated"
+            "description": "Whether video title should be automatically generated."
           },
           "generateDescription": {
             "type": "boolean",
-            "description": "Whether video description should be automatically generated"
+            "description": "Whether video description should be automatically generated."
           },
           "sourceLanguage": {
             "type": "string",
-            "description": "Video source language, use ISO 639-1 language code. IMPORTANT: This value takes precedence over query param, if specified",
+            "description": "Video source language, use ISO 639-1 language code.",
             "nullable": true
           }
         }

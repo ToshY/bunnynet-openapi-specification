@@ -3430,6 +3430,94 @@
         ]
       }
     },
+    "/videolibrary/{id}/drm/statistics": {
+      "get": {
+        "tags": [
+          "Stream Video Library",
+          "Statistics"
+        ],
+        "summary": "Get Video Library DRM Statistics",
+        "operationId": "GetDrmStatisticsEndpoint_Statistics",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the video library for which the DRM statistics will be returned",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "(Optional) The start date of the statistics. If no value is passed, the last 14 days will be returned",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "(Optional) The end date of the statistics. If no value is passed, current date will be used",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the statistics for the video library with the given ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoLibraryDrmStatisticsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "404": {
+            "description": "The video library with the requested ID does not exist"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIStream",
+              "SubuserStream",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIStream",
+              "SubuserStream",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
     "/dnszone": {
       "get": {
         "tags": [
@@ -8301,6 +8389,24 @@
       }
     },
     "schemas": {
+      "VideoLibraryDrmStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "TotalLicensesIssued": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "LicensesIssuedChart": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
       "PaginationListModelOfAbuseCaseModel": {
         "type": "object",
         "required": [

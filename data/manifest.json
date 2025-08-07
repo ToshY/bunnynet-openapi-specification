@@ -4,7 +4,7 @@
     "sourceDescription": "bunny.net API - v1.0",
     "fileName": "base-api-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
-    "fileSha256": "7ce94fdbf77d1d6b8b7616ab9c2d3e824995da8cd214d9cfe86b82f778cb2ce5"
+    "fileSha256": "e96dfb9bd84ec1547fb43a26682e07a5905f76da890e238fbddc92c73e2204eb"
   },
   {
     "source": "https://docs.bunny.net/openapi/672cc9ceb3ce1a00308f440b",
@@ -25,7 +25,7 @@
     "sourceDescription": "Stream API - v1.0",
     "fileName": "stream-api-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.json",
-    "fileSha256": "2d218e8914d1339b388022ca8eb5752ed737c446639c360b8fa7b870b946045a"
+    "fileSha256": "f8fd6be7ff7416b7a9826a3c78f05e3b42058e403106d46815b3da9f1c5a4036"
   },
   {
     "source": "https://docs.bunny.net/openapi/6710011c93fb4500184a0ad9",
