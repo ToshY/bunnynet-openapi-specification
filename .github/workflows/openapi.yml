@@ -58,7 +58,7 @@ jobs:
 
       - name: Upload pages artifact
         if: steps.auto-commit-action.outputs.changes_detected == 'true'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./data
 
