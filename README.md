@@ -18,7 +18,7 @@ https://toshy.github.io/bunnynet-openapi-specification/
 
 ## ⌛ Schedule
 
-1. Daily cron schedule `0 * * * *` triggers workflow [`openapi.yml`](.github/workflows/openapi.yml) (actual workflow execution time may be [delayed](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule)).
+1. A cron schedule every sixth hour (`0 0,6,12,18 * * *` ) triggers workflow [`openapi.yml`](.github/workflows/openapi.yml) (actual workflow execution time may be [delayed](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule)).
 2. OpenAPI files are (temporarily) downloaded, and hashes are computed and compared by using the [`manifest.json`](./data/manifest.json).
 3. Any changes will be automatically committed and a new [release](https://github.com/ToshY/bunnynet-openapi-specification/releases) will be created.
 
