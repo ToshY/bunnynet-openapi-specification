@@ -1,17 +1,17 @@
 [
   {
+    "source": "https://docs.bunny.net/openapi/68ac1b2269490e5495310d94",
+    "sourceDescription": "bunny.net API - v1.0",
+    "fileName": "base-api-v1.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
+    "fileSha256": "b511d162a2495ac692054219b05c9fe9f6ffafd27bd983a5b0c400af3f8ac8ec"
+  },
+  {
     "source": "https://docs.bunny.net/openapi/672cc9ceb3ce1a00308f440b",
     "sourceDescription": "Edge Scripting API - v1.0",
     "fileName": "edge-scripting-api-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.json",
     "fileSha256": "fb507c41b463a472116d681e43c0d522faaa157c4b7ad1b0d82f9db420279707"
-  },
-  {
-    "source": "https://docs.bunny.net/openapi/68ac1b2269490e5495310d94",
-    "sourceDescription": "bunny.net API - v1.0",
-    "fileName": "base-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
-    "fileSha256": "aa00cecb1ffcfe08e9cd983dd69ed48c1f498a12a48087d1f989f2da6083d529"
   },
   {
     "source": "https://docs.bunny.net/openapi/603cfbdb3638dc0077b91fdc",
