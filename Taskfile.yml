@@ -37,14 +37,28 @@ tasks:
           exit 1
         fi
         
+        default_version=$(grep -oP '<div class="header">All OpenAPI Files for \K(v[0-9]+(\.[0-9]+)?)' "$temp_html")
+        if [[ -z "$default_version" ]]; then
+          default_version="v1.0"
+        fi
+
+        default_major="${default_version%%.*}"
+        default_minor="${default_version#*.}"
+        
         grep -oP '<div class="item"><a href="\K([^"]+)".*?>([^<]+)' "$temp_html" | \
         while IFS=$'\n' read -r line; do
           href=$(echo "$line" | cut -d'"' -f1)
           text=$(echo "$line" | cut -d'>' -f2)
           lower_text=$(echo "$text" | tr '[:upper:]' '[:lower:]')
-        
-          # Extract version (e.g., v1.0)
-          version=$(echo "$text" | grep -oE 'v[0-9]+\.[0-9]+')
+          if [[ "$lower_text" =~ (v[0-9]+(\.[0-9]+)?) ]]; then
+            version="${BASH_REMATCH[1]}"
+          elif [[ "$lower_text" == *-[0-9].json ]]; then
+            num="${lower_text##*-}"
+            num="${num%.json}"
+            version="v${num}.${default_minor}" 
+          else
+            version="$default_version"
+          fi
 
           # Normalize filename based on link text
           filename=""
@@ -54,16 +68,21 @@ tasks:
             *"stream api"*) filename="stream-api" ;;
             *"shield api"*) filename="shield-api" ;;
             *"bunny.net api"*) filename="base-api" ;;
+            *"edge-scripting-api"*) filename="edge-scripting-api" ;;
+            *"bunnynet-edge-storage-api"*) filename="edge-storage-api" ;;
+            *"bunny-shield-api"*) filename="shield-api" ;;
+            *"stream-api"*) filename="stream-api" ;;
+            *"bunnynet-api"*) filename="base-api" ;;
             *)
               filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//').json"
               ;;
           esac
-        
+
           # Append version to filename with hyphen if found
           if [ -n "$version" ]; then
             filename="${filename}-${version}"
           fi
-        
+
           filename="${filename}.json"
           full_url="https://docs.bunny.net$href"
           filepath="$out_dir/$filename"
