@@ -514,7 +514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The video was successfuly deleted",
+            "description": "The video was successfully deleted",
             "content": {
               "application/json": {
                 "schema": {
@@ -625,6 +625,46 @@
               "nullable": true
             },
             "x-position": 9
+          },
+          {
+            "name": "generateTitle",
+            "in": "query",
+            "description": "Whether video title should be generated from transcription.",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            },
+            "x-position": 10
+          },
+          {
+            "name": "generateDescription",
+            "in": "query",
+            "description": "Whether video description should be generated from transcription.",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            },
+            "x-position": 11
+          },
+          {
+            "name": "generateChapters",
+            "in": "query",
+            "description": "Whether video chapters should be generated from transcription.",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            },
+            "x-position": 12
+          },
+          {
+            "name": "generateMoments",
+            "in": "query",
+            "description": "Whether video moments should be generated from transcription.",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            },
+            "x-position": 13
           }
         ],
         "responses": {
@@ -664,12 +704,14 @@
           "Manage Videos"
         ],
         "summary": "Get Video Heatmap",
+        "description": "Returns the attention heatmap for a specific video, showing relative viewer interest across the timeline. May be unavailable if the feature is disabled or there isn't enough viewing data.",
         "operationId": "Video_GetVideoHeatmap",
         "parameters": [
           {
             "name": "libraryId",
             "in": "path",
             "required": true,
+            "description": "The ID of the video library.",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -680,6 +722,7 @@
             "name": "videoId",
             "in": "path",
             "required": true,
+            "description": "The GUID of the video.",
             "schema": {
               "type": "string"
             },
@@ -688,7 +731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The heatmap details of the requested video",
+            "description": "The heatmap of the requested video.",
             "content": {
               "application/json": {
                 "schema": {
@@ -701,7 +744,7 @@
             "description": "The request authorization failed"
           },
           "404": {
-            "description": "The requested video was not found"
+            "description": "Video not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -862,6 +905,7 @@
           "Manage Videos"
         ],
         "summary": "Get Video Statistics",
+        "description": "Returns time-series views and watch time, plus country-level aggregates, at the library level or for a specific video. Control the time window with dateFrom/dateTo and the granularity with hourly. Basic safeguards prevent spam and bot inflation by de-duplicating sessions and ignoring obviously invalid events.",
         "operationId": "Video_GetVideoStatistics",
         "parameters": [
           {
@@ -877,7 +921,7 @@
           {
             "name": "dateFrom",
             "in": "query",
-            "description": "(Optional) The start date of the statistics. If no value is passed, the last 30 days will be returned.",
+            "description": "Optional start of the time range (UTC). If omitted or invalid, the last 30 days are returned.",
             "schema": {
               "type": "string",
               "format": "date-time",
@@ -888,7 +932,7 @@
           {
             "name": "dateTo",
             "in": "query",
-            "description": "(Optional) The end date of the statistics. If no value is passed, the last 30 days will be returned.",
+            "description": "Optional end of the time range (UTC). If omitted with a valid start, defaults to now; otherwise the last 30 days are returned.",
             "schema": {
               "type": "string",
               "format": "date-time",
@@ -899,7 +943,7 @@
           {
             "name": "hourly",
             "in": "query",
-            "description": "(Optional) If true, the statistics data will be returned in hourly groupping.",
+            "description": "Optional. If true, returns hourly data; otherwise daily (UTC). Default is daily.",
             "schema": {
               "type": "boolean",
               "default": false
@@ -909,7 +953,7 @@
           {
             "name": "videoGuid",
             "in": "query",
-            "description": "(Optional) The GUID of the video for which the statistics will be returned",
+            "description": "Optional video GUID to filter results. When omitted, returns library-level aggregates.",
             "schema": {
               "type": "string",
               "nullable": true
@@ -919,7 +963,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The heatmap details of the requested video",
+            "description": "Statistics including time-series views and watch time, country breakdowns, and engagement score when available.",
             "content": {
               "application/json": {
                 "schema": {
@@ -932,7 +976,7 @@
             "description": "The request authorization failed"
           },
           "404": {
-            "description": "The requested video was not found"
+            "description": "Video not found (when filtering by videoGuid)"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1735,6 +1779,120 @@
         ]
       }
     },
+    "/library/{libraryId}/videos/{videoId}/smart": {
+      "post": {
+        "tags": [
+          "Manage Videos"
+        ],
+        "summary": "Trigger Smart actions",
+        "operationId": "Video_SmartGenerate",
+        "parameters": [
+          {
+            "name": "libraryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "videoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SmartGenerateModel"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true,
+          "x-position": 3
+        },
+        "responses": {
+          "202": {
+            "description": "The smart action was queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request for smart feature",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested video was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AccessKey": []
+          }
+        ]
+      }
+    },
     "/library/{libraryId}/videos/{videoId}/resolutions": {
       "get": {
         "tags": [
@@ -2189,6 +2347,11 @@
             "description": "The file name of the thumbnail inside of the storage",
             "nullable": true
           },
+          "thumbnailBlurhash": {
+            "type": "string",
+            "description": "Thumbnail blurhash to show while the actual thumbnail is being loaded",
+            "nullable": true
+          },
           "averageWatchTime": {
             "type": "integer",
             "description": "The average watch time of the video in seconds",
@@ -2238,6 +2401,25 @@
           },
           "jitEncodingEnabled": {
             "type": "boolean",
+            "nullable": true
+          },
+          "smartGenerateStatus": {
+            "description": "The status of smart generate action (if triggered)",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SmartGenerateStatus"
+              }
+            ]
+          },
+          "hasOriginal": {
+            "type": "boolean",
+            "description": "Determines if video has the original file available in storage",
+            "nullable": true
+          },
+          "originalHash": {
+            "type": "string",
+            "description": "Original uploaded file SHA256 hash",
             "nullable": true
           }
         }
@@ -2415,13 +2597,31 @@
           10
         ]
       },
+      "SmartGenerateStatus": {
+        "type": "integer",
+        "description": "0 = None\n1 = Queued\n2 = InProgress\n3 = Finished\n4 = Failed",
+        "x-enumNames": [
+          "None",
+          "Queued",
+          "InProgress",
+          "Finished",
+          "Failed"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
       "VideoHeatmapModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "heatmap": {
             "type": "object",
-            "description": "The heatmap of the video. 100 is the highest percentage of watch time.",
+            "description": "Timeline heatmap as segment-index to intensity (0–100). Keys represent consecutive segments from the start of the video; values are normalized so 100 equals the most‑watched segment. Missing segments imply 0.",
             "nullable": true,
             "additionalProperties": {
               "type": "integer",
@@ -2555,7 +2755,7 @@
         "properties": {
           "viewsChart": {
             "type": "object",
-            "description": "The constructed chart of checked requests threats",
+            "description": "Shows the number of playback starts over time, with each data point representing the count of view starts in the corresponding UTC interval (hourly or daily). It is available at both the library level (aggregated across all videos) and the video level (for a single video). A playback start is counted once per viewer session per video and empty intervals are shown as zero.",
             "nullable": true,
             "additionalProperties": {
               "type": "integer",
@@ -2564,7 +2764,7 @@
           },
           "watchTimeChart": {
             "type": "object",
-            "description": "The constructed chart of the total watch time",
+            "description": "Shows the cumulative time viewers spent watching over time, with each data point representing total watch time in the corresponding UTC interval (hourly or daily). It is available at both the library level (aggregated across all videos) and the video level (for a single video). Rewatches and repeated visits add to the total and empty intervals are shown as zero.",
             "nullable": true,
             "additionalProperties": {
               "type": "integer",
@@ -2573,7 +2773,7 @@
           },
           "countryViewCounts": {
             "type": "object",
-            "description": "The country view count constructed chart",
+            "description": "Shows the total number of playback starts by country for the selected time range. It is available at both the library level (aggregated across all videos) and the video level (for a single video). Each country’s value reflects unique playback starts per viewer session based on IP geolocation at playback start.",
             "nullable": true,
             "additionalProperties": {
               "type": "integer",
@@ -2582,7 +2782,7 @@
           },
           "countryWatchTime": {
             "type": "object",
-            "description": "The country watch time constructed chart",
+            "description": "Shows the total watch time by country for the selected time range. It is available at both the library level (aggregated across all videos) and the video level (for a single video). Values reflect cumulative viewing time (rewatches and repeated visits add to the total) based on IP geolocation at playback start.",
             "nullable": true,
             "additionalProperties": {
               "type": "integer",
@@ -2591,6 +2791,7 @@
           },
           "engagementScore": {
             "type": "integer",
+            "description": "Indicates how engaging a specific video is on a 0–100 scale based on viewing duration and viewing patterns; higher values reflect stronger viewer retention. Reported at the video level only and may be unavailable when there isn’t enough viewing data.",
             "format": "int32"
           }
         }
@@ -2793,15 +2994,58 @@
           },
           "generateTitle": {
             "type": "boolean",
-            "description": "Whether video title should be automatically generated."
+            "description": "Whether video title should be automatically generated.",
+            "nullable": true
           },
           "generateDescription": {
             "type": "boolean",
-            "description": "Whether video description should be automatically generated."
+            "description": "Whether video description should be automatically generated.",
+            "nullable": true
+          },
+          "generateChapters": {
+            "type": "boolean",
+            "description": "Whether video chapters should be automatically generated.",
+            "nullable": true
+          },
+          "generateMoments": {
+            "type": "boolean",
+            "description": "Whether video moments should be automatically generated.",
+            "nullable": true
           },
           "sourceLanguage": {
             "type": "string",
             "description": "Video source language, use ISO 639-1 language code.",
+            "nullable": true
+          }
+        }
+      },
+      "SmartGenerateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "generateTitle": {
+            "type": "boolean",
+            "description": "Whether video title should be generated.",
+            "nullable": true
+          },
+          "generateDescription": {
+            "type": "boolean",
+            "description": "Whether video description should be generated.",
+            "nullable": true
+          },
+          "generateChapters": {
+            "type": "boolean",
+            "description": "Whether video chapters should be generated.",
+            "nullable": true
+          },
+          "generateMoments": {
+            "type": "boolean",
+            "description": "Whether video moments should be generated.",
+            "nullable": true
+          },
+          "sourceLanguage": {
+            "type": "string",
+            "description": "(Optional) Video source language, use ISO 639-1 language code.",
             "nullable": true
           }
         }
@@ -3030,9 +3274,5 @@
     {
       "name": "Manage Videos"
     }
-  ],
-  "x-readme": {
-    "explorer-enabled": true,
-    "proxy-enabled": true
-  }
+  ]
 }
