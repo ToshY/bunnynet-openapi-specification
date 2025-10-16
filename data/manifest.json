@@ -11,7 +11,7 @@
     "sourceDescription": "bunnynet-api-1.json",
     "fileName": "base-api-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
-    "fileSha256": "8dafc9b6739fbf531b0626fc5c6d7361312ff5eca73cf581a6da07f920b5ce2d"
+    "fileSha256": "2daff12ca4cb3944f09c8563db0fdc8cb2f873e1c802085787a04263f1929500"
   },
   {
     "source": "https://docs.bunny.net/openapi/bunnynet-edge-storage-api.json",
