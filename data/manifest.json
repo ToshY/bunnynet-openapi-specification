@@ -32,7 +32,7 @@
     "sourceDescription": "origin-errors-spec.json",
     "fileName": "origin-errors-spec-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/origin-errors-spec-v1.0.json",
-    "fileSha256": "24cfa0caac921c635975cb09f52473174594bbbb004e956e8a36ee89032ecbc0"
+    "fileSha256": "24cfa0caac921c635975cb09f52473174594bbbb004e956e8a36ee89032ecbc1"
   },
   {
     "source": "https://docs.bunny.net/openapi/stream-api.json",
