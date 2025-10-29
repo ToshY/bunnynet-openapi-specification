@@ -74,15 +74,20 @@ tasks:
             *"stream-api"*) filename="stream-api" ;;
             *"bunnynet-api"*) filename="base-api" ;;
             *)
-              filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//').json"
+              filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//')"
               ;;
           esac
 
-          # Append version to filename with hyphen if found
+          if [[ "$filename" == *"-json" ]]; then
+            filename="${filename%-json}"
+          fi
+          
+          # 2. Append version to filename with hyphen if found
           if [ -n "$version" ]; then
             filename="${filename}-${version}"
           fi
 
+          # 3. Append .json extension only once at the end
           filename="${filename}.json"
           full_url="https://docs.bunny.net$href"
           filepath="$out_dir/$filename"
