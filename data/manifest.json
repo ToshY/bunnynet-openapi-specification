@@ -11,7 +11,7 @@
     "sourceDescription": "bunnynet-api-1.json",
     "fileName": "base-api-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
-    "fileSha256": "e90b0e32e33091fa334056ba406d5375f9ca96ab283b6ac47cec6ae1bce51b79"
+    "fileSha256": "6b0a85b3ee2da776b3eaee1d48bcf3980ce08fc61b1b4746c56e343396a23b84"
   },
   {
     "source": "https://docs.bunny.net/openapi/bunnynet-edge-storage-api.json",
@@ -32,7 +32,7 @@
     "sourceDescription": "origin-errors-spec.json",
     "fileName": "origin-errors-spec-v1.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/origin-errors-spec-v1.0.json",
-    "fileSha256": "24cfa0caac921c635975cb09f52473174594bbbb004e956e8a36ee89032ecbc1"
+    "fileSha256": "5faf4341126b61d916969320d160c64591dedc2448b89c4fe3c8091636e59240"
   },
   {
     "source": "https://docs.bunny.net/openapi/stream-api.json",

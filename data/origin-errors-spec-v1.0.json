@@ -124,7 +124,7 @@
   },
   "servers": [
     {
-      "url": "https://cdn-origin-error-logging.bunny.net"
+      "url": "https://cdn-origin-logging.bunny.net"
     }
   ]
 }
