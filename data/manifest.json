@@ -1,44 +1,44 @@
 [
   {
-    "source": "https://docs.bunny.net/openapi/bunny-shield-api.json",
-    "sourceDescription": "bunny-shield-api.json",
-    "fileName": "shield-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.json",
-    "fileSha256": "4df28943aeeb3a6427b1e0eb4843ee9855b929cf487db9872fac48b0877289c7"
+    "source": "https://core-api-public-docs.b-cdn.net/docs/v3/public.json",
+    "sourceDescription": "Core Platform API",
+    "fileName": "core-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
+    "fileSha256": "764203a20f9155b28153a6bda8416c02e01e47033e5781a18d5df45c60e0a2c9"
   },
   {
-    "source": "https://docs.bunny.net/openapi/bunnynet-api-1.json",
-    "sourceDescription": "bunnynet-api-1.json",
-    "fileName": "base-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/base-api-v1.0.json",
-    "fileSha256": "faf7330589f1393d40be44eb6a5c64f219028da24e7dba7f91b4fda482ec96ed"
-  },
-  {
-    "source": "https://docs.bunny.net/openapi/bunnynet-edge-storage-api.json",
-    "sourceDescription": "bunnynet-edge-storage-api.json",
-    "fileName": "edge-storage-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-storage-api-v1.0.json",
-    "fileSha256": "68c4a2051bd38fedb014a6fb86bafe9280c56913e828558c4568540878830783"
-  },
-  {
-    "source": "https://docs.bunny.net/openapi/edge-scripting-api.json",
-    "sourceDescription": "edge-scripting-api.json",
-    "fileName": "edge-scripting-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.json",
-    "fileSha256": "fb507c41b463a472116d681e43c0d522faaa157c4b7ad1b0d82f9db420279707"
-  },
-  {
-    "source": "https://docs.bunny.net/openapi/origin-errors-spec.json",
-    "sourceDescription": "origin-errors-spec.json",
-    "fileName": "origin-errors-spec-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/origin-errors-spec-v1.0.json",
+    "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
+    "sourceDescription": "Origin Errors API",
+    "fileName": "origin-errors-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/origin-errors-api-v1.0.0.json",
     "fileSha256": "5faf4341126b61d916969320d160c64591dedc2448b89c4fe3c8091636e59240"
   },
   {
-    "source": "https://docs.bunny.net/openapi/stream-api.json",
-    "sourceDescription": "stream-api.json",
-    "fileName": "stream-api-v1.0.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.json",
-    "fileSha256": "6edbefdcce030465ef550f6032c38df5c82d5310dfcbe22655c3dfd436dd832c"
+    "source": "https://docs.bunny.net/api-reference/storage/openapi.json",
+    "sourceDescription": "Storage API",
+    "fileName": "edge-storage-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-storage-api-v1.0.0.json",
+    "fileSha256": "68c4a2051bd38fedb014a6fb86bafe9280c56913e828558c4568540878830783"
+  },
+  {
+    "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
+    "sourceDescription": "Stream API",
+    "fileName": "stream-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.0.json",
+    "fileSha256": "0d35cf80750d0ab904330f3d98789cccff62bc87a0726280ca5827a4c89786b7"
+  },
+  {
+    "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
+    "sourceDescription": "Shield API",
+    "fileName": "shield-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.0.json",
+    "fileSha256": "77a2c730d078ffd9968e0b85e8685abb3d80c193b58cce8c567753f755d49660"
+  },
+  {
+    "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",
+    "sourceDescription": "Edge Scripting API",
+    "fileName": "edge-scripting-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.0.json",
+    "fileSha256": "e3b8d61a14eb9b58c3a4bda8c8dbf15ea9c4f18bb0b74ae00e88f1d92223370c"
   }
 ]

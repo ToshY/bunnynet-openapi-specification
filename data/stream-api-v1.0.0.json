@@ -13,7 +13,7 @@
   },
   "servers": [
     {
-      "url": "https://video.bunnycdn.com/"
+      "url": "https://video.bunnycdn.com"
     }
   ],
   "paths": {
@@ -65,11 +65,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested collection was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -113,12 +113,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateCollectionModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/UpdateCollectionModel"
               }
             }
           },
@@ -136,14 +131,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested collection was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested collection was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -193,14 +188,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested collection was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested collection was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -328,12 +323,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateCollectionModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/UpdateCollectionModel"
               }
             }
           },
@@ -408,11 +398,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested live stream was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -457,12 +447,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateLiveStreamModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/UpdateLiveStreamModel"
               }
             }
           },
@@ -490,14 +475,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested live stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested live stream was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -558,14 +543,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested live stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested live stream was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -637,14 +622,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested live stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested live stream was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -677,12 +662,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateLiveStreamModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/CreateLiveStreamModel"
               }
             }
           },
@@ -700,6 +680,12 @@
               }
             }
           },
+          "401": {
+            "description": "The request authentication failed"
+          },
+          "403": {
+            "description": "The request authorization failed"
+          },
           "400": {
             "description": "Request was invalid",
             "content": {
@@ -709,12 +695,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "The request authentication failed"
-          },
-          "403": {
-            "description": "The request authorization failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -816,11 +796,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested library was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -883,14 +863,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested live stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested live stream was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -953,14 +933,84 @@
               }
             }
           },
+          "404": {
+            "description": "The requested live stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
           },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": []
+          }
+        ]
+      }
+    },
+    "/library/{libraryId}/live/{streamId}/regenerate-key": {
+      "put": {
+        "tags": [
+          "Manage Live Streams"
+        ],
+        "summary": "Regenerate stream key",
+        "description": "Regenerates the stream key for the live stream. This operation is not allowed for streams that ended.",
+        "operationId": "LiveStream_RegenerateStreamKey",
+        "parameters": [
+          {
+            "name": "libraryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "streamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the live stream with regenerated stream key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveStreamModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModelOfListOfString"
+                }
+              }
+            }
+          },
           "404": {
             "description": "The requested live stream was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
+          },
+          "403": {
+            "description": "The request authorization failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1117,6 +1167,18 @@
             "x-position": 3
           }
         ],
+        "requestBody": {
+          "description": "Optional thumbnail file to upload",
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary",
+                "nullable": true
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "The thumbnail was successfully set",
@@ -1138,14 +1200,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested stream was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested stream was not found"
           },
           "422": {
             "description": "Unable to fetch thumbnail from origin",
@@ -1255,11 +1317,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested live stream was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1311,11 +1373,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested video was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1359,12 +1421,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateVideoModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/UpdateVideoModel"
               }
             }
           },
@@ -1382,14 +1439,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1439,14 +1496,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1586,6 +1643,19 @@
             "x-position": 13
           }
         ],
+        "requestBody": {
+          "description": "Video file to upload",
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary",
+                "nullable": false
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "The video was successfully uploaded",
@@ -1600,14 +1670,14 @@
           "400": {
             "description": "The requested video was already uploaded"
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1662,11 +1732,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "Video not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1738,11 +1808,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested video was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1809,11 +1879,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested video was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1894,11 +1964,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "Video not found (when filtering by videoGuid)"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1951,16 +2021,23 @@
             }
           },
           "400": {
-            "description": "Original file is missing"
+            "description": "Original file is missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested video was not found"
           },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2032,14 +2109,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2104,14 +2181,14 @@
           "400": {
             "description": "Enterprise DRM is disabled for the library, repackaging not available"
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2240,12 +2317,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateVideoModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/CreateVideoModel"
               }
             }
           },
@@ -2263,6 +2335,12 @@
               }
             }
           },
+          "401": {
+            "description": "The request authentication failed"
+          },
+          "403": {
+            "description": "The request authorization failed"
+          },
           "400": {
             "description": "Request was invalid",
             "content": {
@@ -2272,12 +2350,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "The request authentication failed"
-          },
-          "403": {
-            "description": "The request authorization failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2327,6 +2399,18 @@
             "x-position": 3
           }
         ],
+        "requestBody": {
+          "description": "Optional thumbnail file to upload",
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary",
+                "nullable": true
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "The thumbnail was successfully set",
@@ -2338,14 +2422,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2402,12 +2486,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/FetchVideoRequest"
-                  }
-                ]
+                "$ref": "#/components/schemas/FetchVideoRequest"
               }
             }
           },
@@ -2425,6 +2504,9 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "400": {
             "description": "Failed fetching the video"
           },
@@ -2433,9 +2515,6 @@
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2490,12 +2569,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CaptionModelAdd"
-                  }
-                ]
+                "$ref": "#/components/schemas/CaptionModelAdd"
               }
             }
           },
@@ -2513,6 +2587,9 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "400": {
             "description": "Failed uploading the captions",
             "content": {
@@ -2528,9 +2605,6 @@
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2589,6 +2663,9 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "400": {
             "description": "Failed deleting the captions"
           },
@@ -2597,9 +2674,6 @@
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2655,12 +2729,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TranscribeSettings"
-                  }
-                ]
+                "$ref": "#/components/schemas/TranscribeSettings"
               }
             }
           },
@@ -2669,6 +2738,16 @@
         "responses": {
           "200": {
             "description": "The transcription was queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested video was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -2699,16 +2778,6 @@
           },
           "403": {
             "description": "The request authorization failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatusModel"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The requested video was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -2768,12 +2837,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SmartGenerateModel"
-                  }
-                ]
+                "$ref": "#/components/schemas/SmartGenerateModel"
               }
             }
           },
@@ -2783,6 +2847,26 @@
         "responses": {
           "202": {
             "description": "The smart action was queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested video was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limit exceeded",
             "content": {
               "application/json": {
                 "schema": {
@@ -2813,26 +2897,6 @@
           },
           "403": {
             "description": "The request authorization failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatusModel"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The requested video was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatusModel"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Limit exceeded",
             "content": {
               "application/json": {
                 "schema": {
@@ -2898,11 +2962,11 @@
               }
             }
           },
-          "401": {
-            "description": "The request authentication failed"
-          },
           "404": {
             "description": "The requested video was not found"
+          },
+          "401": {
+            "description": "The request authentication failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2954,17 +3018,17 @@
               }
             }
           },
-          "401": {
-            "description": "The request authorization failed"
-          },
           "404": {
             "description": "The requested video was not found"
           },
-          "408": {
-            "description": "Request timeout"
+          "401": {
+            "description": "The request authorization failed"
           },
           "429": {
             "description": "Rate limit exceeded"
+          },
+          "408": {
+            "description": "Request timeout"
           },
           "500": {
             "description": "Internal Server Error"
@@ -3062,14 +3126,14 @@
               }
             }
           },
+          "404": {
+            "description": "The requested video was not found"
+          },
           "401": {
             "description": "The request authentication failed"
           },
           "403": {
             "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The requested video was not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -3257,6 +3321,22 @@
             "type": "integer",
             "description": "The response status code",
             "format": "int32"
+          }
+        }
+      },
+      "VideoLibraryStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "videoCount": {
+            "type": "integer",
+            "description": "The total number of videos contained by the video library",
+            "format": "int64"
+          },
+          "liveStreamCount": {
+            "type": "integer",
+            "description": "The total number of live streams contained by the video library",
+            "format": "int64"
           }
         }
       },
@@ -3997,6 +4077,10 @@
           "originalHash": {
             "type": "string",
             "description": "Original uploaded file SHA256 hash",
+            "nullable": true
+          },
+          "hasHighQualityPreview": {
+            "type": "boolean",
             "nullable": true
           }
         }
@@ -4888,7 +4972,7 @@
             "type": "string",
             "nullable": true
           },
-          "thumbnailUrl": {
+          "thumbnail_url": {
             "type": "string",
             "nullable": true
           },
@@ -4904,13 +4988,605 @@
             "type": "string",
             "nullable": true
           },
-          "providerName": {
+          "provider_name": {
             "type": "string",
             "nullable": true
           },
-          "providerUrl": {
+          "provider_url": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "EncoderCallbackModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "videoLibraryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "videoGuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EncoderCallbackType"
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPremium": {
+            "type": "boolean"
+          },
+          "isJit": {
+            "type": "boolean"
+          },
+          "isRepackage": {
+            "type": "boolean"
+          },
+          "isReEncode": {
+            "type": "boolean"
+          },
+          "encodingJobId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EncoderCallbackType": {
+        "type": "integer",
+        "description": "0 = ThumbnailGenerated\n1 = TaskFinished\n2 = JobFinished\n3 = TranscodingFailed\n4 = VideoInformation\n5 = ThumbnailInformation\n6 = EncodeProgress\n7 = ResolutionFinished\n8 = KeyGenerated\n9 = CaptionsGenerated\n10 = TitleOrDescriptionGenerated\n11 = TranscodingMessageIncoming\n12 = PremiumSegmenting\n13 = PremiumPlaylistsCreated\n14 = CaptionGenerationFailed\n15 = ChaptersGenerated\n16 = MomentsGenerated\n17 = LiveStreamMetadataUpdate",
+        "x-enumNames": [
+          "ThumbnailGenerated",
+          "TaskFinished",
+          "JobFinished",
+          "TranscodingFailed",
+          "VideoInformation",
+          "ThumbnailInformation",
+          "EncodeProgress",
+          "ResolutionFinished",
+          "KeyGenerated",
+          "CaptionsGenerated",
+          "TitleOrDescriptionGenerated",
+          "TranscodingMessageIncoming",
+          "PremiumSegmenting",
+          "PremiumPlaylistsCreated",
+          "CaptionGenerationFailed",
+          "ChaptersGenerated",
+          "MomentsGenerated",
+          "LiveStreamMetadataUpdate"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "EncoderProgressModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "videoLibraryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "videoGuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "availableResolutions": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "LiveStreamMetadataUpdateCallbackModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LiveStreamCallbackModel"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/EncoderCallbackType"
+              },
+              "metadata": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LiveStreamMetadata"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "LiveStreamMetadata": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "framerate": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LiveStreamCallbackModel": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "videoLibraryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "streamId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LiveStreamThumbnailGeneratedCallbackModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LiveStreamCallbackModel"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/EncoderCallbackType"
+              },
+              "newThumbnailFileName": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "VideoStatus": {
+        "type": "integer",
+        "description": "0 = Created\n1 = Uploaded\n2 = Processing\n3 = Transcoding\n4 = Finished\n5 = Error\n6 = UploadFailed\n7 = JitSegmenting\n8 = JitPlaylistsCreated",
+        "x-enumNames": [
+          "Created",
+          "Uploaded",
+          "Processing",
+          "Transcoding",
+          "Finished",
+          "Error",
+          "UploadFailed",
+          "JitSegmenting",
+          "JitPlaylistsCreated"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "AddHeatmapDataModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "currentTime": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AddVideoViewTimeModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "v": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wt": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AddViewDataModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "views": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "watchTime": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "VideoInfoModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "video": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Video"
+              }
+            ]
+          },
+          "heatmapPrebuilt": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Video": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "videoLibraryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "guid": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateUploaded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "views": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalWatchTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalWatchTimeViews": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/VideoStatus"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "length": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "framerate": {
+            "type": "number",
+            "format": "double"
+          },
+          "rotation": {
+            "type": "integer",
+            "nullable": true
+          },
+          "outputCodecs": {
+            "type": "string",
+            "nullable": true
+          },
+          "jitEncodingEnabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "encodingTier": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncodingTier"
+              }
+            ]
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "thumbnailCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "availableResolutions": {
+            "type": "string",
+            "nullable": true
+          },
+          "encodeProgress": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "captions": {
+            "type": "string",
+            "nullable": true
+          },
+          "storageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hasMP4Fallback": {
+            "type": "boolean"
+          },
+          "aesKeyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "collectionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalEncodingTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "thumbnailFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "thumbnailBlurhash": {
+            "type": "string",
+            "nullable": true
+          },
+          "thumbnailTime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deleting": {
+            "type": "boolean"
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "chapters": {
+            "type": "string",
+            "nullable": true
+          },
+          "moments": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaTags": {
+            "type": "string",
+            "nullable": true
+          },
+          "transcodingMessages": {
+            "type": "string",
+            "nullable": true
+          },
+          "vrType": {
+            "$ref": "#/components/schemas/VRTypes"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "transcoderVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasOriginal": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "encodedDrmType": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VideoDrmType"
+              }
+            ]
+          },
+          "reEncoded": {
+            "type": "boolean"
+          },
+          "reEncodedTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reEncodeCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "smartGenerateUsageCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "smartGenerateStatus": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SmartGenerateStatus"
+              }
+            ]
+          },
+          "originalHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasHighQualityPreview": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "EncodingTier": {
+        "type": "integer",
+        "description": "0 = Free\n1 = Premium",
+        "x-enumNames": [
+          "Free",
+          "Premium"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "VRTypes": {
+        "type": "integer",
+        "description": "0 = None\n1 = VR180\n2 = VR360",
+        "x-enumNames": [
+          "None",
+          "VR180",
+          "VR360"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "VideoDrmType": {
+        "type": "integer",
+        "description": "0 = None\n1 = Basic\n2 = EnterpriseEncoded\n3 = RepackageSuccessful\n4 = RepackageProcessing\n5 = RepackageFailed",
+        "x-enumNames": [
+          "None",
+          "Basic",
+          "EnterpriseEncoded",
+          "RepackageSuccessful",
+          "RepackageProcessing",
+          "RepackageFailed"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "SyncSessionResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "sessionKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "rocksDbInfo": {
+            "$ref": "#/components/schemas/RocksDbInfo"
+          }
+        }
+      },
+      "RocksDbInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "SyncSessionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lastSequenceNumber": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       }

@@ -36,77 +36,76 @@ tasks:
           echo "Failed to fetch OpenAPI index from bunny.net"
           exit 1
         fi
-        
-        default_version=$(grep -oP '<div class="header">All OpenAPI Files for \K(v[0-9]+(\.[0-9]+)?)' "$temp_html")
-        if [[ -z "$default_version" ]]; then
-          default_version="v1.0"
-        fi
 
-        default_major="${default_version%%.*}"
-        default_minor="${default_version#*.}"
-        
-        grep -oP '<div class="item"><a href="\K([^"]+)".*?>([^<]+)' "$temp_html" | \
+        # Extract API links from new HTML structure
+        grep -oP '<a[^>]*href="([^"]+)"[^>]*>([^<]+)</a>' "$temp_html" | \
+        grep -E '(Core Platform API|Origin Errors API|Storage API|Stream API|Shield API|Edge Scripting API)' | \
         while IFS=$'\n' read -r line; do
-          href=$(echo "$line" | cut -d'"' -f1)
-          text=$(echo "$line" | cut -d'>' -f2)
+          href=$(echo "$line" | grep -oP 'href="\K[^"]+')
+          text=$(echo "$line" | grep -oP '>[^<]+</a>' | sed 's/>//;s/<\/a>//')
           lower_text=$(echo "$text" | tr '[:upper:]' '[:lower:]')
-          if [[ "$lower_text" =~ (v[0-9]+(\.[0-9]+)?) ]]; then
-            version="${BASH_REMATCH[1]}"
-          elif [[ "$lower_text" == *-[0-9].json ]]; then
-            num="${lower_text##*-}"
-            num="${num%.json}"
-            version="v${num}.${default_minor}" 
-          else
-            version="$default_version"
-          fi
 
-          # Normalize filename based on link text
-          filename=""
+          # Normalize base filename based on link text
+          base_filename=""
           case "$lower_text" in
-            *"edge scripting api"*) filename="edge-scripting-api" ;;
-            *"edge storage api"*) filename="edge-storage-api" ;;
-            *"stream api"*) filename="stream-api" ;;
-            *"shield api"*) filename="shield-api" ;;
-            *"bunny.net api"*) filename="base-api" ;;
-            *"edge-scripting-api"*) filename="edge-scripting-api" ;;
-            *"bunnynet-edge-storage-api"*) filename="edge-storage-api" ;;
-            *"bunny-shield-api"*) filename="shield-api" ;;
-            *"stream-api"*) filename="stream-api" ;;
-            *"bunnynet-api"*) filename="base-api" ;;
+            *"core platform api"*) base_filename="core-api" ;;
+            *"origin errors api"*) base_filename="origin-errors-api" ;;
+            *"storage api"*) base_filename="edge-storage-api" ;;
+            *"stream api"*) base_filename="stream-api" ;;
+            *"shield api"*) base_filename="shield-api" ;;
+            *"edge scripting api"*) base_filename="edge-scripting-api" ;;
             *)
-              filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//')"
+              base_filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//')"
               ;;
           esac
 
-          if [[ "$filename" == *"-json" ]]; then
-            filename="${filename%-json}"
-          fi
-          
-          # 2. Append version to filename with hyphen if found
-          if [ -n "$version" ]; then
-            filename="${filename}-${version}"
+          if [[ "$base_filename" == *"-json" ]]; then
+            base_filename="${base_filename%-json}"
           fi
 
-          # 3. Append .json extension only once at the end
-          filename="${filename}.json"
-          full_url="https://docs.bunny.net$href"
-          filepath="$out_dir/$filename"
+          # Construct full URL: use href as-is if absolute, otherwise prepend base URL
+          if [[ "$href" =~ ^https?:// ]]; then
+            full_url="$href"
+          else
+            full_url="https://docs.bunny.net$href"
+          fi
+
           tempfile="$(mktemp)"
-        
-          echo "Downloading '$text' → '$filepath'"
+
+          echo "Downloading '$text' from '$full_url'..."
           if ! wget --quiet --retry-connrefused --waitretry=3 --read-timeout=20 --timeout=15 --tries=5 --retry-on-http-error=429,500,502,503,504 -O "$tempfile" "$full_url"; then
             echo "Failed to download $text from $full_url after retries"
+            rm -f "$tempfile"
             continue
           fi
-        
+
           if ! jq --indent 2 . "$tempfile" > "$tempfile.json" 2>/dev/null; then
             echo "Invalid JSON from $full_url"
             rm -f "$tempfile" "$tempfile.json"
             continue
           fi
-        
+
           mv "$tempfile.json" "$tempfile"
-        
+
+          # Extract version from the OpenAPI spec
+          api_version=$(jq -r '.info.version // "1.0.0"' "$tempfile")
+
+          # Strip any leading 'v' from version
+          api_version="${api_version#v}"
+
+          # Convert to semver format if needed (e.g., "1" -> "1.0.0", "1.2" -> "1.2.0")
+          if [[ "$api_version" =~ ^[0-9]+$ ]]; then
+            # Only major version (e.g., "1")
+            api_version="${api_version}.0.0"
+          elif [[ "$api_version" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            # Major.minor (e.g., "1.2")
+            api_version="${api_version}.0"
+          fi
+
+          # Construct final filename with version
+          filename="${base_filename}-v${api_version}.json"
+          filepath="$out_dir/$filename"
+
           new_hash=$(sha256sum "$tempfile" | awk '{print $1}')
           old_hash="${existing_hashes[$filename]}"
 
