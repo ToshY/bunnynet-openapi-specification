@@ -3717,8 +3717,8 @@
             "type": "integer",
             "description": "The DVR window size in seconds, required when DvrEnabled is true, max is 12 hours",
             "format": "int32",
-            "maximum": 43200,
-            "minimum": 1,
+            "maximum": 43200.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "recordVod": {
@@ -3783,8 +3783,8 @@
             "type": "integer",
             "description": "The DVR window size in seconds, required when DvrEnabled is true, max is 12 hours",
             "format": "int32",
-            "maximum": 43200,
-            "minimum": 1,
+            "maximum": 43200.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "recordVod": {
