@@ -796,8 +796,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -816,8 +816,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -917,8 +917,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -937,8 +937,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1135,6 +1135,94 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetShieldZoneMetricsOverviewResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/metrics/overview/{shieldZoneId}/detailed": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "description": "The ID of the Shield Zone.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the Shield Zone.",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Resolution",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/MetricsOverviewResolution"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldOverviewMetrics"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldOverviewMetrics"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldOverviewMetrics"
                 }
               }
             }
@@ -2500,8 +2588,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2520,8 +2608,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2621,8 +2709,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2641,8 +2729,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4924,6 +5012,44 @@
         },
         "additionalProperties": false
       },
+      "MetricsOverviewResolution": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "OverviewMetric": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "nullable": true
+          },
+          "totals": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PaginationResponse": {
         "type": "object",
         "properties": {
@@ -5123,6 +5249,53 @@
           "uploadScanningBlocks": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShieldOverviewMetrics": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ShieldOverviewMetricsData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShieldOverviewMetricsData": {
+        "type": "object",
+        "properties": {
+          "waf": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "ddos": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "rateLimit": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "accessLists": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "botDetection": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "uploadScanning": {
+            "$ref": "#/components/schemas/OverviewMetric"
+          },
+          "totalCleanRequestsLimit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalBillableRequestsThisMonth": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "resolution": {
+            "$ref": "#/components/schemas/MetricsOverviewResolution"
           }
         },
         "additionalProperties": false
