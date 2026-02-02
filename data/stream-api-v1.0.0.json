@@ -2546,8 +2546,13 @@
             "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
             "nullable": true,
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/RtmpOutput"
             }
+          },
+          "preStreamTrailerVideoId": {
+            "type": "string",
+            "description": "Video ID of the trailer that will be played before the live stream starts",
+            "nullable": true
           }
         }
       },
@@ -2574,6 +2579,20 @@
           6,
           7
         ]
+      },
+      "RtmpOutput": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "streamKey": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "LiveStreamPlayDataModel": {
         "type": "object",
@@ -2775,8 +2794,13 @@
             "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
             "nullable": true,
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/RtmpOutput"
             }
+          },
+          "preStreamTrailerVideoId": {
+            "type": "string",
+            "description": "Video ID of the trailer that will be played before the live stream starts",
+            "nullable": true
           }
         }
       },
@@ -2841,8 +2865,13 @@
             "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
             "nullable": true,
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/RtmpOutput"
             }
+          },
+          "preStreamTrailerVideoId": {
+            "type": "string",
+            "description": "Video ID of the trailer that will be played before the live stream starts",
+            "nullable": true
           }
         }
       },
@@ -4526,6 +4555,9 @@
           "hasHighQualityPreview": {
             "type": "boolean",
             "nullable": true
+          },
+          "hidden": {
+            "type": "boolean"
           }
         }
       },
