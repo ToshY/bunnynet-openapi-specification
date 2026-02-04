@@ -4,7 +4,7 @@
     "sourceDescription": "Core Platform API",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "50752ba72d9edf0047420a52f05361cad6b321fd68bd5ef120f826d8a55aa53f"
+    "fileSha256": "d35c36efd90329757813731b6a2174b702a57fbf79c8fd3e5710a9d6ac294596"
   },
   {
     "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
