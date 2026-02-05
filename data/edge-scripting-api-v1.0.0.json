@@ -2039,189 +2039,332 @@
   },
   "components": {
     "schemas": {
-      "OptimizerWatermarkPosition": {
-        "type": "integer",
-        "description": "0 = BottomLeft<br/>1 = BottomRight<br/>2 = TopLeft<br/>3 = TopRight<br/>4 = Center<br/>5 = CenterStretch",
-        "x-enumNames": [
-          "BottomLeft",
-          "BottomRight",
-          "TopLeft",
-          "TopRight",
-          "Center",
-          "CenterStretch"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "x-enum-varnames": [
-          "BottomLeft",
-          "BottomRight",
-          "TopLeft",
-          "TopRight",
-          "Center",
-          "CenterStretch"
-        ]
-      },
-      "PaginationListModelOfEdgeScriptReleaseModel": {
+      "EdgeRuleV2Model": {
         "type": "object",
-        "required": [
-          "CurrentPage",
-          "TotalItems",
-          "HasMoreItems"
-        ],
         "properties": {
-          "Items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptReleaseModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
-      "UpdateEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "DefaultValue": {
+          "Guid": {
             "type": "string",
-            "nullable": true,
-            "maxLength": 4096
+            "description": "The unique GUID of the edge rule"
           },
-          "Required": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "DnsZoneDiscoveredRecordModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "Record name relative to the zone. '@' represents apex."
-          },
-          "Type": {
+          "ActionType": {
+            "description": "The action type of the edge rule",
             "allOf": [
               {
-                "$ref": "#/components/schemas/DnsZoneDiscoveredRecordType"
+                "$ref": "#/components/schemas/EdgeRuleActionType"
               }
-            ],
-            "nullable": true
+            ]
           },
-          "Ttl": {
+          "ActionParameter1": {
+            "type": "string",
+            "description": "The Action parameter 1. The value depends on other parameters of the edge rule."
+          },
+          "ActionParameter2": {
+            "type": "string",
+            "description": "The Action parameter 2. The value depends on other parameters of the edge rule."
+          },
+          "ActionParameter3": {
+            "type": "string",
+            "description": "The Action parameter 3. The value depends on other parameters of the edge rule."
+          },
+          "Triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Trigger"
+            },
+            "description": "The list of trigger that trigger the edge rule"
+          },
+          "ExtraActions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeRuleV2ActionModel"
+            },
+            "description": "Additional actions to be performed"
+          },
+          "TriggerMatchingType": {
+            "description": "The trigger matching type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PatternMatchingTypes"
+              }
+            ]
+          },
+          "Description": {
+            "type": "string",
+            "description": "The description of the edge rule"
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Determines if the edge rule is currently enabled or not"
+          },
+          "OrderIndex": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "description": "The index of the edge rule in the list of execution priority"
+          }
+        },
+        "description": "Model definition for EdgeRuleV2Model"
+      },
+      "AbuseCaseStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Reviewing",
+          "Resolved",
+          "AccessBlocked",
+          "Appealed"
+        ],
+        "x-enumNames": [
+          "Pending",
+          "Reviewing",
+          "Resolved",
+          "AccessBlocked",
+          "Appealed"
+        ],
+        "description": "0 = Pending<br/>1 = Reviewing<br/>2 = Resolved<br/>3 = AccessBlocked<br/>4 = Appealed",
+        "example": "Pending"
+      },
+      "ConnectedGithubAccountModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
           },
-          "Value": {
+          "Name": {
             "type": "string",
             "nullable": true
-          },
-          "Priority": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Weight": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Port": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "IsProxied": {
-            "type": "boolean"
           }
         },
         "required": [
-          "IsProxied"
+          "Id"
         ]
       },
-      "PublishEdgeScriptModel": {
+      "AbuseUrlStatus": {
+        "type": "string",
+        "description": "0 = NotResolved<br/>1 = Resolved<br/>2 = Unknown",
+        "x-enumNames": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "enum": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "x-enum-varnames": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "example": "NotResolved"
+      },
+      "UserAuditLog": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Note": {
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Product": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceOwner": {
+            "type": "string",
+            "nullable": true
+          },
+          "Action": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Diff": {
             "type": "string",
             "nullable": true
           }
-        }
+        },
+        "required": [
+          "Timestamp"
+        ]
       },
-      "LogAnonymizationType": {
+      "DnsZoneDiscoveredRecordType": {
         "type": "string",
-        "description": "0 = OneDigit<br/>1 = Drop",
+        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>12 = NS<br/>13 = Svcb<br/>14 = HTTPS<br/>15 = TLSA<br/>16 = SOA",
         "x-enumNames": [
-          "OneDigit",
-          "Drop"
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
         ],
         "enum": [
-          "OneDigit",
-          "Drop"
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
         ],
         "x-enum-varnames": [
-          "OneDigit",
-          "Drop"
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
         ],
-        "example": "OneDigit"
+        "example": "A"
       },
-      "AddEdgeScriptModel": {
+      "DnsZoneModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 100
+          "Id": {
+            "type": "integer",
+            "format": "int64"
           },
-          "Code": {
+          "Domain": {
             "type": "string",
             "nullable": true
           },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
+          "Records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DnsRecordModel"
+            },
+            "nullable": true
           },
-          "CreateLinkedPullZone": {
+          "DateModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "NameserversDetected": {
             "type": "boolean"
           },
-          "LinkedPullZoneName": {
+          "CustomNameserversEnabled": {
+            "type": "boolean"
+          },
+          "Nameserver1": {
             "type": "string",
             "nullable": true
           },
-          "Integration": {
-            "nullable": true,
-            "oneOf": [
+          "Nameserver2": {
+            "type": "string",
+            "nullable": true
+          },
+          "SoaEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "NameserversNextCheck": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "LoggingEnabled": {
+            "type": "boolean"
+          },
+          "LoggingIPAnonymizationEnabled": {
+            "type": "boolean",
+            "description": "Determines if the TLS 1 is enabled on the DNS Zone"
+          },
+          "LogAnonymizationType": {
+            "allOf": [
               {
-                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
+                "$ref": "#/components/schemas/LogAnonymizationType"
+              }
+            ],
+            "nullable": true,
+            "description": "Sets the log anonymization type for this zone"
+          },
+          "DnsSecEnabled": {
+            "type": "boolean",
+            "description": "Determines if DNSSEC is enabled for this DNS Zone"
+          },
+          "CertificateKeyType": {
+            "description": "The private key type to use for automatic certificates",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrivateKeyType"
               }
             ]
           }
         },
         "required": [
-          "CreateLinkedPullZone"
+          "Id",
+          "DateModified",
+          "DateCreated",
+          "NameserversDetected",
+          "CustomNameserversEnabled",
+          "NameserversNextCheck",
+          "LoggingEnabled",
+          "LoggingIPAnonymizationEnabled",
+          "DnsSecEnabled"
         ]
       },
-      "EdgeScriptSecretModel": {
+      "UserModelCategoryType": {
+        "type": "string",
+        "description": "0 = Normal<br/>1 = Internal<br/>2 = Sponsored",
+        "x-enumNames": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "enum": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "x-enum-varnames": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "example": "Normal"
+      },
+      "EdgeScriptVariableModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -2233,78 +2376,37 @@
             "type": "string",
             "nullable": true
           },
-          "LastModified": {
+          "Required": {
+            "type": "boolean"
+          },
+          "DefaultValue": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           }
         },
         "required": [
           "Id",
-          "LastModified"
+          "Required"
         ]
       },
-      "PreloadingScreenTheme": {
-        "type": "string",
-        "description": "0 = Light<br/>1 = Dark",
-        "x-enumNames": [
-          "Light",
-          "Dark"
-        ],
-        "enum": [
-          "Light",
-          "Dark"
-        ],
-        "x-enum-varnames": [
-          "Light",
-          "Dark"
-        ],
-        "example": "Light"
-      },
-      "AppleFairPlayDrm": {
+      "SupportTicketUploadAttachmentModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Enabled": {
-            "type": "boolean"
-          },
-          "CertificateId": {
+          "Body": {
             "type": "integer",
-            "format": "int64",
-            "nullable": true
+            "minimum": 0,
+            "maximum": 255
           },
-          "CertificateExpirationDate": {
+          "FileName": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
-          "Provider": {
+          "ContentType": {
             "type": "string",
             "nullable": true
           }
-        },
-        "required": [
-          "Enabled"
-        ]
-      },
-      "DnsMonitoringStatus": {
-        "type": "string",
-        "description": "0 = Unknown<br/>1 = Online<br/>2 = Offline",
-        "x-enumNames": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "enum": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "x-enum-varnames": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "example": "Unknown"
+        }
       },
       "SearchResultItemModel": {
         "type": "object",
@@ -2330,166 +2432,159 @@
           "Id"
         ]
       },
-      "SourceCodeIntegrationModel": {
+      "GoogleWidevineDrm": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "IntegrationId": {
+          "Enabled": {
+            "type": "boolean"
+          },
+          "CertificateId": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "nullable": true
           },
-          "RepositorySettings": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SourceCodeRepositorySettingsModel"
-              }
-            ]
+          "CertificateExpirationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
-          "DeployConfiguration": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DeployConfigurationModel"
-              }
-            ]
-          }
-        },
-        "required": [
-          "IntegrationId"
-        ]
-      },
-      "AbuseCaseStatus": {
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Reviewing",
-          "Resolved",
-          "AccessBlocked",
-          "Appealed"
-        ],
-        "x-enumNames": [
-          "Pending",
-          "Reviewing",
-          "Resolved",
-          "AccessBlocked",
-          "Appealed"
-        ],
-        "description": "0 = Pending<br/>1 = Reviewing<br/>2 = Resolved<br/>3 = AccessBlocked<br/>4 = Appealed",
-        "example": "Pending"
-      },
-      "ServerZoneStatisticsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Error3xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "Error4xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "Error5xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "RequestsHit": {
-            "type": "number",
-            "format": "double"
-          },
-          "RequestsMiss": {
-            "type": "number",
-            "format": "double"
-          },
-          "Bandwidth": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": [
-          "Error3xx",
-          "Error4xx",
-          "Error5xx",
-          "RequestsHit",
-          "RequestsMiss",
-          "Bandwidth"
-        ]
-      },
-      "ApiKeyModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Key": {
+          "Provider": {
             "type": "string",
             "nullable": true
           },
-          "Roles": {
+          "SdOnlyForL3": {
+            "type": "boolean"
+          },
+          "MinClientSecurityLevel": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WidevineMinClientSecurityLevel"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "Enabled",
+          "SdOnlyForL3"
+        ]
+      },
+      "ListEdgeScriptSecretsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Secrets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptSecretModel"
+            }
+          }
+        }
+      },
+      "EncodingTier": {
+        "type": "string",
+        "description": "0 = Free<br/>1 = Premium",
+        "x-enumNames": [
+          "Free",
+          "Premium"
+        ],
+        "enum": [
+          "Free",
+          "Premium"
+        ],
+        "x-enum-varnames": [
+          "Free",
+          "Premium"
+        ],
+        "example": "Free"
+      },
+      "LogAnonymizationType": {
+        "type": "string",
+        "description": "0 = OneDigit<br/>1 = Drop",
+        "x-enumNames": [
+          "OneDigit",
+          "Drop"
+        ],
+        "enum": [
+          "OneDigit",
+          "Drop"
+        ],
+        "x-enum-varnames": [
+          "OneDigit",
+          "Drop"
+        ],
+        "example": "OneDigit"
+      },
+      "UpdateEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 100
+          },
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
+          }
+        }
+      },
+      "SupportTicketAttachmentModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ContentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Thumbnails": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "nullable": true
+          },
+          "FileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Id": {
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
+          "Size",
           "Id"
         ]
       },
-      "PullZoneLogFormat": {
-        "type": "string",
-        "description": "0 = Plain<br/>1 = JSON",
-        "x-enumNames": [
-          "Plain",
-          "JSON"
-        ],
-        "enum": [
-          "Plain",
-          "JSON"
-        ],
-        "x-enum-varnames": [
-          "Plain",
-          "JSON"
-        ],
-        "example": "Plain"
-      },
-      "ApiErrorData": {
+      "OptimizerClassModel": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
-          "ErrorKey": {
-            "type": "string"
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the optimizer class that will be used in the query string"
           },
-          "Field": {
-            "type": "string"
-          },
-          "Message": {
-            "type": "string"
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of settings and values the class will send to the optimizer"
           }
         }
-      },
-      "WhatsNewModelType": {
-        "type": "string",
-        "description": "0 = Feature<br/>1 = Update<br/>2 = BugFix",
-        "x-enumNames": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "enum": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "x-enum-varnames": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "example": "Feature"
       },
       "PatternMatchingTypes": {
         "type": "integer",
@@ -2509,43 +2604,6 @@
           "MatchNone"
         ],
         "description": "0 = MatchAny<br/>1 = MatchAll<br/>2 = MatchNone"
-      },
-      "PermaCacheType": {
-        "type": "string",
-        "description": "0 = Automatic<br/>1 = Manual",
-        "x-enumNames": [
-          "Automatic",
-          "Manual"
-        ],
-        "enum": [
-          "Automatic",
-          "Manual"
-        ],
-        "x-enum-varnames": [
-          "Automatic",
-          "Manual"
-        ],
-        "example": "Automatic"
-      },
-      "GithubRepositoryBranchModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Protected": {
-            "type": "boolean"
-          },
-          "Default": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "Protected",
-          "Default"
-        ]
       },
       "BillingRecordModel": {
         "type": "object",
@@ -2606,328 +2664,22 @@
           "InvoiceAvailable"
         ]
       },
-      "TeamMemberModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "nullable": true,
-            "description": "The unique id of the user"
-          },
-          "Email": {
-            "type": "string",
-            "nullable": true,
-            "description": "The email of the user"
-          },
-          "FirstName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The first name of the user"
-          },
-          "LastName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The last name of the user"
-          },
-          "DateJoined": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date when the user joined bunny.net"
-          },
-          "EmailVerified": {
-            "type": "boolean",
-            "description": "Determines if the account's email has been successfuly verified"
-          },
-          "Roles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "Determines the roles that the user belongs to"
-          },
-          "TwoFactorAuthenticationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the user has active 2FA configuration"
-          },
-          "IsMainUser": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "DateJoined",
-          "EmailVerified",
-          "TwoFactorAuthenticationEnabled",
-          "IsMainUser"
-        ]
-      },
-      "DnsMonitoringType": {
+      "PermaCacheType": {
         "type": "string",
-        "description": "0 = None<br/>1 = Ping<br/>2 = Http<br/>3 = Monitor",
+        "description": "0 = Automatic<br/>1 = Manual",
         "x-enumNames": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
+          "Automatic",
+          "Manual"
         ],
         "enum": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
+          "Automatic",
+          "Manual"
         ],
         "x-enum-varnames": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
+          "Automatic",
+          "Manual"
         ],
-        "example": "None"
-      },
-      "ConnectedGithubAccountModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id"
-        ]
-      },
-      "SupportTicketModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Status": {
-            "type": "string",
-            "nullable": true
-          },
-          "Comments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SupportTicketCommentModel"
-            },
-            "nullable": true
-          },
-          "Subject": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "LastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "Id",
-          "CreatedAt",
-          "LastUpdatedAt"
-        ]
-      },
-      "SupportTicketAttachmentModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ContentUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "ContentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "Size": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Thumbnails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "FileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          }
-        },
-        "required": [
-          "Size",
-          "Id"
-        ]
-      },
-      "SupportTicketUploadAttachmentModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Body": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 255
-          },
-          "FileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "ContentType": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "ExecutionPhase": {
-        "type": "string",
-        "description": "0 = Cache<br/>1 = LoadBalancer",
-        "x-enumNames": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "enum": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "x-enum-varnames": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "example": "Cache"
-      },
-      "DrmCertificateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "PrivateKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "SecretKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "Certificate": {
-            "type": "string",
-            "nullable": true
-          },
-          "Provider": {
-            "type": "string",
-            "nullable": true
-          },
-          "ExpirationDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "CertificateType": {
-            "$ref": "#/components/schemas/CertificateType"
-          },
-          "DateModified": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "DateCreated": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "Id",
-          "ExpirationDate",
-          "DateModified",
-          "DateCreated"
-        ]
-      },
-      "DnsRecordEnviromentalVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TriggerTypes": {
-        "type": "string",
-        "enum": [
-          "Url",
-          "RequestHeader",
-          "ResponseHeader",
-          "UrlExtension",
-          "CountryCode",
-          "RemoteIP",
-          "UrlQueryString",
-          "RandomChance",
-          "StatusCode",
-          "RequestMethod",
-          "CookieValue",
-          "CountryStateCode",
-          "OriginRetryAttemptCount",
-          "OriginConnectionError"
-        ],
-        "x-enumNames": [
-          "Url",
-          "RequestHeader",
-          "ResponseHeader",
-          "UrlExtension",
-          "CountryCode",
-          "RemoteIP",
-          "UrlQueryString",
-          "RandomChance",
-          "StatusCode",
-          "RequestMethod",
-          "CookieValue",
-          "CountryStateCode",
-          "OriginRetryAttemptCount",
-          "OriginConnectionError"
-        ],
-        "description": "0 = Url\n1 = RequestHeader\n2 = ResponseHeader\n3 = UrlExtension\n4 = CountryCode\n5 = RemoteIP\n6 = UrlQueryString\n7 = RandomChance\n8 = StatusCode\n9 = RequestMethod\n10 = CookieValue\n11 = CountryStateCode\n12 = OriginRetryAttemptCount\n13 = OriginConnectionError",
-        "example": "Url"
-      },
-      "UpdateEdgeScriptModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 100
-          },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
-          }
-        }
-      },
-      "LinkedPullZone": {
-        "type": "object",
-        "description": "Model definition for LinkedPullZone"
+        "example": "Automatic"
       },
       "BillingSavedPaymentMethod": {
         "type": "object",
@@ -2955,7 +2707,167 @@
           }
         }
       },
-      "SupportTicketCommentModel": {
+      "EdgeRuleActionType": {
+        "type": "string",
+        "description": "0 = ForceSSL<br/>1 = Redirect<br/>2 = OriginUrl<br/>3 = OverrideCacheTime<br/>4 = BlockRequest<br/>5 = SetResponseHeader<br/>6 = SetRequestHeader<br/>7 = ForceDownload<br/>8 = DisableTokenAuthentication<br/>9 = EnableTokenAuthentication<br/>10 = OverrideCacheTimePublic<br/>11 = IgnoreQueryString<br/>12 = DisableOptimizer<br/>13 = ForceCompression<br/>14 = SetStatusCode<br/>15 = BypassPermaCache<br/>16 = OverrideBrowserCacheTime<br/>17 = OriginStorage<br/>18 = SetNetworkRateLimit<br/>19 = SetConnectionLimit<br/>20 = SetRequestsPerSecondLimit<br/>21 = RunEdgeScript<br/>22 = OriginMagicContainers<br/>23 = DisableWAF<br/>24 = RetryOrigin<br/>25 = OverrideBrowserCacheResponseHeader<br/>26 = RemoveBrowserCacheResponseHeader<br/>27 = DisableShieldChallenge<br/>28 = DisableShield<br/>29 = DisableShieldBotDetection<br/>30 = BypassAwsS3Authentication<br/>31 = DisableShieldAccessLists<br/>32 = DisableShieldRateLimiting",
+        "x-enumNames": [
+          "ForceSSL",
+          "Redirect",
+          "OriginUrl",
+          "OverrideCacheTime",
+          "BlockRequest",
+          "SetResponseHeader",
+          "SetRequestHeader",
+          "ForceDownload",
+          "DisableTokenAuthentication",
+          "EnableTokenAuthentication",
+          "OverrideCacheTimePublic",
+          "IgnoreQueryString",
+          "DisableOptimizer",
+          "ForceCompression",
+          "SetStatusCode",
+          "BypassPermaCache",
+          "OverrideBrowserCacheTime",
+          "OriginStorage",
+          "SetNetworkRateLimit",
+          "SetConnectionLimit",
+          "SetRequestsPerSecondLimit",
+          "RunEdgeScript",
+          "OriginMagicContainers",
+          "DisableWAF",
+          "RetryOrigin",
+          "OverrideBrowserCacheResponseHeader",
+          "RemoveBrowserCacheResponseHeader",
+          "DisableShieldChallenge",
+          "DisableShield",
+          "DisableShieldBotDetection",
+          "BypassAwsS3Authentication",
+          "DisableShieldAccessLists",
+          "DisableShieldRateLimiting"
+        ],
+        "enum": [
+          "ForceSSL",
+          "Redirect",
+          "OriginUrl",
+          "OverrideCacheTime",
+          "BlockRequest",
+          "SetResponseHeader",
+          "SetRequestHeader",
+          "ForceDownload",
+          "DisableTokenAuthentication",
+          "EnableTokenAuthentication",
+          "OverrideCacheTimePublic",
+          "IgnoreQueryString",
+          "DisableOptimizer",
+          "ForceCompression",
+          "SetStatusCode",
+          "BypassPermaCache",
+          "OverrideBrowserCacheTime",
+          "OriginStorage",
+          "SetNetworkRateLimit",
+          "SetConnectionLimit",
+          "SetRequestsPerSecondLimit",
+          "RunEdgeScript",
+          "OriginMagicContainers",
+          "DisableWAF",
+          "RetryOrigin",
+          "OverrideBrowserCacheResponseHeader",
+          "RemoveBrowserCacheResponseHeader",
+          "DisableShieldChallenge",
+          "DisableShield",
+          "DisableShieldBotDetection",
+          "BypassAwsS3Authentication",
+          "DisableShieldAccessLists",
+          "DisableShieldRateLimiting"
+        ],
+        "x-enum-varnames": [
+          "ForceSSL",
+          "Redirect",
+          "OriginUrl",
+          "OverrideCacheTime",
+          "BlockRequest",
+          "SetResponseHeader",
+          "SetRequestHeader",
+          "ForceDownload",
+          "DisableTokenAuthentication",
+          "EnableTokenAuthentication",
+          "OverrideCacheTimePublic",
+          "IgnoreQueryString",
+          "DisableOptimizer",
+          "ForceCompression",
+          "SetStatusCode",
+          "BypassPermaCache",
+          "OverrideBrowserCacheTime",
+          "OriginStorage",
+          "SetNetworkRateLimit",
+          "SetConnectionLimit",
+          "SetRequestsPerSecondLimit",
+          "RunEdgeScript",
+          "OriginMagicContainers",
+          "DisableWAF",
+          "RetryOrigin",
+          "OverrideBrowserCacheResponseHeader",
+          "RemoveBrowserCacheResponseHeader",
+          "DisableShieldChallenge",
+          "DisableShield",
+          "DisableShieldBotDetection",
+          "BypassAwsS3Authentication",
+          "DisableShieldAccessLists",
+          "DisableShieldRateLimiting"
+        ],
+        "example": "ForceSSL"
+      },
+      "PullZoneOriginType": {
+        "type": "string",
+        "description": "0 = OriginUrl<br/>1 = DnsAccelerate<br/>2 = StorageZone<br/>3 = LoadBalancer<br/>4 = EdgeScript<br/>5 = MagicContainers<br/>6 = PushZone",
+        "x-enumNames": [
+          "OriginUrl",
+          "DnsAccelerate",
+          "StorageZone",
+          "LoadBalancer",
+          "EdgeScript",
+          "MagicContainers",
+          "PushZone"
+        ],
+        "enum": [
+          "OriginUrl",
+          "DnsAccelerate",
+          "StorageZone",
+          "LoadBalancer",
+          "EdgeScript",
+          "MagicContainers",
+          "PushZone"
+        ],
+        "x-enum-varnames": [
+          "OriginUrl",
+          "DnsAccelerate",
+          "StorageZone",
+          "LoadBalancer",
+          "EdgeScript",
+          "MagicContainers",
+          "PushZone"
+        ],
+        "example": "OriginUrl"
+      },
+      "AbuseCaseUrlModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Url": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AbuseUrlStatus"
+              }
+            ]
+          }
+        }
+      },
+      "EdgeScriptModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -2963,190 +2875,81 @@
             "type": "integer",
             "format": "int64"
           },
-          "Type": {
-            "type": "string",
-            "nullable": true
-          },
-          "Body": {
-            "type": "string",
-            "nullable": true
-          },
-          "HtmlBody": {
-            "type": "string",
-            "nullable": true
-          },
-          "Public": {
-            "type": "boolean"
-          },
-          "AuthorId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "User": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SupportTicketUserModel"
-              }
-            ]
-          },
-          "Attachments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SupportTicketAttachmentModel"
-            },
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id",
-          "Public",
-          "AuthorId",
-          "CreatedAt"
-        ]
-      },
-      "BunnyCDN": {
-        "type": "object",
-        "description": "Model definition for BunnyCDN"
-      },
-      "EdgeScriptCodeModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Code": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
           "LastModified": {
             "type": "string",
             "format": "date-time"
-          }
-        },
-        "required": [
-          "LastModified"
-        ]
-      },
-      "StorageZoneTier": {
-        "type": "string",
-        "description": "0 = Standard<br/>1 = Edge",
-        "x-enumNames": [
-          "Standard",
-          "Edge"
-        ],
-        "enum": [
-          "Standard",
-          "Edge"
-        ],
-        "x-enum-varnames": [
-          "Standard",
-          "Edge"
-        ],
-        "example": "Standard"
-      },
-      "CertificateProvisionType": {
-        "type": "string",
-        "description": "0 = Unknown<br/>1 = Http01<br/>2 = Dns01<br/>3 = Custom",
-        "x-enumNames": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "enum": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "x-enum-varnames": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "example": "Unknown"
-      },
-      "EdgeRuleV2ActionModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ActionType": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EdgeRuleV2Model"
-              }
-            ]
           },
-          "ActionParameter1": {
-            "type": "string",
-            "nullable": true
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
           },
-          "ActionParameter2": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActionParameter3": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "EdgeScriptStatisticsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "TotalRequestsServed": {
+          "CurrentReleaseId": {
             "type": "integer",
             "format": "int64"
           },
-          "TotalCpuUsed": {
-            "type": "number",
-            "format": "double"
+          "EdgeScriptVariables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptVariableModel"
+            },
+            "nullable": true
           },
-          "TotalMonthlyCost": {
+          "Deleted": {
+            "type": "boolean"
+          },
+          "LinkedPullZones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedPullZone"
+            },
+            "nullable": true
+          },
+          "Integration": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
+              }
+            ]
+          },
+          "DefaultHostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "SystemHostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "DeploymentKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "RepositoryId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "IntegrationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "MonthlyCost": {
             "type": "number",
             "format": "decimal"
           },
-          "AverageCpuTimePerExecution": {
-            "type": "number",
-            "format": "double"
+          "MonthlyRequestCount": {
+            "type": "integer",
+            "format": "int64"
           },
-          "RequestsServedChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "AverageCpuTimeChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "TotalCpuTimeChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
+          "MonthlyCpuTime": {
+            "type": "integer",
+            "format": "int64"
           }
-        },
-        "required": [
-          "TotalRequestsServed",
-          "TotalCpuUsed",
-          "TotalMonthlyCost",
-          "AverageCpuTimePerExecution"
-        ]
+        }
       },
       "StorageZoneModel": {
         "type": "object",
@@ -3275,1017 +3078,51 @@
           "Discount"
         ]
       },
-      "AcceleratedStatus": {
-        "type": "string",
-        "description": "0 = None<br/>1 = Pending<br/>2 = Processing<br/>3 = Completed<br/>4 = Failed",
-        "x-enumNames": [
-          "None",
-          "Pending",
-          "Processing",
-          "Completed",
-          "Failed"
-        ],
-        "enum": [
-          "None",
-          "Pending",
-          "Processing",
-          "Completed",
-          "Failed"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "Pending",
-          "Processing",
-          "Completed",
-          "Failed"
-        ],
-        "example": "None"
-      },
-      "EdgeScriptAddSecretModel": {
+      "GithubRepositoryBranchModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "Name": {
             "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
+            "nullable": true
           },
-          "Secret": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
+          "Protected": {
+            "type": "boolean"
+          },
+          "Default": {
+            "type": "boolean"
           }
         },
         "required": [
-          "Name"
+          "Protected",
+          "Default"
         ]
       },
-      "EdgeScriptUpdateSecretModel": {
+      "EdgeRuleV2ActionModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Secret": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        }
-      },
-      "GeoDnsLocationModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "CountryCode": {
-            "type": "string",
-            "nullable": true,
-            "description": "The ISO country code of the location"
-          },
-          "Country": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the country of the location"
-          },
-          "ASN": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ASN of the IP organization"
-          },
-          "OrganizationName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The mame of the organization that owns the IP"
-          },
-          "City": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the city of the location"
-          }
-        },
-        "required": [
-          "ASN"
-        ],
-        "description": "Billing model contains data summary about the user's billing"
-      },
-      "UserModelBillingType": {
-        "type": "string",
-        "description": "0 = FreeTrial<br/>1 = PayAsYouGo<br/>2 = PostPaidPayAsYouGo<br/>3 = MonthlyPlan",
-        "x-enumNames": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "enum": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "x-enum-varnames": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "example": "FreeTrial"
-      },
-      "AbuseCaseUrlModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Url": {
-            "type": "string",
-            "nullable": true
-          },
-          "Status": {
+          "ActionType": {
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/AbuseUrlStatus"
-              }
-            ]
-          }
-        }
-      },
-      "StorageZoneS3Type": {
-        "type": "string",
-        "description": "0 = NotSupported<br/>1 = Supported",
-        "x-enumNames": [
-          "NotSupported",
-          "Supported"
-        ],
-        "enum": [
-          "NotSupported",
-          "Supported"
-        ],
-        "x-enum-varnames": [
-          "NotSupported",
-          "Supported"
-        ],
-        "example": "NotSupported"
-      },
-      "UserAuditLog": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "Product": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceType": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceOwner": {
-            "type": "string",
-            "nullable": true
-          },
-          "Action": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActorType": {
-            "type": "string",
-            "nullable": true
-          },
-          "Diff": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Timestamp"
-        ]
-      },
-      "VideoLibraryModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the Video Library."
-          },
-          "VideoCount": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of videos in the video library"
-          },
-          "StorageUsage": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The total amount of storage used by the library"
-          },
-          "DateCreated": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date when the video library was created"
-          },
-          "ReplicationRegions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The geo-replication regions of the underlying storage zone"
-          },
-          "ApiKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "The API key used for authenticating with the video library"
-          },
-          "ReadOnlyApiKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "The read-only API key used for authenticating with the video library"
-          },
-          "HasWatermark": {
-            "type": "boolean",
-            "description": "Determines if the video library has a watermark configured"
-          },
-          "WatermarkPositionLeft": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The left offset of the watermark position (in %)"
-          },
-          "WatermarkPositionTop": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The top offset of the watermark position (in %)"
-          },
-          "WatermarkWidth": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The width of the watermark (in %)"
-          },
-          "PullZoneId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ID of the connected underlying pull zone"
-          },
-          "StorageZoneId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ID of the connected underlying storage zone"
-          },
-          "WatermarkHeight": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The height of the watermark (in %)"
-          },
-          "EnabledResolutions": {
-            "type": "string",
-            "nullable": true,
-            "description": "The comma separated list of enabled resolutions"
-          },
-          "ViAiPublisherId": {
-            "type": "string",
-            "nullable": true,
-            "description": "The vi.ai publisher id for advertising configuration"
-          },
-          "VastTagUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "The URL of the VAST tag endpoint for advertising configuration"
-          },
-          "WebhookUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "The webhook URL of the video library"
-          },
-          "CaptionsFontSize": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The captions display font size"
-          },
-          "CaptionsFontColor": {
-            "type": "string",
-            "nullable": true,
-            "description": "The captions display font color"
-          },
-          "CaptionsBackground": {
-            "type": "string",
-            "nullable": true,
-            "description": "The captions display background color"
-          },
-          "UILanguage": {
-            "type": "string",
-            "nullable": true,
-            "description": "The UI language of the player"
-          },
-          "AllowEarlyPlay": {
-            "type": "boolean",
-            "nullable": true,
-            "description": "Determines if the Early-Play feature is enabled"
-          },
-          "PlayerTokenAuthenticationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the player token authentication is enabled"
-          },
-          "AllowedReferrers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of allowed referrer domains allowed to access the library"
-          },
-          "BlockedReferrers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of blocked referrer domains blocked from accessing the library"
-          },
-          "BlockNoneReferrer": {
-            "type": "boolean",
-            "description": "Determines if the requests without a referrer are blocked"
-          },
-          "EnableMP4Fallback": {
-            "type": "boolean",
-            "description": "Determines if the MP4 fallback feature is enabled"
-          },
-          "KeepOriginalFiles": {
-            "type": "boolean",
-            "description": "Determines if the original video files should be stored after encoding"
-          },
-          "AllowDirectPlay": {
-            "type": "boolean",
-            "description": "Determines direct play URLs are enabled for the library"
-          },
-          "EnableDRM": {
-            "type": "boolean",
-            "description": "Determines if the DRM is enabled"
-          },
-          "DrmVersion": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DrmVersion"
-              }
-            ],
-            "description": "DRM version (basic or enterprise)"
-          },
-          "AppleFairPlayDrm": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AppleFairPlayDrm"
-              }
-            ],
-            "description": "Described Apple FairPlay DRM"
-          },
-          "GoogleWidevineDrm": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/GoogleWidevineDrm"
-              }
-            ],
-            "description": "Describes Google Widevine DRM"
-          },
-          "Bitrate240p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 240p videos"
-          },
-          "Bitrate360p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 360p videos"
-          },
-          "Bitrate480p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 480p videos"
-          },
-          "Bitrate720p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 720p videos"
-          },
-          "Bitrate1080p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 1080p videos"
-          },
-          "Bitrate1440p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 1440p videos"
-          },
-          "Bitrate2160p": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The bitrate used for encoding 2160p videos"
-          },
-          "ApiAccessKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "ShowHeatmap": {
-            "type": "boolean",
-            "description": "Determines if the video watch heatmap should be displayed in the player."
-          },
-          "EnableContentTagging": {
-            "type": "boolean",
-            "description": "Determines if content tagging should be enabled for this library."
-          },
-          "PullZoneType": {
-            "description": "The type of the pull zone attached. Premium = 0, Volume = 1",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PullZoneType"
+                "$ref": "#/components/schemas/EdgeRuleV2Model"
               }
             ]
           },
-          "CustomHTML": {
-            "type": "string",
-            "nullable": true,
-            "description": "The custom HTMl that is added into the head of the HTML player."
-          },
-          "Controls": {
-            "type": "string",
-            "nullable": true,
-            "description": "The list of controls on the video player."
-          },
-          "PlaybackSpeeds": {
-            "type": "string",
-            "nullable": true,
-            "description": "The list of playback speeds available in the video player."
-          },
-          "PlayerKeyColor": {
-            "type": "string",
-            "nullable": true,
-            "description": "The key color of the player."
-          },
-          "FontFamily": {
-            "type": "string",
-            "nullable": true,
-            "description": "The captions font family."
-          },
-          "WatermarkVersion": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "EnableTranscribing": {
-            "type": "boolean",
-            "description": "Determines if the automatic audio transcribing is currently enabled for this zone."
-          },
-          "EnableTranscribingTitleGeneration": {
-            "type": "boolean",
-            "description": "Determines if automatic transcribing title generation is currently enabled."
-          },
-          "EnableTranscribingDescriptionGeneration": {
-            "type": "boolean",
-            "description": "Determines if automatic transcribing description generation is currently enabled."
-          },
-          "EnableTranscribingChaptersGeneration": {
-            "type": "boolean",
-            "description": "Determines if automatic transcribing chapters generation is currently enabled."
-          },
-          "EnableTranscribingMomentsGeneration": {
-            "type": "boolean",
-            "description": "Determines if automatic transcribing moments generation is currently enabled."
-          },
-          "TranscribingCaptionLanguages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of languages that the captions will be automatically transcribed to."
-          },
-          "EnableCaptionsInPlaylist": {
-            "type": "boolean",
-            "nullable": true,
-            "description": "Determines if any associated captions will be automatically signaled in the HLS master playlist via EXT-X-MEDIA tags, allowing client players to show captions."
-          },
-          "RememberPlayerPosition": {
-            "type": "boolean",
-            "description": "Determines if the player will automatically remember the playback position."
-          },
-          "EnableMultiAudioTrackSupport": {
-            "type": "boolean",
-            "description": "Determines if multiple output audio track support is enabled on video library."
-          },
-          "UseSeparateAudioStream": {
-            "type": "boolean",
-            "description": "Determines whether output audio stream should be split from video stream segments."
-          },
-          "JitEncodingEnabled": {
-            "type": "boolean",
-            "description": "Determines whether JIT encoding should be used for the library. Supported in premium encoding only."
-          },
-          "EncodingTier": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EncodingTier"
-              }
-            ],
-            "description": "Defines encoding tier to be used with video library. premium is a paid tier that offers either JIT encoding or prioritized encoding and extra codec support."
-          },
-          "OutputCodecs": {
-            "type": "string",
-            "nullable": true,
-            "description": "Specifies which video codecs are used for encoding, provided as a comma-separated (CSV) string. Free encoding tier supports only x264. A premium encoding tier adds support for vp9, hevc, and av1."
-          },
-          "DrmBasePriceOverride": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true,
-            "description": "DRM (enterprise) monthly base price for this video library if it differs from list price."
-          },
-          "DrmCostPerLicenseOverride": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true,
-            "description": "DRM (enterprise) cost per license for this video library if it differs from list price."
-          },
-          "TranscribingPriceOverride": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "PremiumEncodingPriceOverride": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "MonthlyChargesTranscribing": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "MonthlyChargesPremiumEncoding": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "MonthlyChargesEnterpriseDrm": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "FeatureFlags": {
+          "ActionParameter1": {
             "type": "string",
             "nullable": true
           },
-          "PlayerVersion": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "RemoveMetadataFromFallbackVideos": {
-            "type": "boolean",
-            "description": "Marks whether all potential video metadata should be removed from the fallback files. Default false."
-          },
-          "ScaleVideoUsingBothDimensions": {
-            "type": "boolean",
-            "description": "Marks whether videos should be scaled using both dimensions. Prevents videos being upscaled or unexpected aspect ratio changes. Default true."
-          },
-          "ExposeOriginals": {
-            "type": "boolean",
-            "description": "Marks whether original video files should be exposed via CDN."
-          },
-          "ExposeVideoMetadata": {
-            "type": "boolean",
-            "description": "Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed."
-          }
-        },
-        "required": [
-          "Id",
-          "VideoCount",
-          "StorageUsage",
-          "DateCreated",
-          "HasWatermark",
-          "WatermarkPositionLeft",
-          "WatermarkPositionTop",
-          "WatermarkWidth",
-          "PullZoneId",
-          "StorageZoneId",
-          "WatermarkHeight",
-          "CaptionsFontSize",
-          "PlayerTokenAuthenticationEnabled",
-          "BlockNoneReferrer",
-          "EnableMP4Fallback",
-          "KeepOriginalFiles",
-          "AllowDirectPlay",
-          "EnableDRM",
-          "Bitrate240p",
-          "Bitrate360p",
-          "Bitrate480p",
-          "Bitrate720p",
-          "Bitrate1080p",
-          "Bitrate1440p",
-          "Bitrate2160p",
-          "ShowHeatmap",
-          "EnableContentTagging",
-          "WatermarkVersion",
-          "EnableTranscribing",
-          "EnableTranscribingTitleGeneration",
-          "EnableTranscribingDescriptionGeneration",
-          "EnableTranscribingChaptersGeneration",
-          "EnableTranscribingMomentsGeneration",
-          "RememberPlayerPosition",
-          "EnableMultiAudioTrackSupport",
-          "UseSeparateAudioStream",
-          "JitEncodingEnabled",
-          "MonthlyChargesTranscribing",
-          "MonthlyChargesPremiumEncoding",
-          "MonthlyChargesEnterpriseDrm",
-          "PlayerVersion",
-          "RemoveMetadataFromFallbackVideos",
-          "ScaleVideoUsingBothDimensions",
-          "ExposeOriginals",
-          "ExposeVideoMetadata"
-        ]
-      },
-      "EncodingTier": {
-        "type": "string",
-        "description": "0 = Free<br/>1 = Premium",
-        "x-enumNames": [
-          "Free",
-          "Premium"
-        ],
-        "enum": [
-          "Free",
-          "Premium"
-        ],
-        "x-enum-varnames": [
-          "Free",
-          "Premium"
-        ],
-        "example": "Free"
-      },
-      "DnsZoneModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Domain": {
+          "ActionParameter2": {
             "type": "string",
             "nullable": true
           },
-          "Records": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DnsRecordModel"
-            },
-            "nullable": true
-          },
-          "DateModified": {
+          "ActionParameter3": {
             "type": "string",
-            "format": "date-time"
-          },
-          "DateCreated": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "NameserversDetected": {
-            "type": "boolean"
-          },
-          "CustomNameserversEnabled": {
-            "type": "boolean"
-          },
-          "Nameserver1": {
-            "type": "string",
-            "nullable": true
-          },
-          "Nameserver2": {
-            "type": "string",
-            "nullable": true
-          },
-          "SoaEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "NameserversNextCheck": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "LoggingEnabled": {
-            "type": "boolean"
-          },
-          "LoggingIPAnonymizationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the TLS 1 is enabled on the DNS Zone"
-          },
-          "LogAnonymizationType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LogAnonymizationType"
-              }
-            ],
-            "nullable": true,
-            "description": "Sets the log anonymization type for this zone"
-          },
-          "DnsSecEnabled": {
-            "type": "boolean",
-            "description": "Determines if DNSSEC is enabled for this DNS Zone"
-          },
-          "CertificateKeyType": {
-            "description": "The private key type to use for automatic certificates",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PrivateKeyType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "Id",
-          "DateModified",
-          "DateCreated",
-          "NameserversDetected",
-          "CustomNameserversEnabled",
-          "NameserversNextCheck",
-          "LoggingEnabled",
-          "LoggingIPAnonymizationEnabled",
-          "DnsSecEnabled"
-        ]
-      },
-      "CertificateType": {
-        "type": "string",
-        "description": "0 = FairPlay<br/>1 = Widevine",
-        "x-enumNames": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "enum": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "x-enum-varnames": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "example": "FairPlay"
-      },
-      "DnsZoneScanJobStatus": {
-        "type": "string",
-        "enum": [
-          "Pending",
-          "InProgress",
-          "Completed",
-          "Failed"
-        ],
-        "x-enumNames": [
-          "Pending",
-          "InProgress",
-          "Completed",
-          "Failed"
-        ],
-        "description": "0 = Pending<br/>1 = InProgress<br/>2 = Completed<br/>3 = Failed",
-        "example": "Pending"
-      },
-      "DrmVersion": {
-        "type": "string",
-        "description": "0 = Basic<br/>1 = Enterprise<br/>2 = BasicV2",
-        "x-enumNames": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "enum": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "x-enum-varnames": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "example": "Basic"
-      },
-      "static": {
-        "type": "object",
-        "description": "Model definition for static"
-      },
-      "UserModelCategoryType": {
-        "type": "string",
-        "description": "0 = Normal<br/>1 = Internal<br/>2 = Sponsored",
-        "x-enumNames": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "enum": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "x-enum-varnames": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "example": "Normal"
-      },
-      "SimpleStatistics": {
-        "type": "object",
-        "description": "Model definition for SimpleStatistics"
-      },
-      "EdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Required": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id",
-          "Required"
-        ]
-      },
-      "PullZoneOriginType": {
-        "type": "string",
-        "description": "0 = OriginUrl<br/>1 = DnsAccelerate<br/>2 = StorageZone<br/>3 = LoadBalancer<br/>4 = EdgeScript<br/>5 = MagicContainers<br/>6 = PushZone",
-        "x-enumNames": [
-          "OriginUrl",
-          "DnsAccelerate",
-          "StorageZone",
-          "LoadBalancer",
-          "EdgeScript",
-          "MagicContainers",
-          "PushZone"
-        ],
-        "enum": [
-          "OriginUrl",
-          "DnsAccelerate",
-          "StorageZone",
-          "LoadBalancer",
-          "EdgeScript",
-          "MagicContainers",
-          "PushZone"
-        ],
-        "x-enum-varnames": [
-          "OriginUrl",
-          "DnsAccelerate",
-          "StorageZone",
-          "LoadBalancer",
-          "EdgeScript",
-          "MagicContainers",
-          "PushZone"
-        ],
-        "example": "OriginUrl"
-      },
-      "UpsertEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
-          },
-          "Required": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        },
-        "required": [
-          "Name"
-        ]
-      },
-      "PullZoneLogForwarderProtocolType": {
-        "type": "string",
-        "description": "0 = UDP<br/>1 = TCP<br/>2 = TCPEncrypted<br/>3 = DataDog",
-        "x-enumNames": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
-        ],
-        "enum": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
-        ],
-        "x-enum-varnames": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
-        ],
-        "example": "UDP"
-      },
-      "AddEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
-          },
-          "Required": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        },
-        "required": [
-          "Name",
-          "Required"
-        ]
-      },
-      "BunnyAiImageBlueprintModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
             "nullable": true
           }
         }
-      },
-      "EdgeScriptReleaseStatus": {
-        "type": "string",
-        "description": "0 = Archived<br/>1 = Live",
-        "x-enumNames": [
-          "Archived",
-          "Live"
-        ],
-        "enum": [
-          "Archived",
-          "Live"
-        ],
-        "x-enum-varnames": [
-          "Archived",
-          "Live"
-        ],
-        "example": "Archived"
-      },
-      "EdgeScriptTypes": {
-        "type": "string",
-        "description": "0 = DNS<br/>1 = CDN<br/>2 = Middleware",
-        "x-enumNames": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "enum": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "x-enum-varnames": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "example": "DNS"
       },
       "UpdateEdgeScriptCodeModel": {
         "type": "object",
@@ -4297,144 +3134,27 @@
           }
         }
       },
-      "PaginationListModelOfEdgeScriptModel": {
-        "type": "object",
-        "required": [
-          "CurrentPage",
-          "TotalItems",
-          "HasMoreItems"
-        ],
-        "properties": {
-          "Items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
-      "EdgeRuleActionType": {
+      "PullZoneConnectionType": {
         "type": "string",
-        "description": "0 = ForceSSL<br/>1 = Redirect<br/>2 = OriginUrl<br/>3 = OverrideCacheTime<br/>4 = BlockRequest<br/>5 = SetResponseHeader<br/>6 = SetRequestHeader<br/>7 = ForceDownload<br/>8 = DisableTokenAuthentication<br/>9 = EnableTokenAuthentication<br/>10 = OverrideCacheTimePublic<br/>11 = IgnoreQueryString<br/>12 = DisableOptimizer<br/>13 = ForceCompression<br/>14 = SetStatusCode<br/>15 = BypassPermaCache<br/>16 = OverrideBrowserCacheTime<br/>17 = OriginStorage<br/>18 = SetNetworkRateLimit<br/>19 = SetConnectionLimit<br/>20 = SetRequestsPerSecondLimit<br/>21 = RunEdgeScript<br/>22 = OriginMagicContainers<br/>23 = DisableWAF<br/>24 = RetryOrigin<br/>25 = OverrideBrowserCacheResponseHeader<br/>26 = RemoveBrowserCacheResponseHeader<br/>27 = DisableShieldChallenge<br/>28 = DisableShield<br/>29 = DisableShieldBotDetection<br/>30 = BypassAwsS3Authentication<br/>31 = DisableShieldAccessLists<br/>32 = DisableShieldRateLimiting",
+        "description": "0 = CDN<br/>1 = PermaCache<br/>2 = LogStorage",
         "x-enumNames": [
-          "ForceSSL",
-          "Redirect",
-          "OriginUrl",
-          "OverrideCacheTime",
-          "BlockRequest",
-          "SetResponseHeader",
-          "SetRequestHeader",
-          "ForceDownload",
-          "DisableTokenAuthentication",
-          "EnableTokenAuthentication",
-          "OverrideCacheTimePublic",
-          "IgnoreQueryString",
-          "DisableOptimizer",
-          "ForceCompression",
-          "SetStatusCode",
-          "BypassPermaCache",
-          "OverrideBrowserCacheTime",
-          "OriginStorage",
-          "SetNetworkRateLimit",
-          "SetConnectionLimit",
-          "SetRequestsPerSecondLimit",
-          "RunEdgeScript",
-          "OriginMagicContainers",
-          "DisableWAF",
-          "RetryOrigin",
-          "OverrideBrowserCacheResponseHeader",
-          "RemoveBrowserCacheResponseHeader",
-          "DisableShieldChallenge",
-          "DisableShield",
-          "DisableShieldBotDetection",
-          "BypassAwsS3Authentication",
-          "DisableShieldAccessLists",
-          "DisableShieldRateLimiting"
+          "CDN",
+          "PermaCache",
+          "LogStorage"
         ],
         "enum": [
-          "ForceSSL",
-          "Redirect",
-          "OriginUrl",
-          "OverrideCacheTime",
-          "BlockRequest",
-          "SetResponseHeader",
-          "SetRequestHeader",
-          "ForceDownload",
-          "DisableTokenAuthentication",
-          "EnableTokenAuthentication",
-          "OverrideCacheTimePublic",
-          "IgnoreQueryString",
-          "DisableOptimizer",
-          "ForceCompression",
-          "SetStatusCode",
-          "BypassPermaCache",
-          "OverrideBrowserCacheTime",
-          "OriginStorage",
-          "SetNetworkRateLimit",
-          "SetConnectionLimit",
-          "SetRequestsPerSecondLimit",
-          "RunEdgeScript",
-          "OriginMagicContainers",
-          "DisableWAF",
-          "RetryOrigin",
-          "OverrideBrowserCacheResponseHeader",
-          "RemoveBrowserCacheResponseHeader",
-          "DisableShieldChallenge",
-          "DisableShield",
-          "DisableShieldBotDetection",
-          "BypassAwsS3Authentication",
-          "DisableShieldAccessLists",
-          "DisableShieldRateLimiting"
+          "CDN",
+          "PermaCache",
+          "LogStorage"
         ],
         "x-enum-varnames": [
-          "ForceSSL",
-          "Redirect",
-          "OriginUrl",
-          "OverrideCacheTime",
-          "BlockRequest",
-          "SetResponseHeader",
-          "SetRequestHeader",
-          "ForceDownload",
-          "DisableTokenAuthentication",
-          "EnableTokenAuthentication",
-          "OverrideCacheTimePublic",
-          "IgnoreQueryString",
-          "DisableOptimizer",
-          "ForceCompression",
-          "SetStatusCode",
-          "BypassPermaCache",
-          "OverrideBrowserCacheTime",
-          "OriginStorage",
-          "SetNetworkRateLimit",
-          "SetConnectionLimit",
-          "SetRequestsPerSecondLimit",
-          "RunEdgeScript",
-          "OriginMagicContainers",
-          "DisableWAF",
-          "RetryOrigin",
-          "OverrideBrowserCacheResponseHeader",
-          "RemoveBrowserCacheResponseHeader",
-          "DisableShieldChallenge",
-          "DisableShield",
-          "DisableShieldBotDetection",
-          "BypassAwsS3Authentication",
-          "DisableShieldAccessLists",
-          "DisableShieldRateLimiting"
+          "CDN",
+          "PermaCache",
+          "LogStorage"
         ],
-        "example": "ForceSSL"
+        "example": "CDN"
       },
-      "EdgeScriptModel": {
+      "EdgeScriptSecretModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4449,124 +3169,11 @@
           "LastModified": {
             "type": "string",
             "format": "date-time"
-          },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
-          },
-          "CurrentReleaseId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "EdgeScriptVariables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptVariableModel"
-            },
-            "nullable": true
-          },
-          "Deleted": {
-            "type": "boolean"
-          },
-          "LinkedPullZones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LinkedPullZone"
-            },
-            "nullable": true
-          },
-          "Integration": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
-              }
-            ]
-          },
-          "DefaultHostname": {
-            "type": "string",
-            "nullable": true
-          },
-          "SystemHostname": {
-            "type": "string",
-            "nullable": true
-          },
-          "DeploymentKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "RepositoryId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "IntegrationId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "MonthlyCost": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "MonthlyRequestCount": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "MonthlyCpuTime": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "DnsRecordGeoLocationInfo": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Country": {
-            "type": "string",
-            "nullable": true
-          },
-          "City": {
-            "type": "string",
-            "nullable": true
-          },
-          "Latitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "Longitude": {
-            "type": "number",
-            "format": "double"
           }
         },
         "required": [
-          "Latitude",
-          "Longitude"
-        ]
-      },
-      "SourceCodeRepositorySettingsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Private": {
-            "type": "boolean"
-          },
-          "TemplateUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Private"
+          "Id",
+          "LastModified"
         ]
       },
       "AbuseCaseModel": {
@@ -4634,24 +3241,25 @@
           "PullZoneId"
         ]
       },
-      "OptimizerClassModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the optimizer class that will be used in the query string"
-          },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of settings and values the class will send to the optimizer"
-          }
-        }
+      "DrmVersion": {
+        "type": "string",
+        "description": "0 = Basic<br/>1 = Enterprise<br/>2 = BasicV2",
+        "x-enumNames": [
+          "Basic",
+          "Enterprise",
+          "BasicV2"
+        ],
+        "enum": [
+          "Basic",
+          "Enterprise",
+          "BasicV2"
+        ],
+        "x-enum-varnames": [
+          "Basic",
+          "Enterprise",
+          "BasicV2"
+        ],
+        "example": "Basic"
       },
       "DeployConfigurationModel": {
         "type": "object",
@@ -4681,358 +3289,52 @@
           "CreateWorkflow"
         ]
       },
-      "NotificationType": {
-        "type": "string",
-        "description": "0 = Info<br/>1 = Warning<br/>2 = Problem",
-        "x-enumNames": [
-          "Info",
-          "Warning",
-          "Problem"
-        ],
-        "enum": [
-          "Info",
-          "Warning",
-          "Problem"
-        ],
-        "x-enum-varnames": [
-          "Info",
-          "Warning",
-          "Problem"
-        ],
-        "example": "Info"
-      },
-      "SupportTicketUserModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "ExternalId": {
-            "type": "string",
-            "nullable": true
-          },
-          "Alias": {
-            "type": "string",
-            "nullable": true
-          },
-          "Verified": {
-            "type": "boolean"
-          },
-          "Signature": {
-            "type": "string",
-            "nullable": true
-          },
-          "Role": {
-            "type": "string",
-            "nullable": true
-          },
-          "PhotoUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Verified"
-        ]
-      },
-      "GoogleWidevineDrm": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Enabled": {
-            "type": "boolean"
-          },
-          "CertificateId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "CertificateExpirationDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "Provider": {
-            "type": "string",
-            "nullable": true
-          },
-          "SdOnlyForL3": {
-            "type": "boolean"
-          },
-          "MinClientSecurityLevel": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WidevineMinClientSecurityLevel"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "required": [
-          "Enabled",
-          "SdOnlyForL3"
-        ]
-      },
-      "PullZoneOptimizerClassModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the optimizer class that will be used in the query string"
-          },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of settings and values the class will send to the optimizer"
-          }
-        }
-      },
-      "AffiliateBalanceRecordModel": {
-        "type": "object",
-        "description": "Model definition for AffiliateBalanceRecordModel"
-      },
-      "PrivateKeyType": {
-        "type": "string",
-        "description": "0 = Ecdsa<br/>1 = Rsa",
-        "x-enumNames": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "enum": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "x-enum-varnames": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "example": "Ecdsa"
-      },
-      "EdgeScriptReleaseModel": {
+      "SourceCodeRepositorySettingsModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "Id": {
             "type": "integer",
-            "format": "int64"
-          },
-          "Deleted": {
-            "type": "boolean"
-          },
-          "Code": {
-            "type": "string",
+            "format": "int64",
             "nullable": true
           },
-          "Uuid": {
-            "type": "string",
-            "nullable": true
-          },
-          "Note": {
-            "type": "string",
-            "nullable": true
-          },
-          "Author": {
-            "type": "string",
-            "nullable": true
-          },
-          "AuthorEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "CommitSha": {
-            "type": "string",
-            "nullable": true
-          },
-          "Status": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EdgeScriptReleaseStatus"
-              }
-            ]
-          },
-          "DateReleased": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "DatePublished": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "Id",
-          "Deleted",
-          "DateReleased",
-          "DatePublished"
-        ]
-      },
-      "CouponStatus": {
-        "type": "string",
-        "description": "0 = Active<br/>1 = Expired<br/>2 = FullyUsed",
-        "x-enumNames": [
-          "Active",
-          "Expired",
-          "FullyUsed"
-        ],
-        "enum": [
-          "Active",
-          "Expired",
-          "FullyUsed"
-        ],
-        "x-enum-varnames": [
-          "Active",
-          "Expired",
-          "FullyUsed"
-        ],
-        "example": "Active"
-      },
-      "LogOrdering": {
-        "type": "string",
-        "enum": [
-          "Ascending",
-          "Descending"
-        ],
-        "x-enumNames": [
-          "Ascending",
-          "Descending"
-        ],
-        "description": "0 = Ascending<br/>1 = Descending",
-        "example": "Ascending"
-      },
-      "ServerZoneResultsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ServerZoneId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Results": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/ServerZoneStatisticsModel"
-            },
-            "nullable": true
-          }
-        },
-        "required": [
-          "ServerZoneId"
-        ]
-      },
-      "Trigger": {
-        "type": "object",
-        "properties": {
-          "Type": {
-            "$ref": "#/components/schemas/TriggerTypes",
-            "description": "The type of the trigger. Url = 0, RequestHeader = 1, ResponseHeader = 2, UrlExtension = 3, CountryCode = 4, RemoteIP = 5, UrlQueryString = 6, RandomChance = 7"
-          },
-          "PatternMatches": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The list of pattern matches that will trigger the edge rule"
-          },
-          "PatternMatchingType": {
-            "description": "The type of pattern matching. MatchAny = 0, MatchAll = 1, MatchNone = 2",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PatternMatchingTypes"
-              }
-            ]
-          },
-          "Parameter1": {
-            "type": "string",
-            "description": "The trigger parameter 1. The value depends on the type of trigger."
-          }
-        },
-        "required": [
-          "Type",
-          "PatternMatchingType"
-        ]
-      },
-      "EdgeRuleV2Model": {
-        "type": "object",
-        "properties": {
-          "Guid": {
-            "type": "string",
-            "description": "The unique GUID of the edge rule"
-          },
-          "ActionType": {
-            "description": "The action type of the edge rule",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EdgeRuleActionType"
-              }
-            ]
-          },
-          "ActionParameter1": {
-            "type": "string",
-            "description": "The Action parameter 1. The value depends on other parameters of the edge rule."
-          },
-          "ActionParameter2": {
-            "type": "string",
-            "description": "The Action parameter 2. The value depends on other parameters of the edge rule."
-          },
-          "ActionParameter3": {
-            "type": "string",
-            "description": "The Action parameter 3. The value depends on other parameters of the edge rule."
-          },
-          "Triggers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Trigger"
-            },
-            "description": "The list of trigger that trigger the edge rule"
-          },
-          "ExtraActions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeRuleV2ActionModel"
-            },
-            "description": "Additional actions to be performed"
-          },
-          "TriggerMatchingType": {
-            "description": "The trigger matching type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PatternMatchingTypes"
-              }
-            ]
-          },
-          "Description": {
-            "type": "string",
-            "description": "The description of the edge rule"
-          },
-          "Enabled": {
-            "type": "boolean",
-            "description": "Determines if the edge rule is currently enabled or not"
-          },
-          "OrderIndex": {
-            "type": "integer",
-            "description": "The index of the edge rule in the list of execution priority"
-          }
-        },
-        "description": "Model definition for EdgeRuleV2Model"
-      },
-      "EdgeScriptUpsertSecretModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
           "Name": {
             "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
+            "nullable": true
           },
+          "Private": {
+            "type": "boolean"
+          },
+          "TemplateUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Private"
+        ]
+      },
+      "CertificateType": {
+        "type": "string",
+        "description": "0 = FairPlay<br/>1 = Widevine",
+        "x-enumNames": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "enum": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "x-enum-varnames": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "example": "FairPlay"
+      },
+      "EdgeScriptUpdateSecretModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
           "Secret": {
             "type": "string",
             "nullable": true,
@@ -5040,250 +3342,103 @@
           }
         }
       },
-      "AbuseUrlStatus": {
-        "type": "string",
-        "description": "0 = NotResolved<br/>1 = Resolved<br/>2 = Unknown",
-        "x-enumNames": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "enum": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "x-enum-varnames": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "example": "NotResolved"
-      },
-      "DnsRecordModel": {
+      "DnsZoneDiscoveredRecordModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Record name relative to the zone. '@' represents apex."
           },
           "Type": {
-            "$ref": "#/components/schemas/DnsRecordTypes"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DnsZoneDiscoveredRecordType"
+              }
+            ],
+            "nullable": true
           },
           "Ttl": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "Value": {
             "type": "string",
             "nullable": true
           },
-          "Name": {
-            "type": "string",
+          "Priority": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "Weight": {
             "type": "integer",
-            "format": "int32"
-          },
-          "Priority": {
-            "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "Port": {
             "type": "integer",
-            "format": "int32"
-          },
-          "Flags": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 255
-          },
-          "Tag": {
-            "type": "string",
+            "format": "int32",
             "nullable": true
           },
-          "Accelerated": {
+          "IsProxied": {
             "type": "boolean"
-          },
-          "AcceleratedPullZoneId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "LinkName": {
-            "type": "string",
-            "nullable": true
-          },
-          "IPGeoLocationInfo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/GeoDnsLocationModel"
-              }
-            ]
-          },
-          "GeolocationInfo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DnsRecordGeoLocationInfo"
-              }
-            ]
-          },
-          "MonitorStatus": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DnsMonitoringStatus"
-              }
-            ]
-          },
-          "MonitorType": {
-            "$ref": "#/components/schemas/DnsMonitoringType"
-          },
-          "GeolocationLatitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "GeolocationLongitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "EnviromentalVariables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
-            },
-            "nullable": true
-          },
-          "LatencyZone": {
-            "type": "string",
-            "nullable": true
-          },
-          "SmartRoutingType": {
-            "$ref": "#/components/schemas/DnsSmartRoutingType"
-          },
-          "Disabled": {
-            "type": "boolean"
-          },
-          "Comment": {
-            "type": "string",
-            "nullable": true
-          },
-          "AutoSslIssuance": {
-            "type": "boolean"
-          },
-          "AccelerationStatus": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AcceleratedStatus"
-              }
-            ]
           }
         },
         "required": [
-          "Id",
-          "Ttl",
-          "Weight",
-          "Priority",
-          "Port",
-          "Accelerated",
-          "AcceleratedPullZoneId",
-          "GeolocationLatitude",
-          "GeolocationLongitude",
-          "Disabled",
-          "AutoSslIssuance"
+          "IsProxied"
         ]
       },
-      "ListEdgeScriptSecretsModel": {
+      "DnsMonitoringType": {
+        "type": "string",
+        "description": "0 = None<br/>1 = Ping<br/>2 = Http<br/>3 = Monitor",
+        "x-enumNames": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "enum": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "x-enum-varnames": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "example": "None"
+      },
+      "DnsRecordGeoLocationInfo": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Secrets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptSecretModel"
-            }
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "double"
           }
-        }
-      },
-      "DnsSmartRoutingType": {
-        "type": "string",
-        "description": "0 = None<br/>1 = Latency<br/>2 = Geolocation",
-        "x-enumNames": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "enum": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "example": "None"
-      },
-      "ShieldDDosProtectionType": {
-        "type": "string",
-        "description": "0 = DetectOnly<br/>1 = ActiveStandard<br/>2 = ActiveAggressive",
-        "x-enumNames": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
-        ],
-        "enum": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
-        ],
-        "x-enum-varnames": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
-        ],
-        "example": "DetectOnly"
-      },
-      "StickySessionType": {
-        "type": "string",
-        "enum": [
-          "Off",
-          "On"
-        ],
-        "x-enumNames": [
-          "Off",
-          "On"
-        ],
-        "description": "0 = Off<br/>1 = On",
-        "example": "Off"
-      },
-      "WidevineMinClientSecurityLevel": {
-        "type": "string",
-        "description": "0 = None<br/>1 = L1<br/>2 = L2<br/>3 = L3",
-        "x-enumNames": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "enum": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "example": "None"
+        },
+        "required": [
+          "Latitude",
+          "Longitude"
+        ]
       },
       "AddDnsRecordModel": {
         "type": "object",
@@ -5400,236 +3555,62 @@
           }
         }
       },
-      "DnsZoneDiscoveredRecordType": {
+      "DnsSmartRoutingType": {
         "type": "string",
-        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>12 = NS<br/>13 = Svcb<br/>14 = HTTPS<br/>15 = TLSA<br/>16 = SOA",
+        "description": "0 = None<br/>1 = Latency<br/>2 = Geolocation",
         "x-enumNames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
         "enum": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
         "x-enum-varnames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
-        "example": "A"
+        "example": "None"
       },
-      "RtmpOutput": {
+      "EdgeScriptUpsertSecretModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Endpoint": {
+          "Name": {
             "type": "string",
             "nullable": true,
-            "description": "The RTMP endpoint URL for the output"
+            "maxLength": 256,
+            "minLength": 1
           },
-          "StreamKey": {
+          "Secret": {
             "type": "string",
             "nullable": true,
-            "description": "The RTMP stream key for the output"
+            "maxLength": 4096
           }
         }
       },
-      "DnsRecordTypes": {
+      "CouponStatus": {
         "type": "string",
-        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>5 = Redirect<br/>6 = Flatten<br/>7 = PullZone<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>11 = Script<br/>12 = NS<br/>13 = SVCB<br/>14 = HTTPS<br/>15 = TLSA",
+        "description": "0 = Active<br/>1 = Expired<br/>2 = FullyUsed",
         "x-enumNames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "Redirect",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS",
-          "SVCB",
-          "HTTPS",
-          "TLSA"
+          "Active",
+          "Expired",
+          "FullyUsed"
         ],
         "enum": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "Redirect",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS",
-          "SVCB",
-          "HTTPS",
-          "TLSA"
+          "Active",
+          "Expired",
+          "FullyUsed"
         ],
         "x-enum-varnames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "Redirect",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS",
-          "SVCB",
-          "HTTPS",
-          "TLSA"
+          "Active",
+          "Expired",
+          "FullyUsed"
         ],
-        "example": "A"
-      },
-      "GithubRepositoryModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Private": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "Id",
-          "Private"
-        ]
-      },
-      "HostnameModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The unique ID of the hostname"
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true,
-            "description": "The hostname value for the domain name"
-          },
-          "ForceSSL": {
-            "type": "boolean",
-            "description": "Determines if the Force SSL feature is enabled"
-          },
-          "IsSystemHostname": {
-            "type": "boolean",
-            "description": "Determines if this is a system hostname controlled by bunny.net"
-          },
-          "IsManagedHostname": {
-            "type": "boolean",
-            "description": "Determines if this is a managed hostname controlled by bunny.net"
-          },
-          "HasCertificate": {
-            "type": "boolean",
-            "description": "Determines if the hostname has an SSL certificate configured"
-          },
-          "Certificate": {
-            "type": "string",
-            "nullable": true,
-            "description": "Contains the Base64Url encoded certificate for the hostname"
-          },
-          "CertificateKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "Contains the Base64Url encoded certificate key for the hostname"
-          },
-          "CertificateKeyType": {
-            "description": "The private key type to use for automatic certificates",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PrivateKeyType"
-              }
-            ]
-          },
-          "CertificateProvisionType": {
-            "description": "The provisioned certificate type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CertificateProvisionType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "Id",
-          "ForceSSL",
-          "IsSystemHostname",
-          "IsManagedHostname",
-          "HasCertificate"
-        ]
-      },
-      "PullZoneConnectionType": {
-        "type": "string",
-        "description": "0 = CDN<br/>1 = PermaCache<br/>2 = LogStorage",
-        "x-enumNames": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
-        ],
-        "enum": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
-        ],
-        "x-enum-varnames": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
-        ],
-        "example": "CDN"
+        "example": "Active"
       },
       "PullZoneModel": {
         "type": "object",
@@ -6566,6 +4547,94 @@
           "MaxWebSocketConnections"
         ]
       },
+      "ShieldDDosProtectionType": {
+        "type": "string",
+        "description": "0 = DetectOnly<br/>1 = ActiveStandard<br/>2 = ActiveAggressive",
+        "x-enumNames": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "enum": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "x-enum-varnames": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "example": "DetectOnly"
+      },
+      "SupportTicketModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true
+          },
+          "Comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportTicketCommentModel"
+            },
+            "nullable": true
+          },
+          "Subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "LastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Id",
+          "CreatedAt",
+          "LastUpdatedAt"
+        ]
+      },
+      "EdgeScriptCodeModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastModified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "LastModified"
+        ]
+      },
+      "LogOrdering": {
+        "type": "string",
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "x-enumNames": [
+          "Ascending",
+          "Descending"
+        ],
+        "description": "0 = Ascending<br/>1 = Descending",
+        "example": "Ascending"
+      },
       "BillingRecordType": {
         "type": "string",
         "description": "0 = PayPal<br/>1 = Crypto<br/>2 = CreditCard<br/>3 = MonthlyUsage<br/>4 = Refund<br/>5 = CouponCode<br/>6 = BankTransfer<br/>7 = AffiliateCredits",
@@ -6601,6 +4670,1292 @@
         ],
         "example": "PayPal"
       },
+      "PullZoneOptimizerClassModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the optimizer class that will be used in the query string"
+          },
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of settings and values the class will send to the optimizer"
+          }
+        }
+      },
+      "LinkedPullZone": {
+        "type": "object",
+        "description": "Model definition for LinkedPullZone"
+      },
+      "UserModelBillingType": {
+        "type": "string",
+        "description": "0 = FreeTrial<br/>1 = PayAsYouGo<br/>2 = PostPaidPayAsYouGo<br/>3 = MonthlyPlan",
+        "x-enumNames": [
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
+        ],
+        "enum": [
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
+        ],
+        "x-enum-varnames": [
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
+        ],
+        "example": "FreeTrial"
+      },
+      "EdgeScriptTypes": {
+        "type": "string",
+        "description": "0 = DNS<br/>1 = CDN<br/>2 = Middleware",
+        "x-enumNames": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "enum": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "x-enum-varnames": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "example": "DNS"
+      },
+      "EdgeScriptReleaseModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Deleted": {
+            "type": "boolean"
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "Author": {
+            "type": "string",
+            "nullable": true
+          },
+          "AuthorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "CommitSha": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EdgeScriptReleaseStatus"
+              }
+            ]
+          },
+          "DateReleased": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DatePublished": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Id",
+          "Deleted",
+          "DateReleased",
+          "DatePublished"
+        ]
+      },
+      "NotificationType": {
+        "type": "string",
+        "description": "0 = Info<br/>1 = Warning<br/>2 = Problem",
+        "x-enumNames": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "enum": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "x-enum-varnames": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "example": "Info"
+      },
+      "PullZoneLogFormat": {
+        "type": "string",
+        "description": "0 = Plain<br/>1 = JSON",
+        "x-enumNames": [
+          "Plain",
+          "JSON"
+        ],
+        "enum": [
+          "Plain",
+          "JSON"
+        ],
+        "x-enum-varnames": [
+          "Plain",
+          "JSON"
+        ],
+        "example": "Plain"
+      },
+      "ExecutionPhase": {
+        "type": "string",
+        "description": "0 = Cache<br/>1 = LoadBalancer",
+        "x-enumNames": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "enum": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "x-enum-varnames": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "example": "Cache"
+      },
+      "WhatsNewModelType": {
+        "type": "string",
+        "description": "0 = Feature<br/>1 = Update<br/>2 = BugFix",
+        "x-enumNames": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "enum": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "x-enum-varnames": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "example": "Feature"
+      },
+      "ServerZoneStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Error3xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "Error4xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "Error5xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsHit": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsMiss": {
+            "type": "number",
+            "format": "double"
+          },
+          "Bandwidth": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "Error3xx",
+          "Error4xx",
+          "Error5xx",
+          "RequestsHit",
+          "RequestsMiss",
+          "Bandwidth"
+        ]
+      },
+      "ApiKeyModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Key": {
+            "type": "string",
+            "nullable": true
+          },
+          "Roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "WidevineMinClientSecurityLevel": {
+        "type": "string",
+        "description": "0 = None<br/>1 = L1<br/>2 = L2<br/>3 = L3",
+        "x-enumNames": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "enum": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "x-enum-varnames": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "example": "None"
+      },
+      "DnsRecordTypes": {
+        "type": "string",
+        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>5 = Redirect<br/>6 = Flatten<br/>7 = PullZone<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>11 = Script<br/>12 = NS<br/>13 = Svcb<br/>14 = Https",
+        "x-enumNames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "Svcb",
+          "Https"
+        ],
+        "enum": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "Svcb",
+          "Https"
+        ],
+        "x-enum-varnames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "Svcb",
+          "Https"
+        ],
+        "example": "A"
+      },
+      "EdgeScriptStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "TotalRequestsServed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "TotalCpuUsed": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalMonthlyCost": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "AverageCpuTimePerExecution": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsServedChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "AverageCpuTimeChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "TotalCpuTimeChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "TotalRequestsServed",
+          "TotalCpuUsed",
+          "TotalMonthlyCost",
+          "AverageCpuTimePerExecution"
+        ]
+      },
+      "HostnameModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The unique ID of the hostname"
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true,
+            "description": "The hostname value for the domain name"
+          },
+          "ForceSSL": {
+            "type": "boolean",
+            "description": "Determines if the Force SSL feature is enabled"
+          },
+          "IsSystemHostname": {
+            "type": "boolean",
+            "description": "Determines if this is a system hostname controlled by bunny.net"
+          },
+          "IsManagedHostname": {
+            "type": "boolean",
+            "description": "Determines if this is a managed hostname controlled by bunny.net"
+          },
+          "HasCertificate": {
+            "type": "boolean",
+            "description": "Determines if the hostname has an SSL certificate configured"
+          },
+          "Certificate": {
+            "type": "string",
+            "nullable": true,
+            "description": "Contains the Base64Url encoded certificate for the hostname"
+          },
+          "CertificateKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "Contains the Base64Url encoded certificate key for the hostname"
+          },
+          "CertificateKeyType": {
+            "description": "The private key type to use for automatic certificates",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrivateKeyType"
+              }
+            ]
+          },
+          "CertificateProvisionType": {
+            "description": "The provisioned certificate type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CertificateProvisionType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "Id",
+          "ForceSSL",
+          "IsSystemHostname",
+          "IsManagedHostname",
+          "HasCertificate"
+        ]
+      },
+      "GeoDnsLocationModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "CountryCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "The ISO country code of the location"
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the country of the location"
+          },
+          "ASN": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ASN of the IP organization"
+          },
+          "OrganizationName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The mame of the organization that owns the IP"
+          },
+          "City": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the city of the location"
+          }
+        },
+        "required": [
+          "ASN"
+        ],
+        "description": "Billing model contains data summary about the user's billing"
+      },
+      "TeamMemberModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true,
+            "description": "The unique id of the user"
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true,
+            "description": "The email of the user"
+          },
+          "FirstName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The first name of the user"
+          },
+          "LastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The last name of the user"
+          },
+          "DateJoined": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the user joined bunny.net"
+          },
+          "EmailVerified": {
+            "type": "boolean",
+            "description": "Determines if the account's email has been successfuly verified"
+          },
+          "Roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Determines the roles that the user belongs to"
+          },
+          "TwoFactorAuthenticationEnabled": {
+            "type": "boolean",
+            "description": "Determines if the user has active 2FA configuration"
+          },
+          "IsMainUser": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DateJoined",
+          "EmailVerified",
+          "TwoFactorAuthenticationEnabled",
+          "IsMainUser"
+        ]
+      },
+      "ApiErrorData": {
+        "type": "object",
+        "properties": {
+          "ErrorKey": {
+            "type": "string"
+          },
+          "Field": {
+            "type": "string"
+          },
+          "Message": {
+            "type": "string"
+          }
+        }
+      },
+      "EdgeScriptReleaseStatus": {
+        "type": "string",
+        "description": "0 = Archived<br/>1 = Live",
+        "x-enumNames": [
+          "Archived",
+          "Live"
+        ],
+        "enum": [
+          "Archived",
+          "Live"
+        ],
+        "x-enum-varnames": [
+          "Archived",
+          "Live"
+        ],
+        "example": "Archived"
+      },
+      "ServerZoneResultsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ServerZoneId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Results": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ServerZoneStatisticsModel"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "ServerZoneId"
+        ]
+      },
+      "EdgeScriptAddSecretModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Secret": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "OptimizerWatermarkPosition": {
+        "type": "integer",
+        "description": "0 = BottomLeft<br/>1 = BottomRight<br/>2 = TopLeft<br/>3 = TopRight<br/>4 = Center<br/>5 = CenterStretch",
+        "x-enumNames": [
+          "BottomLeft",
+          "BottomRight",
+          "TopLeft",
+          "TopRight",
+          "Center",
+          "CenterStretch"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "x-enum-varnames": [
+          "BottomLeft",
+          "BottomRight",
+          "TopLeft",
+          "TopRight",
+          "Center",
+          "CenterStretch"
+        ]
+      },
+      "PaginationListModelOfEdgeScriptReleaseModel": {
+        "type": "object",
+        "required": [
+          "CurrentPage",
+          "TotalItems",
+          "HasMoreItems"
+        ],
+        "properties": {
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptReleaseModel"
+            }
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TotalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasMoreItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DnsRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/DnsRecordTypes"
+          },
+          "Ttl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Port": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "Tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "Accelerated": {
+            "type": "boolean"
+          },
+          "AcceleratedPullZoneId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "LinkName": {
+            "type": "string",
+            "nullable": true
+          },
+          "IPGeoLocationInfo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GeoDnsLocationModel"
+              }
+            ]
+          },
+          "GeolocationInfo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DnsRecordGeoLocationInfo"
+              }
+            ]
+          },
+          "MonitorStatus": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DnsMonitoringStatus"
+              }
+            ]
+          },
+          "MonitorType": {
+            "$ref": "#/components/schemas/DnsMonitoringType"
+          },
+          "GeolocationLatitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "GeolocationLongitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "EnviromentalVariables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
+            },
+            "nullable": true
+          },
+          "LatencyZone": {
+            "type": "string",
+            "nullable": true
+          },
+          "SmartRoutingType": {
+            "$ref": "#/components/schemas/DnsSmartRoutingType"
+          },
+          "Disabled": {
+            "type": "boolean"
+          },
+          "Comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "AutoSslIssuance": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Id",
+          "Ttl",
+          "Weight",
+          "Priority",
+          "Port",
+          "Accelerated",
+          "AcceleratedPullZoneId",
+          "GeolocationLatitude",
+          "GeolocationLongitude",
+          "Disabled",
+          "AutoSslIssuance"
+        ]
+      },
+      "TriggerTypes": {
+        "type": "string",
+        "enum": [
+          "Url",
+          "RequestHeader",
+          "ResponseHeader",
+          "UrlExtension",
+          "CountryCode",
+          "RemoteIP",
+          "UrlQueryString",
+          "RandomChance",
+          "StatusCode",
+          "RequestMethod",
+          "CookieValue",
+          "CountryStateCode",
+          "OriginRetryAttemptCount",
+          "OriginConnectionError"
+        ],
+        "x-enumNames": [
+          "Url",
+          "RequestHeader",
+          "ResponseHeader",
+          "UrlExtension",
+          "CountryCode",
+          "RemoteIP",
+          "UrlQueryString",
+          "RandomChance",
+          "StatusCode",
+          "RequestMethod",
+          "CookieValue",
+          "CountryStateCode",
+          "OriginRetryAttemptCount",
+          "OriginConnectionError"
+        ],
+        "description": "0 = Url\n1 = RequestHeader\n2 = ResponseHeader\n3 = UrlExtension\n4 = CountryCode\n5 = RemoteIP\n6 = UrlQueryString\n7 = RandomChance\n8 = StatusCode\n9 = RequestMethod\n10 = CookieValue\n11 = CountryStateCode\n12 = OriginRetryAttemptCount\n13 = OriginConnectionError",
+        "example": "Url"
+      },
+      "VideoLibraryModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the Video Library."
+          },
+          "VideoCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of videos in the video library"
+          },
+          "StorageUsage": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The total amount of storage used by the library"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the video library was created"
+          },
+          "ReplicationRegions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The geo-replication regions of the underlying storage zone"
+          },
+          "ApiKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "The API key used for authenticating with the video library"
+          },
+          "ReadOnlyApiKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "The read-only API key used for authenticating with the video library"
+          },
+          "HasWatermark": {
+            "type": "boolean",
+            "description": "Determines if the video library has a watermark configured"
+          },
+          "WatermarkPositionLeft": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The left offset of the watermark position (in %)"
+          },
+          "WatermarkPositionTop": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The top offset of the watermark position (in %)"
+          },
+          "WatermarkWidth": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The width of the watermark (in %)"
+          },
+          "PullZoneId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the connected underlying pull zone"
+          },
+          "StorageZoneId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the connected underlying storage zone"
+          },
+          "WatermarkHeight": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The height of the watermark (in %)"
+          },
+          "EnabledResolutions": {
+            "type": "string",
+            "nullable": true,
+            "description": "The comma separated list of enabled resolutions"
+          },
+          "ViAiPublisherId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The vi.ai publisher id for advertising configuration"
+          },
+          "VastTagUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The URL of the VAST tag endpoint for advertising configuration"
+          },
+          "WebhookUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The webhook URL of the video library"
+          },
+          "CaptionsFontSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The captions display font size"
+          },
+          "CaptionsFontColor": {
+            "type": "string",
+            "nullable": true,
+            "description": "The captions display font color"
+          },
+          "CaptionsBackground": {
+            "type": "string",
+            "nullable": true,
+            "description": "The captions display background color"
+          },
+          "UILanguage": {
+            "type": "string",
+            "nullable": true,
+            "description": "The UI language of the player"
+          },
+          "AllowEarlyPlay": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Determines if the Early-Play feature is enabled"
+          },
+          "PlayerTokenAuthenticationEnabled": {
+            "type": "boolean",
+            "description": "Determines if the player token authentication is enabled"
+          },
+          "AllowedReferrers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of allowed referrer domains allowed to access the library"
+          },
+          "BlockedReferrers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of blocked referrer domains blocked from accessing the library"
+          },
+          "BlockNoneReferrer": {
+            "type": "boolean",
+            "description": "Determines if the requests without a referrer are blocked"
+          },
+          "EnableMP4Fallback": {
+            "type": "boolean",
+            "description": "Determines if the MP4 fallback feature is enabled"
+          },
+          "KeepOriginalFiles": {
+            "type": "boolean",
+            "description": "Determines if the original video files should be stored after encoding"
+          },
+          "AllowDirectPlay": {
+            "type": "boolean",
+            "description": "Determines direct play URLs are enabled for the library"
+          },
+          "EnableDRM": {
+            "type": "boolean",
+            "description": "Determines if the DRM is enabled"
+          },
+          "DrmVersion": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DrmVersion"
+              }
+            ],
+            "description": "DRM version (basic or enterprise)"
+          },
+          "AppleFairPlayDrm": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AppleFairPlayDrm"
+              }
+            ],
+            "description": "Described Apple FairPlay DRM"
+          },
+          "GoogleWidevineDrm": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GoogleWidevineDrm"
+              }
+            ],
+            "description": "Describes Google Widevine DRM"
+          },
+          "Bitrate240p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 240p videos"
+          },
+          "Bitrate360p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 360p videos"
+          },
+          "Bitrate480p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 480p videos"
+          },
+          "Bitrate720p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 720p videos"
+          },
+          "Bitrate1080p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 1080p videos"
+          },
+          "Bitrate1440p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 1440p videos"
+          },
+          "Bitrate2160p": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The bitrate used for encoding 2160p videos"
+          },
+          "ApiAccessKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "ShowHeatmap": {
+            "type": "boolean",
+            "description": "Determines if the video watch heatmap should be displayed in the player."
+          },
+          "EnableContentTagging": {
+            "type": "boolean",
+            "description": "Determines if content tagging should be enabled for this library."
+          },
+          "PullZoneType": {
+            "description": "The type of the pull zone attached. Premium = 0, Volume = 1",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PullZoneType"
+              }
+            ]
+          },
+          "CustomHTML": {
+            "type": "string",
+            "nullable": true,
+            "description": "The custom HTMl that is added into the head of the HTML player."
+          },
+          "Controls": {
+            "type": "string",
+            "nullable": true,
+            "description": "The list of controls on the video player."
+          },
+          "PlaybackSpeeds": {
+            "type": "string",
+            "nullable": true,
+            "description": "The list of playback speeds available in the video player."
+          },
+          "PlayerKeyColor": {
+            "type": "string",
+            "nullable": true,
+            "description": "The key color of the player."
+          },
+          "FontFamily": {
+            "type": "string",
+            "nullable": true,
+            "description": "The captions font family."
+          },
+          "WatermarkVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "EnableTranscribing": {
+            "type": "boolean",
+            "description": "Determines if the automatic audio transcribing is currently enabled for this zone."
+          },
+          "EnableTranscribingTitleGeneration": {
+            "type": "boolean",
+            "description": "Determines if automatic transcribing title generation is currently enabled."
+          },
+          "EnableTranscribingDescriptionGeneration": {
+            "type": "boolean",
+            "description": "Determines if automatic transcribing description generation is currently enabled."
+          },
+          "EnableTranscribingChaptersGeneration": {
+            "type": "boolean",
+            "description": "Determines if automatic transcribing chapters generation is currently enabled."
+          },
+          "EnableTranscribingMomentsGeneration": {
+            "type": "boolean",
+            "description": "Determines if automatic transcribing moments generation is currently enabled."
+          },
+          "TranscribingCaptionLanguages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of languages that the captions will be automatically transcribed to."
+          },
+          "EnableCaptionsInPlaylist": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Determines if any associated captions will be automatically signaled in the HLS master playlist via EXT-X-MEDIA tags, allowing client players to show captions."
+          },
+          "RememberPlayerPosition": {
+            "type": "boolean",
+            "description": "Determines if the player will automatically remember the playback position."
+          },
+          "EnableMultiAudioTrackSupport": {
+            "type": "boolean",
+            "description": "Determines if multiple output audio track support is enabled on video library."
+          },
+          "UseSeparateAudioStream": {
+            "type": "boolean",
+            "description": "Determines whether output audio stream should be split from video stream segments."
+          },
+          "JitEncodingEnabled": {
+            "type": "boolean",
+            "description": "Determines whether JIT encoding should be used for the library. Supported in premium encoding only."
+          },
+          "EncodingTier": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncodingTier"
+              }
+            ],
+            "description": "Defines encoding tier to be used with video library. premium is a paid tier that offers either JIT encoding or prioritized encoding and extra codec support."
+          },
+          "OutputCodecs": {
+            "type": "string",
+            "nullable": true,
+            "description": "Specifies which video codecs are used for encoding, provided as a comma-separated (CSV) string. Free encoding tier supports only x264. A premium encoding tier adds support for vp9, hevc, and av1."
+          },
+          "DrmBasePriceOverride": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true,
+            "description": "DRM (enterprise) monthly base price for this video library if it differs from list price."
+          },
+          "DrmCostPerLicenseOverride": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true,
+            "description": "DRM (enterprise) cost per license for this video library if it differs from list price."
+          },
+          "TranscribingPriceOverride": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "PremiumEncodingPriceOverride": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "MonthlyChargesTranscribing": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "MonthlyChargesPremiumEncoding": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "MonthlyChargesEnterpriseDrm": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "FeatureFlags": {
+            "type": "string",
+            "nullable": true
+          },
+          "PlayerVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RemoveMetadataFromFallbackVideos": {
+            "type": "boolean",
+            "description": "Marks whether all potential video metadata should be removed from the fallback files. Default false."
+          },
+          "ScaleVideoUsingBothDimensions": {
+            "type": "boolean",
+            "description": "Marks whether videos should be scaled using both dimensions. Prevents videos being upscaled or unexpected aspect ratio changes. Default true."
+          },
+          "ExposeOriginals": {
+            "type": "boolean",
+            "description": "Marks whether original video files should be exposed via CDN."
+          },
+          "ExposeVideoMetadata": {
+            "type": "boolean",
+            "description": "Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed."
+          }
+        },
+        "required": [
+          "Id",
+          "VideoCount",
+          "StorageUsage",
+          "DateCreated",
+          "HasWatermark",
+          "WatermarkPositionLeft",
+          "WatermarkPositionTop",
+          "WatermarkWidth",
+          "PullZoneId",
+          "StorageZoneId",
+          "WatermarkHeight",
+          "CaptionsFontSize",
+          "PlayerTokenAuthenticationEnabled",
+          "BlockNoneReferrer",
+          "EnableMP4Fallback",
+          "KeepOriginalFiles",
+          "AllowDirectPlay",
+          "EnableDRM",
+          "Bitrate240p",
+          "Bitrate360p",
+          "Bitrate480p",
+          "Bitrate720p",
+          "Bitrate1080p",
+          "Bitrate1440p",
+          "Bitrate2160p",
+          "ShowHeatmap",
+          "EnableContentTagging",
+          "WatermarkVersion",
+          "EnableTranscribing",
+          "EnableTranscribingTitleGeneration",
+          "EnableTranscribingDescriptionGeneration",
+          "EnableTranscribingChaptersGeneration",
+          "EnableTranscribingMomentsGeneration",
+          "RememberPlayerPosition",
+          "EnableMultiAudioTrackSupport",
+          "UseSeparateAudioStream",
+          "JitEncodingEnabled",
+          "MonthlyChargesTranscribing",
+          "MonthlyChargesPremiumEncoding",
+          "MonthlyChargesEnterpriseDrm",
+          "PlayerVersion",
+          "RemoveMetadataFromFallbackVideos",
+          "ScaleVideoUsingBothDimensions",
+          "ExposeOriginals",
+          "ExposeVideoMetadata"
+        ]
+      },
       "PullZoneType": {
         "type": "string",
         "description": "0 = Premium<br/>1 = Volume",
@@ -6617,6 +5972,578 @@
           "Volume"
         ],
         "example": "Premium"
+      },
+      "static": {
+        "type": "object",
+        "description": "Model definition for static"
+      },
+      "SourceCodeIntegrationModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IntegrationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "RepositorySettings": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SourceCodeRepositorySettingsModel"
+              }
+            ]
+          },
+          "DeployConfiguration": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DeployConfigurationModel"
+              }
+            ]
+          }
+        },
+        "required": [
+          "IntegrationId"
+        ]
+      },
+      "DnsZoneScanJobStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "InProgress",
+          "Completed",
+          "Failed"
+        ],
+        "x-enumNames": [
+          "Pending",
+          "InProgress",
+          "Completed",
+          "Failed"
+        ],
+        "description": "0 = Pending<br/>1 = InProgress<br/>2 = Completed<br/>3 = Failed",
+        "example": "Pending"
+      },
+      "BunnyCDN": {
+        "type": "object",
+        "description": "Model definition for BunnyCDN"
+      },
+      "UpdateEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          },
+          "Required": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "RtmpOutput": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Endpoint": {
+            "type": "string",
+            "nullable": true,
+            "description": "The RTMP endpoint URL for the output"
+          },
+          "StreamKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "The RTMP stream key for the output"
+          }
+        }
+      },
+      "PublishEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Note": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AddEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Required": {
+            "type": "boolean"
+          },
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name",
+          "Required"
+        ]
+      },
+      "CertificateProvisionType": {
+        "type": "string",
+        "description": "0 = Unknown<br/>1 = Http01<br/>2 = Dns01<br/>3 = Custom",
+        "x-enumNames": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "enum": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "x-enum-varnames": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "example": "Unknown"
+      },
+      "DnsMonitoringStatus": {
+        "type": "string",
+        "description": "0 = Unknown<br/>1 = Online<br/>2 = Offline",
+        "x-enumNames": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "enum": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "x-enum-varnames": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "example": "Unknown"
+      },
+      "DrmCertificateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "PrivateKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "SecretKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "Certificate": {
+            "type": "string",
+            "nullable": true
+          },
+          "Provider": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CertificateType": {
+            "$ref": "#/components/schemas/CertificateType"
+          },
+          "DateModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Id",
+          "ExpirationDate",
+          "DateModified",
+          "DateCreated"
+        ]
+      },
+      "PaginationListModelOfEdgeScriptModel": {
+        "type": "object",
+        "required": [
+          "CurrentPage",
+          "TotalItems",
+          "HasMoreItems"
+        ],
+        "properties": {
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptModel"
+            }
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TotalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasMoreItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GithubRepositoryModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Private": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Id",
+          "Private"
+        ]
+      },
+      "PrivateKeyType": {
+        "type": "string",
+        "description": "0 = Ecdsa<br/>1 = Rsa",
+        "x-enumNames": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "enum": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "x-enum-varnames": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "example": "Ecdsa"
+      },
+      "SupportTicketCommentModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Body": {
+            "type": "string",
+            "nullable": true
+          },
+          "HtmlBody": {
+            "type": "string",
+            "nullable": true
+          },
+          "Public": {
+            "type": "boolean"
+          },
+          "AuthorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "User": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SupportTicketUserModel"
+              }
+            ]
+          },
+          "Attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportTicketAttachmentModel"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id",
+          "Public",
+          "AuthorId",
+          "CreatedAt"
+        ]
+      },
+      "AppleFairPlayDrm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "type": "boolean"
+          },
+          "CertificateId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CertificateExpirationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Provider": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Enabled"
+        ]
+      },
+      "AddEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 100
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
+          },
+          "CreateLinkedPullZone": {
+            "type": "boolean"
+          },
+          "LinkedPullZoneName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Integration": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
+              }
+            ]
+          }
+        },
+        "required": [
+          "CreateLinkedPullZone"
+        ]
+      },
+      "UpsertEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Required": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "BunnyAiImageBlueprintModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "PreloadingScreenTheme": {
+        "type": "string",
+        "description": "0 = Light<br/>1 = Dark",
+        "x-enumNames": [
+          "Light",
+          "Dark"
+        ],
+        "enum": [
+          "Light",
+          "Dark"
+        ],
+        "x-enum-varnames": [
+          "Light",
+          "Dark"
+        ],
+        "example": "Light"
+      },
+      "DnsRecordEnviromentalVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AffiliateBalanceRecordModel": {
+        "type": "object",
+        "description": "Model definition for AffiliateBalanceRecordModel"
+      },
+      "PullZoneLogForwarderProtocolType": {
+        "type": "string",
+        "description": "0 = UDP<br/>1 = TCP<br/>2 = TCPEncrypted<br/>3 = DataDog",
+        "x-enumNames": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "enum": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "x-enum-varnames": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "example": "UDP"
+      },
+      "StorageZoneS3Type": {
+        "type": "string",
+        "description": "0 = NotSupported<br/>1 = Supported",
+        "x-enumNames": [
+          "NotSupported",
+          "Supported"
+        ],
+        "enum": [
+          "NotSupported",
+          "Supported"
+        ],
+        "x-enum-varnames": [
+          "NotSupported",
+          "Supported"
+        ],
+        "example": "NotSupported"
+      },
+      "SupportTicketUserModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExternalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Alias": {
+            "type": "string",
+            "nullable": true
+          },
+          "Verified": {
+            "type": "boolean"
+          },
+          "Signature": {
+            "type": "string",
+            "nullable": true
+          },
+          "Role": {
+            "type": "string",
+            "nullable": true
+          },
+          "PhotoUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Verified"
+        ]
+      },
+      "StickySessionType": {
+        "type": "string",
+        "enum": [
+          "Off",
+          "On"
+        ],
+        "x-enumNames": [
+          "Off",
+          "On"
+        ],
+        "description": "0 = Off<br/>1 = On",
+        "example": "Off"
+      },
+      "StorageZoneTier": {
+        "type": "string",
+        "description": "0 = Standard<br/>1 = Edge",
+        "x-enumNames": [
+          "Standard",
+          "Edge"
+        ],
+        "enum": [
+          "Standard",
+          "Edge"
+        ],
+        "x-enum-varnames": [
+          "Standard",
+          "Edge"
+        ],
+        "example": "Standard"
       },
       "BunnyDBUsageBreakdown": {
         "type": "object",
@@ -6638,6 +6565,42 @@
           "TotalUnits"
         ],
         "description": "BunnyDB usage breakdown containing cost and usage units"
+      },
+      "SimpleStatistics": {
+        "type": "object",
+        "description": "Model definition for SimpleStatistics"
+      },
+      "Trigger": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "$ref": "#/components/schemas/TriggerTypes",
+            "description": "The type of the trigger. Url = 0, RequestHeader = 1, ResponseHeader = 2, UrlExtension = 3, CountryCode = 4, RemoteIP = 5, UrlQueryString = 6, RandomChance = 7"
+          },
+          "PatternMatches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of pattern matches that will trigger the edge rule"
+          },
+          "PatternMatchingType": {
+            "description": "The type of pattern matching. MatchAny = 0, MatchAll = 1, MatchNone = 2",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PatternMatchingTypes"
+              }
+            ]
+          },
+          "Parameter1": {
+            "type": "string",
+            "description": "The trigger parameter 1. The value depends on the type of trigger."
+          }
+        },
+        "required": [
+          "Type",
+          "PatternMatchingType"
+        ]
       }
     },
     "securitySchemes": {
