@@ -2543,7 +2543,7 @@
           },
           "rtmpOutputs": {
             "type": "array",
-            "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
+            "description": "A list of up to 4 RTMP outputs that the incoming stream will be forwarded to",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/RtmpOutput"
@@ -2583,10 +2583,15 @@
       "RtmpOutput": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "endpoint"
+        ],
         "properties": {
           "endpoint": {
             "type": "string",
-            "nullable": true
+            "description": "RTMP output endpoint URL",
+            "format": "uri",
+            "minLength": 1
           },
           "streamKey": {
             "type": "string",
@@ -2791,7 +2796,7 @@
           },
           "rtmpOutputs": {
             "type": "array",
-            "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
+            "description": "A list of up to 4 RTMP outputs that the incoming stream will be forwarded to",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/RtmpOutput"
@@ -2860,18 +2865,18 @@
             "description": "Determines if countdown should be shown in player before the stream start, if it was scheduled (optional)",
             "nullable": true
           },
-          "rtmpOutputs": {
-            "type": "array",
-            "description": "A list of up to 5 RTMP outputs that the incoming stream will be forwarded to",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RtmpOutput"
-            }
-          },
           "preStreamTrailerVideoId": {
             "type": "string",
             "description": "Video ID of the trailer that will be played before the live stream starts",
             "nullable": true
+          },
+          "rtmpOutputs": {
+            "type": "array",
+            "description": "A list of up to 4 RTMP outputs that the incoming stream will be forwarded to",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RtmpOutput"
+            }
           }
         }
       },
