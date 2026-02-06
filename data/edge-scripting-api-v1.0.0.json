@@ -2039,102 +2039,72 @@
   },
   "components": {
     "schemas": {
-      "SupportTicketUserModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "ExternalId": {
-            "type": "string",
-            "nullable": true
-          },
-          "Alias": {
-            "type": "string",
-            "nullable": true
-          },
-          "Verified": {
-            "type": "boolean"
-          },
-          "Signature": {
-            "type": "string",
-            "nullable": true
-          },
-          "Role": {
-            "type": "string",
-            "nullable": true
-          },
-          "PhotoUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Verified"
-        ]
+      "LogAnonymizationType": {
+        "type": "string",
+        "description": "0 = OneDigit<br/>1 = Drop",
+        "x-enumNames": [
+          "OneDigit",
+          "Drop"
+        ],
+        "enum": [
+          "OneDigit",
+          "Drop"
+        ],
+        "x-enum-varnames": [
+          "OneDigit",
+          "Drop"
+        ],
+        "example": "OneDigit"
       },
-      "AppleFairPlayDrm": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Enabled": {
-            "type": "boolean"
-          },
-          "CertificateId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "CertificateExpirationDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "Provider": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Enabled"
-        ]
-      },
-      "RtmpOutput": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Endpoint": {
-            "type": "string",
-            "nullable": true,
-            "description": "The RTMP endpoint URL for the output"
-          },
-          "StreamKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "The RTMP stream key for the output"
-          }
-        }
-      },
-      "PullZoneOptimizerClassModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the optimizer class that will be used in the query string"
-          },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of settings and values the class will send to the optimizer"
-          }
-        }
+      "DnsZoneDiscoveredRecordType": {
+        "type": "string",
+        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>12 = NS<br/>13 = Svcb<br/>14 = HTTPS<br/>15 = TLSA<br/>16 = SOA",
+        "x-enumNames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
+        ],
+        "enum": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
+        ],
+        "x-enum-varnames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "SRV",
+          "CAA",
+          "PTR",
+          "NS",
+          "Svcb",
+          "HTTPS",
+          "TLSA",
+          "SOA"
+        ],
+        "example": "A"
       },
       "PullZoneOriginType": {
         "type": "string",
@@ -2168,7 +2138,7 @@
         ],
         "example": "OriginUrl"
       },
-      "EdgeScriptReleaseModel": {
+      "ApiKeyModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -2176,112 +2146,1031 @@
             "type": "integer",
             "format": "int64"
           },
-          "Deleted": {
+          "Key": {
+            "type": "string",
+            "nullable": true
+          },
+          "Roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "ServerZoneStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Error3xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "Error4xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "Error5xx": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsHit": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsMiss": {
+            "type": "number",
+            "format": "double"
+          },
+          "Bandwidth": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "Error3xx",
+          "Error4xx",
+          "Error5xx",
+          "RequestsHit",
+          "RequestsMiss",
+          "Bandwidth"
+        ]
+      },
+      "StorageZoneS3Type": {
+        "type": "string",
+        "description": "0 = NotSupported<br/>1 = Supported",
+        "x-enumNames": [
+          "NotSupported",
+          "Supported"
+        ],
+        "enum": [
+          "NotSupported",
+          "Supported"
+        ],
+        "x-enum-varnames": [
+          "NotSupported",
+          "Supported"
+        ],
+        "example": "NotSupported"
+      },
+      "ListEdgeScriptSecretsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Secrets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptSecretModel"
+            }
+          }
+        }
+      },
+      "SupportTicketCommentModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Body": {
+            "type": "string",
+            "nullable": true
+          },
+          "HtmlBody": {
+            "type": "string",
+            "nullable": true
+          },
+          "Public": {
             "type": "boolean"
+          },
+          "AuthorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "User": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SupportTicketUserModel"
+              }
+            ]
+          },
+          "Attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportTicketAttachmentModel"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id",
+          "Public",
+          "AuthorId",
+          "CreatedAt"
+        ]
+      },
+      "EdgeScriptAddSecretModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Secret": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "NotificationType": {
+        "type": "string",
+        "description": "0 = Info<br/>1 = Warning<br/>2 = Problem",
+        "x-enumNames": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "enum": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "x-enum-varnames": [
+          "Info",
+          "Warning",
+          "Problem"
+        ],
+        "example": "Info"
+      },
+      "BunnyDBUsageBreakdown": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Usage": {
+            "type": "number",
+            "format": "decimal",
+            "description": "The usage cost in USD"
+          },
+          "TotalUnits": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The total usage units (rows for reads/writes, GB for storage)"
+          }
+        },
+        "required": [
+          "Usage",
+          "TotalUnits"
+        ],
+        "description": "BunnyDB usage breakdown containing cost and usage units"
+      },
+      "EdgeScriptUpsertSecretModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Secret": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        }
+      },
+      "EdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Required": {
+            "type": "boolean"
+          },
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id",
+          "Required"
+        ]
+      },
+      "AddEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 100
           },
           "Code": {
             "type": "string",
             "nullable": true
           },
-          "Uuid": {
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
+          },
+          "CreateLinkedPullZone": {
+            "type": "boolean"
+          },
+          "LinkedPullZoneName": {
             "type": "string",
             "nullable": true
           },
-          "Note": {
-            "type": "string",
-            "nullable": true
-          },
-          "Author": {
-            "type": "string",
-            "nullable": true
-          },
-          "AuthorEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "CommitSha": {
-            "type": "string",
-            "nullable": true
-          },
-          "Status": {
+          "Integration": {
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/EdgeScriptReleaseStatus"
+                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
+              }
+            ]
+          }
+        },
+        "required": [
+          "CreateLinkedPullZone"
+        ]
+      },
+      "SearchResultItemModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true,
+            "description": "The type of the search result item. Possible values: cdn, storage, dns, script, stream"
+          },
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the search result item linked object"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the object found"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "DnsZoneDiscoveredRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Record name relative to the zone. '@' represents apex."
+          },
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DnsZoneDiscoveredRecordType"
+              }
+            ],
+            "nullable": true
+          },
+          "Ttl": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Weight": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Port": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "IsProxied": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "IsProxied"
+        ]
+      },
+      "DnsRecordEnviromentalVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "EdgeScriptStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "TotalRequestsServed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "TotalCpuUsed": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalMonthlyCost": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "AverageCpuTimePerExecution": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsServedChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "AverageCpuTimeChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "TotalCpuTimeChart": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "TotalRequestsServed",
+          "TotalCpuUsed",
+          "TotalMonthlyCost",
+          "AverageCpuTimePerExecution"
+        ]
+      },
+      "BillingRecordType": {
+        "type": "string",
+        "description": "0 = PayPal<br/>1 = Crypto<br/>2 = CreditCard<br/>3 = MonthlyUsage<br/>4 = Refund<br/>5 = CouponCode<br/>6 = BankTransfer<br/>7 = AffiliateCredits",
+        "x-enumNames": [
+          "PayPal",
+          "Crypto",
+          "CreditCard",
+          "MonthlyUsage",
+          "Refund",
+          "CouponCode",
+          "BankTransfer",
+          "AffiliateCredits"
+        ],
+        "enum": [
+          "PayPal",
+          "Crypto",
+          "CreditCard",
+          "MonthlyUsage",
+          "Refund",
+          "CouponCode",
+          "BankTransfer",
+          "AffiliateCredits"
+        ],
+        "x-enum-varnames": [
+          "PayPal",
+          "Crypto",
+          "CreditCard",
+          "MonthlyUsage",
+          "Refund",
+          "CouponCode",
+          "BankTransfer",
+          "AffiliateCredits"
+        ],
+        "example": "PayPal"
+      },
+      "WidevineMinClientSecurityLevel": {
+        "type": "string",
+        "description": "0 = None<br/>1 = L1<br/>2 = L2<br/>3 = L3",
+        "x-enumNames": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "enum": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "x-enum-varnames": [
+          "None",
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "example": "None"
+      },
+      "PrivateKeyType": {
+        "type": "string",
+        "description": "0 = Ecdsa<br/>1 = Rsa",
+        "x-enumNames": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "enum": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "x-enum-varnames": [
+          "Ecdsa",
+          "Rsa"
+        ],
+        "example": "Ecdsa"
+      },
+      "ShieldDDosProtectionType": {
+        "type": "string",
+        "description": "0 = DetectOnly<br/>1 = ActiveStandard<br/>2 = ActiveAggressive",
+        "x-enumNames": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "enum": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "x-enum-varnames": [
+          "DetectOnly",
+          "ActiveStandard",
+          "ActiveAggressive"
+        ],
+        "example": "DetectOnly"
+      },
+      "SourceCodeIntegrationModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IntegrationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "RepositorySettings": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SourceCodeRepositorySettingsModel"
               }
             ]
           },
-          "DateReleased": {
+          "DeployConfiguration": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DeployConfigurationModel"
+              }
+            ]
+          }
+        },
+        "required": [
+          "IntegrationId"
+        ]
+      },
+      "AbuseCaseStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Reviewing",
+          "Resolved",
+          "AccessBlocked",
+          "Appealed"
+        ],
+        "x-enumNames": [
+          "Pending",
+          "Reviewing",
+          "Resolved",
+          "AccessBlocked",
+          "Appealed"
+        ],
+        "description": "0 = Pending<br/>1 = Reviewing<br/>2 = Resolved<br/>3 = AccessBlocked<br/>4 = Appealed",
+        "example": "Pending"
+      },
+      "SupportTicketAttachmentModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ContentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Thumbnails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "FileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "Size",
+          "Id"
+        ]
+      },
+      "WhatsNewModelType": {
+        "type": "string",
+        "description": "0 = Feature<br/>1 = Update<br/>2 = BugFix",
+        "x-enumNames": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "enum": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "x-enum-varnames": [
+          "Feature",
+          "Update",
+          "BugFix"
+        ],
+        "example": "Feature"
+      },
+      "SupportTicketModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true
+          },
+          "Comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportTicketCommentModel"
+            },
+            "nullable": true
+          },
+          "Subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedAt": {
             "type": "string",
             "format": "date-time"
           },
-          "DatePublished": {
+          "LastUpdatedAt": {
             "type": "string",
             "format": "date-time"
           }
         },
         "required": [
           "Id",
-          "Deleted",
-          "DateReleased",
-          "DatePublished"
+          "CreatedAt",
+          "LastUpdatedAt"
         ]
       },
-      "DnsRecordGeoLocationInfo": {
+      "DnsRecordModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Country": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/DnsRecordTypes"
+          },
+          "Ttl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Value": {
             "type": "string",
             "nullable": true
           },
-          "City": {
+          "Name": {
             "type": "string",
             "nullable": true
           },
-          "Latitude": {
+          "Weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Port": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "Tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "Accelerated": {
+            "type": "boolean"
+          },
+          "AcceleratedPullZoneId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "LinkName": {
+            "type": "string",
+            "nullable": true
+          },
+          "IPGeoLocationInfo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GeoDnsLocationModel"
+              }
+            ]
+          },
+          "GeolocationInfo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DnsRecordGeoLocationInfo"
+              }
+            ]
+          },
+          "MonitorStatus": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DnsMonitoringStatus"
+              }
+            ]
+          },
+          "MonitorType": {
+            "$ref": "#/components/schemas/DnsMonitoringType"
+          },
+          "GeolocationLatitude": {
             "type": "number",
             "format": "double"
           },
-          "Longitude": {
+          "GeolocationLongitude": {
             "type": "number",
             "format": "double"
+          },
+          "EnviromentalVariables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
+            },
+            "nullable": true
+          },
+          "LatencyZone": {
+            "type": "string",
+            "nullable": true
+          },
+          "SmartRoutingType": {
+            "$ref": "#/components/schemas/DnsSmartRoutingType"
+          },
+          "Disabled": {
+            "type": "boolean"
+          },
+          "Comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "AutoSslIssuance": {
+            "type": "boolean"
+          },
+          "AccelerationStatus": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AcceleratedStatus"
+              }
+            ]
           }
         },
         "required": [
-          "Latitude",
-          "Longitude"
+          "Id",
+          "Ttl",
+          "Weight",
+          "Priority",
+          "Port",
+          "Accelerated",
+          "AcceleratedPullZoneId",
+          "GeolocationLatitude",
+          "GeolocationLongitude",
+          "Disabled",
+          "AutoSslIssuance"
         ]
       },
-      "UpdateEdgeScriptCodeModel": {
+      "GithubRepositoryModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Code": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
             "type": "string",
+            "nullable": true
+          },
+          "Private": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Id",
+          "Private"
+        ]
+      },
+      "Trigger": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "$ref": "#/components/schemas/TriggerTypes",
+            "description": "The type of the trigger. Url = 0, RequestHeader = 1, ResponseHeader = 2, UrlExtension = 3, CountryCode = 4, RemoteIP = 5, UrlQueryString = 6, RandomChance = 7"
+          },
+          "PatternMatches": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of pattern matches that will trigger the edge rule"
+          },
+          "PatternMatchingType": {
+            "description": "The type of pattern matching. MatchAny = 0, MatchAll = 1, MatchNone = 2",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PatternMatchingTypes"
+              }
+            ]
+          },
+          "Parameter1": {
+            "type": "string",
+            "description": "The trigger parameter 1. The value depends on the type of trigger."
+          }
+        },
+        "required": [
+          "Type",
+          "PatternMatchingType"
+        ]
+      },
+      "ExecutionPhase": {
+        "type": "string",
+        "description": "0 = Cache<br/>1 = LoadBalancer",
+        "x-enumNames": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "enum": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "x-enum-varnames": [
+          "Cache",
+          "LoadBalancer"
+        ],
+        "example": "Cache"
+      },
+      "StickySessionType": {
+        "type": "string",
+        "enum": [
+          "Off",
+          "On"
+        ],
+        "x-enumNames": [
+          "Off",
+          "On"
+        ],
+        "description": "0 = Off<br/>1 = On",
+        "example": "Off"
+      },
+      "AddDnsRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DnsRecordTypes"
+              }
+            ],
+            "nullable": true
+          },
+          "Ttl": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Weight": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255,
+            "nullable": true
+          },
+          "Tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "Port": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "PullZoneId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ScriptId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Accelerated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "MonitorType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DnsMonitoringType"
+              }
+            ],
+            "nullable": true
+          },
+          "GeolocationLatitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "GeolocationLongitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "LatencyZone": {
+            "type": "string",
+            "nullable": true
+          },
+          "SmartRoutingType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DnsSmartRoutingType"
+              }
+            ],
+            "nullable": true
+          },
+          "Disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "EnviromentalVariables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
+            },
+            "nullable": true
+          },
+          "Comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "AutoSslIssuance": {
+            "type": "boolean",
             "nullable": true
           }
         }
       },
-      "PullZoneConnectionType": {
+      "PricingPackageType": {
         "type": "string",
-        "description": "0 = CDN<br/>1 = PermaCache<br/>2 = LogStorage",
+        "description": "1 = Shared<br/>2 = Reserved",
         "x-enumNames": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
+          "Shared",
+          "Reserved"
         ],
         "enum": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
+          "Shared",
+          "Reserved"
         ],
         "x-enum-varnames": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
+          "Shared",
+          "Reserved"
         ],
-        "example": "CDN"
+        "example": "Shared"
+      },
+      "BunnyAiImageBlueprintModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "BunnyCDN": {
+        "type": "object",
+        "description": "Model definition for BunnyCDN"
       },
       "VideoLibraryModel": {
         "type": "object",
@@ -2729,280 +3618,41 @@
           "ExposeVideoMetadata"
         ]
       },
-      "EdgeScriptStatisticsModel": {
+      "SupportTicketUserModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "TotalRequestsServed": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "TotalCpuUsed": {
-            "type": "number",
-            "format": "double"
-          },
-          "TotalMonthlyCost": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "AverageCpuTimePerExecution": {
-            "type": "number",
-            "format": "double"
-          },
-          "RequestsServedChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "AverageCpuTimeChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "TotalCpuTimeChart": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          }
-        },
-        "required": [
-          "TotalRequestsServed",
-          "TotalCpuUsed",
-          "TotalMonthlyCost",
-          "AverageCpuTimePerExecution"
-        ]
-      },
-      "PullZoneLogFormat": {
-        "type": "string",
-        "description": "0 = Plain<br/>1 = JSON",
-        "x-enumNames": [
-          "Plain",
-          "JSON"
-        ],
-        "enum": [
-          "Plain",
-          "JSON"
-        ],
-        "x-enum-varnames": [
-          "Plain",
-          "JSON"
-        ],
-        "example": "Plain"
-      },
-      "ApiErrorData": {
-        "type": "object",
-        "properties": {
-          "ErrorKey": {
-            "type": "string"
-          },
-          "Field": {
-            "type": "string"
-          },
-          "Message": {
-            "type": "string"
-          }
-        }
-      },
-      "AbuseUrlStatus": {
-        "type": "string",
-        "description": "0 = NotResolved<br/>1 = Resolved<br/>2 = Unknown",
-        "x-enumNames": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "enum": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "x-enum-varnames": [
-          "NotResolved",
-          "Resolved",
-          "Unknown"
-        ],
-        "example": "NotResolved"
-      },
-      "StorageZoneModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ID of the storage zone"
-          },
-          "UserId": {
-            "type": "string",
-            "nullable": true,
-            "description": "The ID of the user that owns the storage zone"
-          },
           "Name": {
             "type": "string",
-            "nullable": true,
-            "description": "The name of the storage zone"
+            "nullable": true
           },
-          "Password": {
+          "ExternalId": {
             "type": "string",
-            "nullable": true,
-            "description": "The API access key or FTP password"
+            "nullable": true
           },
-          "DateModified": {
+          "Alias": {
             "type": "string",
-            "format": "date-time",
-            "description": "The date when the zone was last modified"
+            "nullable": true
           },
-          "Deleted": {
-            "type": "boolean",
-            "description": "Determines if the zone was deleted or not"
+          "Verified": {
+            "type": "boolean"
           },
-          "StorageUsed": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The total amount of storage used by this zone"
-          },
-          "FilesStored": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The total number of files stored by this zone"
-          },
-          "Region": {
+          "Signature": {
             "type": "string",
-            "nullable": true,
-            "description": "The main region used by the storage zone"
+            "nullable": true
           },
-          "ReplicationRegions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The replication regions enabled for this storage zone"
-          },
-          "PullZones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PullZoneModel"
-            },
-            "nullable": true,
-            "description": "The list of pull zones connected to this storage zone"
-          },
-          "ReadOnlyPassword": {
+          "Role": {
             "type": "string",
-            "nullable": true,
-            "description": "The read-only API access key or FTP password"
+            "nullable": true
           },
-          "Rewrite404To200": {
-            "type": "boolean",
-            "description": "Determines if the storage zone will rewrite 404 status codes to 200 status codes"
-          },
-          "Custom404FilePath": {
+          "PhotoUrl": {
             "type": "string",
-            "nullable": true,
-            "description": "The custom 404 error path that will be returned in case of a missing file."
-          },
-          "StorageHostname": {
-            "type": "string",
-            "nullable": true,
-            "description": "Determines the storage hostname for this zone"
-          },
-          "ZoneTier": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/StorageZoneTier"
-              }
-            ],
-            "description": "Determines the storage zone tier that is storing the data"
-          },
-          "ReplicationChangeInProgress": {
-            "type": "boolean",
-            "description": "Determines if the storage zone is currently enabling a new replication region"
-          },
-          "PriceOverride": {
-            "type": "number",
-            "format": "decimal",
-            "description": "The custom price override for this zone. Unit is $/TB/month."
-          },
-          "Discount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The Storage Zone specific pricing discount."
-          },
-          "StorageZoneType": {
-            "description": "The Storage Zone S3 support type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StorageZoneS3Type"
-              }
-            ]
+            "nullable": true
           }
         },
         "required": [
-          "Id",
-          "DateModified",
-          "Deleted",
-          "StorageUsed",
-          "FilesStored",
-          "Rewrite404To200",
-          "ReplicationChangeInProgress",
-          "PriceOverride",
-          "Discount"
+          "Verified"
         ]
-      },
-      "PublishEdgeScriptModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Note": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "LogOrdering": {
-        "type": "string",
-        "enum": [
-          "Ascending",
-          "Descending"
-        ],
-        "x-enumNames": [
-          "Ascending",
-          "Descending"
-        ],
-        "description": "0 = Ascending<br/>1 = Descending",
-        "example": "Ascending"
-      },
-      "AbuseCaseUrlModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Url": {
-            "type": "string",
-            "nullable": true
-          },
-          "Status": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AbuseUrlStatus"
-              }
-            ]
-          }
-        }
-      },
-      "BunnyCDN": {
-        "type": "object",
-        "description": "Model definition for BunnyCDN"
       },
       "EdgeScriptSecretModel": {
         "type": "object",
@@ -3025,1113 +3675,6 @@
           "Id",
           "LastModified"
         ]
-      },
-      "AbuseCaseStatus": {
-        "type": "string",
-        "enum": [
-          "Pending",
-          "Reviewing",
-          "Resolved",
-          "AccessBlocked",
-          "Appealed"
-        ],
-        "x-enumNames": [
-          "Pending",
-          "Reviewing",
-          "Resolved",
-          "AccessBlocked",
-          "Appealed"
-        ],
-        "description": "0 = Pending<br/>1 = Reviewing<br/>2 = Resolved<br/>3 = AccessBlocked<br/>4 = Appealed",
-        "example": "Pending"
-      },
-      "GithubRepositoryModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Private": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "Id",
-          "Private"
-        ]
-      },
-      "UserAuditLog": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "Product": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceType": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ResourceOwner": {
-            "type": "string",
-            "nullable": true
-          },
-          "Action": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActorType": {
-            "type": "string",
-            "nullable": true
-          },
-          "Diff": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Timestamp"
-        ]
-      },
-      "DrmCertificateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "PrivateKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "SecretKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "Certificate": {
-            "type": "string",
-            "nullable": true
-          },
-          "Provider": {
-            "type": "string",
-            "nullable": true
-          },
-          "ExpirationDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "CertificateType": {
-            "$ref": "#/components/schemas/CertificateType"
-          },
-          "DateModified": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "DateCreated": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "Id",
-          "ExpirationDate",
-          "DateModified",
-          "DateCreated"
-        ]
-      },
-      "DnsZoneScanJobStatus": {
-        "type": "string",
-        "enum": [
-          "Pending",
-          "InProgress",
-          "Completed",
-          "Failed"
-        ],
-        "x-enumNames": [
-          "Pending",
-          "InProgress",
-          "Completed",
-          "Failed"
-        ],
-        "description": "0 = Pending<br/>1 = InProgress<br/>2 = Completed<br/>3 = Failed",
-        "example": "Pending"
-      },
-      "DnsRecordModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Type": {
-            "$ref": "#/components/schemas/DnsRecordTypes"
-          },
-          "Ttl": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Weight": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Priority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Port": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Flags": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 255
-          },
-          "Tag": {
-            "type": "string",
-            "nullable": true
-          },
-          "Accelerated": {
-            "type": "boolean"
-          },
-          "AcceleratedPullZoneId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "LinkName": {
-            "type": "string",
-            "nullable": true
-          },
-          "IPGeoLocationInfo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/GeoDnsLocationModel"
-              }
-            ]
-          },
-          "GeolocationInfo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DnsRecordGeoLocationInfo"
-              }
-            ]
-          },
-          "MonitorStatus": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DnsMonitoringStatus"
-              }
-            ]
-          },
-          "MonitorType": {
-            "$ref": "#/components/schemas/DnsMonitoringType"
-          },
-          "GeolocationLatitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "GeolocationLongitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "EnviromentalVariables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
-            },
-            "nullable": true
-          },
-          "LatencyZone": {
-            "type": "string",
-            "nullable": true
-          },
-          "SmartRoutingType": {
-            "$ref": "#/components/schemas/DnsSmartRoutingType"
-          },
-          "Disabled": {
-            "type": "boolean"
-          },
-          "Comment": {
-            "type": "string",
-            "nullable": true
-          },
-          "AutoSslIssuance": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "Id",
-          "Ttl",
-          "Weight",
-          "Priority",
-          "Port",
-          "Accelerated",
-          "AcceleratedPullZoneId",
-          "GeolocationLatitude",
-          "GeolocationLongitude",
-          "Disabled",
-          "AutoSslIssuance"
-        ]
-      },
-      "HostnameModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The unique ID of the hostname"
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true,
-            "description": "The hostname value for the domain name"
-          },
-          "ForceSSL": {
-            "type": "boolean",
-            "description": "Determines if the Force SSL feature is enabled"
-          },
-          "IsSystemHostname": {
-            "type": "boolean",
-            "description": "Determines if this is a system hostname controlled by bunny.net"
-          },
-          "IsManagedHostname": {
-            "type": "boolean",
-            "description": "Determines if this is a managed hostname controlled by bunny.net"
-          },
-          "HasCertificate": {
-            "type": "boolean",
-            "description": "Determines if the hostname has an SSL certificate configured"
-          },
-          "Certificate": {
-            "type": "string",
-            "nullable": true,
-            "description": "Contains the Base64Url encoded certificate for the hostname"
-          },
-          "CertificateKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "Contains the Base64Url encoded certificate key for the hostname"
-          },
-          "CertificateKeyType": {
-            "description": "The private key type to use for automatic certificates",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PrivateKeyType"
-              }
-            ]
-          },
-          "CertificateProvisionType": {
-            "description": "The provisioned certificate type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CertificateProvisionType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "Id",
-          "ForceSSL",
-          "IsSystemHostname",
-          "IsManagedHostname",
-          "HasCertificate"
-        ]
-      },
-      "Trigger": {
-        "type": "object",
-        "properties": {
-          "Type": {
-            "$ref": "#/components/schemas/TriggerTypes",
-            "description": "The type of the trigger. Url = 0, RequestHeader = 1, ResponseHeader = 2, UrlExtension = 3, CountryCode = 4, RemoteIP = 5, UrlQueryString = 6, RandomChance = 7"
-          },
-          "PatternMatches": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The list of pattern matches that will trigger the edge rule"
-          },
-          "PatternMatchingType": {
-            "description": "The type of pattern matching. MatchAny = 0, MatchAll = 1, MatchNone = 2",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PatternMatchingTypes"
-              }
-            ]
-          },
-          "Parameter1": {
-            "type": "string",
-            "description": "The trigger parameter 1. The value depends on the type of trigger."
-          }
-        },
-        "required": [
-          "Type",
-          "PatternMatchingType"
-        ]
-      },
-      "DnsRecordTypes": {
-        "type": "string",
-        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>5 = SPF<br/>6 = Flatten<br/>7 = PullZone<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>11 = Script<br/>12 = NS",
-        "x-enumNames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SPF",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS"
-        ],
-        "enum": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SPF",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS"
-        ],
-        "x-enum-varnames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SPF",
-          "Flatten",
-          "PullZone",
-          "SRV",
-          "CAA",
-          "PTR",
-          "Script",
-          "NS"
-        ],
-        "example": "A"
-      },
-      "SourceCodeRepositorySettingsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Private": {
-            "type": "boolean"
-          },
-          "TemplateUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Private"
-        ]
-      },
-      "UserModelBillingType": {
-        "type": "string",
-        "description": "0 = FreeTrial<br/>1 = PayAsYouGo<br/>2 = PostPaidPayAsYouGo<br/>3 = MonthlyPlan",
-        "x-enumNames": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "enum": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "x-enum-varnames": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "example": "FreeTrial"
-      },
-      "BillingRecordType": {
-        "type": "string",
-        "description": "0 = PayPal<br/>1 = Crypto<br/>2 = CreditCard<br/>3 = MonthlyUsage<br/>4 = Refund<br/>5 = CouponCode<br/>6 = BankTransfer<br/>7 = AffiliateCredits",
-        "x-enumNames": [
-          "PayPal",
-          "Crypto",
-          "CreditCard",
-          "MonthlyUsage",
-          "Refund",
-          "CouponCode",
-          "BankTransfer",
-          "AffiliateCredits"
-        ],
-        "enum": [
-          "PayPal",
-          "Crypto",
-          "CreditCard",
-          "MonthlyUsage",
-          "Refund",
-          "CouponCode",
-          "BankTransfer",
-          "AffiliateCredits"
-        ],
-        "x-enum-varnames": [
-          "PayPal",
-          "Crypto",
-          "CreditCard",
-          "MonthlyUsage",
-          "Refund",
-          "CouponCode",
-          "BankTransfer",
-          "AffiliateCredits"
-        ],
-        "example": "PayPal"
-      },
-      "EncodingTier": {
-        "type": "string",
-        "description": "0 = Free<br/>1 = Premium",
-        "x-enumNames": [
-          "Free",
-          "Premium"
-        ],
-        "enum": [
-          "Free",
-          "Premium"
-        ],
-        "x-enum-varnames": [
-          "Free",
-          "Premium"
-        ],
-        "example": "Free"
-      },
-      "DnsZoneDiscoveredRecordModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "Record name relative to the zone. '@' represents apex."
-          },
-          "Type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DnsZoneDiscoveredRecordType"
-              }
-            ],
-            "nullable": true
-          },
-          "Ttl": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true
-          },
-          "Priority": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Weight": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Port": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "IsProxied": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "IsProxied"
-        ]
-      },
-      "OptimizerWatermarkPosition": {
-        "type": "integer",
-        "description": "0 = BottomLeft<br/>1 = BottomRight<br/>2 = TopLeft<br/>3 = TopRight<br/>4 = Center<br/>5 = CenterStretch",
-        "x-enumNames": [
-          "BottomLeft",
-          "BottomRight",
-          "TopLeft",
-          "TopRight",
-          "Center",
-          "CenterStretch"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "x-enum-varnames": [
-          "BottomLeft",
-          "BottomRight",
-          "TopLeft",
-          "TopRight",
-          "Center",
-          "CenterStretch"
-        ]
-      },
-      "EdgeRuleV2Model": {
-        "type": "object",
-        "properties": {
-          "Guid": {
-            "type": "string",
-            "description": "The unique GUID of the edge rule"
-          },
-          "ActionType": {
-            "description": "The action type of the edge rule",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EdgeRuleActionType"
-              }
-            ]
-          },
-          "ActionParameter1": {
-            "type": "string",
-            "description": "The Action parameter 1. The value depends on other parameters of the edge rule."
-          },
-          "ActionParameter2": {
-            "type": "string",
-            "description": "The Action parameter 2. The value depends on other parameters of the edge rule."
-          },
-          "ActionParameter3": {
-            "type": "string",
-            "description": "The Action parameter 3. The value depends on other parameters of the edge rule."
-          },
-          "Triggers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Trigger"
-            },
-            "description": "The list of trigger that trigger the edge rule"
-          },
-          "ExtraActions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeRuleV2ActionModel"
-            },
-            "description": "Additional actions to be performed"
-          },
-          "TriggerMatchingType": {
-            "description": "The trigger matching type",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PatternMatchingTypes"
-              }
-            ]
-          },
-          "Description": {
-            "type": "string",
-            "description": "The description of the edge rule"
-          },
-          "Enabled": {
-            "type": "boolean",
-            "description": "Determines if the edge rule is currently enabled or not"
-          },
-          "OrderIndex": {
-            "type": "integer",
-            "description": "The index of the edge rule in the list of execution priority"
-          }
-        },
-        "description": "Model definition for EdgeRuleV2Model"
-      },
-      "AddEdgeScriptModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 100
-          },
-          "Code": {
-            "type": "string",
-            "nullable": true
-          },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
-          },
-          "CreateLinkedPullZone": {
-            "type": "boolean"
-          },
-          "LinkedPullZoneName": {
-            "type": "string",
-            "nullable": true
-          },
-          "Integration": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
-              }
-            ]
-          }
-        },
-        "required": [
-          "CreateLinkedPullZone"
-        ]
-      },
-      "OptimizerClassModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the optimizer class that will be used in the query string"
-          },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "The list of settings and values the class will send to the optimizer"
-          }
-        }
-      },
-      "PaginationListModelOfEdgeScriptModel": {
-        "type": "object",
-        "required": [
-          "CurrentPage",
-          "TotalItems",
-          "HasMoreItems"
-        ],
-        "properties": {
-          "Items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
-      "WhatsNewModelType": {
-        "type": "string",
-        "description": "0 = Feature<br/>1 = Update<br/>2 = BugFix",
-        "x-enumNames": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "enum": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "x-enum-varnames": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "example": "Feature"
-      },
-      "PullZoneType": {
-        "type": "string",
-        "description": "0 = Premium<br/>1 = Volume",
-        "x-enumNames": [
-          "Premium",
-          "Volume"
-        ],
-        "enum": [
-          "Premium",
-          "Volume"
-        ],
-        "x-enum-varnames": [
-          "Premium",
-          "Volume"
-        ],
-        "example": "Premium"
-      },
-      "CertificateProvisionType": {
-        "type": "string",
-        "description": "0 = Unknown<br/>1 = Http01<br/>2 = Dns01<br/>3 = Custom",
-        "x-enumNames": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "enum": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "x-enum-varnames": [
-          "Unknown",
-          "Http01",
-          "Dns01",
-          "Custom"
-        ],
-        "example": "Unknown"
-      },
-      "PreloadingScreenTheme": {
-        "type": "string",
-        "description": "0 = Light<br/>1 = Dark",
-        "x-enumNames": [
-          "Light",
-          "Dark"
-        ],
-        "enum": [
-          "Light",
-          "Dark"
-        ],
-        "x-enum-varnames": [
-          "Light",
-          "Dark"
-        ],
-        "example": "Light"
-      },
-      "SourceCodeIntegrationModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "IntegrationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "RepositorySettings": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SourceCodeRepositorySettingsModel"
-              }
-            ]
-          },
-          "DeployConfiguration": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DeployConfigurationModel"
-              }
-            ]
-          }
-        },
-        "required": [
-          "IntegrationId"
-        ]
-      },
-      "EdgeScriptModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "LastModified": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
-          },
-          "CurrentReleaseId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "EdgeScriptVariables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptVariableModel"
-            },
-            "nullable": true
-          },
-          "Deleted": {
-            "type": "boolean"
-          },
-          "LinkedPullZones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LinkedPullZone"
-            },
-            "nullable": true
-          },
-          "Integration": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
-              }
-            ]
-          },
-          "DefaultHostname": {
-            "type": "string",
-            "nullable": true
-          },
-          "SystemHostname": {
-            "type": "string",
-            "nullable": true
-          },
-          "DeploymentKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "RepositoryId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "IntegrationId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "MonthlyCost": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "MonthlyRequestCount": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "MonthlyCpuTime": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "UpdateEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          },
-          "Required": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "ServerZoneStatisticsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Error3xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "Error4xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "Error5xx": {
-            "type": "number",
-            "format": "double"
-          },
-          "RequestsHit": {
-            "type": "number",
-            "format": "double"
-          },
-          "RequestsMiss": {
-            "type": "number",
-            "format": "double"
-          },
-          "Bandwidth": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": [
-          "Error3xx",
-          "Error4xx",
-          "Error5xx",
-          "RequestsHit",
-          "RequestsMiss",
-          "Bandwidth"
-        ]
-      },
-      "BillingRecordModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ID of the billing record"
-          },
-          "PaymentId": {
-            "type": "string",
-            "nullable": true,
-            "description": "The external ID of the payment"
-          },
-          "Amount": {
-            "type": "number",
-            "format": "double",
-            "description": "The amount linked to the record model"
-          },
-          "Payer": {
-            "type": "string",
-            "nullable": true,
-            "description": "The payer reference that sent the payment"
-          },
-          "Timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date and time when the billing record was created"
-          },
-          "Type": {
-            "description": "The type of the billing record. PayPal = 0, Crypto = 1, CreditCard = 2, MonthlyUsage = 3, Refund = 4, CouponCode = 5, BankTransfer = 6, AffiliateCredits = 7",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BillingRecordType"
-              }
-            ]
-          },
-          "InvoiceAvailable": {
-            "type": "boolean",
-            "description": "Determines if an invoice is available"
-          },
-          "DocumentDownloadUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "The URL where the invoice or document can be downloaded. Null if this is not available."
-          },
-          "DetailedDocumentDownloadUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "The URL where the document with product usage breakdown can be downloaded. Null if this is not available."
-          }
-        },
-        "required": [
-          "Id",
-          "Amount",
-          "Timestamp",
-          "InvoiceAvailable"
-        ]
-      },
-      "TriggerTypes": {
-        "type": "string",
-        "enum": [
-          "Url",
-          "RequestHeader",
-          "ResponseHeader",
-          "UrlExtension",
-          "CountryCode",
-          "RemoteIP",
-          "UrlQueryString",
-          "RandomChance",
-          "StatusCode",
-          "RequestMethod",
-          "CookieValue",
-          "CountryStateCode",
-          "OriginRetryAttemptCount",
-          "OriginConnectionError"
-        ],
-        "x-enumNames": [
-          "Url",
-          "RequestHeader",
-          "ResponseHeader",
-          "UrlExtension",
-          "CountryCode",
-          "RemoteIP",
-          "UrlQueryString",
-          "RandomChance",
-          "StatusCode",
-          "RequestMethod",
-          "CookieValue",
-          "CountryStateCode",
-          "OriginRetryAttemptCount",
-          "OriginConnectionError"
-        ],
-        "description": "0 = Url\n1 = RequestHeader\n2 = ResponseHeader\n3 = UrlExtension\n4 = CountryCode\n5 = RemoteIP\n6 = UrlQueryString\n7 = RandomChance\n8 = StatusCode\n9 = RequestMethod\n10 = CookieValue\n11 = CountryStateCode\n12 = OriginRetryAttemptCount\n13 = OriginConnectionError",
-        "example": "Url"
-      },
-      "DnsMonitoringStatus": {
-        "type": "string",
-        "description": "0 = Unknown<br/>1 = Online<br/>2 = Offline",
-        "x-enumNames": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "enum": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "x-enum-varnames": [
-          "Unknown",
-          "Online",
-          "Offline"
-        ],
-        "example": "Unknown"
       },
       "EdgeRuleActionType": {
         "type": "string",
@@ -4243,451 +3786,50 @@
         ],
         "example": "ForceSSL"
       },
-      "EdgeScriptVariableModel": {
+      "DeployConfigurationModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
+          "Branch": {
             "type": "string",
             "nullable": true
           },
-          "Required": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id",
-          "Required"
-        ]
-      },
-      "PrivateKeyType": {
-        "type": "string",
-        "description": "0 = Ecdsa<br/>1 = Rsa",
-        "x-enumNames": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "enum": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "x-enum-varnames": [
-          "Ecdsa",
-          "Rsa"
-        ],
-        "example": "Ecdsa"
-      },
-      "GeoDnsLocationModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "CountryCode": {
-            "type": "string",
-            "nullable": true,
-            "description": "The ISO country code of the location"
-          },
-          "Country": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the country of the location"
-          },
-          "ASN": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ASN of the IP organization"
-          },
-          "OrganizationName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The mame of the organization that owns the IP"
-          },
-          "City": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the city of the location"
-          }
-        },
-        "required": [
-          "ASN"
-        ],
-        "description": "Billing model contains data summary about the user's billing"
-      },
-      "SimpleStatistics": {
-        "type": "object",
-        "description": "Model definition for SimpleStatistics"
-      },
-      "EdgeScriptTypes": {
-        "type": "string",
-        "description": "0 = DNS<br/>1 = CDN<br/>2 = Middleware",
-        "x-enumNames": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "enum": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "x-enum-varnames": [
-          "DNS",
-          "CDN",
-          "Middleware"
-        ],
-        "example": "DNS"
-      },
-      "DrmVersion": {
-        "type": "string",
-        "description": "0 = Basic<br/>1 = Enterprise<br/>2 = BasicV2",
-        "x-enumNames": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "enum": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "x-enum-varnames": [
-          "Basic",
-          "Enterprise",
-          "BasicV2"
-        ],
-        "example": "Basic"
-      },
-      "UserModelCategoryType": {
-        "type": "string",
-        "description": "0 = Normal<br/>1 = Internal<br/>2 = Sponsored",
-        "x-enumNames": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "enum": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "x-enum-varnames": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "example": "Normal"
-      },
-      "ListEdgeScriptSecretsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Secrets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptSecretModel"
-            }
-          }
-        }
-      },
-      "AddEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
-          },
-          "Required": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        },
-        "required": [
-          "Name",
-          "Required"
-        ]
-      },
-      "DnsMonitoringType": {
-        "type": "string",
-        "description": "0 = None<br/>1 = Ping<br/>2 = Http<br/>3 = Monitor",
-        "x-enumNames": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
-        ],
-        "enum": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "Ping",
-          "Http",
-          "Monitor"
-        ],
-        "example": "None"
-      },
-      "BunnyDBUsageBreakdown": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Usage": {
-            "type": "number",
-            "format": "decimal",
-            "description": "The usage cost in USD"
-          },
-          "TotalUnits": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The total usage units (rows for reads/writes, GB for storage)"
-          }
-        },
-        "required": [
-          "Usage",
-          "TotalUnits"
-        ],
-        "description": "BunnyDB usage breakdown containing cost and usage units"
-      },
-      "CertificateType": {
-        "type": "string",
-        "description": "0 = FairPlay<br/>1 = Widevine",
-        "x-enumNames": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "enum": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "x-enum-varnames": [
-          "FairPlay",
-          "Widevine"
-        ],
-        "example": "FairPlay"
-      },
-      "WidevineMinClientSecurityLevel": {
-        "type": "string",
-        "description": "0 = None<br/>1 = L1<br/>2 = L2<br/>3 = L3",
-        "x-enumNames": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "enum": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "L1",
-          "L2",
-          "L3"
-        ],
-        "example": "None"
-      },
-      "UpdateEdgeScriptModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 100
-          },
-          "ScriptType": {
-            "$ref": "#/components/schemas/EdgeScriptTypes"
-          }
-        }
-      },
-      "EdgeScriptAddSecretModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
-          },
-          "Secret": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        },
-        "required": [
-          "Name"
-        ]
-      },
-      "BunnyAiImageBlueprintModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
+          "InstallCommand": {
             "type": "string",
             "nullable": true
           },
-          "Properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        }
-      },
-      "SupportTicketUploadAttachmentModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Body": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 255
-          },
-          "FileName": {
+          "BuildCommand": {
             "type": "string",
             "nullable": true
           },
-          "ContentType": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "DnsSmartRoutingType": {
-        "type": "string",
-        "description": "0 = None<br/>1 = Latency<br/>2 = Geolocation",
-        "x-enumNames": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "enum": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "x-enum-varnames": [
-          "None",
-          "Latency",
-          "Geolocation"
-        ],
-        "example": "None"
-      },
-      "SupportTicketAttachmentModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ContentUrl": {
+          "EntryFile": {
             "type": "string",
             "nullable": true
           },
-          "ContentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "Size": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Thumbnails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "FileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          }
-        },
-        "required": [
-          "Size",
-          "Id"
-        ]
-      },
-      "SupportTicketModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Status": {
-            "type": "string",
-            "nullable": true
-          },
-          "Comments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SupportTicketCommentModel"
-            },
-            "nullable": true
-          },
-          "Subject": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "LastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "Id",
-          "CreatedAt",
-          "LastUpdatedAt"
-        ]
-      },
-      "GithubRepositoryBranchModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Protected": {
-            "type": "boolean"
-          },
-          "Default": {
+          "CreateWorkflow": {
             "type": "boolean"
           }
         },
         "required": [
-          "Protected",
-          "Default"
+          "CreateWorkflow"
         ]
+      },
+      "PullZoneType": {
+        "type": "string",
+        "description": "0 = Premium<br/>1 = Volume",
+        "x-enumNames": [
+          "Premium",
+          "Volume"
+        ],
+        "enum": [
+          "Premium",
+          "Volume"
+        ],
+        "x-enum-varnames": [
+          "Premium",
+          "Volume"
+        ],
+        "example": "Premium"
       },
       "GoogleWidevineDrm": {
         "type": "object",
@@ -4727,387 +3869,84 @@
           "SdOnlyForL3"
         ]
       },
-      "EdgeScriptCodeModel": {
+      "DnsZoneScanJobStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "InProgress",
+          "Completed",
+          "Failed"
+        ],
+        "x-enumNames": [
+          "Pending",
+          "InProgress",
+          "Completed",
+          "Failed"
+        ],
+        "description": "0 = Pending<br/>1 = InProgress<br/>2 = Completed<br/>3 = Failed",
+        "example": "Pending"
+      },
+      "SupportTicketUploadAttachmentModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "Code": {
-            "type": "string",
-            "nullable": true
-          },
-          "LastModified": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "required": [
-          "LastModified"
-        ]
-      },
-      "EdgeRuleV2ActionModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ActionType": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EdgeRuleV2Model"
-              }
-            ]
-          },
-          "ActionParameter1": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActionParameter2": {
-            "type": "string",
-            "nullable": true
-          },
-          "ActionParameter3": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "AffiliateBalanceRecordModel": {
-        "type": "object",
-        "description": "Model definition for AffiliateBalanceRecordModel"
-      },
-      "ServerZoneResultsModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ServerZoneId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Results": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/ServerZoneStatisticsModel"
-            },
-            "nullable": true
-          }
-        },
-        "required": [
-          "ServerZoneId"
-        ]
-      },
-      "SupportTicketCommentModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Type": {
-            "type": "string",
-            "nullable": true
-          },
           "Body": {
-            "type": "string",
-            "nullable": true
-          },
-          "HtmlBody": {
-            "type": "string",
-            "nullable": true
-          },
-          "Public": {
-            "type": "boolean"
-          },
-          "AuthorId": {
             "type": "integer",
-            "format": "int64"
+            "minimum": 0,
+            "maximum": 255
           },
-          "CreatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "User": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SupportTicketUserModel"
-              }
-            ]
-          },
-          "Attachments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SupportTicketAttachmentModel"
-            },
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id",
-          "Public",
-          "AuthorId",
-          "CreatedAt"
-        ]
-      },
-      "EdgeScriptUpdateSecretModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Secret": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        }
-      },
-      "DeployConfigurationModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Branch": {
+          "FileName": {
             "type": "string",
             "nullable": true
           },
-          "InstallCommand": {
-            "type": "string",
-            "nullable": true
-          },
-          "BuildCommand": {
-            "type": "string",
-            "nullable": true
-          },
-          "EntryFile": {
-            "type": "string",
-            "nullable": true
-          },
-          "CreateWorkflow": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "CreateWorkflow"
-        ]
-      },
-      "LogAnonymizationType": {
-        "type": "string",
-        "description": "0 = OneDigit<br/>1 = Drop",
-        "x-enumNames": [
-          "OneDigit",
-          "Drop"
-        ],
-        "enum": [
-          "OneDigit",
-          "Drop"
-        ],
-        "x-enum-varnames": [
-          "OneDigit",
-          "Drop"
-        ],
-        "example": "OneDigit"
-      },
-      "SearchResultItemModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Type": {
-            "type": "string",
-            "nullable": true,
-            "description": "The type of the search result item. Possible values: cdn, storage, dns, script, stream"
-          },
-          "Id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The ID of the search result item linked object"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "description": "The name of the object found"
-          }
-        },
-        "required": [
-          "Id"
-        ]
-      },
-      "DnsRecordEnviromentalVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Value": {
+          "ContentType": {
             "type": "string",
             "nullable": true
           }
         }
       },
-      "TeamMemberModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "nullable": true,
-            "description": "The unique id of the user"
-          },
-          "Email": {
-            "type": "string",
-            "nullable": true,
-            "description": "The email of the user"
-          },
-          "FirstName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The first name of the user"
-          },
-          "LastName": {
-            "type": "string",
-            "nullable": true,
-            "description": "The last name of the user"
-          },
-          "DateJoined": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date when the user joined bunny.net"
-          },
-          "EmailVerified": {
-            "type": "boolean",
-            "description": "Determines if the account's email has been successfuly verified"
-          },
-          "Roles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "Determines the roles that the user belongs to"
-          },
-          "TwoFactorAuthenticationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the user has active 2FA configuration"
-          },
-          "IsMainUser": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "DateJoined",
-          "EmailVerified",
-          "TwoFactorAuthenticationEnabled",
-          "IsMainUser"
-        ]
-      },
-      "PaginationListModelOfEdgeScriptReleaseModel": {
-        "type": "object",
-        "required": [
-          "CurrentPage",
-          "TotalItems",
-          "HasMoreItems"
-        ],
-        "properties": {
-          "Items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EdgeScriptReleaseModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
-      "PermaCacheType": {
+      "DrmVersion": {
         "type": "string",
-        "description": "0 = Automatic<br/>1 = Manual",
+        "description": "0 = Basic<br/>1 = Enterprise<br/>2 = BasicV2",
         "x-enumNames": [
-          "Automatic",
-          "Manual"
+          "Basic",
+          "Enterprise",
+          "BasicV2"
         ],
         "enum": [
-          "Automatic",
-          "Manual"
+          "Basic",
+          "Enterprise",
+          "BasicV2"
         ],
         "x-enum-varnames": [
-          "Automatic",
-          "Manual"
+          "Basic",
+          "Enterprise",
+          "BasicV2"
         ],
-        "example": "Automatic"
+        "example": "Basic"
       },
-      "DnsZoneDiscoveredRecordType": {
+      "UserModelBillingType": {
         "type": "string",
-        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>12 = NS<br/>13 = Svcb<br/>14 = HTTPS<br/>15 = TLSA<br/>16 = SOA",
+        "description": "0 = FreeTrial<br/>1 = PayAsYouGo<br/>2 = PostPaidPayAsYouGo<br/>3 = MonthlyPlan",
         "x-enumNames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
         ],
         "enum": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
         ],
         "x-enum-varnames": [
-          "A",
-          "AAAA",
-          "CNAME",
-          "TXT",
-          "MX",
-          "SRV",
-          "CAA",
-          "PTR",
-          "NS",
-          "Svcb",
-          "HTTPS",
-          "TLSA",
-          "SOA"
+          "FreeTrial",
+          "PayAsYouGo",
+          "PostPaidPayAsYouGo",
+          "MonthlyPlan"
         ],
-        "example": "A"
-      },
-      "EdgeScriptReleaseStatus": {
-        "type": "string",
-        "description": "0 = Archived<br/>1 = Live",
-        "x-enumNames": [
-          "Archived",
-          "Live"
-        ],
-        "enum": [
-          "Archived",
-          "Live"
-        ],
-        "x-enum-varnames": [
-          "Archived",
-          "Live"
-        ],
-        "example": "Archived"
+        "example": "FreeTrial"
       },
       "DnsZoneModel": {
         "type": "object",
@@ -5199,6 +4038,427 @@
           "DnsSecEnabled"
         ]
       },
+      "PricingPackageModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "PricingPackageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "CPUCores": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "MemoryInGB": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "DiskInGB": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerPackagePerMonth": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerCPUUnitPerHour": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerDiskUnit": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerMemoryUnit": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerAnycastIpPerMonth": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PricePerPersistentVolumeGBPerMonth": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "PackageType": {
+            "$ref": "#/components/schemas/PricingPackageType"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "LastUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "required": [
+          "CPUCores",
+          "MemoryInGB",
+          "DiskInGB",
+          "PricePerPackagePerMonth",
+          "PricePerCPUUnitPerHour",
+          "PricePerDiskUnit",
+          "PricePerMemoryUnit",
+          "PricePerAnycastIpPerMonth",
+          "PricePerPersistentVolumeGBPerMonth",
+          "CreatedAt"
+        ]
+      },
+      "ConnectedGithubAccountModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "EdgeScriptReleaseModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Deleted": {
+            "type": "boolean"
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "Note": {
+            "type": "string",
+            "nullable": true
+          },
+          "Author": {
+            "type": "string",
+            "nullable": true
+          },
+          "AuthorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "CommitSha": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EdgeScriptReleaseStatus"
+              }
+            ]
+          },
+          "DateReleased": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DatePublished": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Id",
+          "Deleted",
+          "DateReleased",
+          "DatePublished"
+        ]
+      },
+      "EdgeScriptReleaseStatus": {
+        "type": "string",
+        "description": "0 = Archived<br/>1 = Live",
+        "x-enumNames": [
+          "Archived",
+          "Live"
+        ],
+        "enum": [
+          "Archived",
+          "Live"
+        ],
+        "x-enum-varnames": [
+          "Archived",
+          "Live"
+        ],
+        "example": "Archived"
+      },
+      "UpsertEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Required": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "PullZoneLogFormat": {
+        "type": "string",
+        "description": "0 = Plain<br/>1 = JSON",
+        "x-enumNames": [
+          "Plain",
+          "JSON"
+        ],
+        "enum": [
+          "Plain",
+          "JSON"
+        ],
+        "x-enum-varnames": [
+          "Plain",
+          "JSON"
+        ],
+        "example": "Plain"
+      },
+      "CertificateType": {
+        "type": "string",
+        "description": "0 = FairPlay<br/>1 = Widevine",
+        "x-enumNames": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "enum": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "x-enum-varnames": [
+          "FairPlay",
+          "Widevine"
+        ],
+        "example": "FairPlay"
+      },
+      "DnsRecordTypes": {
+        "type": "string",
+        "description": "0 = A<br/>1 = AAAA<br/>2 = CNAME<br/>3 = TXT<br/>4 = MX<br/>5 = Redirect<br/>6 = Flatten<br/>7 = PullZone<br/>8 = SRV<br/>9 = CAA<br/>10 = PTR<br/>11 = Script<br/>12 = NS<br/>13 = SVCB<br/>14 = HTTPS<br/>15 = TLSA",
+        "x-enumNames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "SVCB",
+          "HTTPS",
+          "TLSA"
+        ],
+        "enum": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "SVCB",
+          "HTTPS",
+          "TLSA"
+        ],
+        "x-enum-varnames": [
+          "A",
+          "AAAA",
+          "CNAME",
+          "TXT",
+          "MX",
+          "Redirect",
+          "Flatten",
+          "PullZone",
+          "SRV",
+          "CAA",
+          "PTR",
+          "Script",
+          "NS",
+          "SVCB",
+          "HTTPS",
+          "TLSA"
+        ],
+        "example": "A"
+      },
+      "UpdateEdgeScriptCodeModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Code": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "StorageZoneTier": {
+        "type": "string",
+        "description": "0 = Standard<br/>1 = Edge",
+        "x-enumNames": [
+          "Standard",
+          "Edge"
+        ],
+        "enum": [
+          "Standard",
+          "Edge"
+        ],
+        "x-enum-varnames": [
+          "Standard",
+          "Edge"
+        ],
+        "example": "Standard"
+      },
+      "EdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
+          },
+          "CurrentReleaseId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "EdgeScriptVariables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptVariableModel"
+            },
+            "nullable": true
+          },
+          "Deleted": {
+            "type": "boolean"
+          },
+          "LinkedPullZones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedPullZone"
+            },
+            "nullable": true
+          },
+          "Integration": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SourceCodeIntegrationModel"
+              }
+            ]
+          },
+          "DefaultHostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "SystemHostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "DeploymentKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "RepositoryId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "IntegrationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "MonthlyCost": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "MonthlyRequestCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "MonthlyCpuTime": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AppleFairPlayDrm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "type": "boolean"
+          },
+          "CertificateId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CertificateExpirationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Provider": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Enabled"
+        ]
+      },
       "BillingSavedPaymentMethod": {
         "type": "object",
         "additionalProperties": false,
@@ -5225,104 +4485,480 @@
           }
         }
       },
-      "ApiKeyModel": {
+      "DnsMonitoringType": {
+        "type": "string",
+        "description": "0 = None<br/>1 = Ping<br/>2 = Http<br/>3 = Monitor",
+        "x-enumNames": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "enum": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "x-enum-varnames": [
+          "None",
+          "Ping",
+          "Http",
+          "Monitor"
+        ],
+        "example": "None"
+      },
+      "PullZoneOptimizerClassModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the optimizer class that will be used in the query string"
+          },
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of settings and values the class will send to the optimizer"
+          }
+        }
+      },
+      "EdgeRuleV2ActionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ActionType": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EdgeRuleV2Model"
+              }
+            ]
+          },
+          "ActionParameter1": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActionParameter2": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActionParameter3": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SourceCodeRepositorySettingsModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "Id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "nullable": true
           },
-          "Key": {
+          "Name": {
             "type": "string",
             "nullable": true
+          },
+          "Private": {
+            "type": "boolean"
+          },
+          "TemplateUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Private"
+        ]
+      },
+      "SimpleStatistics": {
+        "type": "object",
+        "description": "Model definition for SimpleStatistics"
+      },
+      "TeamMemberModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true,
+            "description": "The unique id of the user"
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true,
+            "description": "The email of the user"
+          },
+          "FirstName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The first name of the user"
+          },
+          "LastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The last name of the user"
+          },
+          "DateJoined": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the user joined bunny.net"
+          },
+          "EmailVerified": {
+            "type": "boolean",
+            "description": "Determines if the account's email has been successfuly verified"
           },
           "Roles": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id"
-        ]
-      },
-      "ConnectedGithubAccountModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "Id"
-        ]
-      },
-      "ExecutionPhase": {
-        "type": "string",
-        "description": "0 = Cache<br/>1 = LoadBalancer",
-        "x-enumNames": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "enum": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "x-enum-varnames": [
-          "Cache",
-          "LoadBalancer"
-        ],
-        "example": "Cache"
-      },
-      "StorageZoneS3Type": {
-        "type": "string",
-        "description": "0 = NotSupported<br/>1 = Supported",
-        "x-enumNames": [
-          "NotSupported",
-          "Supported"
-        ],
-        "enum": [
-          "NotSupported",
-          "Supported"
-        ],
-        "x-enum-varnames": [
-          "NotSupported",
-          "Supported"
-        ],
-        "example": "NotSupported"
-      },
-      "UpsertEdgeScriptVariableModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
             "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
+            "description": "Determines the roles that the user belongs to"
           },
-          "Required": {
+          "TwoFactorAuthenticationEnabled": {
             "type": "boolean",
+            "description": "Determines if the user has active 2FA configuration"
+          },
+          "IsMainUser": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DateJoined",
+          "EmailVerified",
+          "TwoFactorAuthenticationEnabled",
+          "IsMainUser"
+        ]
+      },
+      "AffiliateBalanceRecordModel": {
+        "type": "object",
+        "description": "Model definition for AffiliateBalanceRecordModel"
+      },
+      "DnsMonitoringStatus": {
+        "type": "string",
+        "description": "0 = Unknown<br/>1 = Online<br/>2 = Offline",
+        "x-enumNames": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "enum": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "x-enum-varnames": [
+          "Unknown",
+          "Online",
+          "Offline"
+        ],
+        "example": "Unknown"
+      },
+      "EdgeRuleV2Model": {
+        "type": "object",
+        "properties": {
+          "Guid": {
+            "type": "string",
+            "description": "The unique GUID of the edge rule"
+          },
+          "ActionType": {
+            "description": "The action type of the edge rule",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EdgeRuleActionType"
+              }
+            ]
+          },
+          "ActionParameter1": {
+            "type": "string",
+            "description": "The Action parameter 1. The value depends on other parameters of the edge rule."
+          },
+          "ActionParameter2": {
+            "type": "string",
+            "description": "The Action parameter 2. The value depends on other parameters of the edge rule."
+          },
+          "ActionParameter3": {
+            "type": "string",
+            "description": "The Action parameter 3. The value depends on other parameters of the edge rule."
+          },
+          "Triggers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Trigger"
+            },
+            "description": "The list of trigger that trigger the edge rule"
+          },
+          "ExtraActions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeRuleV2ActionModel"
+            },
+            "description": "Additional actions to be performed"
+          },
+          "TriggerMatchingType": {
+            "description": "The trigger matching type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PatternMatchingTypes"
+              }
+            ]
+          },
+          "Description": {
+            "type": "string",
+            "description": "The description of the edge rule"
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Determines if the edge rule is currently enabled or not"
+          },
+          "OrderIndex": {
+            "type": "integer",
+            "description": "The index of the edge rule in the list of execution priority"
+          }
+        },
+        "description": "Model definition for EdgeRuleV2Model"
+      },
+      "AbuseCaseUrlModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Url": {
+            "type": "string",
             "nullable": true
           },
-          "DefaultValue": {
+          "Status": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AbuseUrlStatus"
+              }
+            ]
+          }
+        }
+      },
+      "static": {
+        "type": "object",
+        "description": "Model definition for static"
+      },
+      "AbuseUrlStatus": {
+        "type": "string",
+        "description": "0 = NotResolved<br/>1 = Resolved<br/>2 = Unknown",
+        "x-enumNames": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "enum": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "x-enum-varnames": [
+          "NotResolved",
+          "Resolved",
+          "Unknown"
+        ],
+        "example": "NotResolved"
+      },
+      "PullZoneLogForwarderProtocolType": {
+        "type": "string",
+        "description": "0 = UDP<br/>1 = TCP<br/>2 = TCPEncrypted<br/>3 = DataDog",
+        "x-enumNames": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "enum": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "x-enum-varnames": [
+          "UDP",
+          "TCP",
+          "TCPEncrypted",
+          "DataDog"
+        ],
+        "example": "UDP"
+      },
+      "PaginationListModelOfEdgeScriptReleaseModel": {
+        "type": "object",
+        "required": [
+          "CurrentPage",
+          "TotalItems",
+          "HasMoreItems"
+        ],
+        "properties": {
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptReleaseModel"
+            }
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TotalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasMoreItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EdgeScriptCodeModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastModified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "LastModified"
+        ]
+      },
+      "EdgeScriptUpdateSecretModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Secret": {
             "type": "string",
             "nullable": true,
             "maxLength": 4096
           }
+        }
+      },
+      "PreloadingScreenTheme": {
+        "type": "string",
+        "description": "0 = Light<br/>1 = Dark",
+        "x-enumNames": [
+          "Light",
+          "Dark"
+        ],
+        "enum": [
+          "Light",
+          "Dark"
+        ],
+        "x-enum-varnames": [
+          "Light",
+          "Dark"
+        ],
+        "example": "Light"
+      },
+      "GeoDnsLocationModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "CountryCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "The ISO country code of the location"
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the country of the location"
+          },
+          "ASN": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ASN of the IP organization"
+          },
+          "OrganizationName": {
+            "type": "string",
+            "nullable": true,
+            "description": "The mame of the organization that owns the IP"
+          },
+          "City": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the city of the location"
+          }
         },
         "required": [
-          "Name"
-        ]
+          "ASN"
+        ],
+        "description": "Billing model contains data summary about the user's billing"
+      },
+      "LinkedPullZone": {
+        "type": "object",
+        "description": "Model definition for LinkedPullZone"
+      },
+      "ApiErrorData": {
+        "type": "object",
+        "properties": {
+          "ErrorKey": {
+            "type": "string"
+          },
+          "Field": {
+            "type": "string"
+          },
+          "Message": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          },
+          "Required": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "RtmpOutput": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Endpoint": {
+            "type": "string",
+            "nullable": true,
+            "description": "The RTMP endpoint URL for the output"
+          },
+          "StreamKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "The RTMP stream key for the output"
+          }
+        }
+      },
+      "LogOrdering": {
+        "type": "string",
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "x-enumNames": [
+          "Ascending",
+          "Descending"
+        ],
+        "description": "0 = Ascending<br/>1 = Descending",
+        "example": "Ascending"
       },
       "PullZoneModel": {
         "type": "object",
@@ -6259,42 +5895,35 @@
           "MaxWebSocketConnections"
         ]
       },
-      "CouponStatus": {
+      "DnsSmartRoutingType": {
         "type": "string",
-        "description": "0 = Active<br/>1 = Expired<br/>2 = FullyUsed",
+        "description": "0 = None<br/>1 = Latency<br/>2 = Geolocation",
         "x-enumNames": [
-          "Active",
-          "Expired",
-          "FullyUsed"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
         "enum": [
-          "Active",
-          "Expired",
-          "FullyUsed"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
         "x-enum-varnames": [
-          "Active",
-          "Expired",
-          "FullyUsed"
+          "None",
+          "Latency",
+          "Geolocation"
         ],
-        "example": "Active"
+        "example": "None"
       },
-      "StorageZoneTier": {
-        "type": "string",
-        "description": "0 = Standard<br/>1 = Edge",
-        "x-enumNames": [
-          "Standard",
-          "Edge"
-        ],
-        "enum": [
-          "Standard",
-          "Edge"
-        ],
-        "x-enum-varnames": [
-          "Standard",
-          "Edge"
-        ],
-        "example": "Standard"
+      "PublishEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Note": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "PatternMatchingTypes": {
         "type": "integer",
@@ -6315,165 +5944,143 @@
         ],
         "description": "0 = MatchAny<br/>1 = MatchAll<br/>2 = MatchNone"
       },
-      "LinkedPullZone": {
-        "type": "object",
-        "description": "Model definition for LinkedPullZone"
-      },
-      "static": {
-        "type": "object",
-        "description": "Model definition for static"
-      },
-      "AddDnsRecordModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DnsRecordTypes"
-              }
-            ],
-            "nullable": true
-          },
-          "Ttl": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Value": {
-            "type": "string",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "Weight": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Priority": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "Flags": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 255,
-            "nullable": true
-          },
-          "Tag": {
-            "type": "string",
-            "nullable": true
-          },
-          "Port": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "PullZoneId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "ScriptId": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "Accelerated": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "MonitorType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DnsMonitoringType"
-              }
-            ],
-            "nullable": true
-          },
-          "GeolocationLatitude": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "GeolocationLongitude": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "LatencyZone": {
-            "type": "string",
-            "nullable": true
-          },
-          "SmartRoutingType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DnsSmartRoutingType"
-              }
-            ],
-            "nullable": true
-          },
-          "Disabled": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "EnviromentalVariables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DnsRecordEnviromentalVariableModel"
-            },
-            "nullable": true
-          },
-          "Comment": {
-            "type": "string",
-            "nullable": true
-          },
-          "AutoSslIssuance": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "EdgeScriptUpsertSecretModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 256,
-            "minLength": 1
-          },
-          "Secret": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 4096
-          }
-        }
-      },
-      "ShieldDDosProtectionType": {
+      "EncodingTier": {
         "type": "string",
-        "description": "0 = DetectOnly<br/>1 = ActiveStandard<br/>2 = ActiveAggressive",
+        "description": "0 = Free<br/>1 = Premium",
         "x-enumNames": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
+          "Free",
+          "Premium"
         ],
         "enum": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
+          "Free",
+          "Premium"
         ],
         "x-enum-varnames": [
-          "DetectOnly",
-          "ActiveStandard",
-          "ActiveAggressive"
+          "Free",
+          "Premium"
         ],
-        "example": "DetectOnly"
+        "example": "Free"
+      },
+      "PermaCacheType": {
+        "type": "string",
+        "description": "0 = Automatic<br/>1 = Manual",
+        "x-enumNames": [
+          "Automatic",
+          "Manual"
+        ],
+        "enum": [
+          "Automatic",
+          "Manual"
+        ],
+        "x-enum-varnames": [
+          "Automatic",
+          "Manual"
+        ],
+        "example": "Automatic"
+      },
+      "DrmCertificateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "PrivateKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "SecretKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "Certificate": {
+            "type": "string",
+            "nullable": true
+          },
+          "Provider": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CertificateType": {
+            "$ref": "#/components/schemas/CertificateType"
+          },
+          "DateModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Id",
+          "ExpirationDate",
+          "DateModified",
+          "DateCreated"
+        ]
+      },
+      "UserModelCategoryType": {
+        "type": "string",
+        "description": "0 = Normal<br/>1 = Internal<br/>2 = Sponsored",
+        "x-enumNames": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "enum": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "x-enum-varnames": [
+          "Normal",
+          "Internal",
+          "Sponsored"
+        ],
+        "example": "Normal"
+      },
+      "TriggerTypes": {
+        "type": "string",
+        "enum": [
+          "Url",
+          "RequestHeader",
+          "ResponseHeader",
+          "UrlExtension",
+          "CountryCode",
+          "RemoteIP",
+          "UrlQueryString",
+          "RandomChance",
+          "StatusCode",
+          "RequestMethod",
+          "CookieValue",
+          "CountryStateCode",
+          "OriginRetryAttemptCount",
+          "OriginConnectionError"
+        ],
+        "x-enumNames": [
+          "Url",
+          "RequestHeader",
+          "ResponseHeader",
+          "UrlExtension",
+          "CountryCode",
+          "RemoteIP",
+          "UrlQueryString",
+          "RandomChance",
+          "StatusCode",
+          "RequestMethod",
+          "CookieValue",
+          "CountryStateCode",
+          "OriginRetryAttemptCount",
+          "OriginConnectionError"
+        ],
+        "description": "0 = Url\n1 = RequestHeader\n2 = ResponseHeader\n3 = UrlExtension\n4 = CountryCode\n5 = RemoteIP\n6 = UrlQueryString\n7 = RandomChance\n8 = StatusCode\n9 = RequestMethod\n10 = CookieValue\n11 = CountryStateCode\n12 = OriginRetryAttemptCount\n13 = OriginConnectionError",
+        "example": "Url"
       },
       "AbuseCaseModel": {
         "type": "object",
@@ -6540,61 +6147,588 @@
           "PullZoneId"
         ]
       },
-      "NotificationType": {
-        "type": "string",
-        "description": "0 = Info<br/>1 = Warning<br/>2 = Problem",
+      "OptimizerWatermarkPosition": {
+        "type": "integer",
+        "description": "0 = BottomLeft<br/>1 = BottomRight<br/>2 = TopLeft<br/>3 = TopRight<br/>4 = Center<br/>5 = CenterStretch",
         "x-enumNames": [
-          "Info",
-          "Warning",
-          "Problem"
+          "BottomLeft",
+          "BottomRight",
+          "TopLeft",
+          "TopRight",
+          "Center",
+          "CenterStretch"
         ],
         "enum": [
-          "Info",
-          "Warning",
-          "Problem"
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
         ],
         "x-enum-varnames": [
-          "Info",
-          "Warning",
-          "Problem"
-        ],
-        "example": "Info"
+          "BottomLeft",
+          "BottomRight",
+          "TopLeft",
+          "TopRight",
+          "Center",
+          "CenterStretch"
+        ]
       },
-      "StickySessionType": {
+      "AcceleratedStatus": {
         "type": "string",
-        "enum": [
-          "Off",
-          "On"
-        ],
+        "description": "0 = None<br/>1 = Pending<br/>2 = Processing<br/>3 = Completed<br/>4 = Failed",
         "x-enumNames": [
-          "Off",
-          "On"
-        ],
-        "description": "0 = Off<br/>1 = On",
-        "example": "Off"
-      },
-      "PullZoneLogForwarderProtocolType": {
-        "type": "string",
-        "description": "0 = UDP<br/>1 = TCP<br/>2 = TCPEncrypted<br/>3 = DataDog",
-        "x-enumNames": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
+          "None",
+          "Pending",
+          "Processing",
+          "Completed",
+          "Failed"
         ],
         "enum": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
+          "None",
+          "Pending",
+          "Processing",
+          "Completed",
+          "Failed"
         ],
         "x-enum-varnames": [
-          "UDP",
-          "TCP",
-          "TCPEncrypted",
-          "DataDog"
+          "None",
+          "Pending",
+          "Processing",
+          "Completed",
+          "Failed"
         ],
-        "example": "UDP"
+        "example": "None"
+      },
+      "UserAuditLog": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Product": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceOwner": {
+            "type": "string",
+            "nullable": true
+          },
+          "Action": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ActorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Diff": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "Timestamp"
+        ]
+      },
+      "StorageZoneModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the storage zone"
+          },
+          "UserId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The ID of the user that owns the storage zone"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the storage zone"
+          },
+          "Password": {
+            "type": "string",
+            "nullable": true,
+            "description": "The API access key or FTP password"
+          },
+          "DateModified": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the zone was last modified"
+          },
+          "Deleted": {
+            "type": "boolean",
+            "description": "Determines if the zone was deleted or not"
+          },
+          "StorageUsed": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The total amount of storage used by this zone"
+          },
+          "FilesStored": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The total number of files stored by this zone"
+          },
+          "Region": {
+            "type": "string",
+            "nullable": true,
+            "description": "The main region used by the storage zone"
+          },
+          "ReplicationRegions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The replication regions enabled for this storage zone"
+          },
+          "PullZones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PullZoneModel"
+            },
+            "nullable": true,
+            "description": "The list of pull zones connected to this storage zone"
+          },
+          "ReadOnlyPassword": {
+            "type": "string",
+            "nullable": true,
+            "description": "The read-only API access key or FTP password"
+          },
+          "Rewrite404To200": {
+            "type": "boolean",
+            "description": "Determines if the storage zone will rewrite 404 status codes to 200 status codes"
+          },
+          "Custom404FilePath": {
+            "type": "string",
+            "nullable": true,
+            "description": "The custom 404 error path that will be returned in case of a missing file."
+          },
+          "StorageHostname": {
+            "type": "string",
+            "nullable": true,
+            "description": "Determines the storage hostname for this zone"
+          },
+          "ZoneTier": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StorageZoneTier"
+              }
+            ],
+            "description": "Determines the storage zone tier that is storing the data"
+          },
+          "ReplicationChangeInProgress": {
+            "type": "boolean",
+            "description": "Determines if the storage zone is currently enabling a new replication region"
+          },
+          "PriceOverride": {
+            "type": "number",
+            "format": "decimal",
+            "description": "The custom price override for this zone. Unit is $/TB/month."
+          },
+          "Discount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The Storage Zone specific pricing discount."
+          },
+          "StorageZoneType": {
+            "description": "The Storage Zone S3 support type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StorageZoneS3Type"
+              }
+            ]
+          }
+        },
+        "required": [
+          "Id",
+          "DateModified",
+          "Deleted",
+          "StorageUsed",
+          "FilesStored",
+          "Rewrite404To200",
+          "ReplicationChangeInProgress",
+          "PriceOverride",
+          "Discount"
+        ]
+      },
+      "BillingRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the billing record"
+          },
+          "PaymentId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The external ID of the payment"
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double",
+            "description": "The amount linked to the record model"
+          },
+          "Payer": {
+            "type": "string",
+            "nullable": true,
+            "description": "The payer reference that sent the payment"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the billing record was created"
+          },
+          "Type": {
+            "description": "The type of the billing record. PayPal = 0, Crypto = 1, CreditCard = 2, MonthlyUsage = 3, Refund = 4, CouponCode = 5, BankTransfer = 6, AffiliateCredits = 7",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BillingRecordType"
+              }
+            ]
+          },
+          "InvoiceAvailable": {
+            "type": "boolean",
+            "description": "Determines if an invoice is available"
+          },
+          "DocumentDownloadUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The URL where the invoice or document can be downloaded. Null if this is not available."
+          },
+          "DetailedDocumentDownloadUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "The URL where the document with product usage breakdown can be downloaded. Null if this is not available."
+          }
+        },
+        "required": [
+          "Id",
+          "Amount",
+          "Timestamp",
+          "InvoiceAvailable"
+        ]
+      },
+      "HostnameModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The unique ID of the hostname"
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true,
+            "description": "The hostname value for the domain name"
+          },
+          "ForceSSL": {
+            "type": "boolean",
+            "description": "Determines if the Force SSL feature is enabled"
+          },
+          "IsSystemHostname": {
+            "type": "boolean",
+            "description": "Determines if this is a system hostname controlled by bunny.net"
+          },
+          "IsManagedHostname": {
+            "type": "boolean",
+            "description": "Determines if this is a managed hostname controlled by bunny.net"
+          },
+          "HasCertificate": {
+            "type": "boolean",
+            "description": "Determines if the hostname has an SSL certificate configured"
+          },
+          "Certificate": {
+            "type": "string",
+            "nullable": true,
+            "description": "Contains the Base64Url encoded certificate for the hostname"
+          },
+          "CertificateKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "Contains the Base64Url encoded certificate key for the hostname"
+          },
+          "CertificateKeyType": {
+            "description": "The private key type to use for automatic certificates",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrivateKeyType"
+              }
+            ]
+          },
+          "CertificateProvisionType": {
+            "description": "The provisioned certificate type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CertificateProvisionType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "Id",
+          "ForceSSL",
+          "IsSystemHostname",
+          "IsManagedHostname",
+          "HasCertificate"
+        ]
+      },
+      "OptimizerClassModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "description": "The name of the optimizer class that will be used in the query string"
+          },
+          "Properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "The list of settings and values the class will send to the optimizer"
+          }
+        }
+      },
+      "PullZoneConnectionType": {
+        "type": "string",
+        "description": "0 = CDN<br/>1 = PermaCache<br/>2 = LogStorage",
+        "x-enumNames": [
+          "CDN",
+          "PermaCache",
+          "LogStorage"
+        ],
+        "enum": [
+          "CDN",
+          "PermaCache",
+          "LogStorage"
+        ],
+        "x-enum-varnames": [
+          "CDN",
+          "PermaCache",
+          "LogStorage"
+        ],
+        "example": "CDN"
+      },
+      "CouponStatus": {
+        "type": "string",
+        "description": "0 = Active<br/>1 = Expired<br/>2 = FullyUsed",
+        "x-enumNames": [
+          "Active",
+          "Expired",
+          "FullyUsed"
+        ],
+        "enum": [
+          "Active",
+          "Expired",
+          "FullyUsed"
+        ],
+        "x-enum-varnames": [
+          "Active",
+          "Expired",
+          "FullyUsed"
+        ],
+        "example": "Active"
+      },
+      "UpdateEdgeScriptModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 100
+          },
+          "ScriptType": {
+            "$ref": "#/components/schemas/EdgeScriptTypes"
+          }
+        }
+      },
+      "GithubRepositoryBranchModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Protected": {
+            "type": "boolean"
+          },
+          "Default": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Protected",
+          "Default"
+        ]
+      },
+      "EdgeScriptTypes": {
+        "type": "string",
+        "description": "0 = DNS<br/>1 = CDN<br/>2 = Middleware",
+        "x-enumNames": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "enum": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "x-enum-varnames": [
+          "DNS",
+          "CDN",
+          "Middleware"
+        ],
+        "example": "DNS"
+      },
+      "ServerZoneResultsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ServerZoneId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Results": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ServerZoneStatisticsModel"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "ServerZoneId"
+        ]
+      },
+      "CertificateProvisionType": {
+        "type": "string",
+        "description": "0 = Unknown<br/>1 = Http01<br/>2 = Dns01<br/>3 = Custom",
+        "x-enumNames": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "enum": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "x-enum-varnames": [
+          "Unknown",
+          "Http01",
+          "Dns01",
+          "Custom"
+        ],
+        "example": "Unknown"
+      },
+      "AddEdgeScriptVariableModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "Required": {
+            "type": "boolean"
+          },
+          "DefaultValue": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "Name",
+          "Required"
+        ]
+      },
+      "PaginationListModelOfEdgeScriptModel": {
+        "type": "object",
+        "required": [
+          "CurrentPage",
+          "TotalItems",
+          "HasMoreItems"
+        ],
+        "properties": {
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeScriptModel"
+            }
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TotalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasMoreItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DnsRecordGeoLocationInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "Latitude",
+          "Longitude"
+        ]
       }
     },
     "securitySchemes": {
