@@ -17,289 +17,12 @@
       "description": "bunny.net API Server"
     }
   ],
+  "security": [
+    {
+      "AccessKey": []
+    }
+  ],
   "paths": {
-    "/auth/jwt/2fa": {
-      "post": {
-        "tags": [
-          "AuthPublic"
-        ],
-        "operationId": "AuthPublic_AuthJwt2fa",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/JwtTwoFactorModel"
-                  }
-                ]
-              }
-            }
-          },
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "The login request was successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JwtAuthResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The login was not successful"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/auth/jwt/refresh": {
-      "post": {
-        "tags": [
-          "AuthPublic"
-        ],
-        "operationId": "AuthPublic_RefreshJwt",
-        "responses": {
-          "200": {
-            "description": "The token refresh was successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JwtAuthResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The token refresh was not successful"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/billing/payment-request-invoice/{id}/pdf": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Download Payment Request Invoice PDF",
-        "operationId": "BillingPublic_DownloadPaymentRequestInvoicePdf",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/billing/payment/prepare-authorization": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Prepare Payment Authorization",
-        "operationId": "BillingPublic_PaymentsPrepareAuthorization",
-        "responses": {
-          "200": {
-            "description": "The payment authorization details",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentAuthorization"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/billing/coinify/exchangerate": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Get The Coinify BTC exchange rate",
-        "operationId": "BillingPublic_CoinifyExchangeRate",
-        "responses": {
-          "200": {
-            "description": "Get The Coinify BTC exchange rate",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CoinifyExchangeRateModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/billing/coinify/create": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Create Coinify Payment",
-        "operationId": "BillingPublic_CreateCoinifyPayment",
-        "parameters": [
-          {
-            "name": "amount",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "number",
-              "format": "decimal"
-            },
-            "x-position": 1
-          },
-          {
-            "name": "paymentRequestId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
-            },
-            "x-position": 2
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Conify payment request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CoinifyPaymentRequestModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/billing/summary": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Get Billing Summary",
-        "operationId": "BillingPublic_Summary",
-        "responses": {
-          "200": {
-            "description": "Get the billing summary with data report for each Pull Zone",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BillingSummaryItem"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/billing/applycode": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Apply Promo Code",
-        "operationId": "BillingPublic_ApplyCode",
-        "parameters": [
-          {
-            "name": "CouponCode",
-            "in": "query",
-            "required": true,
-            "description": "The coupon code that will be applied",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status model with the result of the code applying",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/country": {
       "get": {
         "tags": [
@@ -326,39 +49,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/coupon-codes/generate": {
-      "post": {
-        "tags": [
-          "CouponCode"
-        ],
-        "operationId": "CouponCode_GenerateCouponCode",
-        "requestBody": {
-          "x-name": "request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GenerateCouponCodeRequest"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
           }
         }
       }
@@ -748,75 +438,6 @@
         }
       }
     },
-    "/dnszone/{zoneId}/records/bulk": {
-      "put": {
-        "tags": [
-          "DNS Zone"
-        ],
-        "summary": "Add Multiple DNS Records",
-        "operationId": "DnsZonePublic_AddRecordsBulk",
-        "parameters": [
-          {
-            "name": "zoneId",
-            "in": "path",
-            "required": true,
-            "description": "The DNS Zone ID to which the records will be added.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "recordModels",
-          "description": "Array of DNS record objects",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/AddDnsRecordModel"
-                }
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "201": {
-            "description": "The DNS records were successfuly added.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DnsZoneModel"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The DNS Zone with the requested ID does not exist."
-          },
-          "400": {
-            "description": "Failed adding the DNS records. Model validation failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/dnszone/{zoneId}/records/{id}": {
       "post": {
         "tags": [
@@ -924,98 +545,6 @@
           },
           "400": {
             "description": "Failed deleting the DNS Record. See error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/dnszone/{id}/recheckdns": {
-      "post": {
-        "tags": [
-          "DNS Zone"
-        ],
-        "summary": "Recheck DNS Configuration",
-        "operationId": "DnsZonePublic_RecheckDNS",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The DNS Zone ID that will be checked",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The DNS Zone object that is being rechecked."
-          },
-          "404": {
-            "description": "The DNS Zone with the requested ID does not exist."
-          },
-          "400": {
-            "description": "Failed deleting the DNS Zone. See error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/dnszone/{id}/dismissnameservercheck": {
-      "post": {
-        "tags": [
-          "DNS Zone"
-        ],
-        "summary": "Dismiss DNS Configuration Notice",
-        "operationId": "DnsZonePublic_DismissNameserverCheck",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Dismisses the nameserver check",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The DNS Zone object that is being rechecked."
-          },
-          "404": {
-            "description": "The DNS Zone with the requested ID does not exist."
-          },
-          "400": {
-            "description": "Failed deleting the DNS Zone. See error response.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2004,56 +1533,6 @@
         }
       }
     },
-    "/pullzone/validateoriginurl": {
-      "post": {
-        "tags": [
-          "Pull Zone"
-        ],
-        "summary": "Validate Origin URL pull zone",
-        "operationId": "PullZonePublic_ValidateOriginUrl",
-        "requestBody": {
-          "x-name": "request",
-          "description": "The Origin URL pull zone validation request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OriginUrlValidationRequestModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "Returns the validation result for the Origin URL pull zone",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OriginUrlValidationResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/pullzone/{id}/addCertificate": {
       "post": {
         "tags": [
@@ -2339,65 +1818,6 @@
         }
       }
     },
-    "/pullzone/{id}/syncStaticHtml": {
-      "post": {
-        "tags": [
-          "Pull Zone"
-        ],
-        "summary": "Sync PullZone Optimizer Static HTML",
-        "operationId": "PullZonePublic_SyncPullZoneStaticHtml",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the requested Pull Zone",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "model",
-          "description": "Request model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PullZoneStaticHtmlSync"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "Static HTML worker was successfully triggered"
-          },
-          "404": {
-            "description": "The Pull Zone with the requested ID was not found"
-          },
-          "400": {
-            "description": "Failed to trigger static html worker sync",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/pullzone/{id}/resetSecurityKey": {
       "post": {
         "tags": [
@@ -2456,7 +1876,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIPullZones",
@@ -2883,87 +2303,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "Purge"
-        ],
-        "summary": "Purge URL",
-        "operationId": "PurgePublic_Index",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "required": true,
-            "description": "The URL that will be purged from cache.",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "headerName",
-            "in": "query",
-            "description": "(Optional) The header name that will be sent as part of the purge request. Only use this with advanced caching options.",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 2
-          },
-          {
-            "name": "headerValue",
-            "in": "query",
-            "description": "(Optional) The header value that will be sent as part of the purge request. Only use this with advanced caching options.",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 3
-          },
-          {
-            "name": "async",
-            "in": "query",
-            "description": "(Optional) Determines if the call should wait for the purge logic to complete",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "x-position": 4
-          },
-          {
-            "name": "exactPath",
-            "in": "query",
-            "description": "(Optional) When true and the URL ends with '/', purges only the exact path without adding a wildcard suffix. Only applies when the pull zone has IgnoreQueryStrings disabled.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "x-position": 5
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The purge request was successfully processed."
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "400": {
-            "description": "Purging failed. The URL was not a valid Bunny CDN URL.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       }
     },
     "/region": {
@@ -3300,52 +2639,6 @@
         }
       }
     },
-    "/storagezone/{id}/connections": {
-      "get": {
-        "tags": [
-          "Storage Zone"
-        ],
-        "summary": "Get Storage Zone Connections",
-        "operationId": "StorageZonePublic_Connections",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the Storage Zone that should be returned",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of connections linked to this storage zone",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorageZonePullZoneConnection"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The Storage Zone with the requested ID does not exist"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/storagezone/{id}/resetPassword": {
       "post": {
         "tags": [
@@ -3411,653 +2704,6 @@
           },
           "404": {
             "description": "The Storage Zone with the requested ID does not exist"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/team/member/{userId}": {
-      "delete": {
-        "tags": [
-          "Team"
-        ],
-        "summary": "Delete Team Member",
-        "operationId": "TeamPublic_DeleteTeamMember",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The details for the specified user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfTeamMemberModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Team"
-        ],
-        "summary": "Get Team Member Details",
-        "operationId": "TeamPublic_TeamMemberDetails",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The details for the specified user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfTeamMemberModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Team"
-        ],
-        "summary": "Edit Team Member",
-        "operationId": "TeamPublic_EditTeamMember",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TeamMemberUpdateModel"
-                  }
-                ]
-              }
-            }
-          },
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "The details for the specified user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamMemberModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/notifications": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "List Notifications",
-        "operationId": "UserPublic_NotificationsList",
-        "responses": {
-          "200": {
-            "description": "The list of all the notification for the currently logged in user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/NotificationModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get User Details",
-        "operationId": "UserPublic_Index",
-        "responses": {
-          "200": {
-            "description": "The details about the currently authorized user account",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Update User Details",
-        "operationId": "UserPublic_UpdateUser",
-        "requestBody": {
-          "x-name": "userModel",
-          "description": "The configuration that should be applied to account",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserUpdateModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "204": {
-            "description": "Update successful"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "400": {
-            "description": "Failed updating the user. Model validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/resend-email-confirmation": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Resend Email Confirmation",
-        "operationId": "UserPublic_ResendEmailConfirmation",
-        "responses": {
-          "204": {
-            "description": "The email confirmation was successfuly sent"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/resetApiKey": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Reset API Key",
-        "operationId": "UserPublic_ResetApiKey",
-        "responses": {
-          "204": {
-            "description": "The key was successfuly reset"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/closeaccount/reasons-list": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "List the close account reasons",
-        "operationId": "UserPublic_ListCloseAccountReasons",
-        "responses": {
-          "200": {
-            "description": "The key was successfuly reset",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AccountCloseReason"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed updating the user. Model validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/dpa": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get DPA Details",
-        "operationId": "UserPublic_Dpa",
-        "responses": {
-          "200": {
-            "description": "The DPA details"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/dpa/accept": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Accept DPA",
-        "operationId": "UserPublic_DpaAccept",
-        "responses": {
-          "200": {
-            "description": "The DPA was successfuly accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DpaAcceptResult"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The DPA accept failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DpaAcceptResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/dpa/pdfhtml": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get DPA Details (HTML)",
-        "operationId": "UserPublic_DpaPdfHhtml",
-        "responses": {
-          "200": {
-            "description": "The HTML version of the DPA",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/setNotificationsOpened": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Set Notifications Opened",
-        "operationId": "UserPublic_SetNotificationsOpened",
-        "responses": {
-          "200": {
-            "description": "The notifications were set as opened."
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/whatsnew": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get What's New Items",
-        "operationId": "UserPublic_WhatsNew",
-        "responses": {
-          "200": {
-            "description": "The list of What's new Items for the currently logged in user.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WhatsNewModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/whatsnew/reset": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Reset What's New",
-        "operationId": "UserPublic_WhatsNewReset",
-        "responses": {
-          "200": {
-            "description": "The What's New list was set as opened and the count was reset."
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/2fa/generate-verification": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Generate 2FA Verification",
-        "operationId": "UserPublic_TwoFactorGenerateVerification",
-        "responses": {
-          "200": {
-            "description": "The two factor code details",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/2fa/disable": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Disable 2FA",
-        "operationId": "UserPublic_TwoFactorDisable",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TwoFactorDisableRequestModel"
-                  }
-                ]
-              }
-            }
-          },
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "Two factor authentication was successfuly disabled.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorEnableResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Disabling two factor authentication failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorEnableResultModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/2fa/enable": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Enable 2FA",
-        "operationId": "UserPublic_TwoFactorEnable",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TwoFactorVerifyModel"
-                  }
-                ]
-              }
-            }
-          },
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "Two factor authentication was successfuly enabled.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorEnableResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Two factor authentication was not successfuly enabled.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorEnableResultModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/user/2fa/verify": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Verify 2FA Code",
-        "operationId": "UserPublic_TwoFactorVerify",
-        "requestBody": {
-          "x-name": "model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TwoFactorVerifyModel"
-                  }
-                ]
-              }
-            }
-          },
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "Two factor authentication verification was successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorVerifyResultModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Two factor authentication verification was not successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TwoFactorVerifyResultModel"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -4868,7 +3514,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -4932,7 +3578,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -4989,7 +3635,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -5054,7 +3700,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -5111,7 +3757,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -5199,7 +3845,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStream",
@@ -5271,7 +3917,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi"
             ]
@@ -5417,7 +4063,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "Subuser"
@@ -5501,7 +4147,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStatistics",
@@ -5686,7 +4332,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIStatistics",
@@ -5769,7 +4415,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserManage",
@@ -5829,7 +4475,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "AccessKey": []
           },
           {
             "bearer": []
@@ -5875,7 +4521,7 @@
         },
         "security": [
           {
-            "apiKey": []
+            "AccessKey": []
           },
           {
             "bearer": []
@@ -5925,7 +4571,7 @@
         "deprecated": true,
         "security": [
           {
-            "apiKey": []
+            "AccessKey": []
           },
           {
             "bearer": []
@@ -5999,7 +4645,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIDns",
@@ -6065,7 +4711,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIDns",
@@ -6129,7 +4775,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIDns",
@@ -6193,7 +4839,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIDns",
@@ -6255,7 +4901,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi",
               "SubuserAPIDns",
@@ -6275,6 +4921,247 @@
             ]
           }
         ]
+      }
+    },
+    "/billing": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "summary": "Get Billing Details",
+        "description": "Get the billing status details",
+        "operationId": "GetBillingDetailsEndpoint_GetBillingDetails",
+        "responses": {
+          "200": {
+            "description": "Get the billing status details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/payment-request-invoice/{id}/pdf": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "summary": "Download Payment Request Invoice PDF",
+        "operationId": "DownloadPaymentRequestInvoicePdfEndpoint_DownloadPaymentRequestInvoicePdf",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/payment-requests": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "summary": "Get Pending Payment Requests",
+        "operationId": "GetPaymentRequestsEndpoint_GetPaymentRequests",
+        "responses": {
+          "200": {
+            "description": "A list of pending payment requests\nor\nA list of pending payment requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentRequestModel"
+                  }
+                }
+              }
+            },
+            "x-expectedSchemas": [
+              {
+                "description": "A list of pending payment requests",
+                "schema": {
+                  "type": "array",
+                  "nullable": true,
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentRequestModel"
+                  }
+                }
+              },
+              {
+                "description": "A list of pending payment requests",
+                "schema": {
+                  "type": "array",
+                  "nullable": true,
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentRequestModel"
+                  }
+                }
+              }
+            ]
+          },
+          "401": {
+            "description": "The request authorization failed\nor\nThe request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error\nor\nInternal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/summary/{billingRecordId}/pdf": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "summary": "Get Billing Summary Document",
+        "operationId": "BillingSummaryPublic_GetBillingSummaryPdf",
+        "parameters": [
+          {
+            "name": "billingRecordId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The PDF version of the summary"
+          },
+          "404": {
+            "description": "The billing record was not found or was not the correct type"
+          },
+          "403": {
+            "description": "The request authorization failed"
+          },
+          "503": {
+            "description": "The service is currently unavailable"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/billing/summary": {
+      "get": {
+        "tags": [
+          "GetBillingSummaryEndpoint"
+        ],
+        "summary": "Get Billing Summary",
+        "operationId": "GetBillingSummaryEndpoint_GetSummaryEndpoint",
+        "responses": {
+          "200": {
+            "description": "Get the billing summary with data report for each Pull Zone",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingSummaryItem"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/apikey": {
@@ -6330,7 +5217,7 @@
         },
         "security": [
           {
-            "apiKey": [
+            "AccessKey": [
               "User",
               "UserApi"
             ]
@@ -6343,94 +5230,56 @@
           }
         ]
       }
+    },
+    "/billing/affiliate": {
+      "get": {
+        "tags": [
+          "Affiliate",
+          "Billing"
+        ],
+        "summary": "Get affiliate details",
+        "operationId": "GetAffiliateDetailsEndpoint_AffiliateDetails",
+        "responses": {
+          "200": {
+            "description": "Get the affiliate details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingAffiliateDetailsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ]
+      }
     }
   },
   "components": {
     "schemas": {
-      "JwtAuthResultModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Token": {
-            "type": "string",
-            "nullable": true
-          },
-          "Message": {
-            "type": "string",
-            "nullable": true
-          },
-          "AuthStatus": {
-            "$ref": "#/components/schemas/AuthStatus"
-          }
-        }
-      },
-      "AuthStatus": {
-        "type": "integer",
-        "description": "0 = Failure\n1 = Authenticated\n2 = TwoFactorRequired\n3 = LockedOut",
-        "x-enumNames": [
-          "Failure",
-          "Authenticated",
-          "TwoFactorRequired",
-          "LockedOut"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      "JwtTwoFactorModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "Code"
-        ],
-        "properties": {
-          "Code": {
-            "type": "string",
-            "minLength": 1
-          }
-        }
-      },
-      "PaymentAuthorization": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "AuthorizationKey": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CoinifyExchangeRateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ExchangeRate": {
-            "type": "number",
-            "description": "The current exchange rate from Coinify ",
-            "format": "double"
-          }
-        }
-      },
-      "CoinifyPaymentRequestModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Success": {
-            "type": "boolean"
-          },
-          "PaymentUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "Message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
       "BillingSummaryItem": {
         "type": "object",
         "additionalProperties": false,
@@ -6503,66 +5352,6 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "GenerateCouponCodeRequest": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "CouponCodeFormat",
-          "CreditAmount",
-          "ExpiryDate"
-        ],
-        "properties": {
-          "CouponCodeFormat": {
-            "$ref": "#/components/schemas/CouponCodeFormat"
-          },
-          "CreditAmount": {
-            "type": "number",
-            "format": "double",
-            "maximum": 1000.0,
-            "minimum": 0.01
-          },
-          "ExpiryDate": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1
-          },
-          "MaxUses": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "IsTimeLimited": {
-            "type": "boolean"
-          },
-          "TimeLimitedDays": {
-            "type": "integer",
-            "format": "int32",
-            "maximum": 365.0,
-            "minimum": 1.0,
-            "nullable": true
-          }
-        }
-      },
-      "CouponCodeFormat": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "Prefix"
-        ],
-        "properties": {
-          "Prefix": {
-            "type": "string",
-            "maxLength": 32,
-            "minLength": 1
-          },
-          "RandomPartLength": {
-            "type": "integer",
-            "format": "int32",
-            "maximum": 64.0,
-            "minimum": 6.0
           }
         }
       },
@@ -9719,30 +8508,6 @@
           }
         }
       },
-      "OriginUrlValidationResultModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Success": {
-            "type": "boolean",
-            "description": "Returns true if the validation was successful"
-          }
-        }
-      },
-      "OriginUrlValidationRequestModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "OriginUrl"
-        ],
-        "properties": {
-          "OriginUrl": {
-            "type": "string",
-            "description": "The origin URL to validate",
-            "minLength": 1
-          }
-        }
-      },
       "PullZoneAddModel": {
         "type": "object",
         "additionalProperties": false,
@@ -10710,17 +9475,6 @@
           }
         }
       },
-      "PullZoneStaticHtmlSync": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Uri": {
-            "type": "string",
-            "description": "URI to purge cache against. Optional",
-            "nullable": true
-          }
-        }
-      },
       "AddAllowedReferrerRequestModel": {
         "type": "object",
         "additionalProperties": false,
@@ -11004,67 +9758,6 @@
           1
         ]
       },
-      "StorageZonePullZoneConnection": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "PullZoneId": {
-            "type": "integer",
-            "description": "The ID of the connected pull zone",
-            "format": "int64"
-          },
-          "PullZoneName": {
-            "type": "string",
-            "description": "The name of the connected pull zone",
-            "nullable": true
-          },
-          "ConnectionType": {
-            "description": "The type of the connection",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/PullZoneConnectionType"
-              }
-            ]
-          },
-          "MonthlyBandwidthUsed": {
-            "type": "number",
-            "description": "The total amount of bandwidth served by this zone this month",
-            "format": "double"
-          },
-          "MainCustomDomain": {
-            "type": "string",
-            "description": "The main custom connected CDN domain",
-            "nullable": true
-          },
-          "Tier": {
-            "description": "The pricing tier of the pull zone",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/PullZoneType"
-              }
-            ]
-          },
-          "MonthlyCharges": {
-            "type": "number",
-            "description": "The total monthly charges incurred by this zone",
-            "format": "double"
-          }
-        }
-      },
-      "PullZoneConnectionType": {
-        "type": "integer",
-        "description": "0 = CDN\n1 = PermaCache\n2 = LogStorage",
-        "x-enumNames": [
-          "CDN",
-          "PermaCache",
-          "LogStorage"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
       "StorageZoneModelAdd": {
         "type": "object",
         "additionalProperties": false,
@@ -11166,678 +9859,6 @@
           "Rewrite404To200": {
             "type": "boolean",
             "description": "Rewrite 404 status code to 200 for URLs without extension",
-            "nullable": true
-          }
-        }
-      },
-      "PaginationListModelOfTeamMemberModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TeamMemberModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
-      "TeamMemberModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "description": "The unique id of the user",
-            "nullable": true
-          },
-          "Email": {
-            "type": "string",
-            "description": "The email of the user",
-            "nullable": true
-          },
-          "FirstName": {
-            "type": "string",
-            "description": "The first name of the user",
-            "nullable": true
-          },
-          "LastName": {
-            "type": "string",
-            "description": "The last name of the user",
-            "nullable": true
-          },
-          "DateJoined": {
-            "type": "string",
-            "description": "The date when the user joined bunny.net",
-            "format": "date-time"
-          },
-          "EmailVerified": {
-            "type": "boolean",
-            "description": "Determines if the account's email has been successfuly verified"
-          },
-          "Roles": {
-            "type": "array",
-            "description": "Determines the roles that the user belongs to",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "TwoFactorAuthenticationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the user has active 2FA configuration"
-          },
-          "IsMainUser": {
-            "type": "boolean"
-          }
-        }
-      },
-      "TeamMemberUpdateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "Email",
-          "FirstName",
-          "LastName",
-          "Roles"
-        ],
-        "properties": {
-          "Email": {
-            "type": "string",
-            "description": "The email of the user",
-            "format": "email",
-            "minLength": 1
-          },
-          "FirstName": {
-            "type": "string",
-            "description": "The first name of the user",
-            "minLength": 1
-          },
-          "LastName": {
-            "type": "string",
-            "description": "The last name of the user",
-            "minLength": 1
-          },
-          "Password": {
-            "type": "string",
-            "description": "The password of the user that will be created",
-            "maxLength": 128,
-            "nullable": true
-          },
-          "Roles": {
-            "type": "array",
-            "description": "Determines the roles that the user belongs to",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "NotificationModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "description": "The unique ID of the notification",
-            "format": "int64"
-          },
-          "Opened": {
-            "type": "boolean",
-            "description": "Determines if the notification has already been opened"
-          },
-          "Title": {
-            "type": "string",
-            "description": "The title of the notification",
-            "nullable": true
-          },
-          "Message": {
-            "type": "string",
-            "description": "The message of the notification",
-            "nullable": true
-          },
-          "Url": {
-            "type": "string",
-            "description": "The URL where the notification is linking to",
-            "nullable": true
-          },
-          "Type": {
-            "description": "The type of the notification",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/NotificationType"
-              }
-            ]
-          },
-          "Timestamp": {
-            "type": "string",
-            "description": "The timestamp when the notification was created",
-            "format": "date-time"
-          },
-          "DateTimeOpened": {
-            "type": "string",
-            "description": "The date when the notification was opened",
-            "format": "date-time"
-          }
-        }
-      },
-      "NotificationType": {
-        "type": "integer",
-        "description": "0 = Info\n1 = Warning\n2 = Problem",
-        "x-enumNames": [
-          "Info",
-          "Warning",
-          "Problem"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "UserModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "description": "The Id of the user",
-            "nullable": true
-          },
-          "AccountId": {
-            "type": "string",
-            "description": "User's account owner ID",
-            "nullable": true
-          },
-          "Email": {
-            "type": "string",
-            "description": "The email of the user",
-            "nullable": true
-          },
-          "BillingEmail": {
-            "type": "string",
-            "description": "The email where the invoices and billing messages will be sent",
-            "nullable": true
-          },
-          "DmcaEmail": {
-            "type": "string",
-            "description": "The email where the abuse notifications and DMCA are sent",
-            "nullable": true
-          },
-          "FirstName": {
-            "type": "string",
-            "description": "The first name of the user",
-            "nullable": true
-          },
-          "LastName": {
-            "type": "string",
-            "description": "The last name of the user",
-            "nullable": true
-          },
-          "StreetAddress": {
-            "type": "string",
-            "description": "The street address of the user",
-            "nullable": true
-          },
-          "City": {
-            "type": "string",
-            "description": "The address zip code of the user",
-            "nullable": true
-          },
-          "ZipCode": {
-            "type": "string",
-            "description": "The address zip code of the user",
-            "nullable": true
-          },
-          "Country": {
-            "type": "string",
-            "description": "The Alpha2 country code that the user is from",
-            "nullable": true
-          },
-          "CompanyName": {
-            "type": "string",
-            "description": "The company name billing detail of the account",
-            "nullable": true
-          },
-          "VATNumber": {
-            "type": "string",
-            "description": "The billing VAT number of the account",
-            "nullable": true
-          },
-          "ReceiveNotificationEmails": {
-            "type": "boolean",
-            "description": "Determines if the account should receive notification emails from bunny.net"
-          },
-          "ReceivePromotionalEmails": {
-            "type": "boolean",
-            "description": "Determines if the account should receive promotional emails from bunny.net"
-          },
-          "Balance": {
-            "type": "number",
-            "description": "The remaining balance on the user's account",
-            "format": "double"
-          },
-          "TrialBalance": {
-            "type": "number",
-            "description": "The remaining trial balance on the user's account",
-            "format": "decimal"
-          },
-          "CardVerified": {
-            "type": "boolean",
-            "description": "Determines whether the user has verified card linked"
-          },
-          "BillingFreeUntilDate": {
-            "type": "string",
-            "description": "The end date of the account's free trial. If this is in the past, the free trial has expired.",
-            "format": "date-time"
-          },
-          "FreeTrialExtendedDate": {
-            "type": "string",
-            "description": "The date at which the free trial was extended. Null of it wasn't extended.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "DateJoined": {
-            "type": "string",
-            "description": "The date when the user joined bunny.net",
-            "format": "date-time"
-          },
-          "TrialBandwidthLimit": {
-            "type": "integer",
-            "description": "The total free trial bandwidth limit for this account",
-            "format": "int64"
-          },
-          "TotalBandwidthUsed": {
-            "type": "integer",
-            "description": "The total bandwidth used by the account.",
-            "format": "int64"
-          },
-          "TwoFactorAuthenticationEnabled": {
-            "type": "boolean",
-            "description": "Determines if the account has 2FA enabled"
-          },
-          "EmailVerified": {
-            "type": "boolean",
-            "description": "Determines if the account's email has been successfuly verified"
-          },
-          "UnreadSupportTicketCount": {
-            "type": "integer",
-            "description": "Returns the number of unead tickets on the user's account",
-            "format": "int32"
-          },
-          "DpaAccepted": {
-            "type": "boolean",
-            "description": "Determines if the DPA was accepted by the user or not"
-          },
-          "DpaVersionAccepted": {
-            "type": "integer",
-            "description": "Determines which version of the DPA was accepted",
-            "format": "int32"
-          },
-          "DpaDateAccepted": {
-            "type": "string",
-            "description": "Determines the date on which the DPA was accepted",
-            "format": "date-time"
-          },
-          "Roles": {
-            "type": "array",
-            "description": "Determines the roles that the user belongs to",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "Suspended": {
-            "type": "boolean",
-            "description": "Determines if the user's account is suspended"
-          },
-          "EnabledPaymentTypes": {
-            "type": "array",
-            "description": "Contains the list of available payment types for this account",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "PaymentsDisabled": {
-            "type": "boolean",
-            "description": "Determines if the payments are disabled on this account"
-          },
-          "AccountDisabled": {
-            "type": "boolean",
-            "description": "Determines if account is disabled"
-          },
-          "FeatureFlags": {
-            "type": "array",
-            "description": "The list of features that the user has enabled",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "BillingType": {
-            "description": "The current billing type of the user",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/UserModelBillingType"
-              }
-            ]
-          },
-          "HasCompleteBillingProfile": {
-            "type": "boolean",
-            "description": "Determines whether the user has all required billing info filled in their profile"
-          },
-          "IsSsoAccount": {
-            "type": "boolean",
-            "description": "Determines whether the user used a Single Sign On account"
-          },
-          "AffiliateEnabled": {
-            "type": "boolean",
-            "description": "Determines whether the user has the affiliate program enabled"
-          },
-          "CategoryType": {
-            "description": "The current category type of the user",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/UserModelCategoryType"
-              }
-            ]
-          },
-          "TaxOnUsage": {
-            "type": "boolean",
-            "description": "Determines whether taxes are charged on usage instead on top-ups"
-          },
-          "HasPendingEmailChange": {
-            "type": "boolean",
-            "description": "Determines whether the user has a pending email change awaiting verification"
-          },
-          "PendingEmail": {
-            "type": "string",
-            "description": "The email address that is pending verification (null if none)",
-            "nullable": true
-          },
-          "IsReseller": {
-            "type": "boolean",
-            "description": "Determines if the account is a reseller account"
-          },
-          "RequiresProfileUpdate": {
-            "type": "boolean",
-            "description": "Determines if the user profile has to be updated"
-          }
-        }
-      },
-      "UserModelBillingType": {
-        "type": "integer",
-        "description": "0 = FreeTrial\n1 = PayAsYouGo\n2 = PostPaidPayAsYouGo\n3 = MonthlyPlan",
-        "x-enumNames": [
-          "FreeTrial",
-          "PayAsYouGo",
-          "PostPaidPayAsYouGo",
-          "MonthlyPlan"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      "UserModelCategoryType": {
-        "type": "integer",
-        "description": "0 = Normal\n1 = Internal\n2 = Sponsored",
-        "x-enumNames": [
-          "Normal",
-          "Internal",
-          "Sponsored"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "AccountCloseReason": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Description": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "DpaAcceptResult": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Success": {
-            "type": "boolean"
-          },
-          "Message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "UserUpdateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "FirstName": {
-            "type": "string",
-            "description": "(Optional) Sets the first name of the account owner",
-            "maxLength": 30,
-            "nullable": true
-          },
-          "Email": {
-            "type": "string",
-            "description": "(Optional) Sets the user email",
-            "format": "email",
-            "nullable": true
-          },
-          "BillingEmail": {
-            "type": "string",
-            "description": "(Optional) Sets the billing email where the invoices will be sent",
-            "format": "email",
-            "nullable": true
-          },
-          "DmcaEmail": {
-            "type": "string",
-            "description": "(Optional) Sets the abuse email where abuse notifications are sent",
-            "format": "email",
-            "nullable": true
-          },
-          "LastName": {
-            "type": "string",
-            "description": "(Optional) Sets the last name of the account owner",
-            "maxLength": 30,
-            "nullable": true
-          },
-          "StreetAddress": {
-            "type": "string",
-            "description": "(Optional) Sets the street name and number of the user's address",
-            "maxLength": 200,
-            "nullable": true
-          },
-          "City": {
-            "type": "string",
-            "description": "(Optional) Sets the city name of the user's address",
-            "maxLength": 50,
-            "nullable": true
-          },
-          "ZipCode": {
-            "type": "string",
-            "description": "(Optional) Sets the ZIP code of the user's address",
-            "maxLength": 30,
-            "nullable": true
-          },
-          "Country": {
-            "type": "string",
-            "description": "(Optional) Sets the country of the user's address",
-            "maxLength": 2,
-            "nullable": true
-          },
-          "CompanyName": {
-            "type": "string",
-            "description": "(Optional) Sets the company name of the company responsible for the account",
-            "maxLength": 80,
-            "nullable": true
-          },
-          "VATNumber": {
-            "type": "string",
-            "description": "(Optional) Sets the VAT number used for the billing details",
-            "maxLength": 20,
-            "nullable": true
-          },
-          "ReceiveNotificationEmails": {
-            "type": "boolean",
-            "description": "(Optional) Determines if the account should receive notification emails from bunny.net",
-            "nullable": true
-          },
-          "ReceivePromotionalEmails": {
-            "type": "boolean",
-            "description": "(Optional) Determines if the account should receive promotional emails from bunny.net",
-            "nullable": true
-          },
-          "Password": {
-            "type": "string",
-            "description": "(Optional) Sets the login password for the user account. OldPassword should also be sent.",
-            "maxLength": 128,
-            "nullable": true
-          },
-          "OldPassword": {
-            "type": "string",
-            "description": "(Optional) The verification password when changing the password through the Password property.",
-            "nullable": true
-          }
-        }
-      },
-      "WhatsNewModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "Timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "Title": {
-            "type": "string",
-            "nullable": true
-          },
-          "Description": {
-            "type": "string",
-            "nullable": true
-          },
-          "Type": {
-            "$ref": "#/components/schemas/WhatsNewModelType"
-          },
-          "IsNew": {
-            "type": "boolean"
-          }
-        }
-      },
-      "WhatsNewModelType": {
-        "type": "integer",
-        "description": "0 = Feature\n1 = Update\n2 = BugFix",
-        "x-enumNames": [
-          "Feature",
-          "Update",
-          "BugFix"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "TwoFactorModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "SecretValidator": {
-            "type": "string",
-            "nullable": true
-          },
-          "Secret": {
-            "type": "string",
-            "nullable": true
-          },
-          "QrCodeBase64": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TwoFactorEnableResultModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Success": {
-            "type": "boolean"
-          },
-          "Error": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TwoFactorDisableRequestModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Password": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TwoFactorVerifyModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "SecretValidator": {
-            "type": "string",
-            "nullable": true
-          },
-          "Secret": {
-            "type": "string",
-            "nullable": true
-          },
-          "TestPin": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TwoFactorVerifyResultModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Success": {
-            "type": "boolean"
-          },
-          "Error": {
-            "type": "string",
             "nullable": true
           }
         }
@@ -13723,6 +11744,506 @@
           }
         }
       },
+      "BillingModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Balance": {
+            "type": "number",
+            "description": "The current account balance",
+            "format": "double"
+          },
+          "ThisMonthCharges": {
+            "type": "number",
+            "description": "The current account charges of the running month",
+            "format": "double"
+          },
+          "LastRechargeBalance": {
+            "type": "number",
+            "description": "Last recharge amount balance",
+            "format": "double"
+          },
+          "BillingRecords": {
+            "type": "array",
+            "description": "The list of billing records for this account",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BillingRecordModel"
+            }
+          },
+          "BillingHistoryChart": {
+            "type": "object",
+            "description": "The constructed billing history chart data",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "MonthlyChargesEUTraffic": {
+            "type": "number",
+            "description": "The total charges this month paid for European traffic",
+            "format": "double"
+          },
+          "MonthlyChargesUSTraffic": {
+            "type": "number",
+            "description": "The total charges this month paid for North American traffic",
+            "format": "double"
+          },
+          "MonthlyChargesASIATraffic": {
+            "type": "number",
+            "description": "The total charges this month paid for Asian and Oceanian traffic",
+            "format": "double"
+          },
+          "MonthlyChargesAFTraffic": {
+            "type": "number",
+            "description": "The total charges this month paid for African traffic",
+            "format": "double"
+          },
+          "MonthlyChargesSATraffic": {
+            "type": "number",
+            "description": "The total charges this month paid for South American traffic",
+            "format": "double"
+          },
+          "MonthlyChargesStorage": {
+            "type": "number",
+            "description": "The total charges this month paid for Edge Storage",
+            "format": "double"
+          },
+          "MonthlyChargesDNS": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny DNS",
+            "format": "double"
+          },
+          "MonthlyChargesOptimizer": {
+            "type": "number",
+            "description": "The monthly charges caused by optimizer.",
+            "format": "double"
+          },
+          "MonthlyChargesTranscribe": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny Stream Transcribe",
+            "format": "double"
+          },
+          "MonthlyChargesPremiumEncoding": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny Stream Premium Encoding",
+            "format": "decimal"
+          },
+          "MonthlyChargesExtraPullZones": {
+            "type": "number",
+            "description": "The monthly charges caused by extra pull zones.",
+            "format": "double"
+          },
+          "MonthlyChargesExtraStorageZones": {
+            "type": "number",
+            "description": "The monthly charges caused by extra storage zones.",
+            "format": "double"
+          },
+          "MonthlyChargesExtraDnsZones": {
+            "type": "number",
+            "description": "The monthly charges caused by extra DNS zones.",
+            "format": "double"
+          },
+          "MonthlyChargesExtraVideoLibraries": {
+            "type": "number",
+            "description": "The monthly charges caused by extra video libraries.",
+            "format": "double"
+          },
+          "MonthlyChargesScripting": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny Edge Scripting",
+            "format": "double"
+          },
+          "MonthlyChargesScriptingRequests": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny Edge Scripting Requests",
+            "format": "double"
+          },
+          "MonthlyChargesScriptingCpu": {
+            "type": "number",
+            "description": "The total monthly charges for Bunny Edge Scripting CPU usage",
+            "format": "double"
+          },
+          "MonthlyChargesDrm": {
+            "type": "number",
+            "description": "The total monthly charges for DRM",
+            "format": "double"
+          },
+          "MonthlyChargesMagicContainers": {
+            "type": "number",
+            "description": "The total monthly charges for Magic Containers",
+            "format": "decimal"
+          },
+          "MonthlyChargesShield": {
+            "type": "number",
+            "description": "The total monthly charges for Shield",
+            "format": "decimal"
+          },
+          "MonthlyChargesTaxes": {
+            "type": "number",
+            "description": "The total monthly charges for Taxes",
+            "format": "decimal"
+          },
+          "MonthlyChargesWebSockets": {
+            "type": "number",
+            "description": "The total monthly charges for WebSockets",
+            "format": "decimal"
+          },
+          "MonthlyChargesDB": {
+            "type": "number",
+            "description": "The total monthly charges for DB",
+            "format": "decimal"
+          },
+          "MonthlyDBWrites": {
+            "description": "The monthly charges and usage for BunnyDB row writes",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyDBReads": {
+            "description": "The monthly charges and usage for BunnyDB row reads",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyDBStorage": {
+            "description": "The monthly charges and usage for BunnyDB storage",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyDBReplica": {
+            "description": "The monthly charges and usage for BunnyDB replica storage",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyBandwidthUsed": {
+            "type": "integer",
+            "description": "Total bandwidth used by the account during this month.",
+            "format": "int64"
+          },
+          "MonthlyDnsSmartQueriesServed": {
+            "type": "integer",
+            "description": "Total number of Bunny DNS smart queries served this month.",
+            "format": "int64"
+          },
+          "MonthlyDnsNormalQueriesServed": {
+            "type": "integer",
+            "description": "Total number of Bunny DNS normal queries served this month.",
+            "format": "int64"
+          },
+          "MonthlyTranscriptionMinutes": {
+            "type": "integer",
+            "description": "Total minutes used for Bunny Stream Transcribe this month.",
+            "format": "int64"
+          },
+          "MonthlyPremiumEncodingBillableMinutes": {
+            "type": "integer",
+            "description": "Total billable minutes used for Bunny Stream Premium Encoding this month.",
+            "format": "int64"
+          },
+          "MonthlyDRMLicensesIssued": {
+            "type": "integer",
+            "description": "DRM (enterprise) licenses issued this month.",
+            "format": "int64"
+          },
+          "MonthlyScriptingRequests": {
+            "type": "integer",
+            "description": "Total number of edge script requests this month.",
+            "format": "int64"
+          },
+          "MonthlyScriptingCpuTime": {
+            "type": "integer",
+            "description": "Total edge script CPU time (milliseconds) used this month.",
+            "format": "int64"
+          },
+          "BillingEnabled": {
+            "type": "boolean",
+            "description": "Determines if billing is currently enabled for this user."
+          },
+          "MinimumMonthlyCommit": {
+            "type": "number",
+            "description": "Determines the minimum monthly commit of the user.",
+            "format": "double"
+          },
+          "VATRate": {
+            "type": "number",
+            "description": "The VAT rate for the user's account.",
+            "format": "decimal"
+          },
+          "NextMonthVATRate": {
+            "type": "number",
+            "description": "Next month VAT rate for the user's account.",
+            "format": "decimal"
+          },
+          "AutomaticPaymentImageUrl": {
+            "type": "string",
+            "description": "If an automatic payment method is configured, this will contain the image url of the payment method",
+            "nullable": true
+          },
+          "AutomaticPaymentCardType": {
+            "type": "string",
+            "description": "If an automatic payment method is configured with a credit card, this will contain the name of the payment credit card",
+            "nullable": true
+          },
+          "AutomaticPaymentIdentifier": {
+            "type": "string",
+            "description": "If an automatic payment method is configured, this will contain the identifier of the payment method",
+            "nullable": true
+          },
+          "AutomaticPaymentAmount": {
+            "type": "number",
+            "description": "If an automatic payments are configured, this contains the payment amount that will be made during an automatic recharge",
+            "format": "decimal"
+          },
+          "AutomaticRechargeTreshold": {
+            "type": "number",
+            "description": "If an automatic payments are configured, this contains the account balance amount that will trigger an automatic recharge",
+            "format": "decimal"
+          },
+          "AutomaticRechargeEnabled": {
+            "type": "boolean",
+            "description": "Determines if automatic recharge is currently enabled."
+          },
+          "AutomaticPaymentFailureCount": {
+            "type": "integer",
+            "description": "Determines the number of failed automatic recharges that the system made since the last successful payment.",
+            "format": "int32"
+          },
+          "SavedPaymentMethods": {
+            "type": "array",
+            "description": "Contains the list of saved payment methods on the user's account",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BillingSavedPaymentMethod"
+            }
+          },
+          "EUUSDiscount": {
+            "type": "integer",
+            "description": "The account wide pricing discount for EU and US region.",
+            "format": "int32"
+          },
+          "SouthAmericaDiscount": {
+            "type": "integer",
+            "description": "The account wide pricing discount for South America region.",
+            "format": "int32"
+          },
+          "AfricaDiscount": {
+            "type": "integer",
+            "description": "The account wide pricing discount for Africa region.",
+            "format": "int32"
+          },
+          "AsiaOceaniaDiscount": {
+            "type": "integer",
+            "description": "The account wide pricing discount for Asia & Oceania region.",
+            "format": "int32"
+          },
+          "OptimizerMonthlyPrice": {
+            "type": "number",
+            "description": "Optimizer monthly price per pull zone for this account (unless overridden on pull zone level).",
+            "format": "decimal"
+          },
+          "DrmBaseMonthlyPrice": {
+            "type": "number",
+            "description": "DRM (Enterprise) base monthly price per video library.",
+            "format": "decimal"
+          },
+          "DrmCostPerLicense": {
+            "type": "number",
+            "description": "DRM (Enterprise) cost per license or default pricing tier applied if null.",
+            "format": "decimal",
+            "nullable": true
+          }
+        }
+      },
+      "BillingRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "The ID of the billing record",
+            "format": "int64"
+          },
+          "PaymentId": {
+            "type": "string",
+            "description": "The external ID of the payment",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "description": "The amount linked to the record model",
+            "format": "double"
+          },
+          "Payer": {
+            "type": "string",
+            "description": "The payer reference that sent the payment",
+            "nullable": true
+          },
+          "Timestamp": {
+            "type": "string",
+            "description": "The date and time when the billing record was created",
+            "format": "date-time"
+          },
+          "Type": {
+            "description": "The type of the billing record. PayPal = 0, Crypto = 1, CreditCard = 2, MonthlyUsage = 3, Refund = 4, CouponCode = 5, BankTransfer = 6, AffiliateCredits = 7",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BillingRecordType"
+              }
+            ]
+          },
+          "InvoiceAvailable": {
+            "type": "boolean",
+            "description": "Determines if an invoice is available"
+          },
+          "DocumentDownloadUrl": {
+            "type": "string",
+            "description": "The URL where the invoice or document can be downloaded. Null if this is not available.",
+            "nullable": true
+          },
+          "DetailedDocumentDownloadUrl": {
+            "type": "string",
+            "description": "The URL where the document with product usage breakdown can be downloaded. Null if this is not available.",
+            "nullable": true
+          }
+        }
+      },
+      "BillingRecordType": {
+        "type": "integer",
+        "description": "0 = PayPal\n1 = Crypto\n2 = CreditCard\n3 = MonthlyUsage\n4 = Refund\n5 = CouponCode\n6 = BankTransfer\n7 = AffiliateCredits",
+        "x-enumNames": [
+          "PayPal",
+          "Crypto",
+          "CreditCard",
+          "MonthlyUsage",
+          "Refund",
+          "CouponCode",
+          "BankTransfer",
+          "AffiliateCredits"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "BunnyDBUsageBreakdown": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Usage": {
+            "type": "number",
+            "description": "The usage cost in USD",
+            "format": "decimal"
+          },
+          "TotalUnits": {
+            "type": "integer",
+            "description": "The total usage units (rows for reads/writes, GB for storage)",
+            "format": "int64"
+          }
+        }
+      },
+      "BillingSavedPaymentMethod": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Token": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastFour": {
+            "type": "string",
+            "nullable": true
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PaymentRequestModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Amount": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "DateGenerated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "DateDue": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Paid": {
+            "type": "boolean"
+          },
+          "DatePaid": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "BillingInvoiceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "BillingInvoiceDownloadLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "BankTransferReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "TaxRate": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "TaxedAmount": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
       "PaginationListModelOfApiKeyModel": {
         "type": "object",
         "additionalProperties": false,
@@ -13767,26 +12288,73 @@
             }
           }
         }
+      },
+      "BillingAffiliateDetailsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "AffiliateBalance": {
+            "type": "number",
+            "description": "The amount of affiliate credits on the account",
+            "format": "decimal"
+          },
+          "AffiliateUrl": {
+            "type": "string",
+            "description": "The affiliate URL for the currently authenticated user",
+            "nullable": true
+          },
+          "ClaimBonusPercentage": {
+            "type": "number",
+            "description": "The bonus percentage given when claiming affiliate balance as bunny credits",
+            "format": "decimal"
+          },
+          "MinimumPayoutAmount": {
+            "type": "number",
+            "description": "The minimum amount required to request affiliate credits external payout",
+            "format": "decimal"
+          },
+          "AffiliateClicksChart": {
+            "type": "object",
+            "description": "The constructed affiliate click history chart data",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "AffiliateSignupsChart": {
+            "type": "object",
+            "description": "The constructed affiliate signup history chart data",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "AffiliateConversionsChart": {
+            "type": "object",
+            "description": "The constructed affiliate conversion history chart data",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
-      "apiKey": {
+      "AccessKey": {
         "type": "apiKey",
         "description": "API Access Key authorization header",
         "name": "AccessKey",
         "in": "header"
       },
       "bearer": {
-        "type": "apiKey",
+        "type": "http",
         "description": "Bearer token authorization header",
-        "name": "Authorization",
-        "in": "header"
-      },
-      "AccessKey": {
-        "type": "apiKey",
-        "description": "API Access Key authorization header",
-        "name": "AccessKey",
-        "in": "header"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },
@@ -13819,10 +12387,13 @@
       "name": "DNSSEC"
     },
     {
+      "name": "Billing"
+    },
+    {
       "name": "API Keys"
     },
     {
-      "name": "Billing"
+      "name": "Affiliate"
     },
     {
       "name": "Countries"
@@ -13832,9 +12403,6 @@
     },
     {
       "name": "Region"
-    },
-    {
-      "name": "Team"
     }
   ]
 }
