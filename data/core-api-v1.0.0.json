@@ -12351,10 +12351,10 @@
         "in": "header"
       },
       "bearer": {
-        "type": "http",
+        "type": "apiKey",
         "description": "Bearer token authorization header",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "name": "Authorization",
+        "in": "header"
       }
     }
   },

@@ -4,7 +4,7 @@
     "sourceDescription": "Core Platform API",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "f10227e15730147670f6b0c03b33e38cec31c46a8b26cf16fc2f2bec840b41bd"
+    "fileSha256": "fbde0a332780a122a13b740d99ce8a635c95f665dc5b3cd04f93c1a9c708115a"
   },
   {
     "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
@@ -39,6 +39,6 @@
     "sourceDescription": "Edge Scripting API",
     "fileName": "edge-scripting-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.0.json",
-    "fileSha256": "246100ec83a5845f43844e52e6967d113894f32af74e045ccdce6f05fe199b84"
+    "fileSha256": "8aa09806ccf30f78613febd955b6c7e8877f919ef36eb7514d6ab870b3cecce2"
   }
 ]
