@@ -4,7 +4,7 @@
     "sourceDescription": "Core Platform API",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "460c36e27980fcc9aa358d1a5b1728028d9ced40f6b81d8e4807f53356a0add5"
+    "fileSha256": "fbde0a332780a122a13b740d99ce8a635c95f665dc5b3cd04f93c1a9c708115a"
   },
   {
     "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
@@ -18,14 +18,14 @@
     "sourceDescription": "Storage API",
     "fileName": "edge-storage-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-storage-api-v1.0.0.json",
-    "fileSha256": "68c4a2051bd38fedb014a6fb86bafe9280c56913e828558c4568540878830783"
+    "fileSha256": "e5a59302987fa4913c117c03428b5579253a5d6ca5eb46c6c3fffb976775c533"
   },
   {
     "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
     "sourceDescription": "Stream API",
     "fileName": "stream-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.0.json",
-    "fileSha256": "c8bf5ef5dfb41ddfa8d6b466dd0190d77f606ec6599cf13e64ed36bf6b32e7dc"
+    "fileSha256": "a5a05f504d3333d1e8bc197c7cf40ae9814f8e715e9be50f72cbb93ce4fd76a9"
   },
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",

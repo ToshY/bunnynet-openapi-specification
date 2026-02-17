@@ -2923,6 +2923,41 @@
           }
         }
       },
+      "LiveStreamStatusModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "readyToStart": {
+            "type": "boolean",
+            "description": "Determines if the stream is ready to start based on live status"
+          },
+          "primaryLive": {
+            "type": "boolean",
+            "description": "Determines if the primary ingest is live"
+          },
+          "backupLive": {
+            "type": "boolean",
+            "description": "Determines if the backup ingest is live"
+          },
+          "lastPingAgo": {
+            "type": "integer",
+            "description": "The number of seconds since the last ping, if available",
+            "format": "int32",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "description": "The stream duration in seconds",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusTimeUtc": {
+            "type": "string",
+            "description": "The UTC time when the status is read",
+            "format": "date-time"
+          }
+        }
+      },
       "VideoModel": {
         "type": "object",
         "additionalProperties": false,
@@ -4266,6 +4301,23 @@
             }
           }
         ]
+      },
+      "Result": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "VideoStatus": {
         "type": "integer",
