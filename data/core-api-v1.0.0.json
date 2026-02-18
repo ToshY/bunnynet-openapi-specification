@@ -7818,40 +7818,6 @@
             "format": "int32",
             "nullable": true
           },
-          "WAFEnabled": {
-            "type": "boolean",
-            "description": "Determines if WAF should be enabled on the zone",
-            "nullable": true
-          },
-          "WAFDisabledRuleGroups": {
-            "type": "array",
-            "description": "Determines the enabled WAF rule groups",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "WAFDisabledRules": {
-            "type": "array",
-            "description": "Determines the disabled WAF rules",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "WAFEnableRequestHeaderLogging": {
-            "type": "boolean",
-            "description": "Determines if WAF should enable request headers logging",
-            "nullable": true
-          },
-          "WAFRequestHeaderIgnores": {
-            "type": "array",
-            "description": "Determines the list of headers that will be ignored in the WAF logs",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
           "ErrorPageEnableCustomCode": {
             "type": "boolean",
             "description": "Determines if custom error page code should be enabled.",
@@ -8859,40 +8825,6 @@
             "format": "int32",
             "nullable": true
           },
-          "WAFEnabled": {
-            "type": "boolean",
-            "description": "Determines if WAF should be enabled on the zone",
-            "nullable": true
-          },
-          "WAFDisabledRuleGroups": {
-            "type": "array",
-            "description": "Determines the enabled WAF rule groups",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "WAFDisabledRules": {
-            "type": "array",
-            "description": "Determines the disabled WAF rules",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "WAFEnableRequestHeaderLogging": {
-            "type": "boolean",
-            "description": "Determines if WAF should enable request headers logging",
-            "nullable": true
-          },
-          "WAFRequestHeaderIgnores": {
-            "type": "array",
-            "description": "Determines the list of headers that will be ignored in the WAF logs",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
           "ErrorPageEnableCustomCode": {
             "type": "boolean",
             "description": "Determines if custom error page code should be enabled.",
@@ -9766,11 +9698,6 @@
           "Region"
         ],
         "properties": {
-          "OriginUrl": {
-            "type": "string",
-            "description": "The origin URL of the storage zone that will be added",
-            "nullable": true
-          },
           "Name": {
             "type": "string",
             "description": "The name of the storage zone",
@@ -9822,33 +9749,6 @@
           "OriginUrl": {
             "type": "string",
             "description": "The origin URL of the storage zone",
-            "nullable": true
-          },
-          "OriginDnsZoneId": {
-            "type": "integer",
-            "description": "The origin DNS Zone ID",
-            "format": "int64",
-            "nullable": true
-          },
-          "OriginDnsRecordId": {
-            "type": "integer",
-            "description": "The origin DNS Record ID",
-            "format": "int64",
-            "nullable": true
-          },
-          "WordPressCronToken": {
-            "type": "string",
-            "description": "The WordPress cron token that will be used to authenticate offloading requests",
-            "nullable": true
-          },
-          "WordPressCronPath": {
-            "type": "string",
-            "description": "The WordPress path where cron jobs should be getting called",
-            "nullable": true
-          },
-          "WordPressPath": {
-            "type": "string",
-            "description": "The WordPress path where WordPress is installed on the origin",
             "nullable": true
           },
           "Custom404FilePath": {
@@ -9903,16 +9803,6 @@
           "VideoCount": {
             "type": "integer",
             "description": "The number of videos in the video library",
-            "format": "int64"
-          },
-          "LiveStreamCount": {
-            "type": "integer",
-            "description": "The total number of live streams contained by the video library",
-            "format": "int64"
-          },
-          "TotalCount": {
-            "type": "integer",
-            "description": "The total number of items contained by the video library",
             "format": "int64"
           },
           "TrafficUsage": {
@@ -10303,20 +10193,6 @@
           "ExposeVideoMetadata": {
             "type": "boolean",
             "description": "Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed."
-          },
-          "EnableLive": {
-            "type": "boolean",
-            "description": "Determines if live streaming is enabled for the video library.",
-            "nullable": true
-          },
-          "Live": {
-            "description": "Live streaming settings for the video library.",
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LiveStreaming"
-              }
-            ]
           }
         }
       },
@@ -10418,88 +10294,6 @@
           0,
           1
         ]
-      },
-      "LiveStreaming": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "EnableCountdown": {
-            "type": "boolean",
-            "description": "Whether to show a countdown until live start time in the player"
-          },
-          "EnableVideoOnDemand": {
-            "type": "boolean",
-            "description": "Whether the live stream will be stored as VoD and available to watch back later when live stream has ended"
-          },
-          "EnableDvr": {
-            "type": "boolean",
-            "description": "Allows the live stream audience to rewind the live stream back behind the live point"
-          },
-          "DvrTimeframeSeconds": {
-            "type": "integer",
-            "description": "The timeframe in seconds for how far back the audience can rewind the live stream when DVR is enabled",
-            "format": "int32",
-            "nullable": true
-          },
-          "PreStreamTrailerVideoId": {
-            "type": "string",
-            "description": "The video ID of the pre-stream trailer video to be played before the live stream starts",
-            "nullable": true
-          },
-          "HasThumbnail": {
-            "type": "boolean",
-            "description": "Determines if the library has a default thumbnail present for live stream"
-          },
-          "HasWatermark": {
-            "type": "boolean",
-            "description": "Determines if the library has a default watermark present for live stream"
-          },
-          "WatermarkPositionLeft": {
-            "type": "integer",
-            "description": "Sets the left offset of the live watermark position (in %)",
-            "format": "int32"
-          },
-          "WatermarkPositionTop": {
-            "type": "integer",
-            "description": "Sets the top offset of the live watermark position (in %)",
-            "format": "int32"
-          },
-          "WatermarkWidth": {
-            "type": "integer",
-            "description": "Sets the width of the live watermark (in %)",
-            "format": "int32"
-          },
-          "WatermarkHeight": {
-            "type": "integer",
-            "description": "Sets the height of the live watermark (in %)",
-            "format": "int32"
-          },
-          "RtmpOutputs": {
-            "type": "array",
-            "description": "(Optional) Up to 4 default RTMP outputs for live streams",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RtmpOutput"
-            }
-          }
-        }
-      },
-      "RtmpOutput": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Endpoint": {
-            "type": "string",
-            "description": "The RTMP endpoint URL for the output",
-            "format": "uri",
-            "nullable": true
-          },
-          "StreamKey": {
-            "type": "string",
-            "description": "The RTMP stream key for the output",
-            "nullable": true
-          }
-        }
       },
       "VideoLibraryCreateModel": {
         "type": "object",
@@ -10854,20 +10648,6 @@
             "type": "boolean",
             "description": "(Optional) Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed.",
             "nullable": true
-          },
-          "EnableLive": {
-            "type": "boolean",
-            "description": "(Optional) Determines if live streaming is enabled for the video library.",
-            "nullable": true
-          },
-          "Live": {
-            "description": "(Optional) Live streaming settings for the video library.",
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LiveStreamingUpdateModel"
-              }
-            ]
           }
         }
       },
@@ -10904,87 +10684,6 @@
                 "$ref": "#/components/schemas/WidevineMinClientSecurityLevel"
               }
             ]
-          }
-        }
-      },
-      "LiveStreamingUpdateModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "EnableCountdown": {
-            "type": "boolean",
-            "description": "(Optional) Whether to show a countdown until live start time in the player",
-            "nullable": true
-          },
-          "EnableVideoOnDemand": {
-            "type": "boolean",
-            "description": "(Optional) Whether the live stream will be stored as VoD and available to watch back later when live stream has ended",
-            "nullable": true
-          },
-          "EnableDvr": {
-            "type": "boolean",
-            "description": "(Optional) Allows the live stream audience to rewind the live stream back behind the live point",
-            "nullable": true
-          },
-          "DvrTimeframeSeconds": {
-            "type": "integer",
-            "description": "(Optional) The timeframe in seconds for how far back the audience can rewind the live stream when DVR is enabled",
-            "format": "int32",
-            "nullable": true
-          },
-          "PreStreamTrailerVideoId": {
-            "type": "string",
-            "description": "(Optional) The video ID of the pre-stream trailer video to be played before the live stream starts",
-            "nullable": true
-          },
-          "WatermarkPositionLeft": {
-            "type": "integer",
-            "description": "(Optional) Sets the left offset of the live watermark position (in %)",
-            "format": "int32",
-            "nullable": true
-          },
-          "WatermarkPositionTop": {
-            "type": "integer",
-            "description": "(Optional) Sets the top offset of the live watermark position (in %)",
-            "format": "int32",
-            "nullable": true
-          },
-          "WatermarkWidth": {
-            "type": "integer",
-            "description": "(Optional) Sets the width of the live watermark (in %)",
-            "format": "int32",
-            "nullable": true
-          },
-          "WatermarkHeight": {
-            "type": "integer",
-            "description": "(Optional) Sets the height of the live watermark (in %)",
-            "format": "int32",
-            "nullable": true
-          },
-          "RtmpOutputs": {
-            "type": "array",
-            "description": "Up to 4 default RTMP outputs for live streams",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RtmpOutput2"
-            }
-          }
-        }
-      },
-      "RtmpOutput2": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Endpoint": {
-            "type": "string",
-            "description": "The RTMP endpoint URL for the output",
-            "format": "uri",
-            "nullable": true
-          },
-          "StreamKey": {
-            "type": "string",
-            "description": "The RTMP stream key for the output",
-            "nullable": true
           }
         }
       },
