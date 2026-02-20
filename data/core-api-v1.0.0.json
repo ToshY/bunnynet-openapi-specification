@@ -3934,7 +3934,7 @@
     "/user/audit/{date}": {
       "get": {
         "tags": [
-          "GetUserAuditLogEndpoint"
+          "AuditLog"
         ],
         "operationId": "GetUserAuditLogEndpoint_GetUserAuditLog",
         "parameters": [
@@ -4529,56 +4529,6 @@
         ]
       }
     },
-    "/v3.0/pricing-packages-old": {
-      "get": {
-        "tags": [
-          "Pricing Packages"
-        ],
-        "summary": "List Pricing Packages (Legacy)",
-        "description": "List pricing packages by type (backward compatibility)",
-        "operationId": "ListPricingPackagesEndpoint_ListPricingPackagesOld",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/PricingPackageType2"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pricing packages were successfully retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PricingPackageModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "User is unauthorized"
-          },
-          "500": {
-            "description": "Unexpected server error"
-          }
-        },
-        "deprecated": true,
-        "security": [
-          {
-            "AccessKey": []
-          },
-          {
-            "bearer": []
-          }
-        ]
-      }
-    },
     "/dnszone/{id}/statistics": {
       "get": {
         "tags": [
@@ -5137,7 +5087,7 @@
     "/billing/summary": {
       "get": {
         "tags": [
-          "GetBillingSummaryEndpoint"
+          "Billing"
         ],
         "summary": "Get Billing Summary",
         "operationId": "GetBillingSummaryEndpoint_GetSummaryEndpoint",
@@ -12063,6 +12013,9 @@
     },
     {
       "name": "User"
+    },
+    {
+      "name": "AuditLog"
     },
     {
       "name": "Storage Zone"
