@@ -2583,15 +2583,12 @@
       "RtmpOutput": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "endpoint"
-        ],
         "properties": {
           "endpoint": {
             "type": "string",
             "description": "RTMP output endpoint URL",
             "format": "uri",
-            "minLength": 1
+            "nullable": true
           },
           "streamKey": {
             "type": "string",
