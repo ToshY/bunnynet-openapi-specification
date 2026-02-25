@@ -32,7 +32,7 @@
     "sourceDescription": "Shield API",
     "fileName": "shield-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.0.json",
-    "fileSha256": "77a2c730d078ffd9968e0b85e8685abb3d80c193b58cce8c567753f755d49660"
+    "fileSha256": "b9b42d49150fb46eeb6abe90165d1857d34a1dbf199c5bab0c66a333728f9814"
   },
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",

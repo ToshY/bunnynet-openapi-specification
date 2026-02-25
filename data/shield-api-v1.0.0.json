@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Bunny Shield API",
-    "description": "Bunny.net API for Bunny Shield (WAF, DDoS, Rate Limiting).",
+    "description": "Bunny.net API for Bunny Shield (WAF, DDoS, Rate Limiting, Bot Detection, Access Lists & API Guardian).",
     "version": "v1"
   },
   "servers": [
@@ -735,6 +735,483 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/shield/shield-zone/{shieldZoneId}/api-guardian": {
+      "get": {
+        "tags": [
+          "ApiGuardian"
+        ],
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApiGuardian"
+        ],
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ApiGuardian"
+        ],
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadOpenApiSpecificationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadOpenApiSpecificationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadOpenApiSpecificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOpenApiSpecificationResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/shield-zone/{shieldZoneId}/api-guardian/endpoint/{endpointId}": {
+      "patch": {
+        "tags": [
+          "ApiGuardian"
+        ],
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "endpointId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianEndpointRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianEndpointRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiGuardianEndpointRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiGuardianEndpointResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -3887,6 +4364,49 @@
         "type": "integer",
         "format": "int32"
       },
+      "AccessListConfiguration": {
+        "required": [
+          "action",
+          "isEnabled",
+          "shieldZoneId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessListId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "userAccessListId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "action": {
+            "$ref": "#/components/schemas/AccessListAction"
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
+          }
+        },
+        "additionalProperties": false
+      },
       "AccessListDetails": {
         "required": [
           "action",
@@ -3961,7 +4481,9 @@
           0,
           1,
           2,
-          3
+          3,
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"
@@ -4015,6 +4537,283 @@
         },
         "additionalProperties": false,
         "description": "Response containing comprehensive access list information for a Shield Zone, including both managed and custom lists."
+      },
+      "Account": {
+        "required": [
+          "accountId"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "maxLength": 36,
+            "minLength": 1,
+            "type": "string"
+          },
+          "billingEligibility": {
+            "$ref": "#/components/schemas/BillingEligibility"
+          },
+          "userType": {
+            "$ref": "#/components/schemas/CustomerCategory"
+          },
+          "featureFlags": {
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          },
+          "shieldZones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShieldZone"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiGuardianEndpoint": {
+        "required": [
+          "requestMethods",
+          "requestPath",
+          "schemaTitle",
+          "schemaVersion"
+        ],
+        "type": "object",
+        "properties": {
+          "apiGuardianEndpointId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "schemaTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "schemaVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestMethods": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestBodyType": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestBodySchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseBodySchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "aiGuardian": {
+            "type": "boolean"
+          },
+          "aiGuardianGuardrails": {
+            "type": "string",
+            "nullable": true
+          },
+          "validateRequestBodySchema": {
+            "type": "boolean"
+          },
+          "validateResponseBodySchema": {
+            "type": "boolean"
+          },
+          "validateAuthorization": {
+            "type": "boolean"
+          },
+          "authorizationConfiguration": {
+            "type": "string",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "rateLimitingGlobalEnabled": {
+            "type": "boolean"
+          },
+          "rateLimitingGlobalRequestCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rateLimitingGlobalTimeframeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rateLimitingGlobalBlockTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rateLimitingPerIpEnabled": {
+            "type": "boolean"
+          },
+          "rateLimitingPerIpRequestCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rateLimitingPerIpTimeframeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rateLimitingPerIpBlockTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiGuardianEndpointsResponse": {
+        "type": "object",
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiGuardianEndpoint"
+            },
+            "description": "The list of API Guardian endpoints.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response containing a list of API Guardian endpoints."
+      },
+      "BillableAudit": {
+        "required": [
+          "auditDateTime",
+          "shieldZoneId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "updateType": {
+            "$ref": "#/components/schemas/BillingAuditType"
+          },
+          "auditDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "billableAuditId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "note": {
+            "maxLength": 300,
+            "type": "string",
+            "nullable": true
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BillingAuditType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BillingEligibility": {
+        "enum": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BotDetectionConfiguration": {
+        "type": "object",
+        "properties": {
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "executionMode": {
+            "$ref": "#/components/schemas/BotDetectionExecutionMode"
+          },
+          "requestIntegrity": {
+            "$ref": "#/components/schemas/BotDetectionSensitivity"
+          },
+          "ipAddressSensitivity": {
+            "$ref": "#/components/schemas/BotDetectionSensitivity"
+          },
+          "browserFingerprintSensitivity": {
+            "$ref": "#/components/schemas/BotDetectionSensitivity"
+          },
+          "browserFingerprintAggression": {
+            "$ref": "#/components/schemas/BrowserFingerprintAggression"
+          },
+          "browserFingerprintMaxCookieAgeMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "browserFingerprintUsersPerIpLimit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "browserFingerprintCollectAvailableSeconds": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "browserFingerprintUseComplexBrowserFingerprint": {
+            "type": "boolean"
+          },
+          "browserFingerprintMaxRequestsUntilBlock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "browserFingerprintMaxRequestsUntilInject": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
+          }
+        },
+        "additionalProperties": false
       },
       "BotDetectionConfigurationResponse": {
         "type": "object",
@@ -4313,7 +5112,8 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Represents a request to create a new Shield Zone."
       },
       "CreateShieldZoneResponse": {
         "type": "object",
@@ -4325,7 +5125,8 @@
             "$ref": "#/components/schemas/GenericRequestResponse"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Response object for creating a new Shield Zone."
       },
       "CreateWafRateLimitRequest": {
         "type": "object",
@@ -4575,6 +5376,15 @@
         },
         "additionalProperties": false
       },
+      "CustomerCategory": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "DDoS": {
         "type": "object",
         "properties": {
@@ -4639,6 +5449,19 @@
         },
         "additionalProperties": false,
         "description": "Generic response object containing status information for API operations."
+      },
+      "GetApiGuardianResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ApiGuardianEndpointsResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response for getting API Guardian configuration."
       },
       "GetCustomWafRulesResponse": {
         "type": "object",
@@ -5310,6 +6133,166 @@
         "type": "integer",
         "format": "int32"
       },
+      "ShieldZone": {
+        "required": [
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pullZoneId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "userId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "planType": {
+            "$ref": "#/components/schemas/ShieldPlanType"
+          },
+          "deletedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "learningMode": {
+            "type": "boolean"
+          },
+          "learningModeUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "wafEnabled": {
+            "type": "boolean"
+          },
+          "wafExecutionMode": {
+            "$ref": "#/components/schemas/WAFExecutionMode"
+          },
+          "wafBlockingMode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wafDisabledRuleGroups": {
+            "type": "string",
+            "nullable": true
+          },
+          "wafDisabledRules": {
+            "type": "string",
+            "nullable": true
+          },
+          "wafLogOnlyRules": {
+            "type": "string",
+            "nullable": true
+          },
+          "wafRequestHeaderLoggingEnabled": {
+            "type": "boolean"
+          },
+          "wafRequestIgnoredHeaders": {
+            "type": "string",
+            "nullable": true
+          },
+          "wafRealtimeThreatIntelligenceEnabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "wafRequestBodyLimitAction": {
+            "$ref": "#/components/schemas/WAFPayloadLimitAction"
+          },
+          "wafResponseBodyLimitAction": {
+            "$ref": "#/components/schemas/WAFPayloadLimitAction"
+          },
+          "wafProfileId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dDoSEnabled": {
+            "type": "boolean"
+          },
+          "dDoSShieldSensitivity": {
+            "$ref": "#/components/schemas/DDoSShieldSensitivity"
+          },
+          "dDoSExecutionMode": {
+            "$ref": "#/components/schemas/DDoSExecutionMode"
+          },
+          "dDoSBlockingMode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dDoSChallengeWindow": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dDoSRequestVariationSensitivity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dDoSDisabledRules": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalWAFCustomRules": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalRateLimitRules": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewedRules": {
+            "type": "string",
+            "nullable": true
+          },
+          "whitelabelResponsePages": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "botDetectionConfiguration": {
+            "$ref": "#/components/schemas/BotDetectionConfiguration"
+          },
+          "uploadScanningConfiguration": {
+            "$ref": "#/components/schemas/UploadScanningConfiguration"
+          },
+          "billableAudits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BillableAudit"
+            },
+            "nullable": true
+          },
+          "userWafRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserWafRule"
+            },
+            "nullable": true
+          },
+          "accessListConfigurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessListConfiguration"
+            },
+            "nullable": true
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          }
+        },
+        "additionalProperties": false
+      },
       "ShieldZoneBotDetectionMetrics": {
         "type": "object",
         "properties": {
@@ -5819,6 +6802,78 @@
         "additionalProperties": false,
         "description": "Response containing the updated access list configuration data or error information."
       },
+      "UpdateApiGuardianEndpointRequest": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the endpoint is enabled.",
+            "nullable": true
+          },
+          "validateRequestBodySchema": {
+            "type": "boolean",
+            "description": "Whether to validate the request body schema.",
+            "nullable": true
+          },
+          "validateResponseBodySchema": {
+            "type": "boolean",
+            "description": "Whether to validate the response body schema.",
+            "nullable": true
+          },
+          "validateAuthorization": {
+            "type": "boolean",
+            "description": "Whether to validate authorization.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the request for updating an individual API Guardian endpoint."
+      },
+      "UpdateApiGuardianEndpointResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ApiGuardianEndpoint"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response for updating an individual API Guardian endpoint."
+      },
+      "UpdateApiGuardianRequest": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The file contents of the OpenAPI specification."
+          },
+          "enforceAuthorisationValidation": {
+            "type": "boolean",
+            "description": "Optional. If true, we will enforce authentication requirements for all endpoints defined in the OpenAPI specification."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the request for updating API Guardian configuration."
+      },
+      "UpdateApiGuardianResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ApiGuardianEndpointsResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response for updating API Guardian configuration."
+      },
       "UpdateBotDetectionRequest": {
         "type": "object",
         "properties": {
@@ -5994,6 +7049,34 @@
         },
         "additionalProperties": false
       },
+      "UploadOpenApiSpecificationRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The file contents of the OpenAPI specification.",
+            "nullable": true
+          },
+          "enforceAuthorisationValidation": {
+            "type": "boolean",
+            "description": "Optional. If true, we will enforce authentication requirements for all endpoints defined in the OpenAPI specification."
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadOpenApiSpecificationResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ApiGuardianEndpointsResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response for uploading an OpenAPI specification to the API Guardian."
+      },
       "UploadScanning": {
         "type": "object",
         "properties": {
@@ -6008,6 +7091,28 @@
           "filesScanned": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadScanningConfiguration": {
+        "type": "object",
+        "properties": {
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "antivirusScanningMode": {
+            "$ref": "#/components/schemas/UploadScanningScannerMode"
+          },
+          "csamScanningMode": {
+            "$ref": "#/components/schemas/UploadScanningScannerMode"
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
           }
         },
         "additionalProperties": false
@@ -6048,6 +7153,59 @@
           0,
           1,
           2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UserWafRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "wafRuleFileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruleDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruleJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruleType": {
+            "$ref": "#/components/schemas/UserWafRuleType"
+          },
+          "wafRuleFile": {
+            "$ref": "#/components/schemas/WafRuleFile"
+          },
+          "shieldZone": {
+            "$ref": "#/components/schemas/ShieldZone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserWafRuleType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -6287,7 +7445,11 @@
       "WafRateLimitTimeframeType": {
         "enum": [
           1,
-          10
+          10,
+          60,
+          300,
+          900,
+          3600
         ],
         "type": "integer",
         "format": "int32"
@@ -6310,7 +7472,8 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"
@@ -6347,6 +7510,40 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "WafRuleFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileContents": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastChanged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "engineRuleType": {
+            "$ref": "#/components/schemas/UserWafRuleType"
+          }
+        },
+        "additionalProperties": false
       },
       "WafRuleGroupModel": {
         "type": "object",
