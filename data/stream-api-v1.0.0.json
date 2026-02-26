@@ -1534,6 +1534,16 @@
           "400": {
             "description": "Failed fetching the video"
           },
+          "429": {
+            "description": "Too many fetch jobs queued. Please try again later.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusModel"
+                }
+              }
+            }
+          },
           "401": {
             "description": "The request authentication failed"
           },
@@ -2361,6 +2371,12 @@
             "type": "integer",
             "description": "The total number of live streams contained by the video library",
             "format": "int64"
+          },
+          "collectionCount": {
+            "type": "integer",
+            "description": "The total number of collections contained by the video library",
+            "format": "int64",
+            "nullable": true
           }
         }
       },

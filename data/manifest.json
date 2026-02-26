@@ -25,7 +25,7 @@
     "sourceDescription": "Stream API",
     "fileName": "stream-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.0.json",
-    "fileSha256": "805629bf1d614752700d582e1eac797b84358be3a648018e727be0e06e014f9b"
+    "fileSha256": "6fdcd95fd5366feac6bf3e41e29e601086e1950370a67a3f707df96721cbb5ae"
   },
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
