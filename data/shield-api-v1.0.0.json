@@ -14,8 +14,10 @@
     "/shield/shield-zone/{shieldZoneId}/access-lists": {
       "get": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Get all Access Lists available for a Shield Zone",
+        "operationId": "Get Access Lists",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -77,8 +79,10 @@
       },
       "post": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Create a new Custom Access List associated with a Shield Zone",
+        "operationId": "Create Custom Access List",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -202,8 +206,10 @@
     "/shield/shield-zone/{shieldZoneId}/access-lists/configurations/{id}": {
       "patch": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Update Access List Configuration for a Shield Zone",
+        "operationId": "Update Access List Configuration",
         "parameters": [
           {
             "name": "id",
@@ -338,8 +344,10 @@
     "/shield/shield-zone/{shieldZoneId}/access-lists/{id}": {
       "get": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Get the specified Custom Access List associated with a Shield Zone",
+        "operationId": "Get Custom Access List",
         "parameters": [
           {
             "name": "id",
@@ -432,8 +440,10 @@
       },
       "patch": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Update the specified Custom Access List associated with a Shield Zone",
+        "operationId": "Update Custom Access List",
         "parameters": [
           {
             "name": "id",
@@ -566,8 +576,10 @@
       },
       "delete": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Delete the specified Custom Access List associated with a Shield Zone",
+        "operationId": "Delete Custom Access List",
         "parameters": [
           {
             "name": "id",
@@ -662,8 +674,10 @@
     "/shield/shield-zone/{shieldZoneId}/access-lists/enums": {
       "get": {
         "tags": [
-          "AccessLists"
+          "Access Lists"
         ],
+        "summary": "Get all Access Lists API enumeration types and their values",
+        "operationId": "Get Access List Enums",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -742,8 +756,10 @@
     "/shield/shield-zone/{shieldZoneId}/api-guardian": {
       "get": {
         "tags": [
-          "ApiGuardian"
+          "API Guardian"
         ],
+        "summary": "Get the API Guardian configuration.",
+        "operationId": "Get API Guardian",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -843,8 +859,10 @@
       },
       "patch": {
         "tags": [
-          "ApiGuardian"
+          "API Guardian"
         ],
+        "summary": "Update your OpenAPI specification",
+        "operationId": "Update OpenAPI Specification",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -964,8 +982,10 @@
       },
       "post": {
         "tags": [
-          "ApiGuardian"
+          "API Guardian"
         ],
+        "summary": "Upload your OpenAPI specification",
+        "operationId": "Upload OpenAPI Specification",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1087,8 +1107,10 @@
     "/shield/shield-zone/{shieldZoneId}/api-guardian/endpoint/{endpointId}": {
       "patch": {
         "tags": [
-          "ApiGuardian"
+          "API Guardian"
         ],
+        "summary": "Update your API Guardian Endpoint configuration",
+        "operationId": "Update API Guardian Endpoint",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1219,8 +1241,10 @@
     "/shield/shield-zone/{shieldZoneId}/bot-detection": {
       "get": {
         "tags": [
-          "BotDetection"
+          "Bot Detection"
         ],
+        "summary": "Your current Bot Detection configuration",
+        "operationId": "Get Current Bot Detection",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1320,8 +1344,10 @@
       },
       "patch": {
         "tags": [
-          "BotDetection"
+          "Bot Detection"
         ],
+        "summary": "Update your current Bot Detection configuration",
+        "operationId": "Update Bot Detection",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1445,6 +1471,8 @@
         "tags": [
           "DDoS"
         ],
+        "summary": "List of all DDoS Enum Mappings",
+        "operationId": "Get DDoS Enums",
         "responses": {
           "200": {
             "description": "OK",
@@ -1495,8 +1523,10 @@
     "/shield/event-logs/{shieldZoneId}/{date}/{continuationToken}": {
       "get": {
         "tags": [
-          "EventLogs"
+          "Event Logs"
         ],
+        "summary": "Get Event Logs for Shield Zone",
+        "operationId": "Get Event Logs",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1582,6 +1612,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get an overview of metrics for the specified Shield Zone",
+        "operationId": "Get Shield Zone Metrics Overview",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1647,6 +1679,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get a detailed metrics overview for the specified Shield Zone within the selected time range and resolution",
+        "operationId": "Get Shield Zone Detailed Metrics Overview",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1735,6 +1769,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get aggregated rate limit metrics for the specified Shield Zone",
+        "operationId": "Get Shield Zone Rate Limit Metrics",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1800,6 +1836,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get detailed metrics for the specified Rate Limit",
+        "operationId": "Get Rate Limit Metrics",
         "parameters": [
           {
             "name": "id",
@@ -1865,6 +1903,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get metrics for a specific WAF Rule within the specified Shield Zone",
+        "operationId": "Get WAF Rule Metrics",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -1940,6 +1980,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get bot detection metrics for the specified Shield Zone",
+        "operationId": "Get Shield Zone Bot Detection Metrics",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -2005,6 +2047,8 @@
         "tags": [
           "Metrics"
         ],
+        "summary": "Get upload scanning metrics for the specified Shield Zone",
+        "operationId": "Get Shield Zone Upload Scanning Metrics",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -2068,9 +2112,10 @@
     "/shield/promo/state": {
       "get": {
         "tags": [
-          "Promo"
+          "Promotions"
         ],
-        "summary": "Gives a breakdown of promo data",
+        "summary": "Get the current Promotion State for your Account",
+        "operationId": "Get Promotion State",
         "responses": {
           "200": {
             "description": "OK"
@@ -2081,8 +2126,10 @@
     "/shield/rate-limits/{shieldZoneId}": {
       "get": {
         "tags": [
-          "RateLimits"
+          "Rate Limiting"
         ],
+        "summary": "Get Rate Limits for your Shield Zone",
+        "operationId": "Get Rate Limits",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -2168,8 +2215,10 @@
     "/shield/rate-limit/{id}": {
       "get": {
         "tags": [
-          "RateLimits"
+          "Rate Limiting"
         ],
+        "summary": "Get Individual Rate Limit for your Shield Zone",
+        "operationId": "Get Rate Limit",
         "parameters": [
           {
             "name": "id",
@@ -2251,8 +2300,10 @@
       },
       "patch": {
         "tags": [
-          "RateLimits"
+          "Rate Limiting"
         ],
+        "summary": "Update a Rate Limit configuration on your Shield Zone",
+        "operationId": "Update Rate Limit",
         "parameters": [
           {
             "name": "id",
@@ -2354,8 +2405,10 @@
       },
       "delete": {
         "tags": [
-          "RateLimits"
+          "Rate Limiting"
         ],
+        "summary": "Delete a Rate Limit on your Shield Zone",
+        "operationId": "Delete Rate Limit",
         "parameters": [
           {
             "name": "id",
@@ -2419,8 +2472,10 @@
     "/shield/rate-limit": {
       "post": {
         "tags": [
-          "RateLimits"
+          "Rate Limiting"
         ],
+        "summary": "Create a Rate Limit for your Shield Zone",
+        "operationId": "Create Rate Limit",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2511,8 +2566,10 @@
     "/shield/shield-zones": {
       "get": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Get all of your Shield Zone Configurations",
+        "operationId": "Get Shield Zone Configurations",
         "parameters": [
           {
             "name": "page",
@@ -2587,8 +2644,10 @@
     "/shield/shield-zones/pullzone-mapping": {
       "get": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Get Active Shield Zones for Pullzone Mapping",
+        "operationId": "Get Shield Zones Pull Zone Mapping",
         "responses": {
           "200": {
             "description": "OK",
@@ -2639,8 +2698,10 @@
     "/shield/shield-zone/{shieldZoneId}": {
       "get": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Get Singular Shield Zone Configuration",
+        "operationId": "Get Shield Zone Configuration",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -2724,8 +2785,10 @@
     "/shield/shield-zone/get-by-pullzone/{pullZoneId}": {
       "get": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Get Singular Shield Zone Configuration for PullZone",
+        "operationId": "Get Shield Zone Configuration by Pull Zone",
         "parameters": [
           {
             "name": "pullZoneId",
@@ -2809,8 +2872,10 @@
     "/shield/shield-zone": {
       "post": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Create a Shield Zone for your PullZone",
+        "operationId": "Create Shield Zone",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2919,8 +2984,10 @@
       },
       "patch": {
         "tags": [
-          "ShieldZone"
+          "Shield Zone"
         ],
+        "summary": "Update your Shield Zone configuration",
+        "operationId": "Update Shield Zone",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3011,8 +3078,10 @@
     "/shield/shield-zone/{shieldZoneId}/upload-scanning": {
       "get": {
         "tags": [
-          "UploadScanning"
+          "Upload Scanning"
         ],
+        "summary": "Get your Current Upload Scanning Configuration",
+        "operationId": "Get Upload Scanning",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3112,8 +3181,10 @@
       },
       "patch": {
         "tags": [
-          "UploadScanning"
+          "Upload Scanning"
         ],
+        "summary": "Update your Upload Scanning Configuration",
+        "operationId": "Update Upload Scanning",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3235,8 +3306,10 @@
     "/shield/waf/rules/{shieldZoneId}": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve all available WAF rules for a Shield Zone",
+        "operationId": "Get WAF Rules",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3309,8 +3382,10 @@
     "/shield/waf/rules/plan-segmentation": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve WAF rules segmented by subscription plan",
+        "operationId": "Get WAF Rules by Plan",
         "responses": {
           "200": {
             "description": "OK",
@@ -3361,8 +3436,10 @@
     "/shield/waf/rules/review-triggered/{shieldZoneId}": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Review all triggered WAF rules for the specified Shield Zone",
+        "operationId": "Get Triggered WAF Rules",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3424,8 +3501,10 @@
       },
       "post": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Review and update the action of a triggered WAF rule",
+        "operationId": "Update Triggered WAF Rule",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3509,8 +3588,10 @@
     "/shield/waf/rules/review-triggered/ai-recommendation/{shieldZoneId}/{ruleId}": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve an AI recommendation for a triggered WAF rule",
+        "operationId": "Get Triggered Rule AI Recommendation",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3584,8 +3665,10 @@
     "/shield/waf/custom-rules/{shieldZoneId}": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve custom WAF rules configured for the specified Shield Zone",
+        "operationId": "Get Custom WAF Rules",
         "parameters": [
           {
             "name": "shieldZoneId",
@@ -3671,8 +3754,10 @@
     "/shield/waf/custom-rule/{id}": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve a specific custom WAF rule",
+        "operationId": "Get Custom WAF Rule",
         "parameters": [
           {
             "name": "id",
@@ -3734,8 +3819,10 @@
       },
       "put": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Update an existing custom WAF rule",
+        "operationId": "Update Custom WAF Rule",
         "parameters": [
           {
             "name": "id",
@@ -3837,8 +3924,10 @@
       },
       "patch": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Update an existing custom WAF rule",
+        "operationId": "Update Custom WAF Rule",
         "parameters": [
           {
             "name": "id",
@@ -3940,8 +4029,10 @@
       },
       "delete": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Delete a custom WAF rule",
+        "operationId": "Delete Custom WAF Rule",
         "parameters": [
           {
             "name": "id",
@@ -4025,8 +4116,10 @@
     "/shield/waf/custom-rule": {
       "post": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Create a new custom WAF rule",
+        "operationId": "Create Custom WAF Rule",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4117,8 +4210,10 @@
     "/shield/waf/profiles": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve all available WAF profiles",
+        "operationId": "List WAF Profiles",
         "responses": {
           "200": {
             "description": "OK",
@@ -4169,8 +4264,10 @@
     "/shield/waf/enums": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve all available WAF enum mappings",
+        "operationId": "Get WAF Enum Mappings",
         "responses": {
           "200": {
             "description": "OK",
@@ -4221,8 +4318,10 @@
     "/shield/waf/engine-config": {
       "get": {
         "tags": [
-          "Waf"
+          "WAF"
         ],
+        "summary": "Retrieve the default WAF engine configuration",
+        "operationId": "Get WAF Engine Configuration",
         "responses": {
           "200": {
             "description": "OK",
