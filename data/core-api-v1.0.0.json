@@ -6890,6 +6890,10 @@
             "type": "integer",
             "description": "The maximum global simultaneous WebSocket connections allowed for this Pull Zone.",
             "format": "int32"
+          },
+          "EnableExtendedLogging": {
+            "type": "boolean",
+            "description": "Determines if extended logging with additional details is enabled for this Pull Zone."
           }
         }
       },
@@ -7067,7 +7071,7 @@
       },
       "EdgeRuleActionType": {
         "type": "integer",
-        "description": "0 = ForceSSL\n1 = Redirect\n2 = OriginUrl\n3 = OverrideCacheTime\n4 = BlockRequest\n5 = SetResponseHeader\n6 = SetRequestHeader\n7 = ForceDownload\n8 = DisableTokenAuthentication\n9 = EnableTokenAuthentication\n10 = OverrideCacheTimePublic\n11 = IgnoreQueryString\n12 = DisableOptimizer\n13 = ForceCompression\n14 = SetStatusCode\n15 = BypassPermaCache\n16 = OverrideBrowserCacheTime\n17 = OriginStorage\n18 = SetNetworkRateLimit\n19 = SetConnectionLimit\n20 = SetRequestsPerSecondLimit\n21 = RunEdgeScript\n22 = OriginMagicContainers\n23 = DisableWAF\n24 = RetryOrigin\n25 = OverrideBrowserCacheResponseHeader\n26 = RemoveBrowserCacheResponseHeader\n27 = DisableShieldChallenge\n28 = DisableShield\n29 = DisableShieldBotDetection",
+        "description": "0 = ForceSSL\n1 = Redirect\n2 = OriginUrl\n3 = OverrideCacheTime\n4 = BlockRequest\n5 = SetResponseHeader\n6 = SetRequestHeader\n7 = ForceDownload\n8 = DisableTokenAuthentication\n9 = EnableTokenAuthentication\n10 = OverrideCacheTimePublic\n11 = IgnoreQueryString\n12 = DisableOptimizer\n13 = ForceCompression\n14 = SetStatusCode\n15 = BypassPermaCache\n16 = OverrideBrowserCacheTime\n17 = OriginStorage\n18 = SetNetworkRateLimit\n19 = SetConnectionLimit\n20 = SetRequestsPerSecondLimit\n21 = RunEdgeScript\n22 = OriginMagicContainers\n23 = DisableWAF\n24 = RetryOrigin\n25 = OverrideBrowserCacheResponseHeader\n26 = RemoveBrowserCacheResponseHeader\n27 = DisableShieldChallenge\n28 = DisableShield\n29 = DisableShieldBotDetection\n30 = BypassAwsS3Authentication\n31 = DisableShieldAccessLists\n32 = DisableShieldRateLimiting\n33 = EnableRequestCoalescing\n34 = DisableRequestCoalescing",
         "x-enumNames": [
           "ForceSSL",
           "Redirect",
@@ -7098,7 +7102,12 @@
           "RemoveBrowserCacheResponseHeader",
           "DisableShieldChallenge",
           "DisableShield",
-          "DisableShieldBotDetection"
+          "DisableShieldBotDetection",
+          "BypassAwsS3Authentication",
+          "DisableShieldAccessLists",
+          "DisableShieldRateLimiting",
+          "EnableRequestCoalescing",
+          "DisableRequestCoalescing"
         ],
         "enum": [
           0,
@@ -7130,7 +7139,12 @@
           26,
           27,
           28,
-          29
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
         ]
       },
       "Trigger": {
