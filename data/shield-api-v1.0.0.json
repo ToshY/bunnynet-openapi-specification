@@ -5144,6 +5144,9 @@
               },
               "RESPONSE_STATUS": {
                 "type": "string"
+              },
+              "FINGERPRINT": {
+                "type": "string"
               }
             },
             "additionalProperties": false,
@@ -5330,6 +5333,9 @@
                 "type": "string"
               },
               "RESPONSE_STATUS": {
+                "type": "string"
+              },
+              "FINGERPRINT": {
                 "type": "string"
               }
             },
@@ -7428,6 +7434,9 @@
               },
               "RESPONSE_STATUS": {
                 "type": "string"
+              },
+              "FINGERPRINT": {
+                "type": "string"
               }
             },
             "additionalProperties": false,
@@ -7572,7 +7581,9 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7
         ],
         "type": "integer",
         "format": "int32"
