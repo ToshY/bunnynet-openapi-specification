@@ -2986,49 +2986,13 @@
         }
       }
     },
-    "/videolibrary/resetApiKey": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Reset API Key",
-        "operationId": "VideoLibraryPublic_ResetPassword",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "description": "The ID of the video library that should have the API key reset",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The API key has been successfully changed"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The Video Library with the requested ID does not exist"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/videolibrary/{id}/resetApiKey": {
       "post": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "Reset API Key",
-        "operationId": "VideoLibraryPublic_ResetPassword2",
+        "operationId": "VideoLibraryPublic_ResetPassword",
         "parameters": [
           {
             "name": "id",
@@ -3058,49 +3022,13 @@
         }
       }
     },
-    "/videolibrary/resetReadOnlyApiKey": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Reset Read Only API Key",
-        "operationId": "VideoLibraryPublic_ResetReadOnlyApiKey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "description": "The ID of the video library that should have the read only API key reset",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The Read Only API key has been successfully changed"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The Video Library with the requested ID does not exist"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/videolibrary/{id}/resetReadOnlyApiKey": {
       "post": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "Reset Read Only API Key",
-        "operationId": "VideoLibraryPublic_ResetReadOnlyApiKey2",
+        "operationId": "VideoLibraryPublic_ResetReadOnlyApiKey",
         "parameters": [
           {
             "name": "id",
