@@ -116,17 +116,21 @@ tasks:
             echo "File '$filename' changed or new (old: $old_hash; new: $new_hash); writing."
             mv "$tempfile" "$filepath"
           fi
+        
+          updatedAt=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
           # Append entry using jq
           manifest_entries=$(echo "$manifest_entries" | jq \
             --arg source "$full_url" \
             --arg sourceDescription "$text" \
+            --arg updatedAt "$updatedAt" \
             --arg fileName "$filename" \
             --arg fileUrl "https://${GIHUB_PAGES_URL}/$filename" \
             --arg fileSha256 "$new_hash" \
             '. + [{
               source: $source,
               sourceDescription: $sourceDescription,
+              updatedAt: $updatedAt,
               fileName: $fileName,
               fileUrl: $fileUrl,
               fileSha256: $fileSha256
