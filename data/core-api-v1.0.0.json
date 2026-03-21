@@ -68,8 +68,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1,
-              "maximum": 2147483647,
-              "minimum": 1
+              "maximum": 2147483647.0,
+              "minimum": 1.0
             },
             "x-position": 1
           },
@@ -80,8 +80,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1000,
-              "maximum": 1000,
-              "minimum": 5
+              "maximum": 1000.0,
+              "minimum": 5.0
             },
             "x-position": 2
           },
@@ -692,8 +692,8 @@
               "type": "integer",
               "format": "int32",
               "default": 0,
-              "maximum": 2147483647,
-              "minimum": 1
+              "maximum": 2147483647.0,
+              "minimum": 1.0
             },
             "x-position": 1
           },
@@ -704,8 +704,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1000,
-              "maximum": 1000,
-              "minimum": 5
+              "maximum": 1000.0,
+              "minimum": 5.0
             },
             "x-position": 2
           },
@@ -2347,8 +2347,8 @@
               "type": "integer",
               "format": "int32",
               "default": 0,
-              "maximum": 2147483647,
-              "minimum": 1
+              "maximum": 2147483647.0,
+              "minimum": 1.0
             },
             "x-position": 1
           },
@@ -2359,8 +2359,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1000,
-              "maximum": 1000,
-              "minimum": 5
+              "maximum": 1000.0,
+              "minimum": 5.0
             },
             "x-position": 2
           },
@@ -2726,8 +2726,8 @@
               "type": "integer",
               "format": "int32",
               "default": 0,
-              "maximum": 2147483647,
-              "minimum": 1
+              "maximum": 2147483647.0,
+              "minimum": 1.0
             },
             "x-position": 1
           },
@@ -2738,8 +2738,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1000,
-              "maximum": 1000,
-              "minimum": 5
+              "maximum": 1000.0,
+              "minimum": 5.0
             },
             "x-position": 2
           },
@@ -3955,8 +3955,8 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "maximum": 10000,
-              "minimum": 1
+              "maximum": 10000.0,
+              "minimum": 1.0
             },
             "x-position": 8
           }
@@ -4961,8 +4961,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1,
-              "maximum": 2147483647,
-              "minimum": 1
+              "maximum": 2147483647.0,
+              "minimum": 1.0
             },
             "x-position": 1
           },
@@ -4973,8 +4973,8 @@
               "type": "integer",
               "format": "int32",
               "default": 1000,
-              "maximum": 1000,
-              "minimum": 5
+              "maximum": 1000.0,
+              "minimum": 5.0
             },
             "x-position": 2
           }
@@ -6360,29 +6360,29 @@
             "type": "integer",
             "description": "Determines the maximum automatic image size for desktop clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0
+            "maximum": 5000.0,
+            "minimum": 0.0
           },
           "OptimizerMobileMaxWidth": {
             "type": "integer",
             "description": "Determines the maximum automatic image size for mobile clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0
+            "maximum": 5000.0,
+            "minimum": 0.0
           },
           "OptimizerImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for desktop clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1
+            "maximum": 100.0,
+            "minimum": 1.0
           },
           "OptimizerMobileImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for mobile clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1
+            "maximum": 100.0,
+            "minimum": 1.0
           },
           "OptimizerEnableWebP": {
             "type": "boolean",
@@ -7479,8 +7479,8 @@
           },
           "PermaCacheType": {
             "description": "Determines Perma-Cache behavior",
-            "maximum": 1,
-            "minimum": 0,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "nullable": true,
             "oneOf": [
               {
@@ -7653,32 +7653,32 @@
             "type": "integer",
             "description": "Determines the maximum automatic image size for desktop clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0,
+            "maximum": 5000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "OptimizerMobileMaxWidth": {
             "type": "integer",
             "description": "Determines the maximum automatic image size for mobile clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0,
+            "maximum": 5000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "OptimizerImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for desktop clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1,
+            "maximum": 100.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "OptimizerMobileImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for mobile clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1,
+            "maximum": 100.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "OptimizerEnableWebP": {
@@ -7856,8 +7856,8 @@
             "type": "integer",
             "description": "Determines the number of maximum concurrent requests allowed to the origin.",
             "format": "int32",
-            "maximum": 10000,
-            "minimum": 1,
+            "maximum": 10000.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "EnableCookieVary": {
@@ -7887,8 +7887,8 @@
             "type": "integer",
             "description": "Determines the max number of origin requests that will remain in the queue",
             "format": "int32",
-            "maximum": 30000,
-            "minimum": 0,
+            "maximum": 30000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "UseBackgroundUpdate": {
@@ -8055,8 +8055,8 @@
             "type": "integer",
             "description": "The delay in miliseconds after which the preloading screen will be displayed (0 - 10000ms)",
             "format": "int32",
-            "maximum": 10000,
-            "minimum": 0,
+            "maximum": 10000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "RoutingFilters": {
@@ -8486,8 +8486,8 @@
           },
           "PermaCacheType": {
             "description": "Determines Perma-Cache behavior",
-            "maximum": 1,
-            "minimum": 0,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "nullable": true,
             "oneOf": [
               {
@@ -8660,32 +8660,32 @@
             "type": "integer",
             "description": "Determines the maximum automatic image size for desktop clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0,
+            "maximum": 5000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "OptimizerMobileMaxWidth": {
             "type": "integer",
             "description": "Determines the maximum automatic image size for mobile clients",
             "format": "int32",
-            "maximum": 5000,
-            "minimum": 0,
+            "maximum": 5000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "OptimizerImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for desktop clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1,
+            "maximum": 100.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "OptimizerMobileImageQuality": {
             "type": "integer",
             "description": "Determines the image quality for mobile clients",
             "format": "int32",
-            "maximum": 100,
-            "minimum": 1,
+            "maximum": 100.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "OptimizerEnableWebP": {
@@ -8863,8 +8863,8 @@
             "type": "integer",
             "description": "Determines the number of maximum concurrent requests allowed to the origin.",
             "format": "int32",
-            "maximum": 10000,
-            "minimum": 1,
+            "maximum": 10000.0,
+            "minimum": 1.0,
             "nullable": true
           },
           "EnableCookieVary": {
@@ -8894,8 +8894,8 @@
             "type": "integer",
             "description": "Determines the max number of origin requests that will remain in the queue",
             "format": "int32",
-            "maximum": 30000,
-            "minimum": 0,
+            "maximum": 30000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "UseBackgroundUpdate": {
@@ -9062,8 +9062,8 @@
             "type": "integer",
             "description": "The delay in miliseconds after which the preloading screen will be displayed (0 - 10000ms)",
             "format": "int32",
-            "maximum": 10000,
-            "minimum": 0,
+            "maximum": 10000.0,
+            "minimum": 0.0,
             "nullable": true
           },
           "RoutingFilters": {
