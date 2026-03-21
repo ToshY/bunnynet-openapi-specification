@@ -22,11 +22,14 @@ tasks:
         
         manifest_path="$out_dir/manifest.json"
         declare -A existing_hashes
+        declare -A existing_updated_at
         if [ -f "$manifest_path" ]; then
           manifest_json=$(cat "$manifest_path")
           while IFS= read -r file; do
             hash=$(echo "$manifest_json" | jq -r --arg file "$file" '.[] | select(.fileName == $file) | .fileSha256')            
             existing_hashes["$file"]="$hash"
+            updated_at=$(echo "$manifest_json" | jq -r --arg file "$file" '.[] | select(.fileName == $file) | .updatedAt')
+            existing_updated_at["$file"]="$updated_at"
           done < <(echo "$manifest_json" | jq -r '.[].fileName')
         fi
         
@@ -112,12 +115,12 @@ tasks:
           if [ "$new_hash" = "$old_hash" ]; then
             echo "File '$filename' unchanged (checksum match); skipping overwrite."
             rm "$tempfile"
+            updatedAt="${existing_updated_at[$filename]}"
           else
             echo "File '$filename' changed or new (old: $old_hash; new: $new_hash); writing."
             mv "$tempfile" "$filepath"
+            updatedAt=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           fi
-        
-          updatedAt=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
           # Append entry using jq
           manifest_entries=$(echo "$manifest_entries" | jq \
