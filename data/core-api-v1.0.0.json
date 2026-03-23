@@ -683,11 +683,12 @@
           "Pull Zone"
         ],
         "summary": "List Pull Zones",
-        "operationId": "PullZonePublic_Index",
+        "operationId": "PullZonePublic_IndexAll",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "The page number to return. When set to 0 (default), all items are returned as a plain array. When set to a value greater than 0, items are returned in a paginated response object.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -732,11 +733,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of all the pull zones on the account",
+            "description": "The list of all the pull zones on the account. When the page parameter is set to a value greater than 0, the response will be a paginated object with Items, CurrentPage, TotalItems and HasMoreItems properties instead of a plain array.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfPullZoneModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PullZoneModel"
+                  }
                 }
               }
             }
@@ -797,7 +801,7 @@
           "Pull Zone"
         ],
         "summary": "Get Pull Zone",
-        "operationId": "PullZonePublic_Index2",
+        "operationId": "PullZonePublic_Index",
         "parameters": [
           {
             "name": "id",
@@ -2338,11 +2342,12 @@
           "Storage Zone"
         ],
         "summary": "List Storage Zones",
-        "operationId": "StorageZonePublic_Index",
+        "operationId": "StorageZonePublic_IndexAll",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "The page number to return. When set to 0 (default), all items are returned as a plain array. When set to a value greater than 0, items are returned in a paginated response object.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -2386,11 +2391,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of storage zones on the account",
+            "description": "The list of storage zones on the account. When the page parameter is set to a value greater than 0, the response will be a paginated object with Items, CurrentPage, TotalItems and HasMoreItems properties instead of a plain array.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfStorageZoneModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StorageZoneModel"
+                  }
                 }
               }
             }
@@ -2501,7 +2509,7 @@
           "Storage Zone"
         ],
         "summary": "Get Storage Zone",
-        "operationId": "StorageZonePublic_Index2",
+        "operationId": "StorageZonePublic_Index",
         "parameters": [
           {
             "name": "id",
@@ -2717,11 +2725,12 @@
           "Stream Video Library"
         ],
         "summary": "List Video Libraries",
-        "operationId": "VideoLibraryPublic_Index",
+        "operationId": "VideoLibraryPublic_IndexAll",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "The page number to return. When set to 0 (default), all items are returned as a plain array. When set to a value greater than 0, items are returned in a paginated response object.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -2756,11 +2765,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of Video Libraries on the account",
+            "description": "The list of Video Libraries on the account. When the page parameter is set to a value greater than 0, the response will be a paginated object with Items, CurrentPage, TotalItems and HasMoreItems properties instead of a plain array.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfVideoLibraryModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VideoLibraryModel"
+                  }
                 }
               }
             }
@@ -2825,7 +2837,7 @@
           "Stream Video Library"
         ],
         "summary": "Get Video Library",
-        "operationId": "VideoLibraryPublic_Index2",
+        "operationId": "VideoLibraryPublic_Index",
         "parameters": [
           {
             "name": "id",
@@ -2965,7 +2977,7 @@
           "Stream Video Library"
         ],
         "summary": "Get Languages",
-        "operationId": "VideoLibraryPublic_Index3",
+        "operationId": "VideoLibraryPublic_Index2",
         "responses": {
           "200": {
             "description": "A list of language information objects",
@@ -5885,30 +5897,6 @@
           "Domain": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "PaginationListModelOfPullZoneModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/PullZoneModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
           }
         }
       },
@@ -9323,30 +9311,6 @@
           }
         }
       },
-      "PaginationListModelOfStorageZoneModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/StorageZoneModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
-          }
-        }
-      },
       "StorageZoneModel": {
         "type": "object",
         "additionalProperties": false,
@@ -9556,30 +9520,6 @@
             "type": "boolean",
             "description": "Rewrite 404 status code to 200 for URLs without extension",
             "nullable": true
-          }
-        }
-      },
-      "PaginationListModelOfVideoLibraryModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/VideoLibraryModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
           }
         }
       },
