@@ -3511,6 +3511,22 @@
             "format": "int32",
             "nullable": true
           },
+          "isPlayable": {
+            "type": "boolean",
+            "description": "Determines if the video is currently playable using either playlist or original source."
+          },
+          "isPlaylistPlayable": {
+            "type": "boolean",
+            "description": "Determines if the HLS playlist is currently playable."
+          },
+          "preferredPlaybackSource": {
+            "description": "Preferred playback source for the current video state.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VideoPlaybackSource"
+              }
+            ]
+          },
           "rememberPlayerPosition": {
             "type": "boolean"
           },
@@ -3519,6 +3535,20 @@
             "nullable": true
           }
         }
+      },
+      "VideoPlaybackSource": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "Playlist",
+          "Original"
+        ],
+        "enum": [
+          "None",
+          "Playlist",
+          "Original"
+        ]
       },
       "VideoStatisticsModel": {
         "type": "object",
