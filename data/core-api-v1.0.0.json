@@ -3137,7 +3137,7 @@
           "Stream Video Library"
         ],
         "summary": "Reset API Key",
-        "operationId": "ResetVideoLibraryApiKeyEndpoint_ResetVideoLibraryApiKey2",
+        "operationId": "ResetVideoLibraryApiKeyEndpoint_ResetVideoLibraryApiKey",
         "parameters": [
           {
             "name": "id",
@@ -3195,7 +3195,7 @@
           "Stream Video Library"
         ],
         "summary": "Reset Read Only API Key",
-        "operationId": "ResetVideoLibraryReadOnlyApiKeyEndpoint_ResetVideoLibraryReadOnlyApiKey2",
+        "operationId": "ResetVideoLibraryReadOnlyApiKeyEndpoint_ResetVideoLibraryReadOnlyApiKey",
         "parameters": [
           {
             "name": "id",
@@ -3659,122 +3659,6 @@
           },
           "401": {
             "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/videolibrary/resetApiKey": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Reset API Key",
-        "operationId": "ResetVideoLibraryApiKeyEndpoint_ResetVideoLibraryApiKey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the video library that should have the API key reset",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The API key has been successfully changed"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The Video Library with the requested ID does not exist"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/videolibrary/resetReadOnlyApiKey": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Reset Read Only API Key",
-        "operationId": "ResetVideoLibraryReadOnlyApiKeyEndpoint_ResetVideoLibraryReadOnlyApiKey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the video library that should have the read only API key reset",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The Read Only API key has been successfully changed"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "404": {
-            "description": "The Video Library with the requested ID does not exist"
           },
           "500": {
             "description": "Internal Server Error"
