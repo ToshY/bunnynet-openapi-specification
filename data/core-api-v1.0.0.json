@@ -2720,85 +2720,17 @@
       }
     },
     "/videolibrary": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Add Video Library",
-        "operationId": "AddVideoLibraryEndpoint_AddVideoLibrary",
-        "requestBody": {
-          "x-name": "videoLibraryModel",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VideoLibraryCreateModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "201": {
-            "description": "The added video library",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VideoLibraryModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed to add video library",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
-      },
       "get": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "List Video Libraries",
-        "operationId": "ListVideoLibrariesEndpoint_ListVideoLibraries",
+        "operationId": "VideoLibraryPublic_IndexAll",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "The page number to return. When set to 0 (default), all items are returned as a plain array. When set to a value greater than 0, items are returned in a paginated response object.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -2837,7 +2769,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginationListModelOfVideoLibraryModel"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VideoLibraryModel"
+                  }
                 }
               }
             }
@@ -2848,94 +2783,61 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/videolibrary/{id}": {
-      "delete": {
+        }
+      },
+      "post": {
         "tags": [
           "Stream Video Library"
         ],
-        "summary": "Delete Video Library",
-        "operationId": "DeleteVideoLibraryEndpoint_DeleteVideoLibrary",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the Video Library that should be deleted",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The requested video library has been successfully deleted"
+        "summary": "Add Video Library",
+        "operationId": "VideoLibraryPublic_Add",
+        "requestBody": {
+          "x-name": "videoLibraryModel",
+          "content": {
+            "application/json": {
+              "schema": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/VideoLibraryCreateModel"
+                  }
+                ]
+              }
+            }
           },
-          "404": {
-            "description": "The Video Library with the requested ID does not exist"
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "x-position": 1
         },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
+        "responses": {
+          "200": {
+            "description": "The added video library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoLibraryModel"
+                }
+              }
+            }
           },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
+          "400": {
+            "description": "Failed to add video library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           }
-        ]
-      },
+        }
+      }
+    },
+    "/videolibrary/{id}": {
       "get": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "Get Video Library",
-        "operationId": "GetVideoLibraryEndpoint_GetVideoLibrary",
+        "operationId": "VideoLibraryPublic_Index",
         "parameters": [
           {
             "name": "id",
@@ -2969,42 +2871,19 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "Update Video Library",
-        "operationId": "UpdateVideoLibraryEndpoint_UpdateVideoLibrary",
+        "operationId": "VideoLibraryPublic_Update",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The ID of the Video Library to update",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -3017,16 +2896,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VideoLibraryUpdateModel"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/VideoLibraryUpdateModel"
+                  }
+                ]
               }
             }
           },
-          "required": true,
           "x-position": 2
         },
         "responses": {
-          "200": {
-            "description": "The updated video library",
+          "204": {
+            "description": "The requested video library has been successfuly deleted",
             "content": {
               "application/json": {
                 "schema": {
@@ -3038,15 +2921,46 @@
           "404": {
             "description": "The Video Library with the requested ID does not exist"
           },
-          "400": {
-            "description": "Validation error",
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stream Video Library"
+        ],
+        "summary": "Delete Video Library",
+        "operationId": "VideoLibraryPublic_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the Video Library that should be deleted",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The requested video library has been successfuly deleted",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
+                  "$ref": "#/components/schemas/VideoLibraryModel"
                 }
               }
             }
+          },
+          "404": {
+            "description": "The Video Library with the requested ID does not exist"
           },
           "401": {
             "description": "The request authorization failed"
@@ -3054,29 +2968,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/languages": {
@@ -3085,17 +2977,14 @@
           "Stream Video Library"
         ],
         "summary": "Get Languages",
-        "operationId": "GetVideoLibraryLanguagesEndpoint_GetVideoLibraryLanguages",
+        "operationId": "VideoLibraryPublic_Index2",
         "responses": {
           "200": {
             "description": "A list of language information objects",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VideoLibraryLanguage"
-                  }
+                  "$ref": "#/components/schemas/VideoLibraryModel"
                 }
               }
             }
@@ -3106,29 +2995,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/resetApiKey": {
@@ -3137,7 +3004,7 @@
           "Stream Video Library"
         ],
         "summary": "Reset API Key",
-        "operationId": "ResetVideoLibraryApiKeyEndpoint_ResetVideoLibraryApiKey",
+        "operationId": "VideoLibraryPublic_ResetPassword",
         "parameters": [
           {
             "name": "id",
@@ -3164,29 +3031,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/resetReadOnlyApiKey": {
@@ -3195,7 +3040,7 @@
           "Stream Video Library"
         ],
         "summary": "Reset Read Only API Key",
-        "operationId": "ResetVideoLibraryReadOnlyApiKeyEndpoint_ResetVideoLibraryReadOnlyApiKey",
+        "operationId": "VideoLibraryPublic_ResetReadOnlyApiKey",
         "parameters": [
           {
             "name": "id",
@@ -3222,29 +3067,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/watermark": {
@@ -3253,7 +3076,7 @@
           "Stream Video Library"
         ],
         "summary": "Add Watermark",
-        "operationId": "AddWatermarkEndpoint_AddWatermark",
+        "operationId": "VideoLibraryPublic_AddWatermark",
         "parameters": [
           {
             "name": "id",
@@ -3269,7 +3092,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The watermark has been successfully uploaded"
+            "description": "The watermark has been successfuly uploaded"
           },
           "404": {
             "description": "The Video Library with the requested ID does not exist"
@@ -3283,36 +3106,14 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
           "Stream Video Library"
         ],
         "summary": "Delete Watermark",
-        "operationId": "DeleteWatermarkEndpoint_DeleteWatermark",
+        "operationId": "VideoLibraryPublic_DeleteWatermark",
         "parameters": [
           {
             "name": "id",
@@ -3328,10 +3129,20 @@
         ],
         "responses": {
           "204": {
-            "description": "The watermark has been successfully deleted"
+            "description": "The watermark has been successfuly deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoLibraryModel"
+                }
+              }
+            }
           },
           "404": {
             "description": "The Video Library with the requested ID does not exist"
+          },
+          "413": {
+            "description": "The uploaded file was too large"
           },
           "401": {
             "description": "The request authorization failed"
@@ -3339,29 +3150,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/addAllowedReferrer": {
@@ -3370,7 +3159,7 @@
           "Stream Video Library"
         ],
         "summary": "Add Allowed Referer",
-        "operationId": "AddAllowedReferrerEndpoint_AddAllowedReferrer",
+        "operationId": "VideoLibraryPublic_AddAllowedReferrer",
         "parameters": [
           {
             "name": "id",
@@ -3398,8 +3187,8 @@
           "x-position": 2
         },
         "responses": {
-          "200": {
-            "description": "The allowed referer was successfully added"
+          "204": {
+            "description": "The allowed referer was successfuly added"
           },
           "404": {
             "description": "The Video Library with the requested ID was not found"
@@ -3420,29 +3209,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/removeAllowedReferrer": {
@@ -3451,88 +3218,7 @@
           "Stream Video Library"
         ],
         "summary": "Remove Allowed Referer",
-        "operationId": "RemoveAllowedReferrerEndpoint_RemoveAllowedReferrer",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the requested Video Library",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "model",
-          "description": "Request model",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RemoveAllowedReferrerRequestModel"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "The allowed referer was successfully removed"
-          },
-          "404": {
-            "description": "The Video Library with the requested ID was not found"
-          },
-          "400": {
-            "description": "Failed to remove allowed referer",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/videolibrary/{id}/addBlockedReferrer": {
-      "post": {
-        "tags": [
-          "Stream Video Library"
-        ],
-        "summary": "Add Blocked Referer",
-        "operationId": "AddBlockedReferrerEndpoint_AddBlockedReferrer",
+        "operationId": "VideoLibraryPublic_RemoveAllowedReferrer",
         "parameters": [
           {
             "name": "id",
@@ -3560,14 +3246,14 @@
           "x-position": 2
         },
         "responses": {
-          "200": {
-            "description": "The blocked referer was successfully added"
+          "204": {
+            "description": "The allowed referer was successfuly removed"
           },
           "404": {
-            "description": "The Video Library with the requested ID was not found"
+            "description": "The Pull Zone with the requested ID was not found"
           },
           "400": {
-            "description": "Failed to add blocked referer",
+            "description": "Failed to remove allowed referer",
             "content": {
               "application/json": {
                 "schema": {
@@ -3582,29 +3268,66 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/videolibrary/{id}/addBlockedReferrer": {
+      "post": {
+        "tags": [
+          "Stream Video Library"
+        ],
+        "summary": "Add Blocked Referer",
+        "operationId": "VideoLibraryPublic_AddBlockedReferrer",
+        "parameters": [
           {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the requested Video Library",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
           }
-        ]
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "Request model",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveAllowedReferrerRequestModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": "The allowed referer was successfuly removed"
+          },
+          "404": {
+            "description": "The Video Library with the requested ID was not found"
+          },
+          "400": {
+            "description": "Failed to remove allowed referer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/videolibrary/{id}/removeBlockedReferrer": {
@@ -3613,7 +3336,7 @@
           "Stream Video Library"
         ],
         "summary": "Remove Blocked Referer",
-        "operationId": "RemoveBlockedReferrerEndpoint_RemoveBlockedReferrer",
+        "operationId": "VideoLibraryPublic_RemoveBlockedReferrer",
         "parameters": [
           {
             "name": "id",
@@ -3641,11 +3364,11 @@
           "x-position": 2
         },
         "responses": {
-          "200": {
-            "description": "The blocked referer was successfully removed"
+          "204": {
+            "description": "The blocked referer was successfuly removed"
           },
           "404": {
-            "description": "The Video Library with the requested ID was not found"
+            "description": "The Pull Zone with the requested ID was not found"
           },
           "400": {
             "description": "Failed to remove blocked referer",
@@ -3663,29 +3386,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStream",
-              "SubuserStream",
-              "SubuserManage",
-              "SubuserAPIManage"
-            ]
-          }
-        ]
+        }
       }
     },
     "/videolibrary/{id}/transcribing/statistics": {
@@ -10733,54 +10434,6 @@
             "type": "string",
             "description": "The hostname that will be removed as a blocked referer",
             "minLength": 1
-          }
-        }
-      },
-      "VideoLibraryLanguage": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ShortCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "SupportPlayerTranslation": {
-            "type": "boolean"
-          },
-          "SupportTranscribing": {
-            "type": "boolean"
-          },
-          "TranscribingAccuracy": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "PaginationListModelOfVideoLibraryModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/VideoLibraryModel"
-            }
-          },
-          "CurrentPage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "TotalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "HasMoreItems": {
-            "type": "boolean"
           }
         }
       },
