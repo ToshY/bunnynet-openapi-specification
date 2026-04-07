@@ -2121,7 +2121,7 @@
             "x-position": 4
           },
           {
-            "name": "deleteOriginal",
+            "name": "allResolutions",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -2130,13 +2130,32 @@
             "x-position": 5
           },
           {
-            "name": "deleteMp4Files",
+            "name": "deleteOriginal",
             "in": "query",
             "schema": {
               "type": "boolean",
               "default": false
             },
             "x-position": 6
+          },
+          {
+            "name": "outputs",
+            "in": "query",
+            "description": "Outputs to clean. Supported values: hls, mp4, all",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 7
+          },
+          {
+            "name": "deleteMp4Files",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 8
           },
           {
             "name": "dryRun",
@@ -2146,7 +2165,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 7
+            "x-position": 9
           }
         ],
         "responses": {
@@ -3533,6 +3552,9 @@
           "customCss": {
             "type": "string",
             "nullable": true
+          },
+          "exposeVideoMetadata": {
+            "type": "boolean"
           }
         }
       },
