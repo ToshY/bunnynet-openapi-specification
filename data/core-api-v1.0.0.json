@@ -2961,10 +2961,34 @@
             }
           },
           "404": {
-            "description": "The Video Library with the requested ID does not exist"
+            "description": "The Video Library with the requested ID does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The Video Library is not accessible for the authenticated account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           },
           "401": {
-            "description": "The request authorization failed"
+            "description": "The request authorization failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
