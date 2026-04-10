@@ -4505,16 +4505,6 @@
             "x-position": 6
           },
           {
-            "name": "exactRange",
-            "in": "query",
-            "description": "(Optional) If true and hourly=true, the exact hour components of dateFrom and dateTo will be preserved instead of rounding to full-day boundaries.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "x-position": 7
-          },
-          {
             "name": "loadOriginResponseTimes",
             "in": "query",
             "description": "Load Origin Response Times",
@@ -4522,7 +4512,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 8
+            "x-position": 7
           },
           {
             "name": "loadOriginTraffic",
@@ -4532,7 +4522,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 9
+            "x-position": 8
           },
           {
             "name": "loadRequestsServed",
@@ -4542,7 +4532,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 10
+            "x-position": 9
           },
           {
             "name": "loadBandwidthUsed",
@@ -4552,7 +4542,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 11
+            "x-position": 10
           },
           {
             "name": "loadOriginShieldBandwidth",
@@ -4562,7 +4552,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 12
+            "x-position": 11
           },
           {
             "name": "loadGeographicTrafficDistribution",
@@ -4572,7 +4562,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 13
+            "x-position": 12
           },
           {
             "name": "loadUserBalanceHistory",
@@ -4582,7 +4572,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 14
+            "x-position": 13
           }
         ],
         "responses": {
