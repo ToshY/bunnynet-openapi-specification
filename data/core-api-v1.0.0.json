@@ -1442,6 +1442,103 @@
         }
       }
     },
+    "/pullzone/requestExternalDnsCertificate": {
+      "post": {
+        "tags": [
+          "Pull Zone"
+        ],
+        "summary": "Request External DNS Certificate",
+        "operationId": "PullZonePublic_RequestExternalDnsCertificate",
+        "requestBody": {
+          "x-name": "hostname",
+          "description": "The hostname that the certificate will be requested for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "The TXT record details for DNS verification",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The hostname was not found in the account"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pullzone/completeExternalDnsCertificate": {
+      "post": {
+        "tags": [
+          "Pull Zone"
+        ],
+        "summary": "Complete External DNS Certificate",
+        "operationId": "PullZonePublic_CompleteExternalDnsCertificate",
+        "requestBody": {
+          "x-name": "hostname",
+          "description": "The hostname that the certificate will be loaded for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "The certificate was successfully loaded"
+          },
+          "400": {
+            "description": "The verification failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The hostname was not found in the account"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/pullzone/{id}/purgeCache": {
       "post": {
         "tags": [
