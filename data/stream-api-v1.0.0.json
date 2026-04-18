@@ -3355,7 +3355,7 @@
       },
       "IssueCodes": {
         "type": "integer",
-        "description": "0 = Undefined\n1 = StreamLengthsDifference\n2 = TranscodingWarnings\n3 = IncompatibleResolution\n4 = InvalidFramerate\n5 = VideoExceededMaxDuration\n6 = AudioExceededMaxDuration\n7 = OriginalCorrupted\n8 = TranscriptionFailed\n9 = JitIncompatible\n10 = JitFailed",
+        "description": "0 = Undefined\n1 = StreamLengthsDifference\n2 = TranscodingWarnings\n3 = IncompatibleResolution\n4 = InvalidFramerate\n5 = VideoExceededMaxDuration\n6 = AudioExceededMaxDuration\n7 = OriginalCorrupted\n8 = TranscriptionFailed\n9 = JitIncompatible\n10 = JitFailed\n11 = CaptionGenerationFailed",
         "x-enumNames": [
           "Undefined",
           "StreamLengthsDifference",
@@ -3367,7 +3367,8 @@
           "OriginalCorrupted",
           "TranscriptionFailed",
           "JitIncompatible",
-          "JitFailed"
+          "JitFailed",
+          "CaptionGenerationFailed"
         ],
         "enum": [
           0,
@@ -3380,7 +3381,8 @@
           7,
           8,
           9,
-          10
+          10,
+          11
         ]
       },
       "SmartGenerateStatus": {
