@@ -8506,7 +8506,7 @@
           },
           "OptimizerEnableUpscaling": {
             "type": "boolean",
-            "description": "Determines if Optimizer should automatically upscale images",
+            "description": "Determines if Optimizer is allowed to upscale images",
             "nullable": true
           },
           "EnableWebSockets": {
@@ -9513,7 +9513,7 @@
           },
           "OptimizerEnableUpscaling": {
             "type": "boolean",
-            "description": "Determines if Optimizer should automatically upscale images",
+            "description": "Determines if Optimizer is allowed to upscale images",
             "nullable": true
           },
           "EnableWebSockets": {
@@ -10359,6 +10359,10 @@
           "ExposeVideoMetadata": {
             "type": "boolean",
             "description": "Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed."
+          },
+          "EnableCompactControls": {
+            "type": "boolean",
+            "description": "Marks whether compact controls should be enabled for the player."
           }
         }
       },
@@ -10485,6 +10489,58 @@
             "type": "integer",
             "description": "(Optional) Sets player version used for this library",
             "format": "int32",
+            "nullable": true
+          },
+          "EncodingTier": {
+            "description": "(Optional) Defines encoding tier. Premium is a paid tier that offers prioritized encoding and extra codec support.",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncodingTier"
+              }
+            ]
+          },
+          "EnabledResolutions": {
+            "type": "string",
+            "description": "(Optional) Enabled transcoding resolutions as a comma-separated list. Allowed values: 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p",
+            "nullable": true
+          },
+          "EnableTranscribing": {
+            "type": "boolean",
+            "description": "(Optional) Enables automatic audio transcribing for this library.",
+            "nullable": true
+          },
+          "TranscribingCaptionLanguages": {
+            "type": "array",
+            "description": "(Optional) Languages that captions will be automatically transcribed to.",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "EnableTranscribingTitleGeneration": {
+            "type": "boolean",
+            "description": "(Optional) Determines if automatic transcribing title generation is enabled for this library. Enabling any smart generation feature turns on transcribing automatically.",
+            "nullable": true
+          },
+          "EnableTranscribingDescriptionGeneration": {
+            "type": "boolean",
+            "description": "(Optional) Determines if automatic transcribing description generation is enabled for this library. Enabling any smart generation feature turns on transcribing automatically.",
+            "nullable": true
+          },
+          "EnableTranscribingChaptersGeneration": {
+            "type": "boolean",
+            "description": "(Optional) Determines if automatic transcribing chapters generation is enabled for this library. Enabling any smart generation feature turns on transcribing automatically.",
+            "nullable": true
+          },
+          "EnableTranscribingMomentsGeneration": {
+            "type": "boolean",
+            "description": "(Optional) Determines if automatic transcribing moments generation is enabled for this library. Enabling any smart generation feature turns on transcribing automatically.",
+            "nullable": true
+          },
+          "AllowEarlyPlay": {
+            "type": "boolean",
+            "description": "(Optional) Enables Early Play. Enabling this also exposes originals via CDN settings consistent with the video library update API.",
             "nullable": true
           }
         }
@@ -10813,6 +10869,11 @@
           "ExposeVideoMetadata": {
             "type": "boolean",
             "description": "(Optional) Marks whether video metadata in form of schema meta tags and LD+JSON should be exposed.",
+            "nullable": true
+          },
+          "EnableCompactControls": {
+            "type": "boolean",
+            "description": "(Optional) Marks whether compact controls should be enabled for the player.",
             "nullable": true
           }
         }
