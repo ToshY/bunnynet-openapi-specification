@@ -2,10 +2,10 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/public.json",
     "sourceDescription": "Core Platform API",
-    "updatedAt": "2026-04-22T01:11:18Z",
+    "updatedAt": "2026-04-22T12:52:50Z",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "eb59f82f754a024810c36ff188c926003c610283ebce9d58590d5064c15390cb"
+    "fileSha256": "1d20bcc9b0f2212515ddabe2c4c2ed44a561fc3ae49faff7f174010e22a7713f"
   },
   {
     "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
@@ -34,10 +34,10 @@
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
     "sourceDescription": "Shield API",
-    "updatedAt": "2026-03-21T12:20:01Z",
+    "updatedAt": "2026-04-22T12:52:52Z",
     "fileName": "shield-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.0.json",
-    "fileSha256": "27ecf76272725b8537f5f3b1e3adefd42dfeeee197d376ca5163a2b9bf692c76"
+    "fileSha256": "0680a12987deb3c4cddf6915978525758f4f0711e991484015fbdadc7ac73ed8"
   },
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",

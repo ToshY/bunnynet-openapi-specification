@@ -1450,12 +1450,11 @@
         "summary": "Request External DNS Certificate",
         "operationId": "PullZonePublic_RequestExternalDnsCertificate",
         "requestBody": {
-          "x-name": "hostname",
-          "description": "The hostname that the certificate will be requested for",
+          "x-name": "req",
           "content": {
             "application/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/ExternalDnsCertificateRequest"
               }
             }
           },
@@ -1501,12 +1500,11 @@
         "summary": "Complete External DNS Certificate",
         "operationId": "PullZonePublic_CompleteExternalDnsCertificate",
         "requestBody": {
-          "x-name": "hostname",
-          "description": "The hostname that the certificate will be loaded for",
+          "x-name": "req",
           "content": {
             "application/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/ExternalDnsCertificateRequest"
               }
             }
           },
@@ -8678,6 +8676,19 @@
           }
         }
       },
+      "ExternalDnsCertificateRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "Hostname"
+        ],
+        "properties": {
+          "Hostname": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
       "PullZonePurgeModel": {
         "type": "object",
         "additionalProperties": false,
@@ -10500,9 +10511,44 @@
               }
             ]
           },
+          "JitEncodingEnabled": {
+            "type": "boolean",
+            "description": "(Optional) Determines whether JIT encoding should be used for the library. Supported in premium encoding only.",
+            "nullable": true
+          },
+          "OutputCodecs": {
+            "type": "string",
+            "description": "(Optional) Specifies which video codecs are used for encoding, provided as a comma-separated (CSV) string. Free encoding tier supports only x264. A premium encoding tier adds support for vp9, hevc, and av1.",
+            "nullable": true
+          },
           "EnabledResolutions": {
             "type": "string",
-            "description": "(Optional) Enabled transcoding resolutions as a comma-separated list. Allowed values: 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p",
+            "description": "(Optional) Sets the enabled resolutions for the transcoding. At least one resolution should be enabled. Possible values: 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p",
+            "nullable": true
+          },
+          "BlockNoneReferrer": {
+            "type": "boolean",
+            "description": "(Optional) Determines if requests without a referer should be blocked.",
+            "nullable": true
+          },
+          "EnableMP4Fallback": {
+            "type": "boolean",
+            "description": "(Optional) Determines if MP4 fallback should be enabled for this library.",
+            "nullable": true
+          },
+          "KeepOriginalFiles": {
+            "type": "boolean",
+            "description": "(Optional) Determines if the original file should be kept after the video is processed.",
+            "nullable": true
+          },
+          "AllowDirectPlay": {
+            "type": "boolean",
+            "description": "(Optional) Determines if direct play URLs should be enabled for the library",
+            "nullable": true
+          },
+          "EnableMultiAudioTrackSupport": {
+            "type": "boolean",
+            "description": "(Optional) Determines if multiple output audio track support is enabled on video library.",
             "nullable": true
           },
           "EnableTranscribing": {
