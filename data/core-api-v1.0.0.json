@@ -4437,6 +4437,58 @@
         ]
       }
     },
+    "/storagezone/regions": {
+      "get": {
+        "tags": [
+          "Storage Zone"
+        ],
+        "summary": "Get Storage Zone Regions",
+        "operationId": "GetStoragezoneRegionsEndpoint_GetStorageZoneRegions",
+        "responses": {
+          "200": {
+            "description": "A list of available storage zone regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StorageRegionModel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIStorage",
+              "SubuserStorage",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIStorage",
+              "SubuserStorage",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
     "/storagezone/{id}/statistics": {
       "get": {
         "tags": [
@@ -11162,6 +11214,27 @@
           "Ascending",
           "Descending"
         ]
+      },
+      "StorageRegionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "The unique identifier for the storage region",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "The name of the storage region",
+            "nullable": true
+          },
+          "Url": {
+            "type": "string",
+            "description": "The storage endpoint URL for this region",
+            "nullable": true
+          }
+        }
       },
       "StorageZoneStatisticsModel": {
         "type": "object",
