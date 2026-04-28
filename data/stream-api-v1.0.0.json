@@ -2747,6 +2747,9 @@
           },
           "rememberPlayerPosition": {
             "type": "boolean"
+          },
+          "enableCompactControls": {
+            "type": "boolean"
           }
         }
       },
@@ -3556,6 +3559,9 @@
             "nullable": true
           },
           "exposeVideoMetadata": {
+            "type": "boolean"
+          },
+          "enableCompactControls": {
             "type": "boolean"
           }
         }
