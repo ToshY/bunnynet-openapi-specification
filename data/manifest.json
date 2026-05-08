@@ -34,10 +34,10 @@
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
     "sourceDescription": "Shield API",
-    "updatedAt": "2026-04-22T12:52:52Z",
+    "updatedAt": "2026-05-08T13:01:46Z",
     "fileName": "shield-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.0.json",
-    "fileSha256": "0680a12987deb3c4cddf6915978525758f4f0711e991484015fbdadc7ac73ed8"
+    "fileSha256": "3bc07ca448c79591df5fa230b52d24cf690499d0a937a88c289df49535ec3c46"
   },
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",

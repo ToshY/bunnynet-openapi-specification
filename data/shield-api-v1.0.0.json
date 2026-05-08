@@ -5920,6 +5920,9 @@
               },
               "FINGERPRINT": {
                 "type": "string"
+              },
+              "VERIFIED_BOT_CATEGORY": {
+                "type": "string"
               }
             },
             "additionalProperties": false,
@@ -6109,6 +6112,9 @@
                 "type": "string"
               },
               "FINGERPRINT": {
+                "type": "string"
+              },
+              "VERIFIED_BOT_CATEGORY": {
                 "type": "string"
               }
             },
@@ -8090,6 +8096,9 @@
                 "type": "string"
               },
               "FINGERPRINT": {
+                "type": "string"
+              },
+              "VERIFIED_BOT_CATEGORY": {
                 "type": "string"
               }
             },
