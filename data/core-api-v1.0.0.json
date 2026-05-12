@@ -7180,7 +7180,7 @@
           },
           "OptimizerEnableUpscaling": {
             "type": "boolean",
-            "description": "Whether to automatically upscale assets when using Optimizer."
+            "description": "Determines if Optimizer is allowed to upscale images"
           },
           "EnableWebSockets": {
             "type": "boolean",
