@@ -12,6 +12,7 @@ https://toshy.github.io/bunnynet-openapi-specification/
 ├── core-api-v1.0.0.json
 ├── edge-scripting-api-v1.0.0.json
 ├── edge-storage-api-v1.0.0.json
+├── magic-containers-api-v1.0.0.json
 ├── origin-errors-api-v1.0.0.json
 ├── shield-api-v1.0.0.json
 └── stream-api-v1.0.0.json
