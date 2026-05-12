@@ -2,10 +2,10 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/public.json",
     "sourceDescription": "Core Platform API",
-    "updatedAt": "2026-05-12T13:28:11Z",
+    "updatedAt": "2026-05-12T18:36:24Z",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "6265267d84df02e73f20973a3d0f513ebd9f7fbd72e671ea60f4caa81eb488ea"
+    "fileSha256": "f6f197c6da37a9b21fc2bd8d7156d79b6009b89ba6782926ec04800d949b83a5"
   },
   {
     "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
@@ -26,10 +26,10 @@
   {
     "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
     "sourceDescription": "Stream API",
-    "updatedAt": "2026-04-28T07:58:46Z",
+    "updatedAt": "2026-05-12T18:36:25Z",
     "fileName": "stream-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.0.0.json",
-    "fileSha256": "3d41d158ff621f0767cff4a8302e6c6e707bfcd9026c9a946d64a4d4c9d9e5db"
+    "fileSha256": "3b305d02a779a151dcf73ef82faa204ffb965e5dfe6e5519e2fd5bdbc1fb9d6a"
   },
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
@@ -42,9 +42,17 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",
     "sourceDescription": "Edge Scripting API",
-    "updatedAt": "2026-03-21T12:20:01Z",
+    "updatedAt": "2026-05-12T18:36:26Z",
     "fileName": "edge-scripting-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.0.json",
-    "fileSha256": "8aa09806ccf30f78613febd955b6c7e8877f919ef36eb7514d6ab870b3cecce2"
+    "fileSha256": "6ea75ec01331181d81d53b75f05b06b5a63842e3fbaf94ab97195291fcf6fa6c"
+  },
+  {
+    "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
+    "sourceDescription": "Magic Containers API",
+    "updatedAt": "2026-05-12T18:36:27Z",
+    "fileName": "magic-containers-api-v1.0.0.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
+    "fileSha256": "d43d92487460c8f1892ef95f84c74e7e240752b88226b390aa9c1cb12d52cf9a"
   }
 ]
