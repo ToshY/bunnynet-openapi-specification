@@ -2121,7 +2121,7 @@
             "x-position": 4
           },
           {
-            "name": "deleteOriginal",
+            "name": "allResolutions",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -2130,13 +2130,32 @@
             "x-position": 5
           },
           {
-            "name": "deleteMp4Files",
+            "name": "deleteOriginal",
             "in": "query",
             "schema": {
               "type": "boolean",
               "default": false
             },
             "x-position": 6
+          },
+          {
+            "name": "outputs",
+            "in": "query",
+            "description": "Outputs to clean. Supported values: hls, mp4, all",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 7
+          },
+          {
+            "name": "deleteMp4Files",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 8
           },
           {
             "name": "dryRun",
@@ -2146,7 +2165,7 @@
               "type": "boolean",
               "default": false
             },
-            "x-position": 7
+            "x-position": 9
           }
         ],
         "responses": {
@@ -2727,6 +2746,9 @@
             "nullable": true
           },
           "rememberPlayerPosition": {
+            "type": "boolean"
+          },
+          "enableCompactControls": {
             "type": "boolean"
           }
         }
@@ -3336,7 +3358,7 @@
       },
       "IssueCodes": {
         "type": "integer",
-        "description": "0 = Undefined\n1 = StreamLengthsDifference\n2 = TranscodingWarnings\n3 = IncompatibleResolution\n4 = InvalidFramerate\n5 = VideoExceededMaxDuration\n6 = AudioExceededMaxDuration\n7 = OriginalCorrupted\n8 = TranscriptionFailed\n9 = JitIncompatible\n10 = JitFailed",
+        "description": "0 = Undefined\n1 = StreamLengthsDifference\n2 = TranscodingWarnings\n3 = IncompatibleResolution\n4 = InvalidFramerate\n5 = VideoExceededMaxDuration\n6 = AudioExceededMaxDuration\n7 = OriginalCorrupted\n8 = TranscriptionFailed\n9 = JitIncompatible\n10 = JitFailed\n11 = CaptionGenerationFailed",
         "x-enumNames": [
           "Undefined",
           "StreamLengthsDifference",
@@ -3348,7 +3370,8 @@
           "OriginalCorrupted",
           "TranscriptionFailed",
           "JitIncompatible",
-          "JitFailed"
+          "JitFailed",
+          "CaptionGenerationFailed"
         ],
         "enum": [
           0,
@@ -3361,7 +3384,8 @@
           7,
           8,
           9,
-          10
+          10,
+          11
         ]
       },
       "SmartGenerateStatus": {
@@ -3511,14 +3535,50 @@
             "format": "int32",
             "nullable": true
           },
+          "isPlayable": {
+            "type": "boolean",
+            "description": "Determines if the video is currently playable using either playlist or original source."
+          },
+          "isPlaylistPlayable": {
+            "type": "boolean",
+            "description": "Determines if the HLS playlist is currently playable."
+          },
+          "preferredPlaybackSource": {
+            "description": "Preferred playback source for the current video state.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VideoPlaybackSource"
+              }
+            ]
+          },
           "rememberPlayerPosition": {
             "type": "boolean"
           },
           "customCss": {
             "type": "string",
             "nullable": true
+          },
+          "exposeVideoMetadata": {
+            "type": "boolean"
+          },
+          "enableCompactControls": {
+            "type": "boolean"
           }
         }
+      },
+      "VideoPlaybackSource": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "Playlist",
+          "Original"
+        ],
+        "enum": [
+          "None",
+          "Playlist",
+          "Original"
+        ]
       },
       "VideoStatisticsModel": {
         "type": "object",
