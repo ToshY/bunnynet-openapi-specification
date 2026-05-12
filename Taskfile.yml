@@ -42,7 +42,7 @@ tasks:
 
         # Extract API links from new HTML structure
         grep -oP '<a[^>]*href="([^"]+)"[^>]*>([^<]+)</a>' "$temp_html" | \
-        grep -E '(Core Platform API|Origin Errors API|Storage API|Stream API|Shield API|Edge Scripting API)' | \
+        grep -E '(Core Platform API|Origin Errors API|Storage API|Stream API|Shield API|Edge Scripting API|Magic Containers API)' | \
         while IFS=$'\n' read -r line; do
           href=$(echo "$line" | grep -oP 'href="\K[^"]+')
           text=$(echo "$line" | grep -oP '>[^<]+</a>' | sed 's/>//;s/<\/a>//')
@@ -57,6 +57,7 @@ tasks:
             *"stream api"*) base_filename="stream-api" ;;
             *"shield api"*) base_filename="shield-api" ;;
             *"edge scripting api"*) base_filename="edge-scripting-api" ;;
+            *"magic containers api"*) base_filename="magic-containers-api" ;;
             *)
               base_filename="$(echo "$text" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed 's/^-//;s/-$//')"
               ;;
