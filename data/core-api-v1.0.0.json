@@ -795,6 +795,33 @@
         }
       }
     },
+    "/pullzone/count": {
+      "get": {
+        "tags": [
+          "Pull Zone"
+        ],
+        "summary": "Count Pull Zones",
+        "operationId": "PullZonePublic_Count",
+        "responses": {
+          "200": {
+            "description": "The total number of Pull Zones on the account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PullZoneCountModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/pullzone/{id}": {
       "get": {
         "tags": [
@@ -5435,7 +5462,25 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ]
       }
     },
     "/apikey": {
@@ -7720,6 +7765,16 @@
           0,
           1
         ]
+      },
+      "PullZoneCountModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "ToggleRequestModel": {
         "type": "object",
