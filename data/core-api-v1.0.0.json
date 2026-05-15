@@ -1208,7 +1208,8 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/pullzone/{pullZoneId}/safehop/statistics": {
@@ -1280,7 +1281,8 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/pullzone/{pullZoneId}/optimizer/statistics": {
@@ -1352,7 +1354,8 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/pullzone/{id}/updatePrivateKeyType": {
