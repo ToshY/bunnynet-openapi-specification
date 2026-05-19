@@ -12000,6 +12000,60 @@
             "description": "The total monthly charges for Magic Containers",
             "format": "decimal"
           },
+          "MonthlyMcCpu": {
+            "description": "The monthly charges and usage for Magic Containers CPU",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyMcMemory": {
+            "description": "The monthly charges and usage for Magic Containers Memory",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyMcIp": {
+            "description": "The monthly charges and usage for Magic Containers Anycast IP",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyMcIngressTraffic": {
+            "description": "The monthly charges and usage for Magic Containers Ingress Traffic",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyMcEgressTraffic": {
+            "description": "The monthly charges and usage for Magic Containers Egress Traffic",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
+          "MonthlyMcVolumes": {
+            "description": "The monthly charges and usage for Magic Containers Persistent Volumes",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
           "MonthlyChargesShield": {
             "type": "number",
             "description": "The total monthly charges for Shield",
@@ -12025,7 +12079,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+                "$ref": "#/components/schemas/UsageBreakdown"
               }
             ]
           },
@@ -12034,7 +12088,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+                "$ref": "#/components/schemas/UsageBreakdown"
               }
             ]
           },
@@ -12043,7 +12097,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+                "$ref": "#/components/schemas/UsageBreakdown"
               }
             ]
           },
@@ -12052,7 +12106,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/BunnyDBUsageBreakdown"
+                "$ref": "#/components/schemas/UsageBreakdown"
               }
             ]
           },
@@ -12272,19 +12326,24 @@
           7
         ]
       },
-      "BunnyDBUsageBreakdown": {
+      "UsageBreakdown": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "Usage": {
             "type": "number",
-            "description": "The usage cost in USD",
+            "description": "The usage based charge in USD",
             "format": "decimal"
           },
           "TotalUnits": {
             "type": "integer",
-            "description": "The total usage units (rows for reads/writes, GB for storage)",
+            "description": "The billed quantity for the related product",
             "format": "int64"
+          },
+          "MeasuringUnit": {
+            "type": "string",
+            "description": "Measuring Unit for TotalUnits (e.g. Rows, GB, Seconds, Bytes, Block-seconds)",
+            "nullable": true
           }
         }
       },
