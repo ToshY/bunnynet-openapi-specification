@@ -2462,6 +2462,7 @@
             "description": "The ID of the WAF Rule.",
             "required": true,
             "schema": {
+              "pattern": "^[A-Za-z0-9_-]{1,64}$",
               "type": "string",
               "description": "The ID of the WAF Rule."
             }
@@ -7267,6 +7268,10 @@
             "type": "boolean",
             "nullable": true
           },
+          "requestBodyLoggingEnabled": {
+            "type": "boolean",
+            "nullable": true
+          },
           "wafRequestIgnoredHeaders": {
             "uniqueItems": true,
             "type": "array",
@@ -7307,21 +7312,6 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
-          },
-          "blockVpn": {
-            "type": "boolean",
-            "nullable": true,
-            "deprecated": true
-          },
-          "blockTor": {
-            "type": "boolean",
-            "nullable": true,
-            "deprecated": true
-          },
-          "blockDatacentre": {
-            "type": "boolean",
-            "nullable": true,
-            "deprecated": true
           },
           "whitelabelResponsePages": {
             "type": "boolean",
@@ -7375,8 +7365,10 @@
             "nullable": true
           },
           "wafRequestHeaderLoggingEnabled": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
+          },
+          "requestBodyLoggingEnabled": {
+            "type": "boolean"
           },
           "wafRequestIgnoredHeaders": {
             "uniqueItems": true,
@@ -7428,18 +7420,6 @@
           "dDoSChallengeWindow": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
-          },
-          "blockVpn": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "blockTor": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "blockDatacentre": {
-            "type": "boolean",
             "nullable": true
           },
           "whitelabelResponsePages": {
