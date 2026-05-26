@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.9.22.0",
+    "description": "Public API endpoints for user consumption. Release version: v1.9.23.1",
     "version": "1.0"
   },
   "servers": [
@@ -3580,6 +3580,7 @@
         ],
         "summary": "List log-forwarding configurations",
         "description": "Get a list of all log-forwarding configurations for the authenticated user.",
+        "operationId": "ListLogForwardingConfigurations",
         "responses": {
           "200": {
             "description": "List of log-forwarding configurations retrieved successfully.",
@@ -3605,6 +3606,7 @@
         ],
         "summary": "Create log forwarding configuration",
         "description": "Create a new log forwarding configuration.",
+        "operationId": "CreateLogForwardingConfiguration",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3645,6 +3647,7 @@
         ],
         "summary": "Get log-forwarding configuration",
         "description": "Get a specific log-forwarding configuration by ID.",
+        "operationId": "GetLogForwardingConfiguration",
         "parameters": [
           {
             "name": "appId",
@@ -3684,6 +3687,7 @@
         ],
         "summary": "Update log-forwarding configuration",
         "description": "Update an existing log-forwarding configuration.",
+        "operationId": "UpdateLogForwardingConfiguration",
         "parameters": [
           {
             "name": "appId",
@@ -3736,6 +3740,7 @@
         ],
         "summary": "Delete log-forwarding configuration",
         "description": "Delete a log-forwarding configuration.",
+        "operationId": "DeleteLogForwardingConfiguration",
         "parameters": [
           {
             "name": "appId",
@@ -6465,6 +6470,9 @@
           "usage": {
             "type": "number",
             "format": "double"
+          },
+          "set": {
+            "type": "string"
           }
         },
         "additionalProperties": false,
