@@ -5675,45 +5675,6 @@
   },
   "components": {
     "schemas": {
-      "BillingSummaryItem": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "PullZoneId": {
-            "type": "integer",
-            "description": "The ID of the pull zone",
-            "format": "int64"
-          },
-          "MonthlyUsage": {
-            "type": "number",
-            "description": "The total credit amount used in this month by the Pull Zone",
-            "format": "decimal"
-          },
-          "MonthlyBandwidthUsed": {
-            "type": "integer",
-            "description": "The total monthly bandwidth used by the pull zone",
-            "format": "int64"
-          }
-        }
-      },
-      "ApiErrorData": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ErrorKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "Field": {
-            "type": "string",
-            "nullable": true
-          },
-          "Message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
       "CountryModel": {
         "type": "object",
         "additionalProperties": false,
@@ -6204,6 +6165,24 @@
           "LoggingIPAnonymizationEnabled": {
             "type": "boolean",
             "description": "Determines if the log anonoymization should be enabled",
+            "nullable": true
+          }
+        }
+      },
+      "ApiErrorData": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ErrorKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "Field": {
+            "type": "string",
+            "nullable": true
+          },
+          "Message": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -7378,18 +7357,20 @@
       },
       "CertificateProvisionType": {
         "type": "integer",
-        "description": "0 = Unknown\n1 = Http01\n2 = Dns01\n3 = Custom",
+        "description": "0 = Unknown\n1 = Http01\n2 = Dns01\n3 = Custom\n4 = Managed",
         "x-enumNames": [
           "Unknown",
           "Http01",
           "Dns01",
-          "Custom"
+          "Custom",
+          "Managed"
         ],
         "enum": [
           0,
           1,
           2,
-          3
+          3,
+          4
         ]
       },
       "ExecutionPhase": {
@@ -12425,6 +12406,27 @@
           "TaxedAmount": {
             "type": "number",
             "format": "decimal"
+          }
+        }
+      },
+      "BillingSummaryItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "PullZoneId": {
+            "type": "integer",
+            "description": "The ID of the pull zone",
+            "format": "int64"
+          },
+          "MonthlyUsage": {
+            "type": "number",
+            "description": "The total credit amount used in this month by the Pull Zone",
+            "format": "decimal"
+          },
+          "MonthlyBandwidthUsed": {
+            "type": "integer",
+            "description": "The total monthly bandwidth used by the pull zone",
+            "format": "int64"
           }
         }
       },
