@@ -5366,16 +5366,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
+          "404": {
+            "description": ""
           }
         },
         "security": [
@@ -7294,6 +7286,11 @@
           "EnableExtendedLogging": {
             "type": "boolean",
             "description": "Determines if extended logging with additional details is enabled for this Pull Zone."
+          },
+          "CacheKeyHeaders": {
+            "type": "string",
+            "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
           }
         }
       },
@@ -8681,6 +8678,11 @@
             "description": "The maximum global simultaneous WebSocket connections allowed for this Pull Zone. Allowed tiers: 500, 1,000, 2,500, 5,000, 10,000, 25,000. If you send a non-tier value, the value is rounded up to the next tier. Values over 25,000 are rejected, please contact sales if required.",
             "format": "int32",
             "nullable": true
+          },
+          "CacheKeyHeaders": {
+            "type": "string",
+            "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
           }
         }
       },
@@ -9580,6 +9582,11 @@
             "type": "integer",
             "description": "The maximum global simultaneous WebSocket connections allowed for this Pull Zone. Allowed tiers: 500, 1,000, 2,500, 5,000, 10,000, 25,000. If you send a non-tier value, the value is rounded up to the next tier. Values over 25,000 are rejected, please contact sales if required.",
             "format": "int32",
+            "nullable": true
+          },
+          "CacheKeyHeaders": {
+            "type": "string",
+            "description": "Vary Cache by Request Headers (comma delimited)",
             "nullable": true
           },
           "Name": {
