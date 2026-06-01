@@ -5366,8 +5366,16 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": ""
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
           }
         },
         "security": [
