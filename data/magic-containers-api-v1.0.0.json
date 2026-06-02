@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.9.24.0",
+    "description": "Public API endpoints for user consumption. Release version: v1.9.25.2",
     "version": "1.0"
   },
   "servers": [
@@ -5700,6 +5700,16 @@
           "ephemeralStorageUsageRatio": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          },
+          "outboundConnectionsLimit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "outboundConnectionsRejectedDiff": {
+            "type": "integer",
+            "format": "int64",
             "nullable": true
           }
         },
