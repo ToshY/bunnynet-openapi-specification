@@ -4956,6 +4956,825 @@
         ]
       }
     },
+    "/loadbalancer/{loadBalancerId}/origingroup/{originGroupId}/origin": {
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Add a new origin to an origin group",
+        "operationId": "LoadBalancerOriginEndpoint_AddOrigin",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "originGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for the new origin",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadBalancerOriginCreateModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 3
+        },
+        "responses": {
+          "200": {
+            "description": "The newly created origin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerOriginModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}/origingroup/{originGroupId}/origin/{originId}": {
+      "delete": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Delete an origin from an origin group",
+        "operationId": "LoadBalancerOriginEndpoint_DeleteOrigin",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "originGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "originId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The origin was deleted"
+          },
+          "404": {
+            "description": "The Load Balancer, origin group, or origin was not found"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Update an existing origin",
+        "operationId": "LoadBalancerOriginEndpoint_UpdateOrigin",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "originGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "originId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 3
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for the origin update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadBalancerOriginCreateModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 4
+        },
+        "responses": {
+          "200": {
+            "description": "The updated origin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerOriginModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}/origingroup": {
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Add a new origin group to a Load Balancer profile",
+        "operationId": "LoadBalancerOriginGroupEndpoint_AddOriginGroup",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for the new origin group",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginGroupCreateModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "The newly created origin group",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerOriginGroupModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}/origingroup/{id}": {
+      "delete": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Delete an origin group from a Load Balancer profile",
+        "operationId": "LoadBalancerOriginGroupEndpoint_DeleteOriginGroup",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The origin group was deleted"
+          },
+          "404": {
+            "description": "The Load Balancer profile or origin group was not found"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Update an origin group in a Load Balancer profile",
+        "operationId": "LoadBalancerOriginGroupEndpoint_UpdateOriginGroup",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for updating the origin group",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginGroupCreateModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 3
+        },
+        "responses": {
+          "200": {
+            "description": "The updated origin group",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerOriginGroupModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer": {
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Create a new Load Balancer profile",
+        "operationId": "LoadBalancerProfileEndpoint_CreateLoadBalancerProfile",
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for the new Load Balancer profile",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadBalancerSettingsModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "The newly created Load Balancer profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerProfileModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get the list of Load Balancer profiles",
+        "operationId": "LoadBalancerProfileEndpoint_GetLoadBalancers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            },
+            "x-position": 1
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of Load Balancer profiles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LoadBalancerProfileModel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}": {
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get a Load Balancer profile",
+        "operationId": "LoadBalancerProfileEndpoint_GetLoadBalancer",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Load Balancer profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerProfileModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Load Balancer profile was not found"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Delete a Load Balancer profile",
+        "operationId": "LoadBalancerProfileEndpoint_DeleteLoadBalancerProfile",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Load Balancer profile was deleted"
+          },
+          "404": {
+            "description": "The Load Balancer profile was not found"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Update a Load Balancer profile",
+        "operationId": "LoadBalancerProfileEndpoint_UpdateLoadBalancerProfile",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "model",
+          "description": "The model for updating the Load Balancer profile",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadBalancerSettingsModel"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "The updated Load Balancer profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerProfileModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
     "/dnszone/{id}/statistics": {
       "get": {
         "tags": [
@@ -8683,6 +9502,12 @@
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
             "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
+            "nullable": true
           }
         }
       },
@@ -9587,6 +10412,12 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
             "nullable": true
           },
           "Name": {
@@ -11603,6 +12434,445 @@
           }
         }
       },
+      "LoadBalancerOriginModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "The unique ID of the origin",
+            "format": "int64"
+          },
+          "Weight": {
+            "type": "integer",
+            "description": "The weight of the origin used for weighted load balancing",
+            "format": "int32"
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Whether traffic should route to this origin"
+          },
+          "HealthStatus": {
+            "description": "Current health status of the origin",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/HealthStatus"
+              }
+            ]
+          },
+          "OriginType": {
+            "description": "The type of origin to connect to",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginType"
+              }
+            ]
+          },
+          "EdgeScriptId": {
+            "type": "integer",
+            "description": "The ID of the Edge Script when using this origin type",
+            "format": "int64",
+            "nullable": true
+          },
+          "StorageZoneId": {
+            "type": "integer",
+            "description": "The ID of the Storage Zone when using this origin type",
+            "format": "int64",
+            "nullable": true
+          },
+          "StandardOrigin": {
+            "description": "Standard Origin settings - Required with Standard origin type",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StandardOriginModel"
+              }
+            ]
+          },
+          "MagicContainersOrigin": {
+            "description": "Magic Containers Origin settings - Required with Magic Containers origin type",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MagicContainersOriginModel"
+              }
+            ]
+          }
+        }
+      },
+      "HealthStatus": {
+        "type": "integer",
+        "description": "0 = Healthy\n1 = Degraded",
+        "x-enumNames": [
+          "Healthy",
+          "Degraded"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "OriginType": {
+        "type": "integer",
+        "description": "0 = Standard\n1 = Storage\n2 = EdgeScript\n3 = MagicContainer",
+        "x-enumNames": [
+          "Standard",
+          "Storage",
+          "EdgeScript",
+          "MagicContainer"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "StandardOriginModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OriginUrl": {
+            "type": "string",
+            "description": "The URL of the origin server",
+            "nullable": true
+          },
+          "HostHeader": {
+            "type": "string",
+            "description": "The host header to send to the origin server",
+            "nullable": true
+          },
+          "VerifySsl": {
+            "type": "boolean",
+            "description": "Whether to verify the SSL certificate of the origin server",
+            "nullable": true
+          }
+        }
+      },
+      "MagicContainersOriginModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "AppId": {
+            "type": "string",
+            "description": "The ID of the Magic Containers app",
+            "nullable": true
+          },
+          "EndPointId": {
+            "type": "string",
+            "description": "The ID of the Magic Containers endpoint",
+            "nullable": true
+          }
+        }
+      },
+      "LoadBalancerOriginCreateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Weight": {
+            "type": "integer",
+            "description": "The weight of the origin used for weighted load balancing",
+            "format": "byte",
+            "nullable": true
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Whether traffic should route to this origin",
+            "nullable": true
+          },
+          "OriginType": {
+            "description": "The type of origin to connect to",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginType"
+              }
+            ]
+          },
+          "EdgeScriptId": {
+            "type": "integer",
+            "description": "The ID of the Edge Script to use as the origin - required when using the EdgeScript origin type",
+            "format": "int64",
+            "nullable": true
+          },
+          "StorageZoneId": {
+            "type": "integer",
+            "description": "The ID of the Storage Zone to use as the origin - required when using the Storage origin type",
+            "format": "int64",
+            "nullable": true
+          },
+          "StandardOrigin": {
+            "description": "Standard origin settings - required when using the Standard origin type",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StandardOriginModel"
+              }
+            ]
+          },
+          "MagicContainersOrigin": {
+            "description": "Magic Containers origin settings - required when using the Magic Containers origin type",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MagicContainersOriginModel"
+              }
+            ]
+          }
+        }
+      },
+      "LoadBalancerOriginGroupModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "The unique ID of the origin group",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "description": "The name of the origin group",
+            "nullable": true
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Set to true if the origin group is enabled"
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "The latitude of the origin group location",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "The longitude of the origin group location",
+            "format": "double"
+          },
+          "Weight": {
+            "type": "integer",
+            "description": "The weight of the origin group used for weighted load balancing",
+            "format": "byte"
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "The priority of the origin group used for failover load balancing",
+            "format": "byte"
+          },
+          "OriginLoadBalancingMethod": {
+            "description": "The load balancing method used for selecting origins within the group",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginLoadBalancingMethod"
+              }
+            ]
+          },
+          "Origins": {
+            "type": "array",
+            "description": "The list of origins associated with the origin group",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginModel"
+            }
+          },
+          "HealthCheckSettings": {
+            "description": "Health settings for the origin group",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/HealthCheckSettings"
+              }
+            ]
+          }
+        }
+      },
+      "OriginLoadBalancingMethod": {
+        "type": "integer",
+        "description": "0 = RoundRobin\n1 = WeightedRandom\n2 = LeastConnections\n3 = Latency",
+        "x-enumNames": [
+          "RoundRobin",
+          "WeightedRandom",
+          "LeastConnections",
+          "Latency"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "HealthCheckSettings": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "type": "boolean",
+            "description": "Whether health checking is enabled for this origin group",
+            "nullable": true
+          },
+          "Path": {
+            "type": "string",
+            "description": "The path used for health check requests",
+            "nullable": true
+          }
+        }
+      },
+      "OriginGroupCreateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "The name of the origin group",
+            "nullable": true
+          },
+          "Enabled": {
+            "type": "boolean",
+            "description": "Set to true if the origin group is enabled",
+            "nullable": true
+          },
+          "HealthCheckSettings": {
+            "description": "Health check settings for monitoring origins in the group",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/HealthCheckSettings"
+              }
+            ]
+          },
+          "OriginLoadBalancingMethod": {
+            "description": "The load balancing method used for selecting origins within the group",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginLoadBalancingMethod"
+              }
+            ]
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "The latitude of the origin group location",
+            "format": "double",
+            "nullable": true
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "The longitude of the origin group location",
+            "format": "double",
+            "nullable": true
+          },
+          "Weight": {
+            "type": "integer",
+            "description": "The weight of the origin group used for weighted load balancing",
+            "format": "byte",
+            "nullable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "The priority of the origin group used for failover load balancing",
+            "format": "byte",
+            "nullable": true
+          }
+        }
+      },
+      "LoadBalancerProfileModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "The unique ID of the Load Balancer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "description": "The name of the Load Balancer profile",
+            "nullable": true
+          },
+          "OriginGroupLoadBalancingMethod": {
+            "description": "The load balancing method used for selecting origin groups",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginGroupLoadBalancingMethod"
+              }
+            ]
+          },
+          "StickySessionType": {
+            "description": "The sticky session type used for persisting client sessions",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LoadBalancerStickySessionType"
+              }
+            ]
+          },
+          "OriginGroups": {
+            "type": "array",
+            "description": "The list of origin groups associated with the Load Balancer profile",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginGroupModel"
+            }
+          }
+        }
+      },
+      "OriginGroupLoadBalancingMethod": {
+        "type": "integer",
+        "description": "0 = WeightedRandom\n1 = RoundRobin\n2 = GeoLocation\n3 = LowestAverageLatency",
+        "x-enumNames": [
+          "WeightedRandom",
+          "RoundRobin",
+          "GeoLocation",
+          "LowestAverageLatency"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "LoadBalancerStickySessionType": {
+        "type": "integer",
+        "description": "0 = Off\n1 = Cookie",
+        "x-enumNames": [
+          "Off",
+          "Cookie"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "LoadBalancerSettingsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "The name of the Load Balancer profile",
+            "nullable": true
+          },
+          "StickySessionType": {
+            "description": "The sticky session type to use for persisting client to an origin",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LoadBalancerStickySessionType"
+              }
+            ]
+          },
+          "OriginGroupLoadBalancingMethod": {
+            "description": "The load balancing method used for selecting origin groups",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OriginGroupLoadBalancingMethod"
+              }
+            ]
+          }
+        }
+      },
       "DnsZoneRecordScanJobResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -12572,6 +13842,9 @@
     },
     {
       "name": "Pull Zone"
+    },
+    {
+      "name": "Load Balancer"
     },
     {
       "name": "DNS Zone"
