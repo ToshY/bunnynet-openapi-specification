@@ -18,10 +18,10 @@
   {
     "source": "https://docs.bunny.net/api-reference/storage/openapi.json",
     "sourceDescription": "Storage API",
-    "updatedAt": "2026-03-21T12:20:00Z",
+    "updatedAt": "2026-06-09T14:11:59Z",
     "fileName": "edge-storage-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-storage-api-v1.0.0.json",
-    "fileSha256": "e5a59302987fa4913c117c03428b5579253a5d6ca5eb46c6c3fffb976775c533"
+    "fileSha256": "c0946d3082c31204ab662a6f42c102c054afa23cc8966477ed34b59b48b37204"
   },
   {
     "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
@@ -50,9 +50,9 @@
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
     "sourceDescription": "Magic Containers API",
-    "updatedAt": "2026-06-06T18:59:15Z",
+    "updatedAt": "2026-06-09T14:12:02Z",
     "fileName": "magic-containers-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
-    "fileSha256": "aeaeff19b4ca713a0fcb58e629561bc1c6d4d27fe2c3d99a43759dcdd339e1a6"
+    "fileSha256": "40391acf41a0231fd536c740486ce16f668f6e258f355b6b43535437ce54a8bc"
   }
 ]

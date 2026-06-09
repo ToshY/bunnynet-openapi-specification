@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.9.28.0",
+    "description": "Public API endpoints for user consumption. Release version: v1.9.30.0",
     "version": "1.0"
   },
   "servers": [
@@ -1630,6 +1630,67 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registries/image-config": {
+      "post": {
+        "tags": [
+          "ContainerRegistries"
+        ],
+        "summary": "Get Image Config",
+        "description": "Retrieves endpoint and volume suggestions for a container image from a registry.",
+        "operationId": "GetImageConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageExposedPortsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageExposedPortsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageExposedPortsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Image configuration was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageConfig"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User is unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -4096,6 +4157,12 @@
               "$ref": "#/components/schemas/EnvironmentVariableSuggestion"
             }
           },
+          "volumeSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeSuggestion"
+            }
+          },
           "appName": {
             "type": "string",
             "nullable": true
@@ -5216,6 +5283,24 @@
         ],
         "type": "string"
       },
+      "ImageConfig": {
+        "type": "object",
+        "properties": {
+          "endpointSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EndpointRequest"
+            }
+          },
+          "volumeSuggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeSuggestion"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "ImagePullPolicy": {
         "enum": [
           "always",
@@ -5274,6 +5359,38 @@
         },
         "additionalProperties": false,
         "description": "List applications response"
+      },
+      "ListContainerImageExposedPortsRequest": {
+        "required": [
+          "imageName",
+          "imageNamespace",
+          "registryId",
+          "tag"
+        ],
+        "type": "object",
+        "properties": {
+          "registryId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The registry identifier. Can be \"dockerhub\", \"github\", or a private registry ID."
+          },
+          "imageName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "imageNamespace": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "tag": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "ListContainerImageTagsRequest": {
         "required": [
@@ -6543,6 +6660,18 @@
           "failed"
         ],
         "type": "string"
+      },
+      "VolumeSuggestion": {
+        "type": "object",
+        "properties": {
+          "containerPath": {
+            "type": "string"
+          },
+          "suggestedVolumeName": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "VolumeTemplate": {
         "required": [
