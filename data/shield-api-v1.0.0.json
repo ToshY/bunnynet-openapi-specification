@@ -1442,6 +1442,419 @@
         }
       }
     },
+    "/shield/shield-zone/{shieldZoneId}/bot-categorization": {
+      "get": {
+        "tags": [
+          "Bot Categorization"
+        ],
+        "summary": "List bots available for explicit allow/block configuration on this Shield Zone, grouped by category.",
+        "operationId": "List Bot Categorizations",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BotCategorizationListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/shield-zone/{shieldZoneId}/bot-categorization/bots/{botId}": {
+      "put": {
+        "tags": [
+          "Bot Categorization"
+        ],
+        "summary": "Set or clear the action applied to a categorised bot for this Shield Zone.",
+        "operationId": "Set Bot Categorization Action",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "botId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/shield-zone/{shieldZoneId}/bot-categorization/categories/{category}": {
+      "put": {
+        "tags": [
+          "Bot Categorization"
+        ],
+        "summary": "Set or clear the action applied to every bot in a category for this Shield Zone.",
+        "operationId": "Set Bot Category Action",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "category",
+            "in": "path",
+            "description": "0 = None\n1 = SEO\n2 = AIScraper\n3 = AITool\n4 = Tool\n5 = Ads\n6 = Preview\n7 = Social\n255 = System",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/BotCategory"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBotCategoryConfigurationResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/shield/shield-zone/{shieldZoneId}/bot-detection": {
       "get": {
         "tags": [
@@ -2122,6 +2535,113 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/metrics/overages/{shieldZoneId}": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Get the overage breakdown for the specified Shield Zone for a given month, segmented by billing plan changes",
+        "operationId": "Get Shield Zone Monthly Overages",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "description": "The ID of the Shield Zone.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the Shield Zone.",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "The calendar year to query.",
+            "schema": {
+              "type": "integer",
+              "description": "The calendar year to query.",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "The calendar month (1-12) to query.",
+            "schema": {
+              "type": "integer",
+              "description": "The calendar month (1-12) to query.",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldZoneMonthlyOveragesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldZoneMonthlyOveragesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShieldZoneMonthlyOveragesResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5722,6 +6242,133 @@
         "type": "string",
         "description": "The type of security scheme as defined in the OpenAPI specification."
       },
+      "BotCategorizationAction": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "0 = None\n1 = Block\n2 = Allow",
+        "format": "int32",
+        "x-enum-varnames": [
+          "None",
+          "Block",
+          "Allow"
+        ]
+      },
+      "BotCategorizationDetails": {
+        "required": [
+          "action",
+          "botId",
+          "category",
+          "isVerifiable",
+          "userAgentMatch"
+        ],
+        "type": "object",
+        "properties": {
+          "botId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userAgentMatch": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "$ref": "#/components/schemas/BotCategory"
+          },
+          "action": {
+            "$ref": "#/components/schemas/BotCategorizationAction"
+          },
+          "isVerifiable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BotCategorizationGroup": {
+        "required": [
+          "bots",
+          "category",
+          "categoryAction"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/BotCategory"
+          },
+          "categoryAction": {
+            "$ref": "#/components/schemas/BotCategorizationAction"
+          },
+          "bots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BotCategorizationDetails"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BotCategorizationListResponse": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BotCategorizationGroup"
+            },
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BotCategory": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "description": "0 = None\n1 = SEO\n2 = AIScraper\n3 = AITool\n4 = Tool\n5 = Ads\n6 = Preview\n7 = Social\n255 = System",
+        "format": "int32",
+        "x-enum-varnames": [
+          "None",
+          "SEO",
+          "AIScraper",
+          "AITool",
+          "Tool",
+          "Ads",
+          "Preview",
+          "Social",
+          "System"
+        ]
+      },
+      "BotCategoryDetails": {
+        "required": [
+          "action",
+          "category"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/BotCategory"
+          },
+          "action": {
+            "$ref": "#/components/schemas/BotCategorizationAction"
+          }
+        },
+        "additionalProperties": false
+      },
       "BotDetectionConfigurationResponse": {
         "type": "object",
         "properties": {
@@ -6895,6 +7542,31 @@
           "Monthly"
         ]
       },
+      "OverageSegment": {
+        "type": "object",
+        "properties": {
+          "periodStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "periodEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "planType": {
+            "$ref": "#/components/schemas/ShieldPlanType"
+          },
+          "overageAllowance": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "overage": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
       "OverviewMetric": {
         "type": "object",
         "properties": {
@@ -7331,6 +8003,38 @@
           },
           "uploadScanning": {
             "$ref": "#/components/schemas/UploadScanning"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShieldZoneMonthlyOveragesResult": {
+        "type": "object",
+        "properties": {
+          "shieldZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalOverage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "segments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OverageSegment"
+            },
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
           }
         },
         "additionalProperties": false
@@ -7873,6 +8577,42 @@
         "additionalProperties": false,
         "description": "Response for the PATCH /endpoint/{endpointId} endpoint."
       },
+      "UpdateBotCategorizationConfigurationRequest": {
+        "required": [
+          "action"
+        ],
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/BotCategorizationAction"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBotCategorizationConfigurationResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BotCategorizationDetails"
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBotCategoryConfigurationResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BotCategoryDetails"
+          },
+          "error": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateBotDetectionRequest": {
         "type": "object",
         "properties": {
@@ -8337,6 +9077,12 @@
           "value": {
             "type": "integer",
             "format": "int32"
+          },
+          "supportedValues": {
+            "$ref": "#/components/schemas/WafSupportedValues"
+          },
+          "recommendedOperator": {
+            "$ref": "#/components/schemas/WafRecommendedOperator"
           }
         },
         "additionalProperties": false
@@ -8457,6 +9203,22 @@
           "JA4",
           "IP_JA4"
         ]
+      },
+      "WafRecommendedOperator": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/WafRuleOperatorType"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "WafRule": {
         "type": "object",
@@ -8726,6 +9488,22 @@
               "$ref": "#/components/schemas/WafRuleMainGroupModel"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WafSupportedValues": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "editable": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
