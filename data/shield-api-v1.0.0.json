@@ -8026,6 +8026,10 @@
             "type": "integer",
             "format": "int64"
           },
+          "totalCleanRequests": {
+            "type": "integer",
+            "format": "int64"
+          },
           "segments": {
             "type": "array",
             "items": {
