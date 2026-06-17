@@ -4248,6 +4248,116 @@
         ]
       }
     },
+    "/storagezone/{id}/statistics/egress": {
+      "get": {
+        "tags": [
+          "Storage Zone"
+        ],
+        "summary": "Get Storage Zone Egress Statistics",
+        "operationId": "GetStoragezoneEgressStatisticsEndpoint_StorageZoneEgressStatistics",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the storage zone",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "(Optional) The start date of the statistics. If no value is passed, the last 30 days will be returned.",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "(Optional) The end date of the statistics. If no value is passed, the last 30 days will be returned.",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "hourly",
+            "in": "query",
+            "description": "(Optional) If true, the statistics data will be returned in hourly groupping.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The egress statistics data for the passed parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageZoneEgressStatisticsModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The requested date range is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The StorageZone has not been found"
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "403": {
+            "description": "The user does not have rights to access this resource"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIStatistics",
+              "SubuserStatistics",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIStatistics",
+              "SubuserStatistics",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
     "/storagezone/regions": {
       "get": {
         "tags": [
@@ -11213,6 +11323,96 @@
           "Ascending",
           "Descending"
         ]
+      },
+      "StorageZoneEgressStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "HttpEgressChart": {
+            "type": "object",
+            "description": "Download traffic served over HTTP",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "S3EgressChart": {
+            "type": "object",
+            "description": "Download traffic served over S3",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "S3PresignedEgressChart": {
+            "type": "object",
+            "description": "Download traffic served over presigned S3 URLs",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "FtpEgressChart": {
+            "type": "object",
+            "description": "Download traffic served over FTP",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "SftpEgressChart": {
+            "type": "object",
+            "description": "Download traffic served over SFTP",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "TotalEgressChart": {
+            "type": "object",
+            "description": "Total download traffic across all protocols",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "HttpEgressTotal": {
+            "type": "integer",
+            "description": "Total download traffic over HTTP",
+            "format": "int64"
+          },
+          "S3EgressTotal": {
+            "type": "integer",
+            "description": "Total download traffic over S3",
+            "format": "int64"
+          },
+          "S3PresignedEgressTotal": {
+            "type": "integer",
+            "description": "Total download traffic over presigned S3 URLs",
+            "format": "int64"
+          },
+          "FtpEgressTotal": {
+            "type": "integer",
+            "description": "Total download traffic over FTP",
+            "format": "int64"
+          },
+          "SftpEgressTotal": {
+            "type": "integer",
+            "description": "Total download traffic over SFTP",
+            "format": "int64"
+          },
+          "TotalEgress": {
+            "type": "integer",
+            "description": "Total download traffic across all protocols",
+            "format": "int64"
+          }
+        }
       },
       "StorageRegionModel": {
         "type": "object",
