@@ -12076,6 +12076,21 @@
             "description": "Last recharge amount balance",
             "format": "double"
           },
+          "AvailableBalance": {
+            "type": "number",
+            "description": "The current account balance plus available (unexpired) coupon credit",
+            "format": "double"
+          },
+          "CouponBalance": {
+            "type": "number",
+            "description": "All available (unexpired) coupon money on the account",
+            "format": "decimal"
+          },
+          "TotalCouponUsage": {
+            "type": "number",
+            "description": "The total coupon credit used this month across all services",
+            "format": "decimal"
+          },
           "BillingRecords": {
             "type": "array",
             "description": "The list of billing records for this account",
