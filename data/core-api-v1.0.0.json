@@ -94,6 +94,19 @@
               "nullable": true
             },
             "x-position": 3
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DnsViewType"
+                }
+              ]
+            },
+            "x-position": 4
           }
         ],
         "responses": {
@@ -421,6 +434,81 @@
           },
           "400": {
             "description": "Failed adding the DNS record. Model validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNS Zone"
+        ],
+        "summary": "List DNS Zone Records",
+        "operationId": "DnsZonePublic_ListDnsZoneRecords",
+        "parameters": [
+          {
+            "name": "zoneId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the DNS Zone",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1,
+              "maximum": 2147483647.0,
+              "minimum": 1.0
+            },
+            "x-position": 2
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000,
+              "maximum": 1000.0,
+              "minimum": 5.0
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list of DNS records for the specified zone",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginationListModelOfDnsRecordModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The DNS Zone with the requested ID does not exist"
+          },
+          "400": {
+            "description": "Failed to fetch dns records for the dns zone",
             "content": {
               "application/json": {
                 "schema": {
@@ -6222,6 +6310,18 @@
           1
         ]
       },
+      "DnsViewType": {
+        "type": "integer",
+        "description": "0 = Full\n1 = Lite",
+        "x-enumNames": [
+          "Full",
+          "Lite"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
       "UpdateDnsZoneModel": {
         "type": "object",
         "additionalProperties": false,
@@ -6579,6 +6679,30 @@
           "Domain": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "PaginationListModelOfDnsRecordModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/DnsRecordModel"
+            }
+          },
+          "CurrentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TotalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasMoreItems": {
+            "type": "boolean"
           }
         }
       },
@@ -12086,7 +12210,7 @@
             "description": "All available (unexpired) coupon money on the account",
             "format": "decimal"
           },
-          "MonthlyCouponUsage": {
+          "TotalCouponUsage": {
             "type": "number",
             "description": "The total coupon credit used this month across all services",
             "format": "decimal"
