@@ -12210,7 +12210,7 @@
             "description": "All available (unexpired) coupon money on the account",
             "format": "decimal"
           },
-          "TotalCouponUsage": {
+          "MonthlyCouponUsage": {
             "type": "number",
             "description": "The total coupon credit used this month across all services",
             "format": "decimal"
