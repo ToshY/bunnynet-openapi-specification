@@ -2559,6 +2559,205 @@
         }
       }
     },
+    "/shield/event-logs/{shieldZoneId}/search": {
+      "post": {
+        "tags": [
+          "Event Logs"
+        ],
+        "summary": "Search, filter and group Event Logs for a Shield Zone",
+        "operationId": "Search Event Logs",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "description": "The ID of the Shield Zone.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the Shield Zone.",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsSearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsSearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsSearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventLogsSearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventLogsSearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventLogsSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/shield/event-logs/{shieldZoneId}/export": {
+      "post": {
+        "tags": [
+          "Event Logs"
+        ],
+        "summary": "Export the full filtered Event Logs set for a Shield Zone as CSV",
+        "operationId": "Export Event Logs",
+        "parameters": [
+          {
+            "name": "shieldZoneId",
+            "in": "path",
+            "description": "The ID of the Shield Zone.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The ID of the Shield Zone.",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsExportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsExportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventLogsExportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/shield/metrics/overages/{shieldZoneId}": {
       "get": {
         "tags": [
@@ -7015,6 +7214,215 @@
           "High",
           "Challenge"
         ]
+      },
+      "EventGroup": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The group key: each requested groupBy dimension mapped to its value.",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of events in the group.",
+            "format": "int64"
+          },
+          "firstSeen": {
+            "type": "integer",
+            "description": "Earliest event time in the group (Unix time in milliseconds, UTC).",
+            "format": "int64"
+          },
+          "lastSeen": {
+            "type": "integer",
+            "description": "Most recent event time in the group (Unix time in milliseconds, UTC).",
+            "format": "int64"
+          },
+          "context": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Context aggregates for the group: country, asn, per-action counts (blocked/challenged/logged),\nand features/ruleIds touched. Counts are numbers; features/ruleIds are comma-joined strings.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An aggregated group of events (returned when the search request specifies groupBy)."
+      },
+      "EventLogsExportRequest": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "Window start as Unix time in milliseconds (UTC). Required.",
+            "format": "int64"
+          },
+          "to": {
+            "type": "integer",
+            "description": "Window end as Unix time in milliseconds (UTC). Required; must be after BunnyNet.Shield.Api.Entities.Waf.WafLogging.EventLogsExportRequest.from and within the last 72 hours.",
+            "format": "int64"
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional free-text search across IP, ruleId, URL, User-Agent and rule name.",
+            "nullable": true
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventLogsFilter"
+            },
+            "description": "Optional filters, combined with AND. Repeated values within one filter combine with OR.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for exporting a Shield Zone's full filtered Event Logs set as CSV."
+      },
+      "EventLogsFilter": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Dimension to filter on: feature, ruleId, ip, ja4, ua, url, asn, country or action.",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "description": "Operator: eq, in, contains, cidr (ip only, IPv4/IPv6) or wildcard ('*' matches any run).",
+            "nullable": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Value(s) for the filter; multiple values are OR-combined.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A single Event Logs filter clause."
+      },
+      "EventLogsSearchRequest": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "Window start as Unix time in milliseconds (UTC). Required.",
+            "format": "int64"
+          },
+          "to": {
+            "type": "integer",
+            "description": "Window end as Unix time in milliseconds (UTC). Required; must be after BunnyNet.Shield.Api.Entities.Waf.WafLogging.EventLogsSearchRequest.from and within the last 72 hours.",
+            "format": "int64"
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional free-text search across IP, ruleId, URL, User-Agent and rule name.",
+            "nullable": true
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventLogsFilter"
+            },
+            "description": "Optional filters, combined with AND. Repeated values within one filter combine with OR.",
+            "nullable": true
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional ordered dimensions to group by, e.g. [\"ip\",\"ja4\"]. Omit for flat rows.\nAllowed: feature, ruleId, ip, ja4, ua, url, asn, country, action.",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "description": "Zero-based page index.",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size; clamped to 1–500 (defaults to 50 when unset).",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for searching a Shield Zone's Event Logs within a time window."
+      },
+      "EventLogsSearchResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventRow"
+            },
+            "description": "Flat event rows (populated when the request had no groupBy).",
+            "nullable": true
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventGroup"
+            },
+            "description": "Aggregated groups (populated when the request had a groupBy).",
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total flat rows, or total distinct groups when grouped.",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Total number of pages for the current page size.",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Zero-based index of the returned page.",
+            "format": "int32"
+          },
+          "errorResponse": {
+            "$ref": "#/components/schemas/GenericRequestResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Result of an Event Logs search. Exactly one of BunnyNet.Shield.Api.Entities.Waf.WafLogging.EventLogsSearchResponse.rows or BunnyNet.Shield.Api.Entities.Waf.WafLogging.EventLogsSearchResponse.groups is populated."
+      },
+      "EventRow": {
+        "type": "object",
+        "properties": {
+          "logId": {
+            "type": "string",
+            "description": "Unique event identifier.",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Event time as Unix time in milliseconds (UTC).",
+            "format": "int64"
+          },
+          "log": {
+            "description": "The full request context for the event (JSON object).",
+            "nullable": true
+          },
+          "fields": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resolved dimension values for the event (e.g. ip, ruleId, url, ja4).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A single event returned in a flat (ungrouped) search."
       },
       "GenericRequestResponse": {
         "type": "object",
