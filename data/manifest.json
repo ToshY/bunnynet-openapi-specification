@@ -50,9 +50,9 @@
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
     "sourceDescription": "Magic Containers API",
-    "updatedAt": "2026-07-07T08:58:52Z",
+    "updatedAt": "2026-07-10T08:53:31Z",
     "fileName": "magic-containers-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
-    "fileSha256": "308f0ec35b4e5265f4be509667b2d1b9a8227b6bbecb085e824dab658734047e"
+    "fileSha256": "0807f9d29784b33bd5db7aedf1a10f148e5df65c34a218f9d12da1e34a7ff312"
   }
 ]
