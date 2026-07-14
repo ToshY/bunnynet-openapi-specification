@@ -6846,6 +6846,14 @@
             "type": "string",
             "nullable": true
           },
+          "isNegated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isRegexVariable": {
+            "type": "boolean",
+            "nullable": true
+          },
           "chainedRuleConditions": {
             "type": "array",
             "items": {
@@ -7037,6 +7045,14 @@
           },
           "value": {
             "type": "string",
+            "nullable": true
+          },
+          "isNegated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isRegexVariable": {
+            "type": "boolean",
             "nullable": true
           },
           "requestCount": {
@@ -9456,6 +9472,14 @@
           },
           "value": {
             "type": "string",
+            "nullable": true
+          },
+          "isNegated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isRegexVariable": {
+            "type": "boolean",
             "nullable": true
           }
         },
