@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.9.45.1",
+    "description": "Public API endpoints for user consumption. Release version: v1.9.46.1",
     "version": "1.0"
   },
   "servers": [
@@ -4185,6 +4185,7 @@
       "ContainerEndpoint": {
         "required": [
           "displayName",
+          "id",
           "isSslEnabled",
           "portMappings",
           "publicHost",
@@ -4193,6 +4194,11 @@
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique endpoint id. Use this value as `container_endpoint_id` when creating a pull zone that targets this endpoint."
+          },
           "displayName": {
             "minLength": 1,
             "type": "string"
