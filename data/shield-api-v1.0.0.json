@@ -1732,17 +1732,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+                "$ref": "#/components/schemas/UpdateBotCategoryConfigurationRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+                "$ref": "#/components/schemas/UpdateBotCategoryConfigurationRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBotCategorizationConfigurationRequest"
+                "$ref": "#/components/schemas/UpdateBotCategoryConfigurationRequest"
               }
             }
           },
@@ -6445,15 +6445,17 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3
         ],
         "type": "integer",
-        "description": "0 = None\n1 = Block\n2 = Allow",
+        "description": "0 = None\n1 = Block\n2 = Allow\n3 = Ignore",
         "format": "int32",
         "x-enum-varnames": [
           "None",
           "Block",
-          "Allow"
+          "Allow",
+          "Ignore"
         ]
       },
       "BotCategorizationDetails": {
@@ -6498,7 +6500,7 @@
             "$ref": "#/components/schemas/BotCategory"
           },
           "categoryAction": {
-            "$ref": "#/components/schemas/BotCategorizationAction"
+            "$ref": "#/components/schemas/BotCategoryAction"
           },
           "bots": {
             "type": "array",
@@ -6552,6 +6554,21 @@
           "System"
         ]
       },
+      "BotCategoryAction": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "0 = None\n1 = Block\n2 = Allow",
+        "format": "int32",
+        "x-enum-varnames": [
+          "None",
+          "Block",
+          "Allow"
+        ]
+      },
       "BotCategoryDetails": {
         "required": [
           "action",
@@ -6563,7 +6580,7 @@
             "$ref": "#/components/schemas/BotCategory"
           },
           "action": {
-            "$ref": "#/components/schemas/BotCategorizationAction"
+            "$ref": "#/components/schemas/BotCategoryAction"
           }
         },
         "additionalProperties": false
@@ -9044,6 +9061,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "UpdateBotCategoryConfigurationRequest": {
+        "required": [
+          "action"
+        ],
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/BotCategoryAction"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request body for setting a category-level action. Uses BunnyNet.Shield.Database.Enums.BotCategoryAction rather\nthan BunnyNet.Shield.Database.Enums.BotCategorizationAction so the contract can only express actions valid for a\ncategory (no Ignore)."
       },
       "UpdateBotCategoryConfigurationResponse": {
         "type": "object",
