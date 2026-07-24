@@ -10352,6 +10352,11 @@
             "description": "Determines the storage hostname for this zone",
             "nullable": true
           },
+          "S3Hostname": {
+            "type": "string",
+            "description": "Determines the S3 compatible hostname for this zone",
+            "nullable": true
+          },
           "ZoneTier": {
             "description": "Determines the storage zone tier that is storing the data",
             "oneOf": [
