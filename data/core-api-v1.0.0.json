@@ -1427,6 +1427,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "429": {
+            "description": "Too many certificate requests for this hostname; retry after the Retry-After interval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           }
         }
       }
@@ -1472,6 +1482,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "429": {
+            "description": "Too many certificate requests for this hostname; retry after the Retry-After interval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           }
         }
       }
@@ -1522,6 +1542,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "429": {
+            "description": "Too many certificate requests for this hostname; retry after the Retry-After interval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           }
         }
       }
@@ -1567,6 +1597,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "429": {
+            "description": "Too many certificate requests for this hostname; retry after the Retry-After interval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           }
         }
       }
