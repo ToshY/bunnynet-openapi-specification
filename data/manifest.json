@@ -42,10 +42,10 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",
     "sourceDescription": "Edge Scripting API",
-    "updatedAt": "2026-05-12T18:40:39Z",
+    "updatedAt": "2026-07-29T13:28:23Z",
     "fileName": "edge-scripting-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/edge-scripting-api-v1.0.0.json",
-    "fileSha256": "8aa09806ccf30f78613febd955b6c7e8877f919ef36eb7514d6ab870b3cecce2"
+    "fileSha256": "651e095597fb429361f2a8dc4025d70fff0b7b6be8e6ce5880115359eb09f704"
   },
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
