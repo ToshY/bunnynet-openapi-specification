@@ -8,7 +8,7 @@
     "fileSha256": "e7c94147ce2c3285887d09d6acf00085f2e8a52fdc0403da91b1894f96a68c41"
   },
   {
-    "source": "https://docs.bunny.net/api-reference/origin-errors/openapi.json",
+    "source": "https://docs.bunny.net/docs/api-reference/origin-errors/openapi.json",
     "sourceDescription": "Origin Errors API",
     "updatedAt": "2026-03-21T12:19:59Z",
     "fileName": "origin-errors-api-v1.0.0.json",
@@ -16,7 +16,7 @@
     "fileSha256": "5faf4341126b61d916969320d160c64591dedc2448b89c4fe3c8091636e59240"
   },
   {
-    "source": "https://docs.bunny.net/api-reference/storage/openapi.json",
+    "source": "https://docs.bunny.net/docs/api-reference/storage/openapi.json",
     "sourceDescription": "Storage API",
     "updatedAt": "2026-06-09T14:11:59Z",
     "fileName": "edge-storage-api-v1.0.0.json",
