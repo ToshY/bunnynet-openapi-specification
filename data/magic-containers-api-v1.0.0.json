@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.9.46.1",
+    "description": "Public API endpoints for user consumption. Release version: v1.10.0.1",
     "version": "1.0"
   },
   "servers": [
@@ -4468,6 +4468,9 @@
             "type": "boolean",
             "nullable": true
           },
+          "isPlatformManaged": {
+            "type": "boolean"
+          },
           "lastUpdatedAt": {
             "type": "string",
             "format": "date-time",
@@ -4483,6 +4486,7 @@
         "type": "object",
         "properties": {
           "displayName": {
+            "maxLength": 50,
             "minLength": 1,
             "type": "string",
             "description": "Container registry display name"
@@ -6139,7 +6143,8 @@
       "RegistryType": {
         "enum": [
           "dockerHub",
-          "gitHub"
+          "gitHub",
+          "bunnyRegistry"
         ],
         "type": "string"
       },
@@ -6663,7 +6668,8 @@
           "creating",
           "notScheduled",
           "scheduled",
-          "failed"
+          "failed",
+          "maintenance"
         ],
         "type": "string"
       },
