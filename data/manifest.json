@@ -26,10 +26,10 @@
   {
     "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
     "sourceDescription": "Stream API",
-    "updatedAt": "2026-08-06T08:08:33Z",
-    "fileName": "stream-api-v1.5.14.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.5.14.json",
-    "fileSha256": "c60bfac5408a908e2b632fde7f771f809b92a8b782bb4bb2ae4ebb63cf6c4dcb"
+    "updatedAt": "2026-08-06T13:25:14Z",
+    "fileName": "stream-api-v1.5.15.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.5.15.json",
+    "fileSha256": "2f563c8515cbc0174ab8023e76c754b59da3250a53b75cca2c907ed72fa4077a"
   },
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
