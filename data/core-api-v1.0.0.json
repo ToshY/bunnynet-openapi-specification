@@ -7447,6 +7447,18 @@
             "type": "boolean",
             "description": "Determines if the SEO HTML prerender is enabled"
           },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer"
+          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled"
@@ -7754,6 +7766,12 @@
           "StickySessionClientHeaders": {
             "type": "string",
             "description": "A set of comma-separated header names used to identify clients",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "The ID of the Load Balancer profile used as the origin when OriginType is LoadBalancer",
+            "format": "int64",
             "nullable": true
           },
           "UserId": {
@@ -8195,6 +8213,18 @@
           1,
           2,
           3
+        ]
+      },
+      "OptimizerHtmlToMarkdownType": {
+        "type": "integer",
+        "description": "0 = Off\n1 = Simple",
+        "x-enumNames": [
+          "Off",
+          "Simple"
+        ],
+        "enum": [
+          0,
+          1
         ]
       },
       "OptimizerWatermarkPosition": {
@@ -8792,6 +8822,20 @@
             "description": "Determines if the SEO HTML prerender should be enabled",
             "nullable": true
           },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
+            "nullable": true
+          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled",
@@ -9206,6 +9250,12 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
             "nullable": true
           }
         }
@@ -9719,6 +9769,20 @@
             "description": "Determines if the SEO HTML prerender should be enabled",
             "nullable": true
           },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
+            "nullable": true
+          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled",
@@ -10133,6 +10197,12 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
             "nullable": true
           },
           "Name": {
@@ -12716,6 +12786,11 @@
           "MonthlyChargesDB": {
             "type": "number",
             "description": "The total monthly charges for DB",
+            "format": "decimal"
+          },
+          "MonthlyChargesLoadBalancer": {
+            "type": "number",
+            "description": "The total monthly charges for Load Balancer",
             "format": "decimal"
           },
           "MonthlyDBWrites": {
