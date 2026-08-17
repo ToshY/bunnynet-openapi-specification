@@ -5367,6 +5367,113 @@
         ]
       }
     },
+    "/v1/pricing/{source}/{resourceId}": {
+      "get": {
+        "tags": [
+          "Pricing"
+        ],
+        "summary": "Get active price for a resource and optionally cost estimate if usage amount provided",
+        "operationId": "GetPriceEstimationEndpoint_GetPriceEstimation",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "path",
+            "required": true,
+            "description": "The billing source to estimate pricing for",
+            "schema": {
+              "$ref": "#/components/schemas/PricingEstimationSource"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the resource (pull zone, storage zone, video library, or edge script)",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "description": "Optional number of units to calculate estimated total cost",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The price estimation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceEstimationModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid pricing source or units",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The authenticated account does not have billing access"
+          },
+          "404": {
+            "description": "The resource was not found or is not accessible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIBilling",
+              "SubuserBilling"
+            ]
+          }
+        ],
+        "x-hidden": true
+      }
+    },
     "/dnszone/{id}/statistics": {
       "get": {
         "tags": [
@@ -7447,18 +7554,6 @@
             "type": "boolean",
             "description": "Determines if the SEO HTML prerender is enabled"
           },
-          "OptimizerHtmlToMarkdown": {
-            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
-              }
-            ]
-          },
-          "OptimizerLlmsTxt": {
-            "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer"
-          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled"
@@ -7766,12 +7861,6 @@
           "StickySessionClientHeaders": {
             "type": "string",
             "description": "A set of comma-separated header names used to identify clients",
-            "nullable": true
-          },
-          "LoadBalancerId": {
-            "type": "integer",
-            "description": "The ID of the Load Balancer profile used as the origin when OriginType is LoadBalancer",
-            "format": "int64",
             "nullable": true
           },
           "UserId": {
@@ -8213,18 +8302,6 @@
           1,
           2,
           3
-        ]
-      },
-      "OptimizerHtmlToMarkdownType": {
-        "type": "integer",
-        "description": "0 = Off\n1 = Simple",
-        "x-enumNames": [
-          "Off",
-          "Simple"
-        ],
-        "enum": [
-          0,
-          1
         ]
       },
       "OptimizerWatermarkPosition": {
@@ -8822,20 +8899,6 @@
             "description": "Determines if the SEO HTML prerender should be enabled",
             "nullable": true
           },
-          "OptimizerHtmlToMarkdown": {
-            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
-              }
-            ]
-          },
-          "OptimizerLlmsTxt": {
-            "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
-            "nullable": true
-          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled",
@@ -9250,12 +9313,6 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
-            "nullable": true
-          },
-          "LoadBalancerId": {
-            "type": "integer",
-            "description": "If using a load balancer origin, the ID of the load balancer to use",
-            "format": "int64",
             "nullable": true
           }
         }
@@ -9769,20 +9826,6 @@
             "description": "Determines if the SEO HTML prerender should be enabled",
             "nullable": true
           },
-          "OptimizerHtmlToMarkdown": {
-            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
-              }
-            ]
-          },
-          "OptimizerLlmsTxt": {
-            "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
-            "nullable": true
-          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled",
@@ -10197,12 +10240,6 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
-            "nullable": true
-          },
-          "LoadBalancerId": {
-            "type": "integer",
-            "description": "If using a load balancer origin, the ID of the load balancer to use",
-            "format": "int64",
             "nullable": true
           },
           "Name": {
@@ -12314,6 +12351,177 @@
           }
         }
       },
+      "PriceEstimationModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "PricingType": {
+            "$ref": "#/components/schemas/AppliedPricingType"
+          },
+          "PricePerUnit": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "UnitDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "EstimatedCost": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "Breakdown": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/PriceEstimationBreakdownLine"
+            }
+          }
+        }
+      },
+      "AppliedPricingType": {
+        "type": "integer",
+        "description": "0 = ListPrice\n1 = UserOverride\n2 = ResourceOverride",
+        "x-enumNames": [
+          "ListPrice",
+          "UserOverride",
+          "ResourceOverride"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "PriceEstimationBreakdownLine": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Units": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "PricePerUnit": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "Cost": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "PricingEstimationSource": {
+        "type": "integer",
+        "description": "1101 = CDN_Standard_Tier_EU_Traffic\n1102 = CDN_Standard_Tier_NA_Traffic\n1103 = CDN_Standard_Tier_APAC_Traffic\n1104 = CDN_Standard_Tier_AF_Traffic\n1105 = CDN_Standard_Tier_SA_Traffic\n1106 = CDN_Standard_Tier_Uncategorized\n1201 = CDN_Standard_Tier_Stream_EU_Traffic\n1202 = CDN_Standard_Tier_Stream_NA_Traffic\n1203 = CDN_Standard_Tier_Stream_APAC_Traffic\n1204 = CDN_Standard_Tier_Stream_AF_Traffic\n1205 = CDN_Standard_Tier_Stream_SA_Traffic\n1206 = CDN_Standard_Tier_Stream_Uncategorized\n1300 = CDN_Volume_Tier\n1400 = CDN_Volume_Tier_Stream\n1501 = CDN_Standard_Tier_Storage_EU_Traffic\n1502 = CDN_Standard_Tier_Storage_NA_Traffic\n1503 = CDN_Standard_Tier_Storage_APAC_Traffic\n1504 = CDN_Standard_Tier_Storage_AF_Traffic\n1505 = CDN_Standard_Tier_Storage_SA_Traffic\n1506 = CDN_Standard_Tier_Storage_Uncategorized\n1510 = CDN_Volume_Tier_Storage\n1630 = CDN_WebSockets_ConsumptionBased\n1701 = CDN_Standard_Tier_MagicContainers_EU_Traffic\n1702 = CDN_Standard_Tier_MagicContainers_NA_Traffic\n1703 = CDN_Standard_Tier_MagicContainers_APAC_Traffic\n1704 = CDN_Standard_Tier_MagicContainers_AF_Traffic\n1705 = CDN_Standard_Tier_MagicContainers_SA_Traffic\n1706 = CDN_Standard_Tier_MagicContainers_Uncategorized\n1710 = CDN_Volume_Tier_MagicContainers\n1801 = CDN_Standard_Tier_Scripting_EU_Traffic\n1802 = CDN_Standard_Tier_Scripting_NA_Traffic\n1803 = CDN_Standard_Tier_Scripting_APAC_Traffic\n1804 = CDN_Standard_Tier_Scripting_AF_Traffic\n1805 = CDN_Standard_Tier_Scripting_SA_Traffic\n1806 = CDN_Standard_Tier_Scripting_Uncategorized\n1810 = CDN_Volume_Tier_Scripting\n2100 = Storage_Standard_Tier\n2200 = Storage_SSD_Tier\n2300 = Storage_Standard_Tier_Stream\n2400 = Storage_SSD_Tier_Stream\n4100 = Transcribing\n4200 = PremiumEncoding\n4300 = DRM_Base\n4400 = DRM_LicenseIssued\n4501 = LiveEncoding_SD\n4502 = LiveEncoding_HD\n4503 = LiveEncoding_4K\n5200 = Scripting_CDN_Requests\n5300 = Scripting_CDN_CPU",
+        "x-enumNames": [
+          "CDN_Standard_Tier_EU_Traffic",
+          "CDN_Standard_Tier_NA_Traffic",
+          "CDN_Standard_Tier_APAC_Traffic",
+          "CDN_Standard_Tier_AF_Traffic",
+          "CDN_Standard_Tier_SA_Traffic",
+          "CDN_Standard_Tier_Uncategorized",
+          "CDN_Standard_Tier_Stream_EU_Traffic",
+          "CDN_Standard_Tier_Stream_NA_Traffic",
+          "CDN_Standard_Tier_Stream_APAC_Traffic",
+          "CDN_Standard_Tier_Stream_AF_Traffic",
+          "CDN_Standard_Tier_Stream_SA_Traffic",
+          "CDN_Standard_Tier_Stream_Uncategorized",
+          "CDN_Volume_Tier",
+          "CDN_Volume_Tier_Stream",
+          "CDN_Standard_Tier_Storage_EU_Traffic",
+          "CDN_Standard_Tier_Storage_NA_Traffic",
+          "CDN_Standard_Tier_Storage_APAC_Traffic",
+          "CDN_Standard_Tier_Storage_AF_Traffic",
+          "CDN_Standard_Tier_Storage_SA_Traffic",
+          "CDN_Standard_Tier_Storage_Uncategorized",
+          "CDN_Volume_Tier_Storage",
+          "CDN_WebSockets_ConsumptionBased",
+          "CDN_Standard_Tier_MagicContainers_EU_Traffic",
+          "CDN_Standard_Tier_MagicContainers_NA_Traffic",
+          "CDN_Standard_Tier_MagicContainers_APAC_Traffic",
+          "CDN_Standard_Tier_MagicContainers_AF_Traffic",
+          "CDN_Standard_Tier_MagicContainers_SA_Traffic",
+          "CDN_Standard_Tier_MagicContainers_Uncategorized",
+          "CDN_Volume_Tier_MagicContainers",
+          "CDN_Standard_Tier_Scripting_EU_Traffic",
+          "CDN_Standard_Tier_Scripting_NA_Traffic",
+          "CDN_Standard_Tier_Scripting_APAC_Traffic",
+          "CDN_Standard_Tier_Scripting_AF_Traffic",
+          "CDN_Standard_Tier_Scripting_SA_Traffic",
+          "CDN_Standard_Tier_Scripting_Uncategorized",
+          "CDN_Volume_Tier_Scripting",
+          "Storage_Standard_Tier",
+          "Storage_SSD_Tier",
+          "Storage_Standard_Tier_Stream",
+          "Storage_SSD_Tier_Stream",
+          "Transcribing",
+          "PremiumEncoding",
+          "DRM_Base",
+          "DRM_LicenseIssued",
+          "LiveEncoding_SD",
+          "LiveEncoding_HD",
+          "LiveEncoding_4K",
+          "Scripting_CDN_Requests",
+          "Scripting_CDN_CPU"
+        ],
+        "enum": [
+          1101,
+          1102,
+          1103,
+          1104,
+          1105,
+          1106,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205,
+          1206,
+          1300,
+          1400,
+          1501,
+          1502,
+          1503,
+          1504,
+          1505,
+          1506,
+          1510,
+          1630,
+          1701,
+          1702,
+          1703,
+          1704,
+          1705,
+          1706,
+          1710,
+          1801,
+          1802,
+          1803,
+          1804,
+          1805,
+          1806,
+          1810,
+          2100,
+          2200,
+          2300,
+          2400,
+          4100,
+          4200,
+          4300,
+          4400,
+          4501,
+          4502,
+          4503,
+          5200,
+          5300
+        ]
+      },
       "DnsZoneRecordScanJobResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -12786,11 +12994,6 @@
           "MonthlyChargesDB": {
             "type": "number",
             "description": "The total monthly charges for DB",
-            "format": "decimal"
-          },
-          "MonthlyChargesLoadBalancer": {
-            "type": "number",
-            "description": "The total monthly charges for Load Balancer",
             "format": "decimal"
           },
           "MonthlyDBWrites": {
@@ -13303,6 +13506,9 @@
     },
     {
       "name": "Pull Zone"
+    },
+    {
+      "name": "Pricing"
     },
     {
       "name": "DNS Zone"
