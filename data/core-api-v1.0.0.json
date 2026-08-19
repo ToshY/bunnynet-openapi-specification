@@ -7419,6 +7419,14 @@
             "type": "boolean",
             "description": "Determines if the TLS 1.1 is enabled on the Pull Zone"
           },
+          "TlsSecurityLevel": {
+            "description": "The minimum TLS security level enforced on the Pull Zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TlsSecurityLevelType"
+              }
+            ]
+          },
           "VerifyOriginSSL": {
             "type": "boolean",
             "description": "Determines if the Pull Zone should verify the origin SSL certificate"
@@ -7863,6 +7871,12 @@
             "description": "A set of comma-separated header names used to identify clients",
             "nullable": true
           },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "The ID of the Load Balancer profile used as the origin when OriginType is LoadBalancer",
+            "format": "int64",
+            "nullable": true
+          },
           "UserId": {
             "type": "string",
             "description": "User Id of the pull zone owner",
@@ -8281,6 +8295,20 @@
           "MatchAny",
           "MatchAll",
           "MatchNone"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "TlsSecurityLevelType": {
+        "type": "integer",
+        "description": "0 = Legacy\n1 = Compatible\n2 = ModernOnly",
+        "x-enumNames": [
+          "Legacy",
+          "Compatible",
+          "ModernOnly"
         ],
         "enum": [
           0,
@@ -8736,6 +8764,15 @@
             "description": "Determines if the TLS 1.1 should be enabled on this zone",
             "nullable": true
           },
+          "TlsSecurityLevel": {
+            "description": "The minimum TLS security level enforced on this zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TlsSecurityLevelType"
+              }
+            ]
+          },
           "CacheErrorResponses": {
             "type": "boolean",
             "description": "Determines if the cache error responses should be enabled on the zone",
@@ -9313,6 +9350,12 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
             "nullable": true
           }
         }
@@ -9663,6 +9706,15 @@
             "description": "Determines if the TLS 1.1 should be enabled on this zone",
             "nullable": true
           },
+          "TlsSecurityLevel": {
+            "description": "The minimum TLS security level enforced on this zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TlsSecurityLevelType"
+              }
+            ]
+          },
           "CacheErrorResponses": {
             "type": "boolean",
             "description": "Determines if the cache error responses should be enabled on the zone",
@@ -10240,6 +10292,12 @@
           "CacheKeyHeaders": {
             "type": "string",
             "description": "Vary Cache by Request Headers (comma delimited)",
+            "nullable": true
+          },
+          "LoadBalancerId": {
+            "type": "integer",
+            "description": "If using a load balancer origin, the ID of the load balancer to use",
+            "format": "int64",
             "nullable": true
           },
           "Name": {
@@ -12994,6 +13052,11 @@
           "MonthlyChargesDB": {
             "type": "number",
             "description": "The total monthly charges for DB",
+            "format": "decimal"
+          },
+          "MonthlyChargesLoadBalancer": {
+            "type": "number",
+            "description": "The total monthly charges for Load Balancer",
             "format": "decimal"
           },
           "MonthlyDBWrites": {
