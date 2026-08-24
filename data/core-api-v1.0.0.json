@@ -7562,6 +7562,18 @@
             "type": "boolean",
             "description": "Determines if the SEO HTML prerender is enabled"
           },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer"
+          },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
             "description": "Determines the image manipulation should be enabled"
@@ -8332,6 +8344,18 @@
           3
         ]
       },
+      "OptimizerHtmlToMarkdownType": {
+        "type": "integer",
+        "description": "0 = Off\n1 = Simple",
+        "x-enumNames": [
+          "Off",
+          "Simple"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
       "OptimizerWatermarkPosition": {
         "type": "integer",
         "description": "0 = BottomLeft\n1 = BottomRight\n2 = TopLeft\n3 = TopRight\n4 = Center\n5 = CenterStretch",
@@ -8934,6 +8958,20 @@
           "OptimizerPrerenderHtml": {
             "type": "boolean",
             "description": "Determines if the SEO HTML prerender should be enabled",
+            "nullable": true
+          },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
             "nullable": true
           },
           "OptimizerEnableManipulationEngine": {
@@ -9876,6 +9914,20 @@
           "OptimizerPrerenderHtml": {
             "type": "boolean",
             "description": "Determines if the SEO HTML prerender should be enabled",
+            "nullable": true
+          },
+          "OptimizerHtmlToMarkdown": {
+            "description": "Determines if Markdown automatic generation for AI systems is enabled and which pipeline to use",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OptimizerHtmlToMarkdownType"
+              }
+            ]
+          },
+          "OptimizerLlmsTxt": {
+            "type": "boolean",
+            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
             "nullable": true
           },
           "OptimizerEnableManipulationEngine": {
