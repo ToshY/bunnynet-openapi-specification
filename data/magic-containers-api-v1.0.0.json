@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.10.3.0",
+    "description": "Public API endpoints for user consumption. Release version: v1.10.4.0",
     "version": "1.0"
   },
   "servers": [
@@ -5713,6 +5713,9 @@
               "type": "number",
               "format": "double"
             }
+          },
+          "limits": {
+            "$ref": "#/components/schemas/OverviewLimits"
           }
         },
         "additionalProperties": false,
@@ -5765,6 +5768,28 @@
         },
         "additionalProperties": false,
         "description": "Overview container model"
+      },
+      "OverviewLimits": {
+        "type": "object",
+        "properties": {
+          "cpuCores": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ramBytes": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "outboundBandwidthBytesPerSecond": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "What one instance of the application may use. The same for every instance, so it is stated once."
       },
       "OverviewPod": {
         "type": "object",
@@ -5838,10 +5863,50 @@
             "type": "integer",
             "format": "int64",
             "nullable": true
+          },
+          "cpuUsageCores": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ramUsageBytes": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "outboundBandwidthBytesPerSecond": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OverviewPodVolume"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false,
         "description": "Overview pod model"
+      },
+      "OverviewPodVolume": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "usageBytes": {
+            "type": "number",
+            "format": "double"
+          },
+          "sizeBytes": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "One volume of an instance, with both halves of its meter in bytes."
       },
       "OverviewRegion": {
         "type": "object",
