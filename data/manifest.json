@@ -2,10 +2,10 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/public.json",
     "sourceDescription": "Core Platform API",
-    "updatedAt": "2026-08-26T12:20:41Z",
+    "updatedAt": "2026-08-27T16:52:53Z",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "9dd0f89350be3bd798e31f03f808d70db9992f4b5185995ba29726ea1a7c8838"
+    "fileSha256": "54857e534d65c18ef8b6632184e751c27cd3aac4042554ceaf920bce6e11df92"
   },
   {
     "source": "https://docs.bunny.net/docs/api-reference/origin-errors/openapi.json",
@@ -50,9 +50,9 @@
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
     "sourceDescription": "Magic Containers API",
-    "updatedAt": "2026-08-25T18:18:45Z",
+    "updatedAt": "2026-08-27T16:52:56Z",
     "fileName": "magic-containers-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
-    "fileSha256": "50fa6668da30bcfafc6a3bc3e69a79d7ae9944d7f6c80e77b2cb5de22d286440"
+    "fileSha256": "a2754b365362d7bfcfc4c83cb3baf92818238bc309b1fa2429f9500e847bee4b"
   }
 ]

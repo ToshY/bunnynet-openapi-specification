@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.10.4.0",
+    "description": "Public API endpoints for user consumption. Release version: v1.10.5.1",
     "version": "1.0"
   },
   "servers": [
@@ -54,7 +54,7 @@
             }
           },
           "409": {
-            "description": "Application is suspended.",
+            "description": "Application is suspended or has no containers.",
             "content": {
               "application/json": {
                 "schema": {
@@ -912,6 +912,16 @@
           },
           "404": {
             "description": "Application is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Application is suspended or has no containers.",
             "content": {
               "application/json": {
                 "schema": {
