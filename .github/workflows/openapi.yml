@@ -30,7 +30,7 @@ jobs:
           version: 3.x
 
       - name: Install jq
-        uses: dcarbone/install-jq-action@v3.2.0
+        uses: dcarbone/install-jq-action@v4.0.1
 
       - name: Retrieve OpenAPI specs
         shell: bash
