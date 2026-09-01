@@ -26,10 +26,10 @@
   {
     "source": "https://video.bunnycdn.com/openapi/bunnynet-video-api.public.json",
     "sourceDescription": "Stream API",
-    "updatedAt": "2026-08-20T12:17:52Z",
-    "fileName": "stream-api-v1.5.23.json",
-    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.5.23.json",
-    "fileSha256": "755a5e6458c239857314b464393c7b1f7727eb4878250eaf8bb0e5a80ad7c342"
+    "updatedAt": "2026-09-01T15:36:22Z",
+    "fileName": "stream-api-v1.5.25.json",
+    "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/stream-api-v1.5.25.json",
+    "fileSha256": "c2aa25c30053f90e8736f599eb57c0b120159d28ea02cfb6d218c2d35aff47a8"
   },
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
@@ -50,9 +50,9 @@
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
     "sourceDescription": "Magic Containers API",
-    "updatedAt": "2026-08-31T18:14:22Z",
+    "updatedAt": "2026-09-01T15:36:25Z",
     "fileName": "magic-containers-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
-    "fileSha256": "e2702ed179be9af8f4b71fe7e7aa2c376dc86c1a6991a68b051f42f6389277d0"
+    "fileSha256": "29dced6a87b57d5b20f9d6235fdd56e5cb44b4baaf69d212b06fe233d92b6466"
   }
 ]
