@@ -148,7 +148,7 @@
         },
         "responses": {
           "201": {
-            "description": "The DNS Zone was successfuly added"
+            "description": "The DNS Zone was successfully added"
           },
           "400": {
             "description": "Failed adding the DNS Zone. Model validation failed",
@@ -299,7 +299,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The DNS Zone was successfuly deleted."
+            "description": "The DNS Zone was successfully deleted."
           },
           "404": {
             "description": "The DNS Zone with the requested ID does not exist."
@@ -433,7 +433,7 @@
         },
         "responses": {
           "201": {
-            "description": "The DNS record was successfuly added.",
+            "description": "The DNS record was successfully added.",
             "content": {
               "application/json": {
                 "schema": {
@@ -611,7 +611,7 @@
         },
         "responses": {
           "204": {
-            "description": "The DNS record was successfuly updated."
+            "description": "The DNS record was successfully updated."
           },
           "404": {
             "description": "The DNS Zone or DNS Record with the requested ID does not exist."
@@ -666,7 +666,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The DNS record was successfuly deleted."
+            "description": "The DNS record was successfully deleted."
           },
           "404": {
             "description": "The DNS Zone or DNS Record with the requested ID does not exist."
@@ -712,7 +712,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The import operation has finished successfuly.",
+            "description": "The import operation has finished successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -902,7 +902,7 @@
         },
         "responses": {
           "201": {
-            "description": "The Pull Zone was successfuly added"
+            "description": "The Pull Zone was successfully added"
           },
           "400": {
             "description": "Failed adding Pull Zone",
@@ -1036,7 +1036,7 @@
         },
         "responses": {
           "200": {
-            "description": "The Pull Zone was successfuly updated",
+            "description": "The Pull Zone was successfully updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -1134,7 +1134,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The Edge Rule was successfuly deleted"
+            "description": "The Edge Rule was successfully deleted"
           },
           "404": {
             "description": "The Pull Zone or Edge Rule with the requested ID does not exist"
@@ -1183,7 +1183,7 @@
         },
         "responses": {
           "201": {
-            "description": "The Edge Rule was successfuly added"
+            "description": "The Edge Rule was successfully added"
           },
           "404": {
             "description": "The Pull Zone with the requested ID does not exist"
@@ -1243,7 +1243,7 @@
         },
         "responses": {
           "204": {
-            "description": "The Edge Rule was successfuly updated"
+            "description": "The Edge Rule was successfully updated"
           },
           "404": {
             "description": "The Pull Zone or Edge Rule with the requested ID does not exist."
@@ -1357,7 +1357,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The certificate was successfuly loaded"
+            "description": "The certificate was successfully loaded"
           },
           "400": {
             "description": "Failed configuring the certificate",
@@ -1649,7 +1649,7 @@
         },
         "responses": {
           "204": {
-            "description": "The cache was successfuly purged"
+            "description": "The cache was successfully purged"
           },
           "404": {
             "description": "The Pull Zone with the requested ID does not exist"
@@ -1741,7 +1741,7 @@
         },
         "responses": {
           "204": {
-            "description": "The certificate was successfuly added"
+            "description": "The certificate was successfully added"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -1800,7 +1800,7 @@
         },
         "responses": {
           "204": {
-            "description": "The certificate was successfuly removed"
+            "description": "The certificate was successfully removed"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2106,7 +2106,7 @@
         },
         "responses": {
           "204": {
-            "description": "The allowed referer was successfuly added"
+            "description": "The allowed referer was successfully added"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2165,7 +2165,7 @@
         },
         "responses": {
           "204": {
-            "description": "The allowed referer was successfuly removed"
+            "description": "The allowed referer was successfully removed"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2224,7 +2224,7 @@
         },
         "responses": {
           "204": {
-            "description": "The blocked referer was successfuly added"
+            "description": "The blocked referer was successfully added"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2283,7 +2283,7 @@
         },
         "responses": {
           "204": {
-            "description": "The blocked referer was successfuly removed"
+            "description": "The blocked referer was successfully removed"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2342,7 +2342,7 @@
         },
         "responses": {
           "204": {
-            "description": "The blocked IP was successfuly added"
+            "description": "The blocked IP was successfully added"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2401,7 +2401,7 @@
         },
         "responses": {
           "204": {
-            "description": "The blocked IP was successfuly removed"
+            "description": "The blocked IP was successfully removed"
           },
           "404": {
             "description": "The Pull Zone with the requested ID was not found"
@@ -2748,7 +2748,7 @@
         },
         "responses": {
           "204": {
-            "description": "The storage zone was successfuly updated"
+            "description": "The storage zone was successfully updated"
           },
           "400": {
             "description": "Failed configuring the Storage Zone. Model validation failed",
@@ -2838,7 +2838,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The password has been successfuly changed"
+            "description": "The password has been successfully changed"
           },
           "401": {
             "description": "The request authorization failed"
@@ -2874,7 +2874,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The read-only password has been successfuly changed."
+            "description": "The read-only password has been successfully changed."
           },
           "401": {
             "description": "The request authorization failed"
