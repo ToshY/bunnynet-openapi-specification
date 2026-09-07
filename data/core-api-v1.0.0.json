@@ -5474,6 +5474,430 @@
         "x-hidden": true
       }
     },
+    "/loadbalancer/{loadBalancerId}/statistics": {
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get Load Balancer statistics",
+        "operationId": "LoadBalancerStatisticsEndpoint_GetLoadBalancerStatistics",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "(Optional) The start date of the statistics. If no value is passed, the last 24 hours will be returned. Rounded to full-day boundaries unless hourly=true and exactRange=true.",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "(Optional) The end date of the statistics. Rounded to full-day boundaries unless hourly=true and exactRange=true.",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "hourly",
+            "in": "query",
+            "description": "(Optional) If true, the statistics will be returned in hourly grouping. Hourly statistics are available for the last 30 days only.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 4
+          },
+          {
+            "name": "exactRange",
+            "in": "query",
+            "description": "(Optional) If true and hourly=true, the exact hour components of from and to will be preserved instead of rounding to full-day boundaries.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Load Balancer statistics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerStatisticsModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Load Balancer profile was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "429": {
+            "description": "Too many statistics requests, try again later",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}/pullzones": {
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get the pull zones attached to a Load Balancer",
+        "operationId": "LoadBalancerStatisticsEndpoint_GetAttachedPullZones",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attached pull zones",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LoadBalancerAttachedZoneModel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Load Balancer profile was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/statistics": {
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get statistics roll-ups for all Load Balancers on the account",
+        "operationId": "LoadBalancerStatisticsEndpoint_GetLoadBalancerAccountStatistics",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Per-Load-Balancer roll-ups",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LoadBalancerAccountSummaryModel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
+    "/loadbalancer/{loadBalancerId}/usage": {
+      "get": {
+        "tags": [
+          "Load Balancer"
+        ],
+        "summary": "Get current-period request usage and pricing for a Load Balancer",
+        "operationId": "LoadBalancerUsageEndpoint_GetLoadBalancerUsage",
+        "parameters": [
+          {
+            "name": "loadBalancerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Year of the usage month (UTC). Defaults to the current year; supply together with month.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Month of the usage month, 1-12 (UTC). Defaults to the current month; supply together with year.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The current usage and pricing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadBalancerUsageModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The requested month is invalid, incomplete, or in the future",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Load Balancer profile was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request authorization failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "AccessKey": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          },
+          {
+            "bearer": [
+              "User",
+              "UserApi",
+              "SubuserAPIPullZones",
+              "SubuserPullZones",
+              "SubuserManage",
+              "SubuserAPIManage"
+            ]
+          }
+        ]
+      }
+    },
     "/dnszone/{id}/statistics": {
       "get": {
         "tags": [
@@ -12682,6 +13106,290 @@
           5300
         ]
       },
+      "LoadBalancerStatisticsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Summary": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LoadBalancerStatisticsSummaryModel"
+              }
+            ]
+          },
+          "RequestsByOrigin": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginRequestsSeriesModel"
+            }
+          },
+          "RequestsByOriginGroup": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginGroupRequestsSeriesModel"
+            }
+          },
+          "TrafficByOrigin": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginRequestsSeriesModel"
+            }
+          },
+          "OriginLatency": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginLatencySeriesModel"
+            }
+          },
+          "OriginFailures": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerOriginFailuresSeriesModel"
+            }
+          }
+        }
+      },
+      "LoadBalancerStatisticsSummaryModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "TotalRequests": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalTraffic": {
+            "type": "number",
+            "format": "double"
+          },
+          "AverageOriginRttMs": {
+            "type": "number",
+            "format": "double"
+          },
+          "AllOriginsExhausted": {
+            "type": "number",
+            "format": "double"
+          },
+          "AverageRetryDepth": {
+            "type": "number",
+            "format": "double"
+          },
+          "StickySessionHits": {
+            "type": "number",
+            "format": "double"
+          },
+          "RequestsByMethod": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "LoadBalancerOriginRequestsSeriesModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OriginId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "OriginName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Values": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "LoadBalancerOriginGroupRequestsSeriesModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OriginGroupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "OriginGroupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Values": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "LoadBalancerOriginLatencySeriesModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OriginId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "OriginName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Percentile": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Values": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "LoadBalancerOriginFailuresSeriesModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OriginId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "OriginName": {
+            "type": "string",
+            "nullable": true
+          },
+          "StatusCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Values": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "LoadBalancerAttachedZoneModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "PullZoneId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Hostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "TrafficServed": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LoadBalancerAccountSummaryModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "LoadBalancerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "TotalRequests": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalTraffic": {
+            "type": "number",
+            "format": "double"
+          },
+          "AttachedPullZoneCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "LoadBalancerUsageModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "LoadBalancerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "PeriodStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PeriodEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ResetsAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CurrentRequests": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "IncludedRequests": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "MonthlyFee": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "Tiers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LoadBalancerPricingTierModel"
+            }
+          }
+        }
+      },
+      "LoadBalancerPricingTierModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ThresholdFromMillions": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ThresholdToMillions": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "PricePerMillion": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
       "DnsZoneRecordScanJobResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -13706,6 +14414,9 @@
     },
     {
       "name": "Pricing"
+    },
+    {
+      "name": "Load Balancer"
     },
     {
       "name": "DNS Zone"
