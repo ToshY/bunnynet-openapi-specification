@@ -7950,10 +7950,6 @@
             "type": "boolean",
             "description": "Determines if the optimizer origin tunnel system is enabled for this zone"
           },
-          "OptimizerTunnelActiveProbingEnabled": {
-            "type": "boolean",
-            "description": "Determines if the optimizer tunnel system active probing should be enabled for this zone"
-          },
           "OptimizerDesktopMaxWidth": {
             "type": "integer",
             "description": "Determines the maximum automatic image size for desktop clients",
@@ -9346,11 +9342,6 @@
             "description": "Determines if the optimizer origin tunnel system should be enabled for this zone",
             "nullable": true
           },
-          "OptimizerTunnelActiveProbingEnabled": {
-            "type": "boolean",
-            "description": "Determines if the optimizer tunnel system active probing should be enabled for this zone",
-            "nullable": true
-          },
           "OptimizerDesktopMaxWidth": {
             "type": "integer",
             "description": "Determines the maximum automatic image size for desktop clients",
@@ -10305,11 +10296,6 @@
           "OptimizerTunnelEnabled": {
             "type": "boolean",
             "description": "Determines if the optimizer origin tunnel system should be enabled for this zone",
-            "nullable": true
-          },
-          "OptimizerTunnelActiveProbingEnabled": {
-            "type": "boolean",
-            "description": "Determines if the optimizer tunnel system active probing should be enabled for this zone",
             "nullable": true
           },
           "OptimizerDesktopMaxWidth": {
