@@ -8120,7 +8120,7 @@
       },
       "EdgeRuleActionType": {
         "type": "integer",
-        "description": "0 = ForceSSL\n1 = Redirect\n2 = OriginUrl\n3 = OverrideCacheTime\n4 = BlockRequest\n5 = SetResponseHeader\n6 = SetRequestHeader\n7 = ForceDownload\n8 = DisableTokenAuthentication\n9 = EnableTokenAuthentication\n10 = OverrideCacheTimePublic\n11 = IgnoreQueryString\n12 = DisableOptimizer\n13 = ForceCompression\n14 = SetStatusCode\n15 = BypassPermaCache\n16 = OverrideBrowserCacheTime\n17 = OriginStorage\n18 = SetNetworkRateLimit\n19 = SetConnectionLimit\n20 = SetRequestsPerSecondLimit\n21 = RunEdgeScript\n22 = OriginMagicContainers\n23 = DisableWAF\n24 = RetryOrigin\n25 = OverrideBrowserCacheResponseHeader\n26 = RemoveBrowserCacheResponseHeader\n27 = DisableShieldChallenge\n28 = DisableShield\n29 = DisableShieldBotDetection\n30 = BypassAwsS3Authentication\n31 = DisableShieldAccessLists\n32 = DisableShieldRateLimiting\n33 = EnableRequestCoalescing\n34 = DisableRequestCoalescing\n37 = StripCookiesClientToOrigin",
+        "description": "0 = ForceSSL\n1 = Redirect\n2 = OriginUrl\n3 = OverrideCacheTime\n4 = BlockRequest\n5 = SetResponseHeader\n6 = SetRequestHeader\n7 = ForceDownload\n8 = DisableTokenAuthentication\n9 = EnableTokenAuthentication\n10 = OverrideCacheTimePublic\n11 = IgnoreQueryString\n12 = DisableOptimizer\n13 = ForceCompression\n14 = SetStatusCode\n15 = BypassPermaCache\n16 = OverrideBrowserCacheTime\n17 = OriginStorage\n18 = SetNetworkRateLimit\n19 = SetConnectionLimit\n20 = SetRequestsPerSecondLimit\n21 = RunEdgeScript\n22 = OriginMagicContainers\n23 = DisableWAF\n24 = RetryOrigin\n25 = OverrideBrowserCacheResponseHeader\n26 = RemoveBrowserCacheResponseHeader\n27 = DisableShieldChallenge\n28 = DisableShield\n29 = DisableShieldBotDetection\n30 = BypassAwsS3Authentication\n31 = DisableShieldAccessLists\n32 = DisableShieldRateLimiting\n33 = EnableRequestCoalescing\n34 = DisableRequestCoalescing\n35 = UseLoadBalancer\n36 = ForceLoadBalancerStickySessionMode\n37 = StripCookiesClientToOrigin",
         "x-enumNames": [
           "ForceSSL",
           "Redirect",
@@ -8157,6 +8157,8 @@
           "DisableShieldRateLimiting",
           "EnableRequestCoalescing",
           "DisableRequestCoalescing",
+          "UseLoadBalancer",
+          "ForceLoadBalancerStickySessionMode",
           "StripCookiesClientToOrigin"
         ],
         "enum": [
@@ -8195,6 +8197,8 @@
           32,
           33,
           34,
+          35,
+          36,
           37
         ]
       },
@@ -11207,6 +11211,15 @@
           "EnableCompactControls": {
             "type": "boolean",
             "description": "Marks whether compact controls should be enabled for the player."
+          },
+          "GeoBlocking": {
+            "description": "Geo-blocking settings for the video library.",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VideoGeoBlocking"
+              }
+            ]
           }
         }
       },
@@ -11308,6 +11321,32 @@
           0,
           1
         ]
+      },
+      "VideoGeoBlocking": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "type": "boolean",
+            "description": "Whether geo-blocking is enabled for the video library"
+          },
+          "AllowedCountries": {
+            "type": "array",
+            "description": "The list of countries allowed to access the video library, 2 letter ISO 3166-1 code",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "BlockedCountries": {
+            "type": "array",
+            "description": "The list of countries blocked from accessing the video library, 2 letter ISO 3166-1 code",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "VideoLibraryCreateModel": {
         "type": "object",
@@ -11816,6 +11855,15 @@
             "type": "boolean",
             "description": "(Optional) Marks whether compact controls should be enabled for the player.",
             "nullable": true
+          },
+          "GeoBlocking": {
+            "description": "(Optional) Geo-blocking settings for the video library.",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VideoGeoBlockingUpdateModel"
+              }
+            ]
           }
         }
       },
@@ -11852,6 +11900,33 @@
                 "$ref": "#/components/schemas/WidevineMinClientSecurityLevel"
               }
             ]
+          }
+        }
+      },
+      "VideoGeoBlockingUpdateModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Enabled": {
+            "type": "boolean",
+            "description": "(Optional) Whether geo-blocking is enabled for the video library",
+            "nullable": true
+          },
+          "AllowedCountries": {
+            "type": "array",
+            "description": "(Optional) The list of countries allowed to access the video library, 2 letter ISO 3166-1 code",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "BlockedCountries": {
+            "type": "array",
+            "description": "(Optional) The list of countries blocked from accessing the video library, 2 letter ISO 3166-1 code",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
