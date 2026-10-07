@@ -2055,7 +2055,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -2065,7 +2066,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -4891,7 +4893,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -4901,7 +4904,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -4985,7 +4989,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -4995,7 +5000,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -5079,7 +5085,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -5089,7 +5096,8 @@
               "SubuserAPIPullZones",
               "SubuserPullZones",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -5274,7 +5282,8 @@
               "SubuserAPIStatistics",
               "SubuserStatistics",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -5284,7 +5293,8 @@
               "SubuserAPIStatistics",
               "SubuserStatistics",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -5355,7 +5365,8 @@
               "User",
               "UserApi",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -5363,7 +5374,8 @@
               "User",
               "UserApi",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -5461,7 +5473,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -5469,7 +5482,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ],
@@ -6931,7 +6945,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -6941,7 +6956,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -6997,7 +7013,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7007,7 +7024,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7061,7 +7079,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7071,7 +7090,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7125,7 +7145,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7135,7 +7156,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7187,7 +7209,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7197,7 +7220,8 @@
               "SubuserAPIDns",
               "SubuserDns",
               "SubuserManage",
-              "SubuserAPIManage"
+              "SubuserAPIManage",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7235,7 +7259,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7243,7 +7268,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7279,7 +7305,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7287,7 +7314,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7349,7 +7377,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7357,7 +7386,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7440,7 +7470,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7448,7 +7479,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -7553,7 +7585,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           },
           {
@@ -7561,7 +7594,8 @@
               "User",
               "UserApi",
               "SubuserAPIBilling",
-              "SubuserBilling"
+              "SubuserBilling",
+              "ScopedApiKey"
             ]
           }
         ]
@@ -10243,7 +10277,7 @@
           },
           "FollowRedirects": {
             "type": "boolean",
-            "description": "Determines if the zone should follow redirects return by the oprigin and cache the response",
+            "description": "Determines if the zone should follow redirects return by the origin and cache the response",
             "nullable": true
           },
           "ConnectionLimitPerIPCount": {
@@ -11204,7 +11238,7 @@
           },
           "FollowRedirects": {
             "type": "boolean",
-            "description": "Determines if the zone should follow redirects return by the oprigin and cache the response",
+            "description": "Determines if the zone should follow redirects return by the origin and cache the response",
             "nullable": true
           },
           "ConnectionLimitPerIPCount": {
@@ -15448,6 +15482,15 @@
               }
             ]
           },
+          "MonthlyAiGatewayOtherCharges": {
+            "description": "The monthly AI Gateway charges that aren't for input, output or cached tokens, and the number of requests that had them",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UsageBreakdown"
+              }
+            ]
+          },
           "MonthlyBandwidthUsed": {
             "type": "integer",
             "description": "Total bandwidth used by the account during this month.",
@@ -15853,7 +15896,7 @@
           },
           "MinimumPayoutAmount": {
             "type": "number",
-            "description": "The minimum amount required to request affiliate credits external payout",
+            "description": "The smallest cash payout that can be requested",
             "format": "decimal"
           },
           "AffiliateClicksChart": {
