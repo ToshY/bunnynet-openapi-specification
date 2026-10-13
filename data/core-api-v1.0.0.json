@@ -8646,7 +8646,7 @@
             "nullable": true
           },
           "Type": {
-            "description": "The type of the pull zone. Premium = 0, Volume = 1",
+            "description": "The type of the pull zone",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/PullZoneType"
@@ -8839,7 +8839,7 @@
             "description": "Determines if the TLS 1.1 is enabled on the Pull Zone"
           },
           "TlsSecurityLevel": {
-            "description": "The minimum TLS security level enforced on the Pull Zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "description": "The minimum TLS security level enforced on the Pull Zone",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/TlsSecurityLevelType"
@@ -9473,7 +9473,7 @@
             "nullable": true
           },
           "ActionType": {
-            "description": "The action type of the edge rule. ForceSSL = 0, Redirect = 1, OriginUrl = 2, OverrideCacheTime = 3, BlockRequest = 4, SetResponseHeader = 5, SetRequestHeader = 6, ForceDownload = 7, DisableTokenAuthentication = 8, EnableTokenAuthentication = 9, OverrideCacheTimePublic = 10, IgnoreQueryString = 11, DisableOptimizer = 12, ForceCompression = 13, SetStatusCode = 14, BypassPermaCache = 15, OverrideBrowserCacheTime = 16",
+            "description": "The action type of the edge rule",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/EdgeRuleActionType"
@@ -9510,7 +9510,7 @@
             }
           },
           "TriggerMatchingType": {
-            "description": "The trigger matching type. MatchAny = 0, MatchAll = 1, MatchNone = 2",
+            "description": "The trigger matching type",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/TriggerMatchingTypes"
@@ -9626,7 +9626,7 @@
         "additionalProperties": false,
         "properties": {
           "Type": {
-            "description": "The type of the trigger. Url = 0, RequestHeader = 1, ResponseHeader = 2, UrlExtension = 3, CountryCode = 4, RemoteIP = 5, UrlQueryString = 6, RandomChance = 7",
+            "description": "The type of the trigger",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/TriggerTypes"
@@ -9642,7 +9642,7 @@
             }
           },
           "PatternMatchingType": {
-            "description": "The type of pattern matching. MatchAny = 0, MatchAll = 1, MatchNone = 2",
+            "description": "The type of pattern matching",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/PatternMatchingTypes"
@@ -10216,7 +10216,7 @@
             "nullable": true
           },
           "TlsSecurityLevel": {
-            "description": "The minimum TLS security level enforced on this zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "description": "The minimum TLS security level enforced on this zone",
             "nullable": true,
             "oneOf": [
               {
@@ -10486,7 +10486,7 @@
             "nullable": true
           },
           "Type": {
-            "description": "The type of the pull zone. Premium = 0, Volume = 1",
+            "description": "The type of the pull zone",
             "nullable": true,
             "oneOf": [
               {
@@ -11177,7 +11177,7 @@
             "nullable": true
           },
           "TlsSecurityLevel": {
-            "description": "The minimum TLS security level enforced on this zone (Legacy = 0, Compatible = 1, ModernOnly = 2)",
+            "description": "The minimum TLS security level enforced on this zone",
             "nullable": true,
             "oneOf": [
               {
@@ -11447,7 +11447,7 @@
             "nullable": true
           },
           "Type": {
-            "description": "The type of the pull zone. Premium = 0, Volume = 1",
+            "description": "The type of the pull zone",
             "nullable": true,
             "oneOf": [
               {
@@ -12471,7 +12471,7 @@
             "description": "Determines if content tagging should be enabled for this library."
           },
           "PullZoneType": {
-            "description": "The type of the pull zone attached. Premium = 0, Volume = 1",
+            "description": "The type of the pull zone attached",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/PullZoneType"
@@ -14222,7 +14222,7 @@
             ]
           },
           "OriginType": {
-            "description": "The type of origin to connect to",
+            "description": "The type of origin to connect to. Magic Container origins must be CDN endpoints; Anycast endpoints are not supported, use a Standard origin for those",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/OriginType"
@@ -14347,7 +14347,7 @@
             "nullable": true
           },
           "OriginType": {
-            "description": "The type of origin to connect to",
+            "description": "The type of origin to connect to. Magic Container origins must be CDN endpoints; Anycast endpoints are not supported, use a Standard origin for those",
             "nullable": true,
             "oneOf": [
               {
@@ -15660,7 +15660,7 @@
             "format": "date-time"
           },
           "Type": {
-            "description": "The type of the billing record. PayPal = 0, Crypto = 1, CreditCard = 2, MonthlyUsage = 3, Refund = 4, CouponCode = 5, BankTransfer = 6, AffiliateCredits = 7",
+            "description": "The type of the billing record",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/BillingRecordType"
