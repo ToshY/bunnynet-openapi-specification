@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Public API",
-    "description": "Public API endpoints for user consumption. Release version: v1.10.13.1",
+    "description": "Public API endpoints for user consumption. Release version: v1.10.14.0",
     "version": "1.0"
   },
   "servers": [
@@ -1620,6 +1620,87 @@
                   "items": {
                     "$ref": "#/components/schemas/ContainerImageTag"
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User is unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registries/tags/paged": {
+      "post": {
+        "tags": [
+          "ContainerRegistries"
+        ],
+        "summary": "List Container Image Tags Page",
+        "description": "Lists one page of the tags of a container image, in the order the registry returns them (newest first for Docker Hub images whose tags the registry can't list in time). The response cursor is the cursor of the next page; it is empty on the last page.",
+        "operationId": "ListContainerImageTagsPage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageTagsPageRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageTagsPageRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListContainerImageTagsPageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The page of container image tags was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListContainerImageTagsPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid, e.g. the limit is out of range.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetails"
                 }
               }
             }
@@ -5599,6 +5680,65 @@
             "maxLength": 100,
             "minLength": 1,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListContainerImageTagsPageRequest": {
+        "required": [
+          "imageName",
+          "imageNamespace",
+          "registryId"
+        ],
+        "type": "object",
+        "properties": {
+          "registryId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The registry identifier. Can be \"dockerhub\", \"github\", or a private registry ID."
+          },
+          "imageName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "imageNamespace": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "limit": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The maximum number of tags in the page. Registries may return fewer.",
+            "format": "int32",
+            "default": 100
+          },
+          "cursor": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "The cursor of the page to return, from the previous response; omit for the first page.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ListContainerImageTagsPageResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerImageTag"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ListMeta"
+          },
+          "cursor": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
