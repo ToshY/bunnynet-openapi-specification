@@ -3552,6 +3552,8 @@
             "in": "query",
             "description": "(Optional) The page number of results.",
             "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) The page number of results.",
               "format": "int32",
@@ -3563,6 +3565,8 @@
             "in": "query",
             "description": "(Optional) (Default: 10) The amount of results returned on one page.",
             "schema": {
+              "maximum": 10000,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) (Default: 10) The amount of results returned on one page.",
               "format": "int32",
@@ -3981,6 +3985,8 @@
             "in": "query",
             "description": "(Optional) The page number of results.",
             "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) The page number of results.",
               "format": "int32",
@@ -3992,6 +3998,8 @@
             "in": "query",
             "description": "(Optional) (Default: 10) The amount of results returned on one page.",
             "schema": {
+              "maximum": 10000,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) (Default: 10) The amount of results returned on one page.",
               "format": "int32",
@@ -5279,6 +5287,8 @@
             "in": "query",
             "description": "(Optional) The page number of results.",
             "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) The page number of results.",
               "format": "int32",
@@ -5290,6 +5300,8 @@
             "in": "query",
             "description": "(Optional) (Default: 10) The amount of results returned on one page.",
             "schema": {
+              "maximum": 10000,
+              "minimum": 1,
               "type": "integer",
               "description": "(Optional) (Default: 10) The amount of results returned on one page.",
               "format": "int32",
@@ -7456,17 +7468,19 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
-        "description": "0 = Off\n1 = Low\n2 = Medium\n3 = High\n4 = Challenge",
+        "description": "0 = Off\n1 = Low\n2 = Medium\n3 = High\n4 = Challenge\n5 = ChallengeInteractive",
         "format": "int32",
         "x-enum-varnames": [
           "Off",
           "Low",
           "Medium",
           "High",
-          "Challenge"
+          "Challenge",
+          "ChallengeInteractive"
         ]
       },
       "EventGroup": {
@@ -9871,6 +9885,9 @@
           },
           "recommendedOperator": {
             "$ref": "#/components/schemas/WafRecommendedOperator"
+          },
+          "valueConstraint": {
+            "$ref": "#/components/schemas/WafValueConstraint"
           }
         },
         "additionalProperties": false
@@ -10167,13 +10184,14 @@
           8,
           9,
           12,
+          13,
           14,
           15,
           17,
           18
         ],
         "type": "integer",
-        "description": "0 = BEGINSWITH\n1 = ENDSWITH\n2 = CONTAINS\n3 = CONTAINSWORD\n4 = STRMATCH\n5 = EQ\n6 = GE\n7 = GT\n8 = LE\n9 = LT\n12 = WITHIN\n14 = RX\n15 = STREQ\n17 = DETECTSQLI\n18 = DETECTXSS",
+        "description": "0 = BEGINSWITH\n1 = ENDSWITH\n2 = CONTAINS\n3 = CONTAINSWORD\n4 = STRMATCH\n5 = EQ\n6 = GE\n7 = GT\n8 = LE\n9 = LT\n12 = WITHIN\n13 = IPMATCH\n14 = RX\n15 = STREQ\n17 = DETECTSQLI\n18 = DETECTXSS",
         "format": "int32",
         "x-enum-varnames": [
           "BEGINSWITH",
@@ -10187,6 +10205,7 @@
           "LE",
           "LT",
           "WITHIN",
+          "IPMATCH",
           "RX",
           "STREQ",
           "DETECTSQLI",
@@ -10295,6 +10314,44 @@
           }
         },
         "additionalProperties": false
+      },
+      "WafValueConstraint": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/WafValueKind"
+          },
+          "pattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxLength": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chainedMaxLength": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "example": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WafValueKind": {
+        "enum": [
+          "Text",
+          "Number",
+          "Regex",
+          "IPMatch"
+        ],
+        "type": "string"
       }
     },
     "securitySchemes": {
