@@ -2507,6 +2507,33 @@
         }
       }
     },
+    "/storagezone/regions": {
+      "get": {
+        "tags": [
+          "Storage Zone"
+        ],
+        "summary": "Get Storage Zone Regions",
+        "operationId": "StorageZonePublic_GetStorageZoneRegions",
+        "responses": {
+          "200": {
+            "description": "Available storage regions and tiers with list prices in USD per GB per month",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StorageRegionModel"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/storagezone": {
       "get": {
         "tags": [
@@ -4656,60 +4683,6 @@
               "SubuserStatistics",
               "SubuserManage",
               "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/storagezone/regions": {
-      "get": {
-        "tags": [
-          "Storage Zone"
-        ],
-        "summary": "Get Storage Zone Regions",
-        "operationId": "GetStoragezoneRegionsEndpoint_GetStorageZoneRegions",
-        "responses": {
-          "200": {
-            "description": "A list of available storage zone regions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorageRegionModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStorage",
-              "SubuserStorage",
-              "SubuserManage",
-              "SubuserAPIManage",
-              "ScopedApiKey"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStorage",
-              "SubuserStorage",
-              "SubuserManage",
-              "SubuserAPIManage",
-              "ScopedApiKey"
             ]
           }
         ]
@@ -12003,6 +11976,61 @@
           }
         }
       },
+      "StorageRegionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Code": {
+            "type": "string",
+            "description": "The storage region code",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "The display name of the storage region",
+            "nullable": true
+          },
+          "Continent": {
+            "type": "string",
+            "description": "The continent code: EU (Europe), NA (North America), AS (Asia), OC (Oceania), SA (South America) or AF (Africa)",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "The approximate latitude of the storage region in decimal degrees",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "The approximate longitude of the storage region in decimal degrees",
+            "format": "double"
+          },
+          "PricePerGigabyte": {
+            "type": "number",
+            "description": "The standard storage price in USD per GB per month, before discounts",
+            "format": "decimal"
+          },
+          "Tier": {
+            "type": "integer",
+            "description": "The storage tier: 0 for Standard (HDD), 1 for Edge (SSD)",
+            "format": "int32"
+          },
+          "IsS3Supported": {
+            "type": "boolean",
+            "description": "Whether the region supports S3 compatibility"
+          },
+          "Hostname": {
+            "type": "string",
+            "description": "The storage API hostname for the region",
+            "nullable": true
+          },
+          "S3Hostname": {
+            "type": "string",
+            "description": "The S3 API hostname, or null when S3 compatibility is not supported",
+            "nullable": true
+          }
+        }
+      },
       "StorageZoneModel": {
         "type": "object",
         "additionalProperties": false,
@@ -13577,27 +13605,6 @@
             "type": "integer",
             "description": "Total download traffic across all protocols",
             "format": "int64"
-          }
-        }
-      },
-      "StorageRegionModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "description": "The unique identifier for the storage region",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "description": "The name of the storage region",
-            "nullable": true
-          },
-          "Url": {
-            "type": "string",
-            "description": "The storage endpoint URL for this region",
-            "nullable": true
           }
         }
       },

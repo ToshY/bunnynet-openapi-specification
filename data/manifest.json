@@ -2,10 +2,10 @@
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/public.json",
     "sourceDescription": "Core Platform API",
-    "updatedAt": "2026-10-13T12:59:29Z",
+    "updatedAt": "2026-10-16T20:07:54Z",
     "fileName": "core-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/core-api-v1.0.0.json",
-    "fileSha256": "e2feed06417bfb5bf632fd89ef07384a5b3b720d9683a6a850d3acb556e041b4"
+    "fileSha256": "3b263bca229fa3965ac8039f8975f3f5e75781399e9a4223812bb4d6666ac85d"
   },
   {
     "source": "https://docs.bunny.net/docs/api-reference/origin-errors/openapi.json",
