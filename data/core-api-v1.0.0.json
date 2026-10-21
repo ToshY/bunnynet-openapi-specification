@@ -317,6 +317,16 @@
           "401": {
             "description": "The request authorization failed"
           },
+          "409": {
+            "description": "The DNS Zone is being modified by another request. Retry shortly.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -683,6 +693,16 @@
           },
           "401": {
             "description": "The request authorization failed"
+          },
+          "409": {
+            "description": "The DNS Zone is being modified by another request. Retry shortly.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorData"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -2496,6 +2516,33 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/RegionModel"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/storagezone/regions": {
+      "get": {
+        "tags": [
+          "Storage Zone"
+        ],
+        "summary": "Get Storage Zone Regions",
+        "operationId": "StorageZonePublic_GetStorageZoneRegions",
+        "responses": {
+          "200": {
+            "description": "Available storage regions and tiers with list prices in USD per GB per month",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StorageRegionModel"
                   }
                 }
               }
@@ -4658,60 +4705,6 @@
               "SubuserStatistics",
               "SubuserManage",
               "SubuserAPIManage"
-            ]
-          }
-        ]
-      }
-    },
-    "/storagezone/regions": {
-      "get": {
-        "tags": [
-          "Storage Zone"
-        ],
-        "summary": "Get Storage Zone Regions",
-        "operationId": "GetStoragezoneRegionsEndpoint_GetStorageZoneRegions",
-        "responses": {
-          "200": {
-            "description": "A list of available storage zone regions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorageRegionModel"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request authorization failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "AccessKey": [
-              "User",
-              "UserApi",
-              "SubuserAPIStorage",
-              "SubuserStorage",
-              "SubuserManage",
-              "SubuserAPIManage",
-              "ScopedApiKey"
-            ]
-          },
-          {
-            "bearer": [
-              "User",
-              "UserApi",
-              "SubuserAPIStorage",
-              "SubuserStorage",
-              "SubuserManage",
-              "SubuserAPIManage",
-              "ScopedApiKey"
             ]
           }
         ]
@@ -8995,7 +8988,7 @@
           },
           "OptimizerLlmsTxt": {
             "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer"
+            "description": "Determines if the llms.txt file should be served when requested"
           },
           "OptimizerEnableManipulationEngine": {
             "type": "boolean",
@@ -9773,14 +9766,16 @@
       },
       "OptimizerHtmlToMarkdownType": {
         "type": "integer",
-        "description": "0 = Off\n1 = Simple",
+        "description": "0 = Off\n1 = Simple\n2 = Prerendered",
         "x-enumNames": [
           "Off",
-          "Simple"
+          "Simple",
+          "Prerendered"
         ],
         "enum": [
           0,
-          1
+          1,
+          2
         ]
       },
       "OptimizerWatermarkPosition": {
@@ -10403,7 +10398,7 @@
           },
           "OptimizerLlmsTxt": {
             "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
+            "description": "Determines if the llms.txt file should be served when requested",
             "nullable": true
           },
           "OptimizerEnableManipulationEngine": {
@@ -11364,7 +11359,7 @@
           },
           "OptimizerLlmsTxt": {
             "type": "boolean",
-            "description": "Determines if the llms.txt file can be generated and served by the Optimizer",
+            "description": "Determines if the llms.txt file should be served when requested",
             "nullable": true
           },
           "OptimizerEnableManipulationEngine": {
@@ -12003,6 +11998,65 @@
           }
         }
       },
+      "StorageRegionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Code": {
+            "type": "string",
+            "description": "The storage region code",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "The display name of the storage region",
+            "nullable": true
+          },
+          "Continent": {
+            "type": "string",
+            "description": "The continent code: EU (Europe), NA (North America), AS (Asia), OC (Oceania), SA (South America) or AF (Africa)",
+            "nullable": true
+          },
+          "Latitude": {
+            "type": "number",
+            "description": "The approximate latitude of the storage region in decimal degrees",
+            "format": "double"
+          },
+          "Longitude": {
+            "type": "number",
+            "description": "The approximate longitude of the storage region in decimal degrees",
+            "format": "double"
+          },
+          "PricePerGigabyte": {
+            "type": "number",
+            "description": "The standard storage price in USD per GB per month, before discounts",
+            "format": "decimal"
+          },
+          "Tier": {
+            "type": "integer",
+            "description": "The storage tier: 0 for Standard (HDD), 1 for Edge (SSD)",
+            "format": "int32"
+          },
+          "IsMainRegionSupported": {
+            "type": "boolean",
+            "description": "Whether the region can be selected as the main region for this storage tier"
+          },
+          "IsS3Supported": {
+            "type": "boolean",
+            "description": "Supports S3 replication; main-region use also requires IsMainRegionSupported"
+          },
+          "Endpoint": {
+            "type": "string",
+            "description": "The storage API endpoint, or null for SSD regions that cannot be selected as the main region",
+            "nullable": true
+          },
+          "S3Endpoint": {
+            "type": "string",
+            "description": "The S3 API endpoint, or null when S3 compatibility is not supported or the region cannot be selected as the main region",
+            "nullable": true
+          }
+        }
+      },
       "StorageZoneModel": {
         "type": "object",
         "additionalProperties": false,
@@ -12020,6 +12074,8 @@
           "Name": {
             "type": "string",
             "description": "The name of the storage zone",
+            "maxLength": 63,
+            "minLength": 4,
             "nullable": true
           },
           "Password": {
@@ -12158,7 +12214,8 @@
           "Name": {
             "type": "string",
             "description": "The name of the storage zone",
-            "minLength": 1
+            "maxLength": 63,
+            "minLength": 4
           },
           "Region": {
             "type": "string",
@@ -12236,6 +12293,17 @@
           "VideoCount": {
             "type": "integer",
             "description": "The number of videos in the video library",
+            "format": "int64"
+          },
+          "LiveStreamCount": {
+            "type": "integer",
+            "description": "The total number of live streams contained by the video library",
+            "format": "int64",
+            "nullable": true
+          },
+          "TotalCount": {
+            "type": "integer",
+            "description": "The total number of items contained by the video library",
             "format": "int64"
           },
           "TrafficUsage": {
@@ -13577,27 +13645,6 @@
             "type": "integer",
             "description": "Total download traffic across all protocols",
             "format": "int64"
-          }
-        }
-      },
-      "StorageRegionModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Id": {
-            "type": "string",
-            "description": "The unique identifier for the storage region",
-            "nullable": true
-          },
-          "Name": {
-            "type": "string",
-            "description": "The name of the storage region",
-            "nullable": true
-          },
-          "Url": {
-            "type": "string",
-            "description": "The storage endpoint URL for this region",
-            "nullable": true
           }
         }
       },
