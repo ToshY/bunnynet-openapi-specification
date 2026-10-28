@@ -12420,7 +12420,7 @@
           },
           "AllowEarlyPlay": {
             "type": "boolean",
-            "description": "Determines if the Early-Play feature is enabled. Always false while EnableDRM is true.",
+            "description": "Determines if the Early-Play feature is enabled",
             "nullable": true
           },
           "PlayerTokenAuthenticationEnabled": {
@@ -12461,7 +12461,7 @@
           },
           "EnableDRM": {
             "type": "boolean",
-            "description": "Determines if MediaCage DRM is enabled. While true, AllowEarlyPlay and ExposeOriginals are always false."
+            "description": "Determines if the DRM is enabled"
           },
           "DrmVersion": {
             "description": "DRM version (basic or enterprise)",
@@ -12689,7 +12689,7 @@
           },
           "ExposeOriginals": {
             "type": "boolean",
-            "description": "Marks whether original video files are exposed via CDN. Always false while EnableDRM is true; original files are not protected by DRM."
+            "description": "Marks whether original video files should be exposed via CDN."
           },
           "ExposeVideoMetadata": {
             "type": "boolean",
@@ -13113,7 +13113,7 @@
           },
           "AllowEarlyPlay": {
             "type": "boolean",
-            "description": "(Optional) Determines if the Early-Play feature should be enabled. Setting it to true also sets ExposeOriginals to true. Cannot be true while EnableDRM is true, and EnableDRM cannot be set to true while this is true, because Early Play serves the original file, which is not protected by DRM.",
+            "description": "(Optional) Determines if the Early-Play feature should be enabled. Enabling this will enable Expose Originals.",
             "nullable": true
           },
           "PlayerTokenAuthenticationEnabled": {
@@ -13143,7 +13143,7 @@
           },
           "EnableDRM": {
             "type": "boolean",
-            "description": "(Optional) Determines if MediaCage DRM should be enabled for this library. Cannot be set to true while AllowEarlyPlay or ExposeOriginals is true; set them to false first or in the same request, because original files are not protected by DRM.",
+            "description": "(Optional) Determines if MediaCage DRM should be enabled for this library",
             "nullable": true
           },
           "DrmVersion": {
@@ -13330,7 +13330,7 @@
           },
           "ExposeOriginals": {
             "type": "boolean",
-            "description": "(Optional) Marks whether original video files should be exposed via CDN. Original files are not protected by DRM, so this cannot be true while EnableDRM is true, and EnableDRM cannot be set to true while this is true. Setting AllowEarlyPlay to true sets this to true.",
+            "description": "(Optional) Marks whether original video files should be exposed via CDN. Originals are not protected by DRM. Enabling Early-Play will enable this.",
             "nullable": true
           },
           "ExposeVideoMetadata": {
