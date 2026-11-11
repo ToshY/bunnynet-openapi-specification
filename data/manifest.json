@@ -34,10 +34,10 @@
   {
     "source": "https://api.bunny.net/shield/docs/v1/swagger.json",
     "sourceDescription": "Shield API",
-    "updatedAt": "2026-11-11T12:59:54Z",
+    "updatedAt": "2026-11-11T23:44:21Z",
     "fileName": "shield-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/shield-api-v1.0.0.json",
-    "fileSha256": "57e147f155f6704fdb334b747bd4cbd2c9202f1498ac8f92b2b501293c0bf5b8"
+    "fileSha256": "6249099dfd92ef180b5f6ba3d5113f8bd104ce22afaa75b6aa80c8a2dac7dd03"
   },
   {
     "source": "https://core-api-public-docs.b-cdn.net/docs/v3/compute.json",
@@ -50,9 +50,9 @@
   {
     "source": "https://api-mc.opsbunny.net/docs/public/swagger.json",
     "sourceDescription": "Magic Containers API",
-    "updatedAt": "2026-11-10T13:49:04Z",
+    "updatedAt": "2026-11-11T23:44:23Z",
     "fileName": "magic-containers-api-v1.0.0.json",
     "fileUrl": "https://toshy.github.io/bunnynet-openapi-specification/magic-containers-api-v1.0.0.json",
-    "fileSha256": "883603541150621000905dce7e59d99569d393a5e1ed51c117f3b6ab80b7b6bf"
+    "fileSha256": "858ba696b2bb102e98fd31c7db9e5dc04fe2220d5d48aebb1f655cdd1d9ded2e"
   }
 ]
