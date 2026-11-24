@@ -8937,6 +8937,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "ruleConditionsLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
           "planType": {
             "$ref": "#/components/schemas/ShieldPlanType"
           },
